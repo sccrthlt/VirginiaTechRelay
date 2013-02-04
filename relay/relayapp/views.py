@@ -75,6 +75,14 @@ def homepage_events(request):
 		response = json_serializer.serialize(events, ensure_ascii=False)
 		return HttpResponse(response, mimetype="application/json")
 
+def participant_specific_info(request, participant):
+
+        helper = RelayFunctions()
+        info = helper.participant_specific_general_candles(participant)
+
+        response = json.dumps(info)
+	return HttpResponse(response, mimetype="application/json")
+
 def team_participants(request, team):
         team_participants = Participant.objects.filter(team = team)
 

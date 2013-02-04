@@ -65,7 +65,7 @@ class RelayFunctions:
     def participant_specific_general_candles(self, participant):
         candles = {}
         candles['participant_id'] = int(participant)
-        candles['participant_email'] = model_to_dict(Participant.objects.get(pk = participant))['email']
+        #candles['participant_email'] = model_to_dict(Participant.objects.get(pk = participant))['email']
         candles['participant_first_name'] = model_to_dict(Participant.objects.get(pk = participant))['fname']
         candles['participant_last_name'] = model_to_dict(Participant.objects.get(pk = participant))['lname']
         candles['participant_candles_total'] = self.participants_specific_milestone_candles(participant) + self.participants_specific_emails_candles(participant) + self.participants_specific_event_candles(participant)
