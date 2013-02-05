@@ -61,11 +61,10 @@ class RelayFunctions:
         candles['company_id'] = int(company)
         candles['company_name'] = model_to_dict(Company.objects.get(pk = company))['name']
         candles['company_type'] = model_to_dict(Company.objects.get(pk = company))['company_type']
-        candles['company_candles_total'] = self.company_event_candles(company) + self.company_tshirt_milestone_candles(company) + self.company_registration_candles(company) + self.company_donation_milestone_candles(company)
+        candles['company_candles_total'] = self.company_event_candles(company) + self.company_tshirt_milestone_candles(company) + self.company_registration_candles(company)
         candles['company_event_milestone_candles'] = self.company_event_candles(company)
         candles['company_tshirt_milestone_candles'] = self.company_tshirt_milestone_candles(company)
         candles['company_registration_milestone_candles'] = self.company_registration_candles(company)
-        candles['company_donation_milestone_candles'] = self.company_donation_milestone_candles(company)
 
         company_donations = Donation.objects.filter(participant__team__company = company).aggregate(total_donations = Sum('amount'))
         candles['company_donations_total'] = float(str(company_donations['total_donations'] if company_donations['total_donations'] is not None else 0))
