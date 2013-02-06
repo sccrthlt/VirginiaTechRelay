@@ -71,6 +71,14 @@ class RelayFunctions:
         
         return candles
 
+    def participant_unsigned(self, participant)
+        candles = {}
+        candles['participant_first_name'] = model_to_dict(Participant.objects.get(pk = participant))['fname']
+        candles['participant_last_name'] = model_to_dict(Participant.objects.get(pk = participant))['lname']
+        candles['participant_id'] = int(participant)
+        return candles
+
+
     def participant_specific_general_candles(self, participant):
         candles = {}
         candles['participant_id'] = int(participant)
