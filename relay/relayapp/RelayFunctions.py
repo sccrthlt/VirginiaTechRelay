@@ -143,3 +143,10 @@ class RelayFunctions:
         candles['team_email_milestone_candles'] = self.participants_emails_candles(team)
         candles['team_event_milestone_candles'] = self.participants_event_candles(team)
         return candles
+
+    def participant_specific(self, participant):
+        candles = {}
+        candles['donation_date'] = model_to_dict(Donation.objects.filter(participant = participant))['date']
+        candles['donation_amount'] = model_to_dict(Donation.objects.filter(participant = participant))['amount']
+        candles['milestone_date'] = model_to_dict(Participant_Milestone_Record.objects.filter(participant = participant))['date']
+        candles['donation_milestone'] = model_to_dict(Participant_Milestone_Record.objects.filter(participant = participant))['donation_milestone']
