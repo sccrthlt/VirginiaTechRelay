@@ -111,17 +111,6 @@ def company_candles(request, company):
 	response = json.dumps(helper.company_candles(company))
 	return HttpResponse(response, mimetype="application/json")
 
-def all_participant_unsigned(request, participant):
-        helper = RelayFunctions()
-        
-        cool = []
-
-        for participant in Participant.objects.all():
-                cool.append(helper.participant_unsigned(model_to_dict(participant)['id']))
-
-	response = json.dumps(cool)
-	return HttpResponse(response, mimetype="application/json")
-
 def team_specific_general_candles(request, team):
         helper = RelayFunctions()
         

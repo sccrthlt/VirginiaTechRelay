@@ -27,22 +27,36 @@ class RelayFunctions:
             candles = Participant_Event_Record.objects.filter(participant__team = team).aggregate(candles_rewarded = Sum('event__candles_rewarded'))
             return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
 
-    def participant_specific_donation_date(self, participant):
+    def participant_specific_donation(self, participant):
         donations = Donation.objects.filter(participant = participant)
             
-        helper = []
+        helper = {}
 
         for donation in donations:
             helper.append(['date'])
+            helper.append(['amount'])
+        return helper
+	
+	def participant_specific_milestone(self, participant):
+        milestones = Participant_Milestone_Record.objects.filter(participant = participant)
+            
+        helper = {}
+
+        for milestone in milestones:
+            helper.append(['date'])
+            helper.append(['donation_milestone'])
+            helper.append(['donation_milestone__candles_rewarded'])
         return helper
 
-    def participant_specific_donation_amount(self, participant):
-        donations = Donation.objects.filter(participant = participant)
+	def participant_specific_emails(self, participant):
+        emails = Participant_Milestone_Record.objects.filter(participant = participant)
             
-        helper = []
+        helper = {}
 
-        for donation in donations:
-            helper.append(['amount'])
+        for milestone in milestones:
+            helper.append(['date'])
+            helper.append(['donation_milestone'])
+            helper.append(['donation_milestone__candles_rewarded'])
         return helper
 
     def participant_specific_donation_amount(self, participant):
@@ -96,13 +110,6 @@ class RelayFunctions:
         company_donations = Donation.objects.filter(participant__team__company = company).aggregate(total_donations = Sum('amount'))
         candles['company_donations_total'] = float(str(company_donations['total_donations'] if company_donations['total_donations'] is not None else 0))
         
-        return candles
-
-    def participant_unsigned(self, participant)
-        candles = {}
-        candles['participant_first_name'] = model_to_dict(Participant.objects.get(pk = participant))['fname']
-        candles['participant_last_name'] = model_to_dict(Participant.objects.get(pk = participant))['lname']
-        candles['participant_id'] = int(participant)
         return candles
 
 
