@@ -182,7 +182,7 @@ def teams_unregistered(request):
 
 	
 	
-def participant_specific_donation(request, participant):
+def participant_specific(request, participant):
         helper = RelayFunctions()
         info = helper.participant_specific_donation(participant)
         info1 = helper.participant_specific_milestone(participant)
