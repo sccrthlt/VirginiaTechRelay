@@ -4,12 +4,12 @@ from decimal import Decimal
 	
 class Company(models.Model):
 
-		RELAY = 'RT'
-		GREEK = 'GT'
-		CORE = 'CT'
+	RELAY = 'RT'
+	GREEK = 'GT'
+	CORE = 'CT'
 
-		COMPANY_TYPES = ((RELAY, 'Relay'),(GREEK, 'Greek'),(CORE, 'Core'),)
-		
+	COMPANY_TYPES = ((RELAY, 'Relay'),(GREEK, 'Greek'),(CORE, 'Core'),)
+	
 	name = models.CharField(verbose_name='Company Name', max_length=100)
 	captain = models.ForeignKey('Participant', blank=True, null=True)
 	total_people_in_chapter = models.PositiveIntegerField(default=0, blank=True)
