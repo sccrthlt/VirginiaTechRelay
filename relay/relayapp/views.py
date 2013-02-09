@@ -191,6 +191,15 @@ def teams_unregistered(request):
 	response = json.dumps(teams)
 	return HttpResponse(response, mimetype="application/json")
 
+	
+	
+def participant_specific(request, participant):
+        helper = RelayFunctions()
+        info = helper.participant_specific(participant)
+
+        response = json.dumps(info)
+	return HttpResponse(response, mimetype="application/json")
+
 @csrf_exempt
 def event_registration(request):
 	participant_email = request.POST.get('email', '')
