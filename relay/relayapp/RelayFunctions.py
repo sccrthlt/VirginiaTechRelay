@@ -33,8 +33,8 @@ class RelayFunctions:
         helper = {}
 
         for donation in donations:
-            helper.append(['date'])
-            helper.append(['amount'])
+            helper['donation_date'] = donation.date
+            helper['donation_amount'] = donation.amount
         return helper
 	
 	def participant_specific_milestone(self, participant):
@@ -43,9 +43,9 @@ class RelayFunctions:
         helper = {}
 
         for milestone in milestones:
-            helper.append(['date'])
-            helper.append(['donation_milestone'])
-            helper.append(['donation_milestone__candles_rewarded'])
+            helper['milestone_date'] = milestone.date
+            helper['milestone_milestone'] = milestone.milestone_date
+            helper['milestone_candles_rewarded'] = milestone.candles_rewarded
         return helper
 
 	def participant_specific_emails(self, participant):
@@ -53,19 +53,17 @@ class RelayFunctions:
             
         helper = {}
 
-        for milestone in milestones:
-            helper.append(['date'])
-            helper.append(['donation_milestone'])
-            helper.append(['donation_milestone__candles_rewarded'])
+        for email in emails:
+            helper['emails_sent'] = email.emails_sent
         return helper
 
-    def participant_specific_donation_amount(self, participant):
-        donations = Donation.objects.filter(participant = participant)
+    def participant_specific_events(self, participant):
+        events = Participant_Event_Record.objects.filter(participant = participant)
             
-        helper = []
+        helper = {}
 
-        for donation in donations:
-            helper.append(['amount'])
+        for event in events:
+            helper['event_name'] = event.event
         return helper
 	
     def participants_specific_milestone_candles(self, participant):
@@ -176,21 +174,4 @@ class RelayFunctions:
         candles['team_donation_milestone_candles'] = self.participants_milestone_candles(team)
         candles['team_email_milestone_candles'] = self.participants_emails_candles(team)
         candles['team_event_milestone_candles'] = self.participants_event_candles(team)
-        return candles
-
-    def participant_specific(self, participant):
-        candles = {}
-        candles['donation_date'] = model_to_dict(Donation.objects.filter(participant = participant))['date']
-        candles['donation_amount'] = model_to_dict(Donation.objects.filter(participant = participant))['amount']
-        candles['milestone_date'] = model_to_dict(Participant_Milestone_Record.objects.filter(participant = participant))['date']
-        candles['milestone_actual'] = model_to_dict(Participant_Milestone_Record.objects.filter(participant = participant))['donation_milestone']
-        candles['milestone_candles'] = model_to_dict(Participant_Milestone_Record.objects.filter(participant = participant))['donation_milestone__candles_rewarded']
-        candles['emails_sent'] = model_to_dict(Participant_Milestone_Record.objects.filter(participant = participant))['donation_milestone']
-        candles['event_name'] = model_to_dict(Participant_Event_Record.objects.filter(participant = participant))['event']
-        candles['event_date'] = model_to_dict(Participant_Event_Record.objects.filter(participant = participant))['date']
-        candles['event_candles'] = model_to_dict(Participant_Event_Record.objects.filter(participant = participant))['event__candles_rewarded']
-		
-		
-		
-		
-		
+        return candles	

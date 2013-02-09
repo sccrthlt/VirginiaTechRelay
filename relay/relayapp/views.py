@@ -182,11 +182,12 @@ def teams_unregistered(request):
 
 	
 	
-def participant_specific(request, participant):
+def participant_specific_donation(request, participant):
         helper = RelayFunctions()
-        info = helper.participant_specific(participant)
+        info = helper.participant_specific_donation(participant)
+        info1 = helper.participant_specific_milestone(participant)
 
-        response = json.dumps(info)
+        response = json.dumps(info, info1)
 	return HttpResponse(response, mimetype="application/json")
 
 @csrf_exempt
