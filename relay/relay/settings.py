@@ -11,11 +11,11 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'vtrelay_db',                      # Or path to database file if using sqlite3.
-        'USER': 'vtrelay',                      # Not used with sqlite3.
-        'PASSWORD': 'k8675309',                  # Not used with sqlite3.
-        'HOST': 'postgresql.alwaysdata.com',                      # Set to empty string for localhost. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'vtrelayc_db',                      # Or path to database file if using sqlite3.
+        'USER': 'vtrelayc_db',                      # Not used with sqlite3.
+        'PASSWORD': 'GlT=Mn!cq$N?',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
