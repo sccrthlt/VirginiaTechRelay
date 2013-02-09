@@ -9,7 +9,7 @@ class Company(models.Model):
 	CORE = 'CT'
 
 	COMPANY_TYPES = ((RELAY, 'Relay'),(GREEK, 'Greek'),(CORE, 'Core'),)
-	
+
 	name = models.CharField(verbose_name='Company Name', max_length=100)
 	captain = models.ForeignKey('Participant', blank=True, null=True)
 	total_people_in_chapter = models.PositiveIntegerField(default=0, blank=True)
@@ -64,7 +64,7 @@ class Event(models.Model):
 #change to partipant record for donations
 #pull from CSV
 class TShirt(models.Model):
-		name = models.CharField(max_length=200)
+	name = models.CharField(max_length=200)
 
 class Donation(models.Model):
 	participant = models.ForeignKey(Participant)
@@ -80,25 +80,25 @@ class Donation_Milestone(models.Model):
 	candles_rewarded = models.PositiveIntegerField()
 
 	def __unicode__(self):
-				return 'Milestone: ' + str(self.donation_amount) + ' Candles: ' + str(self.candles_rewarded)
+		return 'Milestone: ' + str(self.donation_amount) + ' Candles: ' + str(self.candles_rewarded)
 
-		class Meta:
-				ordering = ['candles_rewarded']
+	class Meta:
+		ordering = ['candles_rewarded']
 
 class Company_Registration_Rule(models.Model):
-		percent_registered = models.PositiveIntegerField(default=0, blank=True)
-		candles_rewarded = models.PositiveIntegerField()
-		date_cutoff = models.DateField()
+	percent_registered = models.PositiveIntegerField(default=0, blank=True)
+	candles_rewarded = models.PositiveIntegerField()
+	date_cutoff = models.DateField()
 	
 class Email_Rule(models.Model):
 	candles_rewarded = models.PositiveIntegerField()
 	emails = models.PositiveIntegerField()
 
 	def __unicode__(self):
-				return 'Emails: ' + str(self.emails) + ' Candles: ' + str(self.candles_rewarded)
+		return 'Emails: ' + str(self.emails) + ' Candles: ' + str(self.candles_rewarded)
 
 class Participant_Email_Record(models.Model):
-		participant = models.ForeignKey(Participant)
+	participant = models.ForeignKey(Participant)
 	email_milestone = models.ForeignKey(Email_Rule)
 	date = models.DateField()
 
@@ -108,9 +108,9 @@ class Participant_Event_Record(models.Model):
 	participant = models.ForeignKey(Participant)
 
 class Company_TShirt_Milestone_Record(models.Model):
-		company = models.ForeignKey(Company)
-		tshirt_milestone = models.ForeignKey(Company_TShirt_Milestone)
-		date = models.DateField()
+	company = models.ForeignKey(Company)
+	tshirt_milestone = models.ForeignKey(Company_TShirt_Milestone)
+	date = models.DateField()
 
 class Team_Event_Record(models.Model):
 	event = models.ForeignKey(Event)
@@ -122,15 +122,15 @@ class Participant_Milestone_Record(models.Model):
 	date = models.DateField()
 
 class Participant_TShirt_Purchase_Record(models.Model):
-		participant = models.ForeignKey(Participant)
-		tshirt = models.ForeignKey(TShirt)
-		quantity = models.PositiveIntegerField(default=0, blank=True)
-		date = models.DateField()
+	participant = models.ForeignKey(Participant)
+	tshirt = models.ForeignKey(TShirt)
+	quantity = models.PositiveIntegerField(default=0, blank=True)
+	date = models.DateField()
 
 class Company_Registration_Record(models.Model):
-		company = models.ForeignKey(Company)
-		registration_milestone = models.ForeignKey(Company_Registration_Rule)
-		date = models.DateField()
+	company = models.ForeignKey(Company)
+	registration_milestone = models.ForeignKey(Company_Registration_Rule)
+	date = models.DateField()
 	
 #add tshirt milestone record for copmanies
 
