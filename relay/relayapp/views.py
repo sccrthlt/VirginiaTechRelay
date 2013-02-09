@@ -187,7 +187,8 @@ def participant_specific_donation(request, participant):
         info = helper.participant_specific_donation(participant)
         info1 = helper.participant_specific_milestone(participant)
 
-        response = json.dumps(info, info1)
+        data = { 'participant_specific_donation' : info, 'participant_specific_milestone' : info1 }
+        response = json.dumps(data)
 	return HttpResponse(response, mimetype="application/json")
 
 @csrf_exempt
