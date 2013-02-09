@@ -6,26 +6,26 @@ from django.forms.models import model_to_dict
 class RelayFunctions:
 
 	def participants_milestone_candles(self, team):
-			candles = Participant_Milestone_Record.objects.filter(participant__team = team).aggregate(candles_rewarded = Sum('donation_milestone__candles_rewarded'))
-			return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
+		candles = Participant_Milestone_Record.objects.filter(participant__team = team).aggregate(candles_rewarded = Sum('donation_milestone__candles_rewarded'))
+		return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
 
 	def participants_emails_candles(self, team):
-			participants = Participant.objects.filter(team = team)
-			
-			total = 0
-			for participant in participants:
-				for rule in Email_Rule.objects.all():
-					if rule.emails <= participant.emails_sent:
-						total += participant.emails_sent * rule.candles_rewarded
-			return total
-			
-			#original call, keep in case we revert
-			#candles = Participant_Email_Record.objects.filter(participant__team = team).aggregate(candles_rewarded = Sum('email_milestone__candles_rewarded'))
-			#return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
+		participants = Participant.objects.filter(team = team)
+		
+		total = 0
+		for participant in participants:
+			for rule in Email_Rule.objects.all():
+				if rule.emails <= participant.emails_sent:
+					total += participant.emails_sent * rule.candles_rewarded
+		return total
+		
+		#original call, keep in case we revert
+		#candles = Participant_Email_Record.objects.filter(participant__team = team).aggregate(candles_rewarded = Sum('email_milestone__candles_rewarded'))
+		#return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
 
 	def participants_event_candles(self, team):
-			candles = Participant_Event_Record.objects.filter(participant__team = team).aggregate(candles_rewarded = Sum('event__candles_rewarded'))
-			return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
+		candles = Participant_Event_Record.objects.filter(participant__team = team).aggregate(candles_rewarded = Sum('event__candles_rewarded'))
+		return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
 
 	def participant_specific_donation(self, participant):
 		donations = Donation.objects.filter(participant = participant)
@@ -67,20 +67,20 @@ class RelayFunctions:
 		return helper
 	
 	def participants_specific_milestone_candles(self, participant):
-			candles = Participant_Milestone_Record.objects.filter(participant = participant).aggregate(candles_rewarded = Sum('donation_milestone__candles_rewarded'))
-			return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
+		candles = Participant_Milestone_Record.objects.filter(participant = participant).aggregate(candles_rewarded = Sum('donation_milestone__candles_rewarded'))
+		return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
 
 	def participants_specific_emails_candles(self, participant):
-			candles = Participant_Email_Record.objects.filter(participant = participant).aggregate(candles_rewarded = Sum('email_milestone__candles_rewarded'))
-			return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
+		candles = Participant_Email_Record.objects.filter(participant = participant).aggregate(candles_rewarded = Sum('email_milestone__candles_rewarded'))
+		return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
 
 	def participants_specific_event_candles(self, participant):
-			candles = Participant_Event_Record.objects.filter(participant = participant).aggregate(candles_rewarded = Sum('event__candles_rewarded'))
-			return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
+		candles = Participant_Event_Record.objects.filter(participant = participant).aggregate(candles_rewarded = Sum('event__candles_rewarded'))
+		return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
 
 	def number_participants_in_company_signed_up(self, company):
-			participants = Team.objects.filter(company = company, signup = True).aggregate(participant_count = Count('participant'))
-			return participants['participant_count']
+		participants = Team.objects.filter(company = company, signup = True).aggregate(participant_count = Count('participant'))
+		return participants['participant_count']
 
 	def percentage_of_participants_in_company_signed_up(self, company):
 		percentage = (self.number_participants_in_company_signed_up(company) / Company.objects.get(pk = company).total_people_in_chapter) * 100

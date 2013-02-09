@@ -18,7 +18,7 @@ class Company(models.Model):
 	#add field for total participants, default to 0, allow blank
 	#tshirt milestone can be figured out by using the percentages from the data
 	def __unicode__(self):
-				return self.name
+		return self.name
 
 #move type to company
 class Team(models.Model):
@@ -28,7 +28,7 @@ class Team(models.Model):
 	signup = models.BooleanField()
 	
 	def __unicode__(self):
-				return self.name
+		return self.name
 
 class Participant(models.Model):
 	fname = models.CharField(verbose_name='First Name', max_length=100)
