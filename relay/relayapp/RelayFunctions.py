@@ -26,6 +26,33 @@ class RelayFunctions:
     def participants_event_candles(self, team):
             candles = Participant_Event_Record.objects.filter(participant__team = team).aggregate(candles_rewarded = Sum('event__candles_rewarded'))
             return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
+
+    def participant_specific_donation_date(self, participant):
+        donations = Donation.objects.filter(participant = participant)
+            
+        helper = []
+
+        for donation in donations:
+            helper.append(['date'])
+        return helper
+
+    def participant_specific_donation_amount(self, participant):
+        donations = Donation.objects.filter(participant = participant)
+            
+        helper = []
+
+        for donation in donations:
+            helper.append(['amount'])
+        return helper
+
+    def participant_specific_donation_amount(self, participant):
+        donations = Donation.objects.filter(participant = participant)
+            
+        helper = []
+
+        for donation in donations:
+            helper.append(['amount'])
+        return helper
 	
     def participants_specific_milestone_candles(self, participant):
             candles = Participant_Milestone_Record.objects.filter(participant = participant).aggregate(candles_rewarded = Sum('donation_milestone__candles_rewarded'))
@@ -149,4 +176,14 @@ class RelayFunctions:
         candles['donation_date'] = model_to_dict(Donation.objects.filter(participant = participant))['date']
         candles['donation_amount'] = model_to_dict(Donation.objects.filter(participant = participant))['amount']
         candles['milestone_date'] = model_to_dict(Participant_Milestone_Record.objects.filter(participant = participant))['date']
-        candles['donation_milestone'] = model_to_dict(Participant_Milestone_Record.objects.filter(participant = participant))['donation_milestone']
+        candles['milestone_actual'] = model_to_dict(Participant_Milestone_Record.objects.filter(participant = participant))['donation_milestone']
+        candles['milestone_candles'] = model_to_dict(Participant_Milestone_Record.objects.filter(participant = participant))['donation_milestone__candles_rewarded']
+        candles['emails_sent'] = model_to_dict(Participant_Milestone_Record.objects.filter(participant = participant))['donation_milestone']
+        candles['event_name'] = model_to_dict(Participant_Event_Record.objects.filter(participant = participant))['event']
+        candles['event_date'] = model_to_dict(Participant_Event_Record.objects.filter(participant = participant))['date']
+        candles['event_candles'] = model_to_dict(Participant_Event_Record.objects.filter(participant = participant))['event__candles_rewarded']
+		
+		
+		
+		
+		
