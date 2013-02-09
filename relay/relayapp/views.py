@@ -77,105 +77,105 @@ def homepage_events(request):
 
 def participant_specific_info(request, participant):
 
-        helper = RelayFunctions()
-        info = helper.participant_specific_general_candles(participant)
+		helper = RelayFunctions()
+		info = helper.participant_specific_general_candles(participant)
 
-        response = json.dumps(info)
+		response = json.dumps(info)
 	return HttpResponse(response, mimetype="application/json")
 
 def team_participants(request, team):
-        team_participants = Participant.objects.filter(team = team)
+		team_participants = Participant.objects.filter(team = team)
 
-        json_serializer = serializers.get_serializer("json")()
+		json_serializer = serializers.get_serializer("json")()
 	response = json_serializer.serialize(team_participants, ensure_ascii=False)
 	return HttpResponse(response, mimetype="application/json")
 
 def team_candles(request, team):
-        helper = RelayFunctions()
+		helper = RelayFunctions()
 	response = json.dumps(helper.team_candles(team))
 	return HttpResponse(response, mimetype="application/json")
 
 def all_team_candles(request):
-        helper = RelayFunctions()
+		helper = RelayFunctions()
 
-        all_team_candles = []
+		all_team_candles = []
 
-        for team in Team.objects.all():
-                all_team_candles.append(helper.team_candles(model_to_dict(team)['id']))
+		for team in Team.objects.all():
+				all_team_candles.append(helper.team_candles(model_to_dict(team)['id']))
 
-        response = json.dumps(all_team_candles)
+		response = json.dumps(all_team_candles)
 	return HttpResponse(response, mimetype="application/json")
 
 def company_candles(request, company):
-        helper = RelayFunctions()
+		helper = RelayFunctions()
 	response = json.dumps(helper.company_candles(company))
 	return HttpResponse(response, mimetype="application/json")
 
 def team_specific_general_candles(request, team):
-        helper = RelayFunctions()
-        
-        all_participant_specific_general_candles = []
+		helper = RelayFunctions()
+		
+		all_participant_specific_general_candles = []
 
-        for participant in Participant.objects.filter(team = team):
-                all_participant_specific_general_candles.append(helper.participant_specific_general_candles(model_to_dict(participant)['id']))
+		for participant in Participant.objects.filter(team = team):
+				all_participant_specific_general_candles.append(helper.participant_specific_general_candles(model_to_dict(participant)['id']))
 
 	response = json.dumps(all_participant_specific_general_candles)
 	return HttpResponse(response, mimetype="application/json")
 
 def all_candles(request):
-        helper = RelayFunctions()
+		helper = RelayFunctions()
 
-        all_candles_total = []
+		all_candles_total = []
 
-        for team in Team.objects.all():
-                all_candles_total.append(helper.candles_total(model_to_dict(team)['id']))
+		for team in Team.objects.all():
+				all_candles_total.append(helper.candles_total(model_to_dict(team)['id']))
 
-        response = json.dumps(all_candles_total)
+		response = json.dumps(all_candles_total)
 	return HttpResponse(response, mimetype="application/json")	
 
 def all_company_candles(request):
-        helper = RelayFunctions()
+		helper = RelayFunctions()
 
-        all_company_candles = []
+		all_company_candles = []
 
-        for company in Company.objects.all():
-                all_company_candles.append(helper.company_candles(model_to_dict(company)['id']))
+		for company in Company.objects.all():
+				all_company_candles.append(helper.company_candles(model_to_dict(company)['id']))
 
-        response = json.dumps(all_company_candles)
+		response = json.dumps(all_company_candles)
 	return HttpResponse(response, mimetype="application/json")
 
 def all_company_corps_candles(request):
-        helper = RelayFunctions()
+		helper = RelayFunctions()
 
-        all_company_corps_candles = []
+		all_company_corps_candles = []
 
-        for company in Company.objects.all():
-                all_company_corps_candles.append(helper.company_corps_candles(model_to_dict(company)['id']))
+		for company in Company.objects.all():
+				all_company_corps_candles.append(helper.company_corps_candles(model_to_dict(company)['id']))
 
-        response = json.dumps(all_company_corps_candles)
+		response = json.dumps(all_company_corps_candles)
 	return HttpResponse(response, mimetype="application/json")
 
 def all_company_donations(request):
-        helper = RelayFunctions()
+		helper = RelayFunctions()
 
-        all_company_donations = []
+		all_company_donations = []
 
-        for company in Company.objects.all():
-                all_company_donations.append(helper.company_donations(model_to_dict(company)['id']))
+		for company in Company.objects.all():
+				all_company_donations.append(helper.company_donations(model_to_dict(company)['id']))
 
-        response = json.dumps(all_company_donations)
+		response = json.dumps(all_company_donations)
 	return HttpResponse(response, mimetype="application/json")
 
 def teams_unregistered(request):
-        unregistered = Team.objects.filter(signup = False)
+		unregistered = Team.objects.filter(signup = False)
 		
-        teams = []
-        for team in unregistered:
-            team = model_to_dict(team)
-            team['team_type'] = model_to_dict(Company.objects.get(team__pk = team['id']))['company_type']
-            teams.append(team)
+		teams = []
+		for team in unregistered:
+			team = model_to_dict(team)
+			team['team_type'] = model_to_dict(Company.objects.get(team__pk = team['id']))['company_type']
+			teams.append(team)
 
-        #json_serializer = serializers.get_serializer("json")()
+		#json_serializer = serializers.get_serializer("json")()
 	#response = json_serializer.serialize(unregistered, ensure_ascii=False)
 	response = json.dumps(teams)
 	return HttpResponse(response, mimetype="application/json")
@@ -183,12 +183,12 @@ def teams_unregistered(request):
 	
 	
 def participant_specific(request, participant):
-        helper = RelayFunctions()
-        info = helper.participant_specific_donation(participant)
-        info1 = helper.participant_specific_milestone(participant)
+		helper = RelayFunctions()
+		info = helper.participant_specific_donation(participant)
+		info1 = helper.participant_specific_milestone(participant)
 
-        data = { 'participant_specific_donation' : info, 'participant_specific_milestone' : info1 }
-        response = json.dumps(data)
+		data = { 'participant_specific_donation' : info, 'participant_specific_milestone' : info1 }
+		response = json.dumps(data)
 	return HttpResponse(response, mimetype="application/json")
 
 @csrf_exempt
