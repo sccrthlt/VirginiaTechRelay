@@ -37,7 +37,7 @@ class RelayFunctions:
             helper['donation_amount'] = donation.amount
         return helper
 	
-	def participant_specific_milestone(self, participant):
+    def participant_specific_milestone(self, participant):
         milestones = Participant_Milestone_Record.objects.filter(participant = participant)
             
         helper = {}
