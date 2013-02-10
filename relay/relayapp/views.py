@@ -189,8 +189,8 @@ def participant_specific(request, participant):
 
     data = { 'participant_specific_donation' : info , 'participant_specific_milestone' : info1 }
     json_serializer = serializers.get_serializer("json")()
-	response = json_serializer.serialize(data, ensure_ascii=False)
-	return HttpResponse(response, mimetype="application/json")
+    response = json_serializer.serialize(data, ensure_ascii=False)
+    return HttpResponse(response, mimetype="application/json")
 
 @csrf_exempt
 def event_registration(request):
