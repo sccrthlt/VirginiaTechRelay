@@ -33,7 +33,7 @@ class RelayFunctions:
 		helper = {}
 
 		for donation in donations:
-			##helper['donation_date'] = donation.date
+			helper['donation_date'] = donation.date
 			helper['donation_amount'] = donation.amount
 		return helper
 	
