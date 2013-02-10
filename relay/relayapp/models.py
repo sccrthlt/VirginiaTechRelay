@@ -48,42 +48,42 @@ class Participant(models.Model):
         ordering = ['lname', 'fname']
 
 class Event(models.Model):
-name = models.CharField(max_length=100)
-date = models.DateField()
-candles_rewarded = models.IntegerField()
-description = models.TextField(blank=True)
-image = models.URLField(blank = True)
-homepage = models.BooleanField()
+    name = models.CharField(max_length=100)
+    date = models.DateField()
+    candles_rewarded = models.IntegerField()
+    description = models.TextField(blank=True)
+    image = models.URLField(blank = True)
+    homepage = models.BooleanField()
 
-def __unicode__(self):
-return self.name
+    def __unicode__(self):
+        return self.name
 
-class Meta:
-ordering = ['date']
+    class Meta:
+        ordering = ['date']
 
 #change to partipant record for donations
 #pull from CSV
 class TShirt(models.Model):
-name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
 
 class Donation(models.Model):
-participant = models.ForeignKey(Participant)
-amount = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
-date = models.DateField()
+    participant = models.ForeignKey(Participant)
+    amount = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
+    date = models.DateField()
 
 class Company_TShirt_Milestone(models.Model):
-percentage_purchased = models.PositiveIntegerField(default=0, blank=True)
-candles_rewarded = models.PositiveIntegerField()
+    percentage_purchased = models.PositiveIntegerField(default=0, blank=True)
+    candles_rewarded = models.PositiveIntegerField()
 
 class Donation_Milestone(models.Model):
-donation_amount = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
-candles_rewarded = models.PositiveIntegerField()
+    donation_amount = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
+    candles_rewarded = models.PositiveIntegerField()
 
-def __unicode__(self):
-return 'Milestone: ' + str(self.donation_amount) + ' Candles: ' + str(self.candles_rewarded)
+    def __unicode__(self):
+        return 'Milestone: ' + str(self.donation_amount) + ' Candles: ' + str(self.candles_rewarded)
 
-class Meta:
-ordering = ['candles_rewarded']
+    class Meta:
+        ordering = ['candles_rewarded']
 
 class Company_Registration_Rule(models.Model):
     percent_registered = models.PositiveIntegerField(default=0, blank=True)
