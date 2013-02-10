@@ -18,12 +18,12 @@ def setupParticipant(info):
             print ('\n')
 
     return participant_return
-                                          
+
 
 def parseCSVParticipantDetails():
     with open('ParticipantDetails.csv', 'rt') as csvfile:
         relayreader = csv.DictReader(csvfile, delimiter=',')
-        
+
         for row in relayreader:
 
             try:
@@ -34,5 +34,3 @@ def parseCSVParticipantDetails():
                 print ("it was not a ascii-encoded unicode string")
                 print (row)
                 print ('\n')
-            
-            

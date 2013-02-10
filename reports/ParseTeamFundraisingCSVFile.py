@@ -5,9 +5,9 @@ import codecs
 from relayapp.models import *
 
 def setupCompany(info):
-    
+
     company_return = Company.objects.get(name = 'General Company')
-    
+
     if (info['Public Company Name'] != 'N/A'):
         try:
             company_check = Company.objects.get(name = info['Public Company Name'])
@@ -52,18 +52,18 @@ def setupCaptain(info):
     return cap_return
 
 def parseCSVTeamFundraising():
-    
+
     #open('TeamFundraising.csv', 'rt')
-    #codecs.open('TeamFundraising.csv', 'r', encoding='utf-8') 
+    #codecs.open('TeamFundraising.csv', 'r', encoding='utf-8')
     with open('TeamFundraising.csv', 'rt') as csvfile:
 
         relayreader = csv.DictReader(csvfile, delimiter=',')
-        
+
         for row in relayreader:
 
             try:
                 row['Team Name'].decode('ascii')
-                
+
                 company = setupCompany(row)
                 team = setupTeam(row)
                 captain = setupCaptain(row)
@@ -75,7 +75,6 @@ def parseCSVTeamFundraising():
                 print ("it was not a ascii-encoded unicode string")
             else:
                 print ("It may have been an ascii-encoded unicode string")
-            
+
             print (row)
             print ('\n')
-            

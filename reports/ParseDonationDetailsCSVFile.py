@@ -16,7 +16,7 @@ def checkDonationsTotals(participant):
             try:
                 record = Participant_Milestone_Record.objects.get(participant = participant, donation_milestone = milestone)
             except Participant_Milestone_Record.DoesNotExist:
-                donated_date = Donation.objects.filter(participant = participant).annotate(most_recent_donation_date = Max('date')) 
+		donated_date = Donation.objects.filter(participant = participant).annotate(most_recent_donation_date = Max('date'))
                 new_participant_milestone_record = Participant_Milestone_Record(participant = participant, donation_milestone = milestone, date = donated_date[0].most_recent_donation_date)
                 new_participant_milestone_record.save()
 
@@ -33,13 +33,13 @@ def setupDonation(info):
         donation_return.save()
 
         checkDonationsTotals(Participant.objects.get(email = info['Email']))
-        
+
     except Participant.DoesNotExist:
-        
+
         try:
             date_donated = datetime.strptime(info['Donation Date'], '%m/%d/%y %H:%M')
 
-            participants = Participant.objects.filter(fname = info['Participant Credited First Name'], lname = info['Participant Credited Last Name'])            
+	    participants = Participant.objects.filter(fname = info['Participant Credited First Name'], lname = info['Participant Credited Last Name'])
             if len(participants) > 1:
                 l = list(participants[:1])
                 found_participant = l[0]
@@ -50,7 +50,7 @@ def setupDonation(info):
             donation_return.save()
 
             checkDonationsTotals(Participant.objects.get(email = found_participant.email))
-            
+
         except Participant.DoesNotExist:
             print('ERROR: PARTICIPANT NOT FOUND')
 
@@ -58,7 +58,7 @@ def parseCSVPDonationDetails():
     Donation.objects.all().delete()
     with open('DonationDetails.csv', 'rt') as csvfile:
         relayreader = csv.DictReader(csvfile, delimiter=',')
-        
+
         for row in relayreader:
 
             print (row)

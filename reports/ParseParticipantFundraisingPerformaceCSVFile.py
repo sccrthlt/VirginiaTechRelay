@@ -5,7 +5,7 @@ import datetime
 from relayapp.models import *
 
 def checkEmailTotals(participant):
-    
+
     emails_count = participant.emails_sent
 
     for milestone in Email_Rule.objects.all():
@@ -26,7 +26,7 @@ def setupEmailsSent(info):
         participant.save()
 
         #checkEmailTotals(participant)
-        
+
     except Participant.DoesNotExist:
         try:
             participant = Participant.objects.get(fname = info['Participant First Name'], lname = info['Participant Last Name'])
@@ -34,7 +34,7 @@ def setupEmailsSent(info):
             participant.save()
 
             #checkEmailTotals(participant)
-            
+
         except Participant.DoesNotExist:
             print('ERROR: PARTICIPANT DOES NOT EXIST')
 
@@ -45,13 +45,13 @@ def parseCSVParticipantFundraising():
         for row in relayreader:
 
             print (row)
-            
+
             try:
                 row['Team Name'].decode('ascii')
                 setupEmailsSent(row)
 
             except UnicodeDecodeError:
                 print ("it was not a ascii-encoded unicode string")
-            
-            
+
+
             print ('\n')
