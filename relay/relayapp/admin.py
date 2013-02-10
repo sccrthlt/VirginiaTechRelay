@@ -3,31 +3,31 @@ from django.contrib import admin
 from relayapp.models import *
 
 class ParticipantAdmin(admin.ModelAdmin):
-	list_display = ('lname', 'fname', 'email', 'team', 'emails_sent')
-	search_fields = ['email']
-	
+    list_display = ('lname', 'fname', 'email', 'team', 'emails_sent')
+    search_fields = ['email']
+
 class EventAdmin(admin.ModelAdmin):
-	list_display = ('name', 'date')
-	list_filter = ['date']
-	search_fields = ['name']
+    list_display = ('name', 'date')
+    list_filter = ['date']
+    search_fields = ['name']
 
 class DonationAdmin(admin.ModelAdmin):
-	list_display = ('participant', 'amount', 'date')
-	list_filter = ['date']
-	search_fields = ['participant']
+    list_display = ('participant', 'amount', 'date')
+    list_filter = ['date']
+    search_fields = ['participant']
 
 class ParticipantMilestoneRecordAdmin(admin.ModelAdmin):
-	list_display = ('participant', 'donation_milestone', 'date')
-	list_filter = ['date']
-	search_fields = ['participant']
+    list_display = ('participant', 'donation_milestone', 'date')
+    list_filter = ['date']
+    search_fields = ['participant']
 
 class ParticipantEmailRecordAdmin(admin.ModelAdmin):
-	list_display = ('participant', 'email_milestone', 'date')
-	list_filter = ['date']
-	search_fields = ['participant']
+    list_display = ('participant', 'email_milestone', 'date')
+    list_filter = ['date']
+    search_fields = ['participant']
 
 class EmailRuleAdmin(admin.ModelAdmin):
-	list_display = ('candles_rewarded', 'emails')
+    list_display = ('candles_rewarded', 'emails')
 
 admin.site.register(Company)
 admin.site.register(Team)
