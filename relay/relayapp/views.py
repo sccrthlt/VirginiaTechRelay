@@ -188,9 +188,9 @@ def participant_specific(request, participant):
 	info1 = helper.participant_specific_milestone(participant)
 
 
-	data = { 'participant_specific_donation' : info, 'participant_specific_milestone' : info1 }
-	dthandler = lambda obj: obj.isoformat() if isinstance(obj, info.helper.participant_specific_donation.donation_date) else None
-	response = json.dumps(data, default=dthandler)
+	data = { 'participant_specific_donation' : info }
+	##dthandler = lambda obj: obj.isoformat() if isinstance(obj, info.helper.participant_specific_donation.donation_date) else None
+	response = json.dumps(data)
 	return HttpResponse(response, mimetype="application/json")
 
 @csrf_exempt
