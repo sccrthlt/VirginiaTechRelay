@@ -23,36 +23,36 @@ class RelayFunctions:
 		#candles = Participant_Email_Record.objects.filter(participant__team = team).aggregate(candles_rewarded = Sum('email_milestone__candles_rewarded'))
 		#return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
 
-def participants_event_candles(self, team):
-        candles = Participant_Event_Record.objects.filter(participant__team = team).aggregate(candles_rewarded = Sum('event__candles_rewarded'))
-	return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
+    def participants_event_candles(self, team):
+		candles = Participant_Event_Record.objects.filter(participant__team = team).aggregate(candles_rewarded = Sum('event__candles_rewarded'))
+		return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
 
-def participant_specific_donation(self, participant):
-        donations = Donation.objects.filter(participant = participant)
+	def participant_specific_donation(self, participant):
+		donations = Donation.objects.filter(participant = participant)
 			
-        helper = {}
+		helper = {}
 
         ##date = [donation.date for donation in donations]
         ##helper['donation_date'] = date
 		
-        amount = [donation.amount for donation in donations]
-            helper['donation_amount'] = amount
+		amount = [donation.amount for donation in donations]
+			helper['donation_amount'] = amount
 		
-        return helper
+		return helper
 	
-def participant_specific_milestone(self, participant):
+	def participant_specific_milestone(self, participant):
 		milestones = Participant_Milestone_Record.objects.filter(participant = participant)
 		
 		helper = {}
 
 		date = [milestone.date for milestone in milestones ]
-		##helper['milestone_date'] = date
+			##helper['milestone_date'] = date
 
 		milestone = [milestone.donation_milestone for milestone in milestones]
-		helper['milestone_milestone'] = milestone
+			helper['milestone_milestone'] = milestone
 		
 		candles_rewarded = [milestone.donation_milestone for milestone in milestones]
-		helper['milestone_candles_rewarded'] = candles_rewarded
+			helper['milestone_candles_rewarded'] = candles_rewarded
         
 		return helper
 	
