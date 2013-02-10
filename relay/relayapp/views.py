@@ -187,7 +187,7 @@ def participant_specific(request, participant):
     info = helper.participant_specific_donation(participant)
     info1 = helper.participant_specific_milestone(participant)
 
-    data = { 'participant_specific_donation' : info , 'participant_specific_milestone' : info1 }
+    data = [ 'participant_specific_donation' : info , 'participant_specific_milestone' : info1 ]
     response = HttpResponse()
     response.content = serialized_obj = serializers.serialize('json', [ data, ])
     response['Content-Type'] = 'application/json'
