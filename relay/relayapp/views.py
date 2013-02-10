@@ -188,8 +188,8 @@ def participant_specific(request, participant):
     info1 = helper.participant_specific_milestone(participant)
 
     data = { 'participant_specific_donation' : info , 'participant_specific_milestone' : info1 }
-    json_serializer = serializers.get_serializer("json")()
-    response = json_serializer.serialize(data, ensure_ascii=False)
+    
+    response = json.dumps(data)
     return HttpResponse(response, mimetype="application/json")
 
 @csrf_exempt
