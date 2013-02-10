@@ -44,7 +44,7 @@ class RelayFunctions:
 
 		for milestone in milestones:
 			##helper['milestone_date'] = milestone.date
-			helper['milestone_milestone'] = milestone.milestone_date
+			helper['milestone_milestone'] = milestone.donation_milestone
 			helper['milestone_candles_rewarded'] = milestone.candles_rewarded
 		return helper
 
