@@ -188,8 +188,10 @@ def participant_specific(request, participant):
         info1 = helper.participant_specific_milestone(participant)
 
         data = { 'participant_specific_donation' : info, 'participant_specific_milestone' : info1 }
-        response = json.dumps(data)
-	return HttpResponse(response, mimetype="application/json")
+    
+    dthandler = lambda data: data.isoformat() if isinstance(data, datetime.datetime) else None
+    response = json.dumps(data, default = dthandler)
+    return HttpResponse(response, mimetype="application/json")
 
 @csrf_exempt
 def event_registration(request):
