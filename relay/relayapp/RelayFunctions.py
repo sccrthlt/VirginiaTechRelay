@@ -37,8 +37,8 @@ class RelayFunctions:
         ##date = [donation.date for donation in donations]
             ##helper['donation_date'] = date
 
-        amount = [str(amount) for donation in donations]
-        helper['donation_amount'] = int(amount)
+        amount = [str(donations.amount) for donation in donations]
+        helper['donation_amount'] = amount
 
         return helper
 
@@ -47,13 +47,13 @@ class RelayFunctions:
 
         helper = {}
 
-        date = [str(date) for milestone in milestones ]
+        date = [str(milestones.date) for milestone in milestones ]
         ##helper['milestone_date'] = date
 
-        milestone = [str(milestone) for milestone in milestones]
+        milestone = [str(milestones.milestone) for milestone in milestones]
         helper['milestone_milestone'] = milestone
 
-        candles_rewarded = [str(candles_rewarded) for milestone in milestones]
+        candles_rewarded = [str(milestones.candles_rewarded) for milestone in milestones]
         helper['milestone_candles_rewarded'] = candles_rewarded
 
         return helper
