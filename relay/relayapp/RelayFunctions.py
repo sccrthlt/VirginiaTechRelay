@@ -68,7 +68,7 @@ class RelayFunctions:
 
 		return eventRecords
 
-		def participant_specific_emails(self, participant):
+	def participant_specific_emails(self, participant):
 		email_record_objects = Participant_Email_Record.objects.filter(participant = participant)
 
 		emailRecords = []
