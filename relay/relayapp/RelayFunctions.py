@@ -35,7 +35,7 @@ class RelayFunctions:
 		donations = []
 		for donation in donation_objects:
 			tempDonation = {}
-			tempDonation['date'] = model_to_dict(donation)['date']
+			tempDonation['date'] = donation.date.strftime("%d/%m/%y")
 			tempDonation['amount'] = float(str(model_to_dict(donation)['amount']))
 			donations.append(tempDonation)
 
@@ -47,7 +47,7 @@ class RelayFunctions:
 		milestoneRecords = []
 		for milestone_record in milestone_record_objects:
 			tempMilestoneRecord = {}
-			tempMilestoneRecord['date'] = model_to_dict(milestone_record)['date']
+			tempMilestoneRecord['date'] = milestone_record.date.strftime("%d/%m/%y")
 			tempMilestoneRecord['amount'] = float(str(milestone_record.donation_milestone.donation_amount))
 			tempMilestoneRecord['candles'] = milestone_record.donation_milestone.candles_rewarded
 			milestoneRecords.append(tempMilestoneRecord)
@@ -60,7 +60,7 @@ class RelayFunctions:
 		eventRecords = []
 		for event_record in event_record_objects:
 			tempEventRecord = {}
-			tempEventRecord['date'] = model_to_dict(event_record.event)['date']
+			tempEventRecord['date'] = event_record.event.date.strftime("%d/%m/%y")
 			tempEventRecord['candles'] = event_record.event.candles_rewarded
 			tempEventRecord['name'] = event_record.event.name
 			tempEventRecord['description'] = event_record.event.description
@@ -74,7 +74,7 @@ class RelayFunctions:
 		emailRecords = []
 		for email_record in email_record_objects:
 			tempEmailRecord = {}
-			tempEmailRecord['date'] = model_to_dict(email_record)['date']
+			tempEmailRecord['date'] = email_record.date.strftime("%d/%m/%y")
 			tempEmailRecord['candles'] = email_record.email_milestone.candles_rewarded
 			tempEmailRecord['emails'] = email_record.email_milestone.emails
 			emailRecords.append(tempEmailRecord)
