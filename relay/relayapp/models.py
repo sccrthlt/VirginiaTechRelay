@@ -38,6 +38,7 @@ class Participant(models.Model):
     emails_sent = models.PositiveIntegerField(default=0, blank=True)
     team = models.ForeignKey(Team)
     reg_date = models.DateField()
+
     #tshirt purchase totals based on records
     #donation totals will be based on donation records with this participant key
     #event totals will be based on the events with this participant key and value of the event

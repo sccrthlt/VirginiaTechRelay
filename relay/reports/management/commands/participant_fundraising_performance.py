@@ -1,8 +1,23 @@
+from django.core.management.base import BaseCommand, CommandError
 import csv
 import os
-import datetime
+import time
+import cStringIO
+
+from django.db.models import Sum
+from django.db.models import Max
+from datetime import datetime
 
 from relayapp.models import *
+
+class Command(BaseCommand):
+    args = 'CSV file with <Participant> detail data'
+    help = 'Parses CSV files related to participant details'
+
+    def handle(self, *args, **options):
+        print "Starting Command.."
+        csv_file_location = args[0]
+        parseCSVParticipantFundraising(csv_file_location)
 
 def checkEmailTotals(participant):
 
@@ -38,20 +53,14 @@ def setupEmailsSent(info):
 	except Participant.DoesNotExist:
 	    print('ERROR: PARTICIPANT DOES NOT EXIST')
 
-def parseCSVParticipantFundraising():
-    Participant_Email_Record.objects.all().delete()
-    with open('ParticipantFundraisingPerformance.csv', 'rt') as csvfile:
-	relayreader = csv.DictReader(csvfile, delimiter=',')
-	for row in relayreader:
+def parseCSVParticipantFundraising(csv_file_location):
+    data = open(csv_file_location).read()
+    relayreader = csv.DictReader(cStringIO.StringIO(data), delimiter=',')
+        for row in relayreader:
+            # print (row)
+            try:
+                row['Team Name'].decode('ascii')
+                setupEmailsSent(row)
 
-	    print (row)
-
-	    try:
-		row['Team Name'].decode('ascii')
-		setupEmailsSent(row)
-
-	    except UnicodeDecodeError:
-		print ("it was not a ascii-encoded unicode string")
-
-
-	    print ('\n')
+            except UnicodeDecodeError:
+                print ("it was not a ascii-encoded unicode string")
