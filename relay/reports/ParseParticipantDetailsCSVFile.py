@@ -9,7 +9,8 @@ def setupParticipant(info):
 	participant_return = Participant.objects.get(email = info['Primary Email Address'])
     except Participant.DoesNotExist:
 	try:
-	    participant_return = Participant(fname = info['First Name'], lname = info['Last Name'], email = info['Primary Email Address'], team = Team.objects.get(name = info['Team Name']))
+            date_registered = datetime.strptime(info['Registration Date'], '%m/%d/%y %H:%M')
+	    participant_return = Participant(fname = info['First Name'], lname = info['Last Name'], email = info['Primary Email Address'], team = Team.objects.get(name = info['Team Name']), reg_date = date_registered)
 	    participant_return.save()
 	except Team.DoesNotExist:
 	    participant_return = None
