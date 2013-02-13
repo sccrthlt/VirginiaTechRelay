@@ -53,10 +53,9 @@ class RelayFunctions:
 		for rule in Email_Rule.objects.all():
 				if rule.emails <= participant.emails_sent:
 					totalCandles += participant.emails_sent * rule.candles_rewarded
-					emails_sent = participant.emails_sent
-					emails_candles = rule.candles_rewarded
+					total_emails_sent = participant.emails_sent
 		
-		total['emails_sent'] = emails_sent
+		total['emails_sent'] = total_emails_sent
 		total['emails_candles'] = totalCandles
 		
 		eventTotal = 0
