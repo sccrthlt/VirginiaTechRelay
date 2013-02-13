@@ -13,9 +13,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.template import RequestContext
 from relayapp.models import *
 from relayapp.RelayFunctions import *
-# from django.views.decorators.cache import cache_page
 
-# @cache_page(60 * 60) # cache for 60 minutes
 def participant_info(request):
 	if request.method == 'GET':
 		if 'email' in request.GET:
@@ -48,21 +46,18 @@ def participant_info(request):
 ##      response['Content-Type'] = 'application/json'
 ##      return response
 
-# @cache_page(60 * 60) # cache for 60 minutes
 def all_participants_info(request):
 	participants = Participant.objects.all()
 	json_serializer = serializers.get_serializer("json")()
 	response = json_serializer.serialize(participants, ensure_ascii=False)
 	return HttpResponse(response, mimetype="application/json")
 
-# @cache_page(60 * 60) # cache for 60 minutes
 def all_teams_info(request):
 	teams = Team.objects.all()
 	json_serializer = serializers.get_serializer("json")()
 	response = json_serializer.serialize(teams, ensure_ascii=False)
 	return HttpResponse(response, mimetype="application/json")
 
-# @cache_page(60 * 60) # cache for 60 minutes
 def homepage_events(request):
 	hpage_count = Event.objects.filter(homepage=True).count()
 	if hpage_count >= 4:
@@ -80,7 +75,6 @@ def homepage_events(request):
 		response = json_serializer.serialize(events, ensure_ascii=False)
 		return HttpResponse(response, mimetype="application/json")
 
-# @cache_page(60 * 60) # cache for 60 minutes
 def participant_specific_info(request, participant):
 
 	helper = RelayFunctions()
@@ -89,7 +83,6 @@ def participant_specific_info(request, participant):
 	response = json.dumps(info)
 	return HttpResponse(response, mimetype="application/json")
 
-# @cache_page(60 * 60) # cache for 60 minutes
 def team_participants(request, team):
 	team_participants = Participant.objects.filter(team = team)
 
@@ -97,31 +90,27 @@ def team_participants(request, team):
 	response = json_serializer.serialize(team_participants, ensure_ascii=False)
 	return HttpResponse(response, mimetype="application/json")
 
-# @cache_page(60 * 60) # cache for 60 minutes
 def team_candles(request, team):
 	helper = RelayFunctions()
 	response = json.dumps(helper.team_candles(team))
 	return HttpResponse(response, mimetype="application/json")
 
-# @cache_page(60 * 60) # cache for 60 minutes
 def all_team_candles(request):
 	helper = RelayFunctions()
 
 	all_team_candles = []
 
-	for team in Team.objects.filter(signup = True):
+	for team in Team.objects.all():
 			all_team_candles.append(helper.team_candles(model_to_dict(team)['id']))
 
 	response = json.dumps(all_team_candles)
 	return HttpResponse(response, mimetype="application/json")
 
-# @cache_page(60 * 60) # cache for 60 minutes
 def company_candles(request, company):
 	helper = RelayFunctions()
 	response = json.dumps(helper.company_candles(company))
 	return HttpResponse(response, mimetype="application/json")
 
-# @cache_page(60 * 60) # cache for 60 minutes
 def team_specific_general_candles(request, team):
 	helper = RelayFunctions()
 
@@ -133,19 +122,17 @@ def team_specific_general_candles(request, team):
 	response = json.dumps(all_participant_specific_general_candles)
 	return HttpResponse(response, mimetype="application/json")
 
-# @cache_page(60 * 60) # cache for 60 minutes
 def all_candles(request):
 	helper = RelayFunctions()
 
 	all_candles_total = []
 
-	for team in Team.objects.filter(team = team, signup = True):
+	for team in Team.objects.all():
 			all_candles_total.append(helper.candles_total(model_to_dict(team)['id']))
 
 	response = json.dumps(all_candles_total)
 	return HttpResponse(response, mimetype="application/json")
 
-# @cache_page(60 * 60) # cache for 60 minutes
 def all_company_candles(request):
 	helper = RelayFunctions()
 
@@ -157,7 +144,6 @@ def all_company_candles(request):
 	response = json.dumps(all_company_candles)
 	return HttpResponse(response, mimetype="application/json")
 
-# @cache_page(60 * 60) # cache for 60 minutes
 def all_company_corps_candles(request):
 	helper = RelayFunctions()
 
@@ -169,7 +155,6 @@ def all_company_corps_candles(request):
 	response = json.dumps(all_company_corps_candles)
 	return HttpResponse(response, mimetype="application/json")
 
-# @cache_page(60 * 60) # cache for 60 minutes
 def all_company_donations(request):
 	helper = RelayFunctions()
 
@@ -195,18 +180,17 @@ def teams_unregistered(request):
 	response = json.dumps(teams)
 	return HttpResponse(response, mimetype="application/json")
 
-# @cache_page(60 * 60) # cache for 60 minutes
 def participant_specific(request, participant):
 	helper = RelayFunctions()
-
+	
 	donations = helper.participant_specific_donations(participant)
 	milestones = helper.participant_specific_milestones(participant)
 	events = helper.participant_specific_events(participant)
 	emails = helper.participant_specific_emails(participant)
-
+	
 
 	data = { 'donations' : donations , 'milestones' : milestones, 'events':events, 'emails':emails }
-
+	
 	response = json.dumps(data)
 	return HttpResponse(response, mimetype="application/json")
 
