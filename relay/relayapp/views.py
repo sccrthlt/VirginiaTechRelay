@@ -104,12 +104,12 @@ def team_candles(request, team):
 	return HttpResponse(response, mimetype="application/json")
 
 # @cache_page(60 * 60) # cache for 60 minutes
-def all_team_candles(request, team):
+def all_team_candles(request):
 	helper = RelayFunctions()
 
 	all_team_candles = []
 
-	for team in Team.objects.filter(team = team, signup = True):
+	for team in Team.objects.filter(signup = True):
 			all_team_candles.append(helper.team_candles(model_to_dict(team)['id']))
 
 	response = json.dumps(all_team_candles)
