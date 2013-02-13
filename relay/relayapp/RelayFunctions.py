@@ -36,7 +36,7 @@ class RelayFunctions:
 		tempInfo = {}
 		tempInfo['fname'] = model_to_dict(Participant.objects.get(pk = participant))['fname']
 		tempInfo['lname'] = model_to_dict(Participant.objects.get(pk = participant))['lname']
-		#tempInfo['team_name'] = model_to_dict(Team.objects.get(pk = participant__team))['name']
+		#tempInfo['team_name'] = model_to_dict(Team.objects.get(pk = team__participant))['name']
 		info.append(tempInfo)
 		
 		return info
