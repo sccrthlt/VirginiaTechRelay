@@ -24,7 +24,7 @@ def setupParticipant(info):
                 fname = info['First Name'],
                 lname = info['Last Name'],
                 email = info['Primary Email Address'],
-                team = Team.objects.get(name = info['Team Name'])
+                team = Team.objects.get(name = info['Team Name']),
                 reg_date = datetime.strptime(info['Registration Date'], '%m/%d/%y %H:%M')
             )
             participant_return.save()
@@ -42,7 +42,7 @@ def parseCSVParticipantDetails(csv_file_location):
     print("starting...")
     for row in relayreader:
         try:
-            row['Team Name'].decode('ascii')
+            row['Team Name'] = unicode(row['Team Name'], 'latin-1')
             setupParticipant(row)
 
         except UnicodeDecodeError:

@@ -11,8 +11,8 @@ from datetime import datetime
 from relayapp.models import *
 
 class Command(BaseCommand):
-    args = 'CSV file with <Participant> detail data'
-    help = 'Parses CSV files related to participant details'
+    args = 'CSV file with <Participant Fundraising> detail data'
+    help = 'Parses CSV files related to participant Fundraising'
 
     def handle(self, *args, **options):
         print "Starting Command.."
@@ -40,7 +40,7 @@ def setupEmailsSent(info):
 	participant.emails_sent = info['Emails Sent']
 	participant.save()
 
-	#checkEmailTotals(participant)
+	checkEmailTotals(participant)
 
     except Participant.DoesNotExist:
 	try:
@@ -48,19 +48,20 @@ def setupEmailsSent(info):
 	    participant.emails_sent = info['Emails Sent']
 	    participant.save()
 
-	    #checkEmailTotals(participant)
+	    checkEmailTotals(participant)
 
 	except Participant.DoesNotExist:
-	    print('ERROR: PARTICIPANT DOES NOT EXIST')
+                print('ERROR: PARTICIPANT DOES NOT EXIST')
+                print info
 
 def parseCSVParticipantFundraising(csv_file_location):
     data = open(csv_file_location).read()
     relayreader = csv.DictReader(cStringIO.StringIO(data), delimiter=',')
-        for row in relayreader:
-            # print (row)
-            try:
-                row['Team Name'].decode('ascii')
-                setupEmailsSent(row)
+    for row in relayreader:
+        # print (row)
+        try:
+            row['Team Name'] = unicode(row['Team Name'], 'latin-1')
+            setupEmailsSent(row)
 
-            except UnicodeDecodeError:
-                print ("it was not a ascii-encoded unicode string")
+        except UnicodeDecodeError:
+            print ("it was not a ascii-encoded unicode string")
