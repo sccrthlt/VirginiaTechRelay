@@ -202,13 +202,14 @@ def participant_specific(request, participant):
 	helper = RelayFunctions()
 	
 	info = helper.participant_specific_info(participant)
+	totals = helper.participant_specific_totals(participant)
 	donations = helper.participant_specific_donations(participant)
 	milestones = helper.participant_specific_milestones(participant)
 	events = helper.participant_specific_events(participant)
 	emails = helper.participant_specific_emails(participant)
 	
 
-	data = { 'info' : info , 'donations' : donations , 'milestones' : milestones, 'events':events, 'emails':emails }
+	data = { 'info' : info , 'totals' : totals , 'donations' : donations , 'milestones' : milestones, 'events':events, 'emails':emails }
 	
 	response = json.dumps(data)
 	return HttpResponse(response, mimetype="application/json")
