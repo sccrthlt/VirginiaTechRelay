@@ -1,7 +1,6 @@
-<<<<<<< HEAD
+
 -import datetime
-=======
->>>>>>> 3d31a9914186b5de04ff0ec69e2fbb1870d67836
+
 from relayapp.models import *
 from django.db.models import Sum
 from django.db.models import Count
@@ -62,10 +61,9 @@ class RelayFunctions:
 		#not positive if this is what was intended
 		#total = currCandles + milestone_record.donation_milestone.candles_rewarded
 
-<<<<<<< HEAD
+
 		#tempMilestoneRecord['total'] = total
-=======
->>>>>>> 3d31a9914186b5de04ff0ec69e2fbb1870d67836
+
 		return milestoneRecords
 
 	def participant_specific_events(self, participant):
@@ -115,7 +113,7 @@ class RelayFunctions:
 		percentage = (self.number_participants_in_company_signed_up(company) / Company.objects.get(pk = company).total_people_in_chapter) * 100
 		return percentage
 
-<<<<<<< HEAD
+
 		#THIS HAS NOT BEEN TESTED YET, BUT IT IS SETUP  	
 	def company_registration_candles(self, company):
 
@@ -133,9 +131,6 @@ class RelayFunctions:
 
 				return candlesTotal
 		
-		
-=======
->>>>>>> 3d31a9914186b5de04ff0ec69e2fbb1870d67836
 	def company_donations(self, company):
 		donations = {}
 		donations['company_id'] = int(company)
