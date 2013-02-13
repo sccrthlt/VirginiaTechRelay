@@ -41,7 +41,7 @@ class RelayFunctions:
 			tempDonation['amount'] = float(str(model_to_dict(donation)['amount']))
 
 			#not positive if this is what was intended
-			tempDonation['total'] = currDonations + float(str(model_to_dict(donation)['amount']))
+			#tempDonation['total'] = currDonations + float(str(model_to_dict(donation)['amount']))
 			
 			donations.append(tempDonation)
 
@@ -59,7 +59,7 @@ class RelayFunctions:
 			tempMilestoneRecord['candles'] = milestone_record.donation_milestone.candles_rewarded
 			
 			#not positive if this is what was intended
-			tempMilestoneRecord['total'] = currCandles + milestone_record.donation_milestone.candles_rewarded
+			#tempMilestoneRecord['total'] = currCandles + milestone_record.donation_milestone.candles_rewarded
 			
 			milestoneRecords.append(tempMilestoneRecord)
 
