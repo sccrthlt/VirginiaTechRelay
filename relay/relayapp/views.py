@@ -109,7 +109,7 @@ def all_team_candles(request):
 
 	all_team_candles = []
 
-	for team in Team.objects.all():
+	for team in Team.objects.filter(team = team, signup = True):
 			all_team_candles.append(helper.team_candles(model_to_dict(team)['id']))
 
 	response = json.dumps(all_team_candles)
@@ -139,7 +139,7 @@ def all_candles(request):
 
 	all_candles_total = []
 
-	for team in Team.objects.all():
+	for team in Team.objects.filter(team = team, signup = True):
 			all_candles_total.append(helper.candles_total(model_to_dict(team)['id']))
 
 	response = json.dumps(all_candles_total)
