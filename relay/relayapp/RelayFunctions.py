@@ -33,7 +33,7 @@ class RelayFunctions:
 		donation_objects = Donation.objects.filter(participant = participant)
 
 		donations = []
-        currDonations = 0
+		currDonations = 0
 		for donation in donation_objects:
 			tempDonation = {}
 			tempDonation['date'] = donation.date.strftime("%d/%m/%y")
