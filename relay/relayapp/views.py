@@ -13,7 +13,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.template import RequestContext
 from relayapp.models import *
 from relayapp.RelayFunctions import *
-from django.views.decorators.cache import cache_page
+# from django.views.decorators.cache import cache_page
 
 # @cache_page(60 * 60) # cache for 60 minutes
 def participant_info(request):
@@ -109,7 +109,7 @@ def all_team_candles(request):
 
 	all_team_candles = []
 
-	for team in Team.objects.filter(team = team, signup = True):
+	for team in Team.objects.filter(signup = True):
 			all_team_candles.append(helper.team_candles(model_to_dict(team)['id']))
 
 	response = json.dumps(all_team_candles)
