@@ -33,25 +33,31 @@ class RelayFunctions:
 		donation_objects = Donation.objects.filter(participant = participant)
 
 		donations = []
+        currDonations = 0
 		for donation in donation_objects:
 			tempDonation = {}
 			tempDonation['date'] = donation.date.strftime("%d/%m/%y")
 			tempDonation['amount'] = float(str(model_to_dict(donation)['amount']))
+			total = currDonations + float(str(model_to_dict(donation)['amount']))
 			donations.append(tempDonation)
-
+			
+		donations['total'] = total
 		return donations
 
 	def participant_specific_milestones(self, participant):
 		milestone_record_objects = Participant_Milestone_Record.objects.filter(participant = participant)
 
 		milestoneRecords = []
+		currCandles = 0
 		for milestone_record in milestone_record_objects:
 			tempMilestoneRecord = {}
 			tempMilestoneRecord['date'] = milestone_record.date.strftime("%d/%m/%y")
 			tempMilestoneRecord['amount'] = float(str(milestone_record.donation_milestone.donation_amount))
 			tempMilestoneRecord['candles'] = milestone_record.donation_milestone.candles_rewarded
+			total = currCandles + milestone_record.donation_milestone.candles_rewarded
 			milestoneRecords.append(tempMilestoneRecord)
-
+		
+		tempMilestoneRecord['total'] = total
 		return milestoneRecords
 
 	def participant_specific_events(self, participant):
