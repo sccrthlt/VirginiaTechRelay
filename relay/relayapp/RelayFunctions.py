@@ -62,7 +62,7 @@ class RelayFunctions:
 		eventTotal = 0
 		currEventTotal = 0
 		events = Participant_Event_Record.objects.filter(participant = participant)
-		for event in events
+		for event in events:
 			eventTotal = currEventTotal + 1
 		
 		total['event_total'] = eventTotal
