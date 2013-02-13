@@ -49,6 +49,7 @@ class RelayFunctions:
 		total['milestone_total'] = Participant_Milestone_Record.objects.filter(participant = participant).aggregate(candles_rewarded = Sum('donation_milestone__candles_rewarded'))
 		
 		totalCandles = 0
+		total_emails_sent = 0
 		participant = Participant.objects.get(pk = participant)
 		for rule in Email_Rule.objects.all():
 				if rule.emails <= participant.emails_sent:
