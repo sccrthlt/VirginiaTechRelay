@@ -41,6 +41,35 @@ class RelayFunctions:
 		
 		return info
 		
+	def participant_specific_totals(self, participant):
+	
+		totals = []
+		total = {}
+		total['donations_total'] = Donation.objects.filter(participant = participant).aggregate(total_donations = Sum('amount'))
+		total['milestone_total'] = Participant_Milestone_Record.objects.filter(participant = participant).aggregate(candles_rewarded = Sum('donation_milestone__candles_rewarded'))
+		
+		totalCandles = 0
+		participant = Participant.objects.get(pk = participant)
+		for rule in Email_Rule.objects.all():
+				if rule.emails <= participant.emails_sent:
+					totalCandles += participant.emails_sent * rule.candles_rewarded
+					emails_sent = participant.emails_sent
+					emails_candles = rule.candles_rewarded
+		
+		total['emails_sent'] = emails_sent
+		total['emails_candles'] = totalCandles
+		
+		eventTotal = 0
+		currEventTotal = 0
+		events = Participant_Event_Record.objects.filter(participant = participant)
+		for event in events
+			eventTotal = currEventTotal + 1
+		
+		total['event_total'] = eventTotal
+		total['event_candles'] = Participant_Event_Record.objects.filter(participant = participant).aggregate(candles_rewarded = Sum('event__candles_rewarded'))
+		totals.append(total)
+		return totals
+		
 	def participant_specific_donations(self, participant):
 		donation_objects = Donation.objects.filter(participant = participant)
 
@@ -50,9 +79,6 @@ class RelayFunctions:
 			tempDonation['date'] = donation.date.strftime("%d/%m/%y")
 			tempDonation['amount'] = float(str(model_to_dict(donation)['amount']))
 			donations.append(tempDonation)
-			
-		#not positive if this is what was intended	
-		#tempDonation['total'] = currDonations + float(str(model_to_dict(donation)['amount']))
 
 		return donations
 
