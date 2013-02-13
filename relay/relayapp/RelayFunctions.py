@@ -31,6 +31,16 @@ class RelayFunctions:
 		candles = Participant_Event_Record.objects.filter(participant__team = team).aggregate(candles_rewarded = Sum('event__candles_rewarded'))
 		return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
 
+	def participant_specific_info(self, participant):
+		info = []
+		tempInfo = {}
+		tempInfo['fname'] = model_to_dict(Participant.objects.get(pk = participant))['fname']
+		tempInfo['lname'] = model_to_dict(Participant.objects.get(pk = participant))['lname']
+		tempInfo['team_name'] = model_to_dict(Team.objects.get(pk = team__participant))['name']
+		info.append(tempInfo)
+		
+		return info
+		
 	def participant_specific_donations(self, participant):
 		donation_objects = Donation.objects.filter(participant = participant)
 
