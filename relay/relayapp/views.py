@@ -109,7 +109,7 @@ def all_team_candles(request):
 
 	all_team_candles = []
 
-	for team in Team.objects.filter(team = team, signup = True):
+	for team in Team.objects.all():
 			all_team_candles.append(helper.team_candles(model_to_dict(team)['id']))
 
 	response = json.dumps(all_team_candles)
