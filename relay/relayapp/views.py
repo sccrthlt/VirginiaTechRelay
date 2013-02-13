@@ -103,6 +103,7 @@ def team_candles(request, team):
 	response = json.dumps(helper.team_candles(team))
 	return HttpResponse(response, mimetype="application/json")
 
+
 # @cache_page(60 * 60) # cache for 60 minutes
 def all_team_candles(request):
 	helper = RelayFunctions()
@@ -139,7 +140,7 @@ def all_candles(request):
 
 	all_candles_total = []
 
-	for team in Team.objects.filter(team = team, signup = True):
+	for team in Team.objects.all():
 			all_candles_total.append(helper.candles_total(model_to_dict(team)['id']))
 
 	response = json.dumps(all_candles_total)
@@ -181,6 +182,7 @@ def all_company_donations(request):
 	response = json.dumps(all_company_donations)
 	return HttpResponse(response, mimetype="application/json")
 
+# @cache_page(60 * 60) # cache for 60 minutes
 def teams_unregistered(request):
 	unregistered = Team.objects.filter(signup = False)
 
@@ -198,15 +200,15 @@ def teams_unregistered(request):
 # @cache_page(60 * 60) # cache for 60 minutes
 def participant_specific(request, participant):
 	helper = RelayFunctions()
-
+	
 	donations = helper.participant_specific_donations(participant)
 	milestones = helper.participant_specific_milestones(participant)
 	events = helper.participant_specific_events(participant)
 	emails = helper.participant_specific_emails(participant)
-
+	
 
 	data = { 'donations' : donations , 'milestones' : milestones, 'events':events, 'emails':emails }
-
+	
 	response = json.dumps(data)
 	return HttpResponse(response, mimetype="application/json")
 
