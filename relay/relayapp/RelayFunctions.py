@@ -1,4 +1,3 @@
-import datetime
 from relayapp.models import *
 from django.db.models import Sum
 from django.db.models import Count
@@ -34,15 +33,10 @@ class RelayFunctions:
 		donation_objects = Donation.objects.filter(participant = participant)
 
 		donations = []
-		currDonations = 0
 		for donation in donation_objects:
 			tempDonation = {}
 			tempDonation['date'] = donation.date.strftime("%d/%m/%y")
 			tempDonation['amount'] = float(str(model_to_dict(donation)['amount']))
-
-			#not positive if this is what was intended
-			#tempDonation['total'] = currDonations + float(str(model_to_dict(donation)['amount']))
-			
 			donations.append(tempDonation)
 
 		return donations
@@ -51,19 +45,13 @@ class RelayFunctions:
 		milestone_record_objects = Participant_Milestone_Record.objects.filter(participant = participant)
 
 		milestoneRecords = []
-		currCandles = 0
 		for milestone_record in milestone_record_objects:
 			tempMilestoneRecord = {}
 			tempMilestoneRecord['date'] = milestone_record.date.strftime("%d/%m/%y")
 			tempMilestoneRecord['amount'] = float(str(milestone_record.donation_milestone.donation_amount))
 			tempMilestoneRecord['candles'] = milestone_record.donation_milestone.candles_rewarded
-			
-			#not positive if this is what was intended
-			total = currCandles + milestone_record.donation_milestone.candles_rewarded
-			
 			milestoneRecords.append(tempMilestoneRecord)
 
-		tempMilestoneRecord['total'] = total
 		return milestoneRecords
 
 	def participant_specific_events(self, participant):
@@ -112,21 +100,6 @@ class RelayFunctions:
 	def percentage_of_participants_in_company_signed_up(self, company):
 		percentage = (self.number_participants_in_company_signed_up(company) / Company.objects.get(pk = company).total_people_in_chapter) * 100
 		return percentage
-
-        #THIS HAS NOT BEEN TESTED YET, BUT IT IS SETUP
-	def company_registration_candles(self, company):
-                companyObject = Company.objects.get(pk=company)
-                candlesTotal = 0
-
-                if companyObject.total_people_in_chapter == 0:
-                        return 0
-                
-                for rule in Company_Registration_Rule:
-                        participants = Participant.objects.filter(team__company = company).filter(reg_date__lt = rule.date_cutoff)
-                        if (participants.count() / companyObject.total_people_in_chapter) * 100 > rule.percent_registered:
-                                candlesTotal += rule.candles_rewarded
-
-                return candlesTotal
 
 	def company_donations(self, company):
 		donations = {}
