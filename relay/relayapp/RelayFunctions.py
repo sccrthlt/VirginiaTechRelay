@@ -39,9 +39,8 @@ class RelayFunctions:
 			tempDonation['date'] = donation.date.strftime("%d/%m/%y")
 			tempDonation['amount'] = float(str(model_to_dict(donation)['amount']))
 			total = currDonations + float(str(model_to_dict(donation)['amount']))
-			donations.append(tempDonation)
-			
-		donations['total'] = total
+			donations.append(tempDonation + total)
+
 		return donations
 
 	def participant_specific_milestones(self, participant):
@@ -55,9 +54,8 @@ class RelayFunctions:
 			tempMilestoneRecord['amount'] = float(str(milestone_record.donation_milestone.donation_amount))
 			tempMilestoneRecord['candles'] = milestone_record.donation_milestone.candles_rewarded
 			total = currCandles + milestone_record.donation_milestone.candles_rewarded
-			milestoneRecords.append(tempMilestoneRecord)
-		
-		tempMilestoneRecord['total'] = total
+			milestoneRecords.append(tempMilestoneRecord + total)
+
 		return milestoneRecords
 
 	def participant_specific_events(self, participant):
