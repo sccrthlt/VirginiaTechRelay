@@ -77,6 +77,9 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
+# Public HTML Dir
+STATIC_DOC_ROOT = '/home/vtrelayc/public_html/'
+
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'fx0b6b2q7x&amp;*070nwqiri@)cvpkqp*pk42bn00bi!27byrs^k&amp;'
 
