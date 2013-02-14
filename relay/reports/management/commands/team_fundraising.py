@@ -21,7 +21,6 @@ def setupCompany(info):
 
     try:
         c = Company.objects.get(name='General Company')
-        print "Using General Company"
     except Company.DoesNotExist:
         c = Company(name='General Company')
         c.save()
@@ -39,6 +38,9 @@ def setupCompany(info):
             print "Created new company"
 
         company_return = company_check
+        
+    else:
+        print "Using General Company"
 
     return company_return
 
@@ -52,7 +54,7 @@ def setupCompany(info):
 #     return company_return
 
 def setupTeam(info):
-    # print('team: ' + info['Team Name'])
+    print('team: ' + info['Team Name'])
 
     try:
         team_return = Team.objects.get(name = info['Team Name'])
@@ -61,7 +63,7 @@ def setupTeam(info):
         team_company = setupCompany(info)
         team_return = Team(name = info['Team Name'], company = team_company, signup = False)
         team_return.save()
-        # print "Created Team"
+        print "Created Team >> " + team_return.name
 
     return team_return
 
