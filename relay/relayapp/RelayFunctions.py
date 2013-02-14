@@ -170,8 +170,6 @@ class RelayFunctions:
 			tshirtTotal = currTshirtTotal + 1
 		
 		total['tshirt_total'] = tshirtTotal
-		tshirt_candles = Participant_TShirt_Purchase_Record(participant = participant).aggregate(total_tshirt_candles = sum('Company_TShirt_Milestone__candles_rewarded'))
-		total['tshirt_candles'] = float(str(donations_total['total_tshirt_candles'] if donations_total['total_tshirt_candles'] is not None else 0))
 
 
 		eventTotal = 0
