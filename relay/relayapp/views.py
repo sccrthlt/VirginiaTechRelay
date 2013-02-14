@@ -141,7 +141,7 @@ def team_specific_greek_candles(request, team):
 
 	teamObject = Team.objects.get(pk = team)
 	companyObject = Company.objects.get(pk = teamObject.company.id)
-	for participant in Participant.objects.filter(team = team, companyObject.type = 'GT'):
+	for participant in Participant.objects.filter(team = team):
 			all_team_specific_greek_candles.append(helper.team_specific_greek_candles(model_to_dict(participant)['id']))
 
 	response = json.dumps(all_team_specific_greek_candles)
