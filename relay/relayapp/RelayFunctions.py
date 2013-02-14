@@ -142,7 +142,7 @@ class RelayFunctions:
 		
 		
 		
-		def participant_specific_info_greek(self, participant):
+	def participant_specific_info_greek(self, participant):
 		tempInfo = {}
 		participantObject = Participant.objects.get(pk = participant)
 		tempInfo['fname'] = participantObject.fname
