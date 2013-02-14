@@ -125,6 +125,113 @@ class RelayFunctions:
 
 		return emailRecords
 
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		def participant_specific_info_greek(self, participant):
+		tempInfo = {}
+		participantObject = Participant.objects.get(pk = participant)
+		tempInfo['fname'] = participantObject.fname
+		tempInfo['lname'] = participantObject.lname
+		tempInfo['team_name'] = str(participantObject.team)
+		tempInfo['team_id'] = participantObject.team.id
+		tempInfo['id'] = participantObject.id
+		tempInfo['company_name'] = teamObject(team = participantObject.team).company
+
+		return tempInfo
+
+	def participant_specific_totals_greek(self, participant):
+
+		total = {}
+		donations_total = Donation.objects.filter(participant = participant).aggregate(total_donations = Sum('amount'))
+		total['donations_total'] = float(str(donations_total['total_donations'] if donations_total['total_donations'] is not None else 0))
+		
+		tshirtTotal = 0
+		currTshirtTotal = 0
+		tshirts = Participant_TShirt_Purchase_Record.objects.filter(participant = participant)
+		for tshirt in tshirts:
+			tshirtTotal = currTshirtTotal + 1
+		
+		total['tshirt_total'] = tshirtTotal
+		tshirt_candles = Participant_TShirt_Purchase_Record(participant = participant).aggregate(total_tshirt_candles = sum('Company_TShirt_Milestone__candles_rewarded'))
+		total['tshirt_candles'] = float(str(donations_total['total_tshirt_candles'] if donations_total['total_tshirt_candles'] is not None else 0))
+
+
+		eventTotal = 0
+		currEventTotal = 0
+		events = Participant_Event_Record.objects.filter(participant = participant)
+		for event in events:
+			eventTotal = currEventTotal + 1
+
+		total['event_total'] = eventTotal
+		candles_event = Participant_Event_Record.objects.filter(participant = participant).aggregate(candles_rewarded = Sum('event__candles_rewarded'))
+		total['event_candles'] = float(str(candles_event['candles_rewarded'] if candles_event['candles_rewarded'] is not None else 0))
+
+		return total
+
+	def participant_specific_donations_greek(self, participant):
+		donation_objects = Donation.objects.filter(participant = participant)
+
+		donations = []
+		for donation in donation_objects:
+			tempDonation = {}
+			tempDonation['date'] = donation.date.strftime("%d/%m/%y")
+			tempDonation['amount'] = float(str(model_to_dict(donation)['amount']))
+			donations.append(tempDonation)
+
+		return donations
+
+	def participant_specific_events_greek(self, participant):
+		event_record_objects = Participant_Event_Record.objects.filter(participant = participant)
+
+		eventRecords = []
+		for event_record in event_record_objects:
+			tempEventRecord = {}
+			tempEventRecord['date'] = event_record.event.date.strftime("%d/%m/%y")
+			tempEventRecord['candles'] = event_record.event.candles_rewarded
+			tempEventRecord['name'] = event_record.event.name
+			tempEventRecord['description'] = event_record.event.description
+			eventRecords.append(tempEventRecord)
+
+		return eventRecords
+	
+	def participant_specific_tshirt_greek(self, participant):
+		tshirt_record_objects = Participant_TShirt_Purchase_Record.objects.filter(participant = participant)
+
+		tshirtRecords = []
+		for tshirt_record in tshirt_record_objects:
+			tempTshirtRecord = {}
+			tempTshirtRecord['date'] = tshirt_record.date.strftime("%d/%m/%y")
+			tempTshirtRecord['candles'] = tshirt_record.tshirt.candles_rewarded
+			tempTshirtRecord['name'] = tshirt_record.name
+			tempTshirtRecord['quantity'] = tshirt_record.quantity
+			eventRecords.append(tempTshirtRecord)
+
+		return tshirtRecords
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	def participants_specific_milestone_candles(self, participant):
 		candles = Participant_Milestone_Record.objects.filter(participant = participant).aggregate(candles_rewarded = Sum('donation_milestone__candles_rewarded'))
 		return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0

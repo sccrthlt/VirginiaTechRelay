@@ -213,6 +213,22 @@ def participant_specific(request, participant):
 
 	response = json.dumps(data)
 	return HttpResponse(response, mimetype="application/json")
+	
+# @cache_page(60 * 60) # cache for 60 minutes
+def participant_specific_greek(request, participant):
+	helper = RelayFunctions()
+
+	info = helper.participant_specific_info_greek(participant)
+	totals = helper.participant_specific_totals_greek(participant)
+	donations = helper.participant_specific_donations_greek(participant)
+	events = helper.participant_specific_events_greek(participant)
+	tshirts = helper.participant_specific_tshirt_greek(participant)
+
+
+	data = { 'info' : info , 'totals' : totals , 'donations' : donations , 'events' : events, 'tshirts' : tshirts }
+
+	response = json.dumps(data)
+	return HttpResponse(response, mimetype="application/json")
 
 @csrf_exempt
 def event_registration(request):

@@ -35,5 +35,6 @@ urlpatterns += patterns('relayapp.views',
     url(r'^team/specific/candles/(?P<team>\d{1,4})/$', 'team_specific_general_candles'),
     url(r'^companies/donations/all/$', 'all_company_donations'),
     url(r'^participants/specific/(?P<participant>\d{1,4})/$', 'participant_specific'),
+	url(r'^participants/specific/greek/(?P<participant>\d{1,4})/$', 'participant_specific_greek'),
     url(r'^candles/all/$', 'all_candles'),
 )
