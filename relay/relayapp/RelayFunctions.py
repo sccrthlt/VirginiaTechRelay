@@ -145,12 +145,15 @@ class RelayFunctions:
 	def participant_specific_info_greek(self, participant):
 		tempInfo = {}
 		participantObject = Participant.objects.get(pk = participant)
+		teamObject = Team.objects.get(pk = participantObject.team.id)
+		companyObject = Company.objects.get(pk = teamObject.company.id)
+		tempInfo['id'] = participantObject.id
 		tempInfo['fname'] = participantObject.fname
 		tempInfo['lname'] = participantObject.lname
 		tempInfo['team_name'] = str(participantObject.team)
-		tempInfo['team_id'] = participantObject.team.id
-		tempInfo['id'] = participantObject.id
-		tempInfo['company_name'] = teamObject(team = participantObject.team).company
+		tempInfo['team_id'] = teamObject.name
+		tempInfo['company_name'] = companyObject.name
+		tempInfo['company_id'] = companyObject.id
 
 		return tempInfo
 
