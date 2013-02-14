@@ -37,7 +37,7 @@ class RelayFunctions:
 		participantObject = Participant.objects.get(pk = participant)
 		tempInfo['fname'] = participantObject.fname
 		tempInfo['lname'] = participantObject.lname
-		tempInfo['team_name'] = Team.objects.get(pk = participantObject.team).name
+		tempInfo['team_name'] = participantObject.team
 		info.append(tempInfo)
 		
 		return info
@@ -46,7 +46,8 @@ class RelayFunctions:
 	
 		totals = []
 		total = {}
-		#total['donations_total'] = Donation.objects.filter(participant = participant).aggregate(total_donations = Sum('amount'))
+		donations_total = Donation.objects.filter(participant = participant).aggregate(total_donations = Sum('amount'))
+		total['donations_total'] = float(str(donations_total))
 		total['milestone_total'] = Participant_Milestone_Record.objects.filter(participant = participant).aggregate(candles_rewarded = Sum('donation_milestone__candles_rewarded'))
 		
 		totalCandles = 0
