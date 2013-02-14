@@ -110,7 +110,7 @@ def all_team_candles(request):
 
 	all_team_candles = []
 
-	for team in Team.objects.filter(signup = False):
+	for team in Team.objects.filter(signup = True):
 			all_team_candles.append(helper.team_candles(model_to_dict(team)['id']))
 
 	response = json.dumps(all_team_candles)
@@ -126,12 +126,25 @@ def company_candles(request, company):
 def team_specific_general_candles(request, team):
 	helper = RelayFunctions()
 
-	all_participant_specific_general_candles = []
+	all_team_specific_general_candles = []
 
 	for participant in Participant.objects.filter(team = team):
-			all_participant_specific_general_candles.append(helper.participant_specific_general_candles(model_to_dict(participant)['id']))
+			all_team_specific_general_candles.append(helper.team_specific_general_candles(model_to_dict(participant)['id']))
 
-	response = json.dumps(all_participant_specific_general_candles)
+	response = json.dumps(all_team_specific_general_candles)
+	return HttpResponse(response, mimetype="application/json")
+	
+def team_specific_greek_candles(request, team):
+	helper = RelayFunctions()
+
+	all_team_specific_greek_candles = []
+
+	teamObject = Team.objects.get(pk = team)
+	companyObject = Company.objects.get(pk = teamObject.company.id)
+	for participant in Participant.objects.filter(team = team, companyObject.type = 'GT'):
+			all_team_specific_greek_candles.append(helper.team_specific_greek_candles(model_to_dict(participant)['id']))
+
+	response = json.dumps(all_team_specific_greek_candles)
 	return HttpResponse(response, mimetype="application/json")
 
 # @cache_page(60 * 60) # cache for 60 minutes

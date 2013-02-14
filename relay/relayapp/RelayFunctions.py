@@ -296,7 +296,7 @@ class RelayFunctions:
 		return candles
 
 
-	def participant_specific_general_candles(self, participant):
+	def team_specific_general_candles(self, participant):
 		candles = {}
 		candles['participant_id'] = int(participant)
 		#candles['participant_email'] = model_to_dict(Participant.objects.get(pk = participant))['email']
@@ -306,6 +306,18 @@ class RelayFunctions:
 		candles['participant_donation_milestone_candles'] = self.participants_specific_milestone_candles(participant)
 		candles['participant_email_milestone_candles'] = self.participants_specific_emails_candles(participant)
 		candles['participant_event_milestone_candles'] = self.participants_specific_event_candles(participant)
+		return candles
+		
+	def team_specific_greek_candles(self, participant):
+		candles = {}
+		candles['participant_id'] = int(participant)
+		#candles['participant_email'] = model_to_dict(Participant.objects.get(pk = participant))['email']
+		candles['participant_first_name'] = model_to_dict(Participant.objects.get(pk = participant))['fname']
+		candles['participant_last_name'] = model_to_dict(Participant.objects.get(pk = participant))['lname']
+		candles['participant_candles_total'] = self.participants_specific_milestone_candles(participant) + self.participants_specific_emails_candles(participant) + self.participants_specific_event_candles(participant)
+		candles['participant_event_milestone_candles'] = self.company_event_candles(company)
+		candles['participant_tshirt_milestone_candles'] = self.company_tshirt_milestone_candles(company)
+		candles['participant_registration_milestone_candles'] = str('N/A')
 		return candles
 
 	def candles_total(self, team):
