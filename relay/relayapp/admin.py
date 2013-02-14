@@ -29,8 +29,12 @@ class ParticipantEmailRecordAdmin(admin.ModelAdmin):
 class EmailRuleAdmin(admin.ModelAdmin):
     list_display = ('candles_rewarded', 'emails')
 
+class TeamAdmin(admin.ModelAdmin):
+    list_filter = ['company']
+    search_fields = ['name']
+
 admin.site.register(Company)
-admin.site.register(Team)
+admin.site.register(Team, TeamAdmin)
 admin.site.register(Participant, ParticipantAdmin)
 admin.site.register(Event, EventAdmin)
 admin.site.register(TShirt)
