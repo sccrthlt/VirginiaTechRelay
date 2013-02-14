@@ -96,12 +96,6 @@ class RelayFunctions:
 			tempMilestoneRecord['candles'] = milestone_record.donation_milestone.candles_rewarded
 			milestoneRecords.append(tempMilestoneRecord)
 
-		#not positive if this is what was intended
-		#total = currCandles + milestone_record.donation_milestone.candles_rewarded
-
-
-		#tempMilestoneRecord['total'] = total
-
 		return milestoneRecords
 
 	def participant_specific_events(self, participant):
