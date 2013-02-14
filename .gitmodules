@@ -1,3 +1,0 @@
-[submodule "relay/public"]
-	path = relay/public
-	url = https://github.com/JamieChung/vt-relay-candles.git
