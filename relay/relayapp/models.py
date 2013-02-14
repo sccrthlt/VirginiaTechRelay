@@ -30,6 +30,9 @@ class Team(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        ordering = ['name']
+
 class Participant(models.Model):
     fname = models.CharField(verbose_name='First Name', max_length=100)
     lname = models.CharField(verbose_name='Last Name', max_length=100)
