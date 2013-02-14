@@ -45,7 +45,7 @@ class RelayFunctions:
 	
 		totals = []
 		total = {}
-		total['donations_total'] = float(str(Donation.objects.filter(participant = participant).aggregate(total_donations = Sum('amount'))))
+		total['donations_total'] = Donation.objects.filter(participant = participant).aggregate(total_donations = Sum(float(str('amount'))))
 		total['milestone_total'] = Participant_Milestone_Record.objects.filter(participant = participant).aggregate(candles_rewarded = Sum('donation_milestone__candles_rewarded'))
 		
 		totalCandles = 0
