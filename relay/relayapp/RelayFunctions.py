@@ -32,25 +32,24 @@ class RelayFunctions:
 		return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
 
 	def participant_specific_info(self, participant):
-		info = []
 		tempInfo = {}
 		participantObject = Participant.objects.get(pk = participant)
 		tempInfo['fname'] = participantObject.fname
 		tempInfo['lname'] = participantObject.lname
 		tempInfo['team_name'] = str(participantObject.team)
-		info.append(tempInfo)
-		
-		return info
-		
+		tempInfo['team_id'] = participantObject.team.id
+		tempInfo['id'] = participantObject.id
+
+		return tempInfo
+
 	def participant_specific_totals(self, participant):
-	
-		totals = []
+
 		total = {}
 		donations_total = Donation.objects.filter(participant = participant).aggregate(total_donations = Sum('amount'))
 		total['donations_total'] = float(str(donations_total['total_donations'] if donations_total['total_donations'] is not None else 0))
 		total_milestone = Participant_Milestone_Record.objects.filter(participant = participant).aggregate(candles_rewarded = Sum('donation_milestone__candles_rewarded'))
 		total['milestone_total'] = float(str(total_milestone['candles_rewarded'] if total_milestone['candles_rewarded'] is not None else 0))
-		
+
 		totalCandles = 0
 		total_emails_sent = 0
 		participant = Participant.objects.get(pk = participant)
@@ -58,22 +57,22 @@ class RelayFunctions:
 				if rule.emails <= participant.emails_sent:
 					totalCandles += participant.emails_sent * rule.candles_rewarded
 					total_emails_sent = participant.emails_sent
-		
+
 		total['emails_sent'] = total_emails_sent
 		total['emails_candles'] = totalCandles
-		
+
 		eventTotal = 0
 		currEventTotal = 0
 		events = Participant_Event_Record.objects.filter(participant = participant)
 		for event in events:
 			eventTotal = currEventTotal + 1
-		
+
 		total['event_total'] = eventTotal
 		candles_event = Participant_Event_Record.objects.filter(participant = participant).aggregate(candles_rewarded = Sum('event__candles_rewarded'))
 		total['event_candles'] = float(str(candles_event['candles_rewarded'] if candles_event['candles_rewarded'] is not None else 0))
-		totals.append(total)
-		return totals
-		
+
+		return total
+
 	def participant_specific_donations(self, participant):
 		donation_objects = Donation.objects.filter(participant = participant)
 
@@ -96,7 +95,7 @@ class RelayFunctions:
 			tempMilestoneRecord['amount'] = float(str(milestone_record.donation_milestone.donation_amount))
 			tempMilestoneRecord['candles'] = milestone_record.donation_milestone.candles_rewarded
 			milestoneRecords.append(tempMilestoneRecord)
-			
+
 		#not positive if this is what was intended
 		#total = currCandles + milestone_record.donation_milestone.candles_rewarded
 
@@ -153,7 +152,7 @@ class RelayFunctions:
 		return percentage
 
 
-		#THIS HAS NOT BEEN TESTED YET, BUT IT IS SETUP  	
+		#THIS HAS NOT BEEN TESTED YET, BUT IT IS SETUP
 	def company_registration_candles(self, company):
 
 				companyObject = Company.objects.get(pk=company)
@@ -169,7 +168,7 @@ class RelayFunctions:
 							candlesTotal += rule.candles_rewarded
 
 				return candlesTotal
-		
+
 	def company_donations(self, company):
 		donations = {}
 		donations['company_id'] = int(company)
