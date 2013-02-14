@@ -37,7 +37,7 @@ class RelayFunctions:
 		participantObject = Participant.objects.get(pk = participant)
 		tempInfo['fname'] = participantObject.fname
 		tempInfo['lname'] = participantObject.lname
-		tempInfo['team_name'] = participantObject.team
+		tempInfo['team_name'] = str(participantObject.team)
 		info.append(tempInfo)
 		
 		return info
