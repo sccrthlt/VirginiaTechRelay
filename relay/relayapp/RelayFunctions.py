@@ -313,7 +313,7 @@ class RelayFunctions:
 		candles['participant_first_name'] = model_to_dict(Participant.objects.get(pk = participant))['fname']
 		candles['participant_last_name'] = model_to_dict(Participant.objects.get(pk = participant))['lname']
 		candles['participant_candles_total'] = str('N/A')
-		candles['participant_event_milestone_candles'] = self.participant_event_candles(participant)
+		candles['participant_event_milestone_candles'] = self.participants_specific_event_candles(participant)
 		candles['participant_tshirt_milestone_candles'] = str('N/A')
 		candles['participant_registration_milestone_candles'] = str('N/A')
 		
