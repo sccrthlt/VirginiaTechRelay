@@ -326,7 +326,7 @@ class RelayFunctions:
 		candles['team_id'] = int(team)
 		candles['team_name'] = model_to_dict(Team.objects.get(pk = team))['name']
 		candles['team_candles_total'] = str('N/A')
-		candles['team_event_milestone_candles'] = self.participants_event_candles(participant)
+		candles['team_event_milestone_candles'] = self.participants_event_candles(team)
 		candles['team_tshirt_milestone_candles'] = str('N/A')
 		candles['team_registration_milestone_candles'] = str('N/A')
 		
