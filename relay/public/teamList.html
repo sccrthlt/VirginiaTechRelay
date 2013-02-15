@@ -170,16 +170,16 @@
 		<script type="text/template" id="teams-list-row-template">
 			<% _.each(teams, function(team){ %>
 			<tr class="teamRow" id="team-<%= team.get('team_id') %>">
-				<td class="teamRowPosition"><%= team.get('position') %></td>
+				<td id="teamRowPosition"><%= team.get('position') %></td>
 				<td class="teamRowFirstName">
 					<a href="#team/<%= team.get('team_id') %>">
 						<%= team.get('team_name') %>
 					</a>
 				</td>
-				<td class="teamRowOther"><%= team.get('team_donation_milestone_candles') %></td>
-				<td class="teamRowOther"><%= team.get('team_email_milestone_candles') %></td>
-				<td class="teamRowOther"><%= team.get('team_event_milestone_candles') %></td>
-				<td class="teamRowOther"><%= team.get('team_candles_total') %></td>
+				<td id="team_donation_milestone_candles"><%= team.get('team_donation_milestone_candles') %></td>
+				<td id="team_email_milestone_candles"><%= team.get('team_email_milestone_candles') %></td>
+				<td id="team_event_milestone_candles"><%= team.get('team_event_milestone_candles') %></td>
+				<td id="team_candles"><%= team.get('team_candles_total') %></td>
 			</tr>
 			<% }); %>
 		</script>

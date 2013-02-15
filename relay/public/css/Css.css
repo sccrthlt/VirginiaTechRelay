@@ -724,17 +724,16 @@ div.loggedIn
 }
 #pagesCheck #sorterHeader .sorterTeamName
 {
-	border-left: 2px solid #222222;
-	color: white;
-	float: left;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	font-weight: bold;
-	height: 27px;
-	padding-left: 15px;
-	padding-top: 11px;
-	text-align: left;
-	width: 325px;
+	float:left;
+			width:340px;
+			text-align:left;
+			height:27px;
+			padding-top:11px;
+			color:white;
+			font-size:12px;
+			font-weight:bold;
+			font-family:Arial, Helvetica, sans-serif;
+			border-left: 2px solid #222222;
 }
 #pagesCheck #sorterHeader th
 {
@@ -742,16 +741,17 @@ div.loggedIn
 }
 #pagesCheck #sorterHeader .sorterOther
 {
-	border-left: 2px solid #222222;
-	color: white;
-	float: left;
-	font-family: Arial;
-	font-size: 12px;
-	font-weight: bold;
-	height: 27px;
-	padding-top: 11px;
-	text-align: center;
-	width: 100px;
+	float:left;
+		width:110px;
+		height:27px;
+		padding-top:11px;
+		text-align: center;
+		font-weight: bold;
+		color: white;
+		font-size:12px;
+		border-left: 2px solid #222222;
+		font-family: Arial;
+		font-weight:bold;
 }
 #pagesCheck #forScroll #table #team_table_body .teamRow
 {
@@ -767,39 +767,53 @@ table
 {
 	border-spacing: 0px;
 }
-#pagesCheck #forScroll #table #team_table_body .teamRow .teamRowPosition
-{
-	border: none;
-	font-family: arial;
-	font-size: 12px;
-	padding-bottom: 10px;
-	padding-top: 10px;
-	text-align: center;
-	width: 48px;
+#pagesCheck #forScroll #table #team_table_body .teamRow #teamRowPosition {
+			float:left;
+			text-align:center;
+			width:48px;
+			border:none;
+			font-size:12px;
+			font-family:arial;
 }
-#pagesCheck #forScroll #table #team_table_body .teamRow .teamRowFirstName
-{
-	border: none;
-	font-family: arial;
-	font-size: 12px;
-	padding-bottom: 10px;
-	padding-left: 15px;
-	padding-top: 10px;
-	text-align: left;
-	width: 308px;
-}
+#pagesCheck #forScroll #table #team_table_body .teamRow .teamRowFirstName {
+			float:left;
+			text-align:left;
+			width:342px;
+			border:none;
+			font-size:12px;
+			font-family:arial;
+		}
 table
 {
 	border-spacing: 0px;
 }
-#pagesCheck #forScroll #table #team_table_body .teamRow .teamRowOther
-{
-	padding-bottom: 10px;
-	padding-top: 10px;
-	padding-top: 15px;
-	text-align: center;
-	width: 100px;
-}
+
+		#pagesCheck #forScroll #table #team_table_body .teamRow #team_donation_milestone_candles {
+		float:left;
+		border:none;
+		width:112px;
+		text-align:center;
+		}
+		#pagesCheck #forScroll #table #team_table_body .teamRow #team_email_milestone_candles {
+		float:left;
+		border:none;
+		width:112px;
+		text-align:center;
+		}
+		#pagesCheck #forScroll #table #team_table_body .teamRow #team_event_milestone_candles {
+		float:left;
+		border:none;
+		width:112px;
+		text-align:center;
+		}
+		#pagesCheck #forScroll #table #team_table_body .teamRow #team_candles {
+		float:left;
+		margin-left:26px;
+		border:none;
+		width:60px;
+		text-align:center;
+		}
+
 #greekPagesBkg
 {
 	border-radius: 30px;
