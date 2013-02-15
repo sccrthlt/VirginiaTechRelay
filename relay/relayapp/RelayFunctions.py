@@ -324,8 +324,7 @@ class RelayFunctions:
 	def company_specific_greek_candles(self, team):
 		candles = {}
 		candles['team_id'] = int(team)
-		candles['team_first_name'] = model_to_dict(Team.objects.get(pk = team))['fname']
-		candles['team_last_name'] = model_to_dict(Team.objects.get(pk = team))['lname']
+		candles['team_name'] = model_to_dict(Team.objects.get(pk = team))['name']
 		candles['team_candles_total'] = str('N/A')
 		candles['team_event_milestone_candles'] = self.participants_event_candles(participant)
 		candles['team_tshirt_milestone_candles'] = str('N/A')
