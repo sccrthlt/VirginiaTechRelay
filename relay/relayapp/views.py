@@ -147,6 +147,17 @@ def team_specific_greek_candles(request, team):
 	response = json.dumps(all_team_specific_greek_candles)
 	return HttpResponse(response, mimetype="application/json")
 
+def company_specific_greek_candles(request, company):
+	helper = RelayFunctions()
+
+	all_company_specific_greek_candles = []
+
+	for team in Team.objects.filter(company = company):
+			all_company_specific_greek_candles.append(helper.company_specific_greek_candles(model_to_dict(team)['id']))
+
+	response = json.dumps(all_company_specific_greek_candles)
+	return HttpResponse(response, mimetype="application/json")
+
 # @cache_page(60 * 60) # cache for 60 minutes
 def all_candles(request):
 	helper = RelayFunctions()

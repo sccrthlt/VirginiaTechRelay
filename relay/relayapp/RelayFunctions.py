@@ -307,7 +307,21 @@ class RelayFunctions:
 		candles['participant_event_milestone_candles'] = self.participants_specific_event_candles(participant)
 		return candles
 		
-	def team_specific_greek_candles(self, participant):
+	def company_specific_greek_candles(self, team):
+		candles = {}
+		candles['team_id'] = int(team)
+		candles['team_first_name'] = model_to_dict(Team.objects.get(pk = team))['fname']
+		candles['team_last_name'] = model_to_dict(Team.objects.get(pk = team))['lname']
+		candles['team_candles_total'] = str('N/A')
+		candles['team_event_milestone_candles'] = self.participants_event_candles(participant)
+		candles['team_tshirt_milestone_candles'] = str('N/A')
+		candles['team_registration_milestone_candles'] = str('N/A')
+		
+		donations_total = Donation.objects.filter(participant__team = team).aggregate(total_donations = Sum('donation__amount'))
+		candles['team_donations_total'] = float(str(donations_total['total_donations'] if donations_total['total_donations'] is not None else 0))
+		return candles
+	
+	def company_specific_greek_candles(self, participant):
 		candles = {}
 		candles['participant_id'] = int(participant)
 		candles['participant_first_name'] = model_to_dict(Participant.objects.get(pk = participant))['fname']
