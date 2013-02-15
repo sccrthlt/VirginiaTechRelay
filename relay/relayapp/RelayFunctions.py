@@ -280,21 +280,6 @@ class RelayFunctions:
 		donations['company_donations'] = float(str(company_donations['total_donations'] if company_donations['total_donations'] is not None else 0))
 		return donations
 
-	def company_candles(self, company):
-		candles = {}
-		candles['company_id'] = int(company)
-		candles['company_name'] = model_to_dict(Company.objects.get(pk = company))['name']
-		candles['company_type'] = model_to_dict(Company.objects.get(pk = company))['company_type']
-		candles['company_candles_total'] = self.company_event_candles(company) + self.company_tshirt_milestone_candles(company) + self.company_registration_candles(company)
-		candles['company_event_milestone_candles'] = self.company_event_candles(company)
-		candles['company_tshirt_milestone_candles'] = self.company_tshirt_milestone_candles(company)
-		candles['company_registration_milestone_candles'] = self.company_registration_candles(company)
-
-		company_donations = Donation.objects.filter(participant__team__company = company).aggregate(total_donations = Sum('amount'))
-		candles['company_donations_total'] = float(str(company_donations['total_donations'] if company_donations['total_donations'] is not None else 0))
-
-		return candles
-
 
 	def team_specific_general_candles(self, participant):
 		candles = {}
@@ -338,8 +323,8 @@ class RelayFunctions:
 		candles['team_donations_total'] = float(str(donations_total['total_donations'] if donations_total['total_donations'] is not None else 0))
 		return candles
 
-	def candles_total(self, team):
-		candles=self.company_event_candles(company) + self.company_emails_candles(company) + self.company_milestone_candles(company) + self.company_tshirt_milestone_candles(company) + self.company_registration_candles(company) + self.company_donation_milestone_candles(company) + self.participants_milestone_candles(team) + self.participants_emails_candles(team) + self.participants_event_candles(team)
+	def candles_total(self, company):
+		candles=self.company_event_candles(company) + self.company_emails_candles(company) + self.company_milestone_candles(company) + self.company_tshirt_milestone_candles(company) + self.company_registration_candles(company)
 
 		return candles
 
@@ -373,10 +358,6 @@ class RelayFunctions:
 
 	def company_registration_candles(self, company):
 		candles = Company_Registration_Record.objects.filter(company = company).aggregate(candles_rewarded = Sum('registration_milestone__candles_rewarded'))
-		return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
-
-	def company_donation_milestone_candles(self, company):
-		candles = Participant_Milestone_Record.objects.filter(participant__team__company = company).aggregate(candles_rewarded = Sum('donation_milestone__candles_rewarded'))
 		return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
 
 	def team_candles(self, team):

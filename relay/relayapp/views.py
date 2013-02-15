@@ -80,29 +80,6 @@ def homepage_events(request):
 		response = json_serializer.serialize(events, ensure_ascii=False)
 		return HttpResponse(response, mimetype="application/json")
 
-# @cache_page(60 * 60) # cache for 60 minutes
-def participant_specific_info(request, participant):
-
-	helper = RelayFunctions()
-	info = helper.participant_specific_general_candles(participant)
-
-	response = json.dumps(info)
-	return HttpResponse(response, mimetype="application/json")
-
-# @cache_page(60 * 60) # cache for 60 minutes
-def team_participants(request, team):
-	team_participants = Participant.objects.filter(team = team)
-
-	json_serializer = serializers.get_serializer("json")()
-	response = json_serializer.serialize(team_participants, ensure_ascii=False)
-	return HttpResponse(response, mimetype="application/json")
-
-# @cache_page(60 * 60) # cache for 60 minutes
-def team_candles(request, team):
-	helper = RelayFunctions()
-	response = json.dumps(helper.team_candles(team))
-	return HttpResponse(response, mimetype="application/json")
-
 
 # @cache_page(60 * 60) # cache for 60 minutes
 def all_team_candles(request):
@@ -114,12 +91,6 @@ def all_team_candles(request):
 			all_team_candles.append(helper.team_candles(model_to_dict(team)['id']))
 
 	response = json.dumps(all_team_candles)
-	return HttpResponse(response, mimetype="application/json")
-
-# @cache_page(60 * 60) # cache for 60 minutes
-def company_candles(request, company):
-	helper = RelayFunctions()
-	response = json.dumps(helper.company_candles(company))
 	return HttpResponse(response, mimetype="application/json")
 
 # @cache_page(60 * 60) # cache for 60 minutes
@@ -171,18 +142,6 @@ def all_candles(request):
 	return HttpResponse(response, mimetype="application/json")
 
 # @cache_page(60 * 60) # cache for 60 minutes
-def all_company_candles(request):
-	helper = RelayFunctions()
-
-	all_company_candles = []
-
-	for company in Company.objects.all():
-			all_company_candles.append(helper.company_candles(model_to_dict(company)['id']))
-
-	response = json.dumps(all_company_candles)
-	return HttpResponse(response, mimetype="application/json")
-
-# @cache_page(60 * 60) # cache for 60 minutes
 def all_company_corps_candles(request):
 	helper = RelayFunctions()
 
@@ -192,18 +151,6 @@ def all_company_corps_candles(request):
 			all_company_corps_candles.append(helper.company_corps_candles(model_to_dict(company)['id']))
 
 	response = json.dumps(all_company_corps_candles)
-	return HttpResponse(response, mimetype="application/json")
-
-# @cache_page(60 * 60) # cache for 60 minutes
-def all_company_donations(request):
-	helper = RelayFunctions()
-
-	all_company_donations = []
-
-	for company in Company.objects.all():
-			all_company_donations.append(helper.company_donations(model_to_dict(company)['id']))
-
-	response = json.dumps(all_company_donations)
 	return HttpResponse(response, mimetype="application/json")
 
 # @cache_page(60 * 60) # cache for 60 minutes
