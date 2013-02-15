@@ -141,13 +141,26 @@ def all_candles(request):
 	response = json.dumps(all_candles_total)
 	return HttpResponse(response, mimetype="application/json")
 
+	
+# @cache_page(60 * 60) # cache for 60 minutes
+def all_company_greek_candles(request):
+	helper = RelayFunctions()
+
+	all_company_greek_candles = []
+
+	for company in Company.objects.filter(type = 'GT'):
+			all_company_greek_candles.append(helper.company_greek_candles(model_to_dict(company)['id']))
+
+	response = json.dumps(all_company_greek_candles)
+	return HttpResponse(response, mimetype="application/json")	
+
 # @cache_page(60 * 60) # cache for 60 minutes
 def all_company_corps_candles(request):
 	helper = RelayFunctions()
 
 	all_company_corps_candles = []
 
-	for company in Company.objects.all():
+	for company in Company.objects.filter(type = 'CT'):
 			all_company_corps_candles.append(helper.company_corps_candles(model_to_dict(company)['id']))
 
 	response = json.dumps(all_company_corps_candles)
