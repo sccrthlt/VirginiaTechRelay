@@ -299,7 +299,6 @@ class RelayFunctions:
 	def team_specific_general_candles(self, participant):
 		candles = {}
 		candles['participant_id'] = int(participant)
-		#candles['participant_email'] = model_to_dict(Participant.objects.get(pk = participant))['email']
 		candles['participant_first_name'] = model_to_dict(Participant.objects.get(pk = participant))['fname']
 		candles['participant_last_name'] = model_to_dict(Participant.objects.get(pk = participant))['lname']
 		candles['participant_candles_total'] = self.participants_specific_milestone_candles(participant) + self.participants_specific_emails_candles(participant) + self.participants_specific_event_candles(participant)
@@ -311,13 +310,15 @@ class RelayFunctions:
 	def team_specific_greek_candles(self, participant):
 		candles = {}
 		candles['participant_id'] = int(participant)
-		#candles['participant_email'] = model_to_dict(Participant.objects.get(pk = participant))['email']
 		candles['participant_first_name'] = model_to_dict(Participant.objects.get(pk = participant))['fname']
 		candles['participant_last_name'] = model_to_dict(Participant.objects.get(pk = participant))['lname']
-		candles['participant_candles_total'] = self.participants_specific_milestone_candles(participant) + self.participants_specific_emails_candles(participant) + self.participants_specific_event_candles(participant)
-		candles['participant_event_milestone_candles'] = self.company_event_candles(company)
-		candles['participant_tshirt_milestone_candles'] = self.company_tshirt_milestone_candles(company)
+		candles['participant_candles_total'] = str('N/A')
+		candles['participant_event_milestone_candles'] = self.participant_event_candles(participant)
+		candles['participant_tshirt_milestone_candles'] = str('N/A')
 		candles['participant_registration_milestone_candles'] = str('N/A')
+		
+		donations_total = Donation.objects.filter(participant = participant).aggregate(total_donations = Sum('amount'))
+		total['participant_donations_total'] = float(str(donations_total['total_donations'] if donations_total['total_donations'] is not None else 0))
 		return candles
 
 	def candles_total(self, team):
