@@ -307,6 +307,20 @@ class RelayFunctions:
 		candles['participant_event_milestone_candles'] = self.participants_specific_event_candles(participant)
 		return candles
 		
+	def team_specific_greek_candles(self, participant):
+		candles = {}
+		candles['participant_id'] = int(participant)
+		candles['participant_first_name'] = model_to_dict(Participant.objects.get(pk = participant))['fname']
+		candles['participant_last_name'] = model_to_dict(Participant.objects.get(pk = participant))['lname']
+		candles['participant_candles_total'] = str('N/A')
+		candles['participant_event_milestone_candles'] = self.participants_event_candles(participant)
+		candles['participant_tshirt_milestone_candles'] = str('N/A')
+		candles['participant_registration_milestone_candles'] = str('N/A')
+		
+		donations_total = Donation.objects.filter(participant__team = team).aggregate(total_donations = Sum('donation__amount'))
+		candles['participant_donations_total'] = float(str(donations_total['total_donations'] if donations_total['total_donations'] is not None else 0))
+		return candles
+	
 	def company_specific_greek_candles(self, team):
 		candles = {}
 		candles['team_id'] = int(team)
@@ -319,20 +333,6 @@ class RelayFunctions:
 		
 		donations_total = Donation.objects.filter(participant__team = team).aggregate(total_donations = Sum('donation__amount'))
 		candles['team_donations_total'] = float(str(donations_total['total_donations'] if donations_total['total_donations'] is not None else 0))
-		return candles
-	
-	def company_specific_greek_candles(self, participant):
-		candles = {}
-		candles['participant_id'] = int(participant)
-		candles['participant_first_name'] = model_to_dict(Participant.objects.get(pk = participant))['fname']
-		candles['participant_last_name'] = model_to_dict(Participant.objects.get(pk = participant))['lname']
-		candles['participant_candles_total'] = str('N/A')
-		candles['participant_event_milestone_candles'] = self.participants_specific_event_candles(participant)
-		candles['participant_tshirt_milestone_candles'] = str('N/A')
-		candles['participant_registration_milestone_candles'] = str('N/A')
-		
-		donations_total = Donation.objects.filter(participant = participant).aggregate(total_donations = Sum('amount'))
-		candles['participant_donations_total'] = float(str(donations_total['total_donations'] if donations_total['total_donations'] is not None else 0))
 		return candles
 
 	def candles_total(self, team):
