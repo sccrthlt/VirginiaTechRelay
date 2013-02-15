@@ -102,7 +102,7 @@
 									Pos.
 								</th>
 								<th id="team_name" class="sorterTeamName">
-									Team Name
+									&nbsp;&nbsp;&nbsp;&nbsp;Team Name
 								</th>
 								<th id="team_donation_milestone_candles" class="sorterOther">
 									Milestone
@@ -176,10 +176,10 @@
 						<%= team.get('team_name') %>
 					</a>
 				</td>
-				<td id="team_donation_milestone_candles"><%= team.get('team_donation_milestone_candles') %></td>
-				<td id="team_email_milestone_candles"><%= team.get('team_email_milestone_candles') %></td>
-				<td id="team_event_milestone_candles"><%= team.get('team_event_milestone_candles') %></td>
-				<td id="team_candles"><%= team.get('team_candles_total') %></td>
+				<td class="team_donation_milestone_candles"><%= team.get('team_donation_milestone_candles') %></td>
+				<td class="team_email_milestone_candles"><%= team.get('team_email_milestone_candles') %></td>
+				<td class="team_event_milestone_candles"><%= team.get('team_event_milestone_candles') %></td>
+				<td class="team_candles"><%= team.get('team_candles_total') %></td>
 			</tr>
 			<% }); %>
 		</script>

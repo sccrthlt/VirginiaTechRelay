@@ -725,8 +725,9 @@ div.loggedIn
 #pagesCheck #sorterHeader .sorterTeamName
 {
 	float:left;
-			width:340px;
+			width:330px;
 			text-align:left;
+			padding-left:10px;
 			height:27px;
 			padding-top:11px;
 			color:white;
@@ -735,6 +736,7 @@ div.loggedIn
 			font-family:Arial, Helvetica, sans-serif;
 			border-left: 2px solid #222222;
 }
+
 #pagesCheck #sorterHeader th
 {
 	cursor: pointer;
@@ -762,23 +764,28 @@ div.loggedIn
 	font-size: 12px;
 	list-style-type: none;
 	width: 100%;
+	height:17px;
+	margin-top:10px;
 }
 table
 {
 	border-spacing: 0px;
 }
 #pagesCheck #forScroll #table #team_table_body .teamRow #teamRowPosition {
-			float:left;
 			text-align:center;
+			margin-top:10px;
 			width:48px;
+			height:15px;
 			border:none;
 			font-size:12px;
 			font-family:arial;
 }
 #pagesCheck #forScroll #table #team_table_body .teamRow .teamRowFirstName {
 			float:left;
+			margin-top:10px;
+			padding-left:12px;
 			text-align:left;
-			width:342px;
+			width:330px;
 			border:none;
 			font-size:12px;
 			font-family:arial;
@@ -788,25 +795,29 @@ table
 	border-spacing: 0px;
 }
 
-		#pagesCheck #forScroll #table #team_table_body .teamRow #team_donation_milestone_candles {
+		#pagesCheck #forScroll #table #team_table_body .teamRow .team_donation_milestone_candles {
+			margin-top:10px;
 		float:left;
 		border:none;
 		width:112px;
 		text-align:center;
 		}
-		#pagesCheck #forScroll #table #team_table_body .teamRow #team_email_milestone_candles {
+		#pagesCheck #forScroll #table #team_table_body .teamRow .team_email_milestone_candles {
+			margin-top:10px;
 		float:left;
 		border:none;
 		width:112px;
 		text-align:center;
 		}
-		#pagesCheck #forScroll #table #team_table_body .teamRow #team_event_milestone_candles {
+		#pagesCheck #forScroll #table #team_table_body .teamRow .team_event_milestone_candles {
+			margin-top:10px;
 		float:left;
 		border:none;
 		width:112px;
 		text-align:center;
 		}
-		#pagesCheck #forScroll #table #team_table_body .teamRow #team_candles {
+		#pagesCheck #forScroll #table #team_table_body .teamRow .team_candles {
+			margin-top:10px;
 		float:left;
 		margin-left:26px;
 		border:none;
