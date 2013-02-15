@@ -318,7 +318,7 @@ class RelayFunctions:
 		candles['participant_registration_milestone_candles'] = str('N/A')
 		
 		donations_total = Donation.objects.filter(participant = participant).aggregate(total_donations = Sum('amount'))
-		total['participant_donations_total'] = float(str(donations_total['total_donations'] if donations_total['total_donations'] is not None else 0))
+		candles['participant_donations_total'] = float(str(donations_total['total_donations'] if donations_total['total_donations'] is not None else 0))
 		return candles
 
 	def candles_total(self, team):
