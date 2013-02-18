@@ -992,11 +992,20 @@ table
 	text-align: left;
 	width: 342px;
 }
+#greekPagesCheck #forScroll #table #team_table_body .greekRow .greekRowFirstName a
+{
+	color:white;
+	text-decoration: underline;
+}
+#greekPagesCheck #forScroll #table #team_table_body .greekRow .greekRowFirstName a:hover
+{
+	text-decoration: none;
+}
 table
 {
 	border-spacing: 0px;
 }
-#greekPagesCheck #forScroll #table #team_table_body .greekRow #greekRowDonation
+#greekPagesCheck #forScroll #table #team_table_body .greekRow .greekRowDonation
 {
 	border: none;
 	float: left;
@@ -1007,28 +1016,28 @@ table
 {
 	display: inline;
 }
-#greekPagesCheck #forScroll #table #team_table_body .greekRow #greekRowRegistration
+#greekPagesCheck #forScroll #table #team_table_body .greekRow .greekRowRegistration
 {
 	border: none;
 	float: left;
 	text-align: center;
 	width: 87px;
 }
-#greekPagesCheck #forScroll #table #team_table_body .greekRow #greekRowEvents
+#greekPagesCheck #forScroll #table #team_table_body .greekRow .greekRowEvents
 {
 	border: none;
 	float: left;
 	text-align: center;
 	width: 87px;
 }
-#greekPagesCheck #forScroll #table #team_table_body .greekRow #greekRowTshirt
+#greekPagesCheck #forScroll #table #team_table_body .greekRow .greekRowTshirt
 {
 	border: none;
 	float: left;
 	text-align: center;
 	width: 87px;
 }
-#greekPagesCheck #forScroll #table #team_table_body .greekRow #greekRowTotal
+#greekPagesCheck #forScroll #table #team_table_body .greekRow .greekRowTotal
 {
 	border: none;
 	float: left;
