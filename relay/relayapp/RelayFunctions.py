@@ -125,21 +125,7 @@ class RelayFunctions:
 
 		return emailRecords
 
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		
 		
 	def participant_specific_info_greek(self, participant):
@@ -226,13 +212,6 @@ class RelayFunctions:
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
 	def participants_specific_milestone_candles(self, participant):
 		candles = Participant_Milestone_Record.objects.filter(participant = participant).aggregate(candles_rewarded = Sum('donation_milestone__candles_rewarded'))
 		return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
@@ -292,6 +271,13 @@ class RelayFunctions:
 		candles['participant_event_milestone_candles'] = self.participants_specific_event_candles(participant)
 		return candles
 		
+	def team_specific_general_participants(self, participant):
+		candles = {}
+		candles['participant_id'] = int(participant)
+		candles['participant_first_name'] = model_to_dict(Participant.objects.get(pk = participant))['fname']
+		candles['participant_last_name'] = model_to_dict(Participant.objects.get(pk = participant))['lname']
+		return candles
+		
 	def team_specific_greek_candles(self, participant):
 		candles = {}
 		candles['participant_id'] = int(participant)
@@ -321,6 +307,18 @@ class RelayFunctions:
 		
 		donations_total = Donation.objects.filter(participant__team = team).aggregate(total_donations = Sum('amount'))
 		candles['team_donations_total'] = float(str(donations_total['total_donations'] if donations_total['total_donations'] is not None else 0))
+		return candles
+		
+	def company_corps_candles(self, company):
+		candles = {}
+		candles['company_id'] = int(company)
+		candles['company_name'] = model_to_dict(Company.objects.get(pk = company))['name']
+		candles['company_type'] = model_to_dict(Company.objects.get(pk = company))['company_type']
+		candles['company_candles_total'] = self.company_event_candles(company) + self.company_emails_candles(company) + self.company_milestone_candles(company)
+		candles['company_donation_milestone_candles'] = self.company_milestone_candles(company)
+		candles['company_email_milestone_candles'] = self.company_emails_candles(company)
+		candles['company_event_milestone_candles'] = self.company_event_candles(company)
+
 		return candles
 
 	def candles_total(self, company):

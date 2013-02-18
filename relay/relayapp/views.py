@@ -82,12 +82,24 @@ def homepage_events(request):
 
 
 # @cache_page(60 * 60) # cache for 60 minutes
-def all_team_candles(request):
+def all_team_candles_general(request):
 	helper = RelayFunctions()
 
 	all_team_candles = []
 
-	for team in Team.objects.filter(signup = True):
+	for team in Team.objects.filter(team_type = 'RT', signup = True):
+			all_team_candles.append(helper.team_candles(model_to_dict(team)['id']))
+
+	response = json.dumps(all_team_candles)
+	return HttpResponse(response, mimetype="application/json")
+
+# @cache_page(60 * 60) # cache for 60 minutes
+def all_team_candles_corps(request):
+	helper = RelayFunctions()
+
+	all_team_candles = []
+
+	for team in Team.objects.filter(team_type = 'CT', signup = True):
 			all_team_candles.append(helper.team_candles(model_to_dict(team)['id']))
 
 	response = json.dumps(all_team_candles)
@@ -103,6 +115,17 @@ def team_specific_general_candles(request, team):
 			all_team_specific_general_candles.append(helper.team_specific_general_candles(model_to_dict(participant)['id']))
 
 	response = json.dumps(all_team_specific_general_candles)
+	return HttpResponse(response, mimetype="application/json")
+	
+def team_specific_general_participants(request, team):
+	helper = RelayFunctions()
+
+	all_team_specific_general_participants = []
+
+	for participant in Participant.objects.filter(team = team):
+			all_team_specific_general_participants.append(helper.team_specific_general_participants(model_to_dict(participant)['id']))
+
+	response = json.dumps(all_team_specific_general_participants)
 	return HttpResponse(response, mimetype="application/json")
 	
 def team_specific_greek_candles(request, team):
