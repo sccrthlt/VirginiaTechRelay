@@ -87,7 +87,7 @@ def all_team_candles_general(request):
 
 	all_team_candles = []
 
-	for team in Team.objects.filter(type = 'RT', signup = True):
+	for team in Team.objects.filter(company.type = 'RT', signup = True):
 			all_team_candles.append(helper.team_candles(model_to_dict(team)['id']))
 
 	response = json.dumps(all_team_candles)
@@ -99,7 +99,7 @@ def all_team_candles_corps(request):
 
 	all_team_candles = []
 
-	for team in Team.objects.filter(type = 'CT', signup = True):
+	for team in Team.objects.filter(company.type = 'CT', signup = True):
 			all_team_candles.append(helper.team_candles(model_to_dict(team)['id']))
 
 	response = json.dumps(all_team_candles)
