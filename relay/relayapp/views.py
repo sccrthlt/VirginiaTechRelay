@@ -181,13 +181,19 @@ def all_company_corps_candles(request):
 
 # @cache_page(60 * 60) # cache for 60 minutes
 def teams_unregistered(request):
-	unregistered = Team.objects.filter(signup = False)
-
 	teams = []
-	for team in unregistered:
-		team = model_to_dict(team)
-		team['team_type'] = model_to_dict(Company.objects.get(team__pk = team['id']))['company_type']
-		teams.append(team)
+	for company in Company.objects.filter(company_type = 'RT'):
+		for team in Team.objects.filter(company = company):
+			if team.signup == False:
+				team = model_to_dict(team)
+				team['team_type'] = model_to_dict(Company.objects.get(team__pk = team['id']))['company_type']
+				teams.append(team)
+
+	#teams = []
+	#for team in unregistered:
+		#team = model_to_dict(team)
+		#team['team_type'] = model_to_dict(Company.objects.get(team__pk = team['id']))['company_type']
+		#teams.append(team)
 
 	#json_serializer = serializers.get_serializer("json")()
 	#response = json_serializer.serialize(unregistered, ensure_ascii=False)
