@@ -91,8 +91,6 @@ def all_team_candles_general(request):
 		for team in Team.objects.filter(company = company):
 			if team.signup == 'true':
 				all_team_candles.append(helper.team_candles(model_to_dict(team)['id']))
-			else:
-				return None
 
 	response = json.dumps(all_team_candles)
 	return HttpResponse(response, mimetype="application/json")
