@@ -29,8 +29,16 @@ def setupParticipant(info):
             )
             participant_return.save()
         except Team.DoesNotExist:
-            participant_return = None
+            participant_return = Participant(
+                fname = info['First Name'],
+                lname = info['Last Name'],
+                email = info['Primary Email Address'],
+                team = Team.objects.get(name = 'General Team'),
+                reg_date = datetime.strptime(info['Registration Date'], '%m/%d/%y %H:%M')
+            )
+            participant_return.save()
             print("Team does not exist for >> "+info['Team Name'])
+            print("Put into General Team")
 
     return participant_return
 
