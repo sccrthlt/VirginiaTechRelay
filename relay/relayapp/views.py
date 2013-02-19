@@ -167,6 +167,17 @@ def all_company_greek_candles(request):
 	response = json.dumps(all_company_greek_candles)
 	return HttpResponse(response, mimetype="application/json")	
 
+	
+# @cache_page(60 * 60) # cache for 60 minutes
+def company_singular_greek(request, company):
+	helper = RelayFunctions()
+
+	company_singular_greek_object = helper.company_greek_candles(model_to_dict(company)['id']))
+
+	response = json.dumps(company_singular_greek_object)
+	return HttpResponse(response, mimetype="application/json")	
+
+
 # @cache_page(60 * 60) # cache for 60 minutes
 def all_company_corps_candles(request):
 	helper = RelayFunctions()
