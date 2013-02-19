@@ -88,21 +88,9 @@ def all_team_candles_general(request):
 	all_team_candles = []
 
 	for company in Company.objects.filter(company_type = 'RT'):
-		for team in company.filter(signup = True):
-			all_team_candles.append(helper.team_candles(model_to_dict(team)['id']))
-
-	response = json.dumps(all_team_candles)
-	return HttpResponse(response, mimetype="application/json")
-
-# @cache_page(60 * 60) # cache for 60 minutes
-def all_team_candles_corps(request):
-	helper = RelayFunctions()
-
-	all_team_candles = []
-
-	for company in Company.objects.filter(company_type = 'CT'):
 		for team in company:
-			all_team_candles.append(helper.team_candles(model_to_dict(team)['id']))
+			if team.signup = True:
+				all_team_candles.append(helper.team_candles(model_to_dict(team)['id']))
 
 	response = json.dumps(all_team_candles)
 	return HttpResponse(response, mimetype="application/json")
