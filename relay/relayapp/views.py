@@ -88,7 +88,7 @@ def all_team_candles_general(request):
 	all_team_candles = []
 
 	for company in Company.objects.filter(type = 'RT'):
-		for team.filter(signup = True) in company:
+		for team in company.filter(signup = True):
 			all_team_candles.append(helper.team_candles(model_to_dict(team)['id']))
 
 	response = json.dumps(all_team_candles)
