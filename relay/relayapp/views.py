@@ -91,7 +91,7 @@ def all_team_candles_general(request):
 		for team in company:
 			if (signup = True):
 				all_team_candles.append(helper.team_candles(model_to_dict(team)['id']))
-			else
+			else:
 				return None
 
 	response = json.dumps(all_team_candles)
