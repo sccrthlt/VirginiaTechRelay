@@ -95,6 +95,14 @@ def all_team_candles_general(request):
 	response = json.dumps(all_team_candles)
 	return HttpResponse(response, mimetype="application/json")
 
+def team_singular(request, team):
+	helper = RelayFunctions()
+
+	cool = helper.team_candles(team)
+
+	response = json.dumps(cool)
+	return HttpResponse(response, mimetype="application/json")
+
 # @cache_page(60 * 60) # cache for 60 minutes
 def team_specific_general_candles(request, team):
 	helper = RelayFunctions()
