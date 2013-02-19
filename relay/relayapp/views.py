@@ -89,7 +89,7 @@ def all_team_candles_general(request):
 
 	for company in Company.objects.filter(company_type = 'RT'):
 		for team in company:
-			if signup = True:
+			if (signup = True):
 				all_team_candles.append(helper.team_candles(model_to_dict(team)['id']))
 			else
 				return None
