@@ -169,7 +169,7 @@
 		<script type="text/template" id="teams-list-row-template">
 			<% _.each(teams, function(team){ %>
 			<tr class="teamRow" id="team-<%= team.get('team_id') %>">
-				<td id="teamRowPosition"><%= team.get('position') %></td>
+				<td class="teamRowPosition"><%= team.get('position') %></td>
 				<td class="teamRowFirstName">
 					<a href="#team/<%= team.get('team_id') %>">
 						<%= team.get('team_name') %>
@@ -188,17 +188,17 @@
 		<script type="text/template" id="participants-list-row-template">
 			<% _.each(participants, function(p){ %>
 			<tr class="teamRow" id="participant-<%= p.get('participant_id') %>">
-				<td class="teamRowPosition"><%= p.get('position') %></td>
+				<td class="teamRowPosition"> - <%= p.get('position') %></td>
 				<td class="teamRowFirstName">
 					<a href="teamList.html#/participant/<%= p.get('participant_id') %>">
 						<%= p.get('participant_first_name') %>
 						<%= p.get('participant_last_name') %>
 					</a>
 				</td>
-				<td class="teamRowOther"><%= p.get('participant_donation_milestone_candles') %></td>
-				<td class="teamRowOther"><%= p.get('participant_email_milestone_candles') %></td>
-				<td class="teamRowOther"><%= p.get('participant_event_milestone_candles') %></td>
-				<td class="teamRowOther"><%= p.get('participant_candles_total') %></td>
+				<td class="team_donation_milestone_candles"><%= p.get('participant_donation_milestone_candles') %></td>
+				<td class="team_email_milestone_candles"><%= p.get('participant_email_milestone_candles') %></td>
+				<td class="team_event_milestone_candles"><%= p.get('participant_event_milestone_candles') %></td>
+				<td class="team_candles"><%= p.get('participant_candles_total') %></td>
 			</tr>
 			<% }); %>
 		</script>

@@ -332,7 +332,7 @@ Participant = Backbone.Model.extend({
 
 Team = Backbone.Model.extend({
 	url: function(){
-		return __proxy + '/teams/candles/' + this.id + '/';
+		return __proxy + '/teams/singular/' + this.id + '/';
 	}
 });
 
@@ -344,7 +344,7 @@ Teams = Backbone.Collection.extend({
 
 TeamParticipants = Backbone.Collection.extend({
 	url: function(){
-		return __proxy + '/team/specific/candles/' + this.team_id + '/';
+		return __proxy + '/team/specific/general/' + this.team_id + '/';
 	},
 	team_id: 0,
 	model: Participant
