@@ -174,7 +174,7 @@ def company_singular_greek(request, company):
 
 	company_singular_greek_object = []
 
-	company_singular_greek_object.append(helper.company_greek_candles(model_to_dict(company)['id']))
+	company_singular_greek_object.append(helper.company_greek_candles(company))
 
 	response = json.dumps(company_singular_greek_object)
 	return HttpResponse(response, mimetype="application/json")	
