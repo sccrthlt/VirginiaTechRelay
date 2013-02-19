@@ -108,6 +108,8 @@ def parseCSVTeamFundraising(csv_file_location):
         except Exception, e:
             print e
 
+    general_team_info = {'Team Name':'General Team', 'Public Company Name':'N/A'}
+    setupTeam(general_team_info)
         # else:
         #     print "Unble to save?"
 
