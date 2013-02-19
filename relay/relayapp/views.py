@@ -172,11 +172,9 @@ def all_company_greek_candles(request):
 def company_singular_greek(request, company):
 	helper = RelayFunctions()
 
-	company_singular_greek_object = []
+	cool = helper.company_greek_candles(company))
 
-	company_singular_greek_object.append(helper.company_greek_candles(company))
-
-	response = json.dumps(company_singular_greek_object)
+	response = json.dumps(cool)
 	return HttpResponse(response, mimetype="application/json")	
 
 
