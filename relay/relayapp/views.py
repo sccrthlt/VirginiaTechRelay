@@ -172,7 +172,7 @@ def all_company_greek_candles(request):
 def company_singular_greek(request, company):
 	helper = RelayFunctions()
 
-	cool = helper.company_greek_candles(company))
+	cool = helper.company_greek_candles(company)
 
 	response = json.dumps(cool)
 	return HttpResponse(response, mimetype="application/json")	
