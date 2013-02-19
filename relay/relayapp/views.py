@@ -169,7 +169,7 @@ def all_company_greek_candles(request):
 
 	all_company_greek_candles = []
 
-	for company in Company.objects.filter(company_type = 'RT'):
+	for company in Company.objects.filter(company_type = 'GT'):
 			all_company_greek_candles.append(helper.company_greek_candles(model_to_dict(company)['id']))
 
 	response = json.dumps(all_company_greek_candles)
