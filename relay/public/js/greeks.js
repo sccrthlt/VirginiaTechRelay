@@ -168,6 +168,7 @@ CompaniesListView = Backbone.View.extend({
 		$('#loadingImg').show();
 		$('#company_name').text('Company Name');
 		$('#pagesHeaderTxt').text('Greeks');
+		$('#search-area, #sorterHeader, #forScroll, #greekPagesCheck').show();
 
 		CompaniesCollection.fetch({
 			success: function(companies){
@@ -195,19 +196,30 @@ CompanyTeamsListView = Backbone.View.extend({
 		$('#content').empty();
 		$('#loadingImg').show();
 		$('#company_name').text('Team Name');
-		// $('#search-area, #sorterHeader, #forScroll, #pagesCheck').show();
+		$('#search-area, #sorterHeader, #forScroll, #greekPagesCheck').show();
 
-		CompanyTeamsCollection.company_id = id;
-		CompanyTeamsCollection.fetch({
-			success: function(teams){
-				$('#loadingImg').hide();
+		var c = new Company({id: id});
+		c.fetch({
+			success: function(){
 
-				$(that.el).html(
-					_.template($('#teams-list-row-template').html(), {
-						teams: teams.models
+				$('#pagesHeaderTxt').html(
+					_.template($('#company-title-template').html(), {
+						company: c
 					}));
-				info = _.toArray(teams.models);
-				    jQuery("#forScroll").mCustomScrollbar("update");
+
+				CompanyTeamsCollection.company_id = id;
+				CompanyTeamsCollection.fetch({
+					success: function(teams){
+						$('#loadingImg').hide();
+
+						$(that.el).html(
+							_.template($('#teams-list-row-template').html(), {
+								teams: teams.models
+							}));
+						info = _.toArray(teams.models);
+						    jQuery("#forScroll").mCustomScrollbar("update");
+					}
+				});
 			}
 		});
 	}
@@ -223,65 +235,64 @@ ParticipantsListView = Backbone.View.extend({
 		$(this.el).empty();
 		$('#content').empty();
 		$('#loadingImg').show();
-		$('#team_name').text('Participant Name');
+		$('#company_name').text('Participant Name');
 		$('#search-area, #sorterHeader, #forScroll, #greekPagesCheck').show();
 
-		TeamParticipantsCollection.team_id = id;
-		TeamParticipantsCollection.fetch({
-			success: function(participants){
-				$('#loadingImg').hide();
+		var t = new Team({id: id}).fetch({
+			success: function(team){
 
-				$(that.el).html(
-					_.template($('#participants-list-row-template').html(), {
-						participants: participants.models
+				$('#pagesHeaderTxt').html(
+					_.template($('#participants-title-template').html(), {
+						team: team
 					}));
-				info = _.toArray(participants.models);
-				    jQuery("#forScroll").mCustomScrollbar("update");
+
+                                            TeamParticipantsCollection.team_id = id;
+                                            TeamParticipantsCollection.fetch({
+                                                success: function(participants){
+                                                    $('#loadingImg').hide();
+
+                                                    $(that.el).html(
+                                                        _.template($('#participants-list-row-template').html(), {
+                                                            participants: participants.models
+                                                        }));
+                                                    info = _.toArray(participants.models);
+                                                        jQuery("#forScroll").mCustomScrollbar("update");
+                                                }
+                                            });
+
 			}
 		});
-
-		// var t = new Team({id: id}).fetch({
-		// 	success: function(team){
-
-		// 		$('#pagesHeaderTxt').html(
-		// 			_.template($('#participants-title-template').html(), {
-		// 				team: team
-		// 			}));
-
-
-		// 	}
-		// });
 	}
 });
 
-// // #/participant/:id
-// // View of a single participant
-// ParticipantSingleView = Backbone.View.extend({
-// 	el: $('#content'),
-// 	render: function(id){
-// 		var that = this;
-// 		var P = new Participant({id: id});
-// 		$('#search-area, #sorterHeader, #forScroll, #pagesCheck').hide();
-// 		P.fetch({
-// 			success: function(participant){
+// #/participant/:id
+// View of a single participant
+ParticipantSingleView = Backbone.View.extend({
+	el: $('#content'),
+	render: function(id){
+		var that = this;
+		var P = new Participant({id: id});
+		$('#search-area, #sorterHeader, #forScroll, #greekPagesCheck').hide();
+		P.fetch({
+			success: function(participant){
 
-// 				$('#loadingImg').hide();
+				$('#loadingImg').hide();
 
-// 				vars = {
-// 					id: id,
-// 					participant: participant
-// 				};
+				vars = {
+					id: id,
+					participant: participant
+				};
 
-// 				$('#pagesHeaderTxt').html(
-// 					_.template($('#participant-title-template').html(), vars));
+				$('#pagesHeaderTxt').html(
+					_.template($('#participant-title-template').html(), vars));
 
-// 				$(that.el).html(
-// 					_.template($('#participant-single-template').html(), vars));
-// 			}
-// 		});
+				$(that.el).html(
+					_.template($('#participant-single-template').html(), vars));
+			}
+		});
 
-// 	}
-// });
+	}
+});
 
 
 Participant = Backbone.Model.extend({
@@ -292,7 +303,7 @@ Participant = Backbone.Model.extend({
 
 Team = Backbone.Model.extend({
 	url: function(){
-		return __proxy + '/team/specific/greek/' + this.id + '/';
+		return __proxy + '/team/singular/greek/' + this.id + '/';
 	}
 });
 
@@ -314,7 +325,9 @@ TeamParticipants = Backbone.Collection.extend({
 });
 
 Company = Backbone.Model.extend({
-
+        url: function(){
+            return __proxy + '/company/singular/greek/' + this.id + '/';
+        }
 });
 
 Companies = Backbone.Collection.extend({
@@ -330,7 +343,7 @@ var TeamParticipantsCollection = new TeamParticipants();
 var AppRouter = Backbone.Router.extend({
 	routes: {
 		// 'participants': 'getParticipants',
-		// 'participant/:id': 'getParticipant',
+		'participant/:id': 'getParticipant',
 		'team/:id': 'getParticipants',
 		// 'teams': 'getTeams',
 		'company/:id': 'getCompanyTeams',
@@ -340,10 +353,10 @@ var AppRouter = Backbone.Router.extend({
 
 var app_router = new AppRouter();
 
-// app_router.on('route:getParticipant', function(id){
-// 	var participant_single_view = new ParticipantSingleView();
-// 	participant_single_view.render(id);
-// });
+app_router.on('route:getParticipant', function(id){
+	var participant_single_view = new ParticipantSingleView();
+	participant_single_view.render(id);
+});
 
 app_router.on('route:getParticipants', function(id){
 	var participants_list_view = new ParticipantsListView();

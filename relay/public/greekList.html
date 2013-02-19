@@ -173,6 +173,10 @@
 			<% }); %>
 		</script>
 
+		<script type="text/template" id="company-title-template">
+			<a href="greekList.html#">Companies</a> &raquo; <%= company.get('company_name') %>
+		</script>
+
 		<script type="text/template" id="teams-list-row-template">
 			<% _.each(teams, function(team){ %>
 			<tr class="greekRow" id="teams-<%= team.get('teams_id') %>">
@@ -192,7 +196,7 @@
 		</script>
 
 		<script type="text/template" id="participants-title-template">
-			<a href="teamList.html#">Teams</a> &raquo; <%= team.get('team_name') %>
+			<a href="greekList.html#">Teams</a> &raquo; <%= team.get('team_name') %>
 		</script>
 
 		<script type="text/template" id="participants-list-row-template">

@@ -169,7 +169,9 @@
 		<script type="text/template" id="teams-list-row-template">
 			<% _.each(teams, function(team){ %>
 			<tr class="teamRow" id="team-<%= team.get('team_id') %>">
-				<td class="teamRowPosition"><%= team.get('position') %></td>
+				<td class="teamRowPosition">
+					<%= team.get('position') %>
+				</td>
 				<td class="teamRowFirstName">
 					<a href="#team/<%= team.get('team_id') %>">
 						<%= team.get('team_name') %>
@@ -188,7 +190,9 @@
 		<script type="text/template" id="participants-list-row-template">
 			<% _.each(participants, function(p){ %>
 			<tr class="teamRow" id="participant-<%= p.get('participant_id') %>">
-				<td class="teamRowPosition"> - <%= p.get('position') %></td>
+				<td class="teamRowPosition">
+					<%= p.get('position') %>
+				</td>
 				<td class="teamRowFirstName">
 					<a href="teamList.html#/participant/<%= p.get('participant_id') %>">
 						<%= p.get('participant_first_name') %>
