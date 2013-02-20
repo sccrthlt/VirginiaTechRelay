@@ -304,13 +304,11 @@ def team_registration(request):
 
 def participant_unsigned(request):
 	
-	teams = []
-	for company in Company.objects.all():
-		for team in Team.objects.all():
-			for participant in Participant.objects.all():
-				team = model_to_dict(participant)
-				team['team_type'] = model_to_dict(Company.objects.get(team__pk = team['id']))['company_type']
-				teams.append(team)
-
-	response = json.dumps(teams)
+	cool = {}
+	for participant in Participant.objects.all():
+		cool['fname'] = participant.fname
+		cool['lname'} = participant.lname
+		cool['id'] = participant.id
+	
+	response = json.dumps(cool)
 	return HttpResponse(response, mimetype="application/json")
