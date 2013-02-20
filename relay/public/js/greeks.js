@@ -297,7 +297,7 @@ ParticipantSingleView = Backbone.View.extend({
 
 Participant = Backbone.Model.extend({
 	url: function(){
-		return __proxy + '/participants/specific/' + this.id + '/';
+		return __proxy + '/participants/specific/greek/' + this.id + '/';
 	}
 });
 

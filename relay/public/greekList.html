@@ -226,7 +226,7 @@
 		<div class="personal">
 			<div class="personalBox">
 				<div class="personalTab">
-					Milestone
+					Donations
 				</div>
 				<div class="personalBody">
 					<div class="personalBodyTop">
@@ -235,27 +235,21 @@
 								<th class="personalTableLarge">
 									Date
 								</th>
-								<th class="personalTableSmall">
-									Milestone
-								</th>
 								<th class="personalTableEnd">
-									Candles
+									Amount
 								</th>
 							</tr>
 						</table>
 						<div class="forScroll">
-							<% if ( _.size(participant.get('milestones')) > 0 ){ %>
+							<% if ( _.size(participant.get('donations')) > 0 ){ %>
 							<table class="personalTable">
-								<% _.each(participant.get('milestones'), function(milestone){ %>
+								<% _.each(participant.get('donations'), function(donation){ %>
 								<tr>
 									<td class="personalTableLarge personalTableFirstRow">
-										<%= milestone.date %>
-									</td>
-									<td class="personalTableSmall personalTableFirstRow">
-										<%= milestone.amount %>
+										<%= donation.date %>
 									</td>
 									<td class="personalTableEnd personalTableFirstRow">
-										<%= milestone.candles %>
+										<%= amount.candles %>
 									</td>
 								</tr>
 								<% }) %>
@@ -279,7 +273,7 @@
 			</div>
 			<div class="personalBox">
 				<div class="personalTab">
-					Donations
+					Events
 				</div>
 				<div class="personalBody">
 					<div class="personalBodyTop">
@@ -288,21 +282,27 @@
 								<th class="personalTableLargeOne">
 									Date
 								</th>
+								<th class="personalTableSmall">
+									Attend?
+								</th>
 								<th class="personalTableEndOne">
-									Donations
+									Candles
 								</th>
 							</tr>
 						</table>
 						<div class="forScroll">
-							<% if ( _.size(participant.get('donations')) > 0 ){ %>
+							<% if ( _.size(participant.get('events')) > 0 ){ %>
 							<table class="personalTable">
-								<% _.each(participant.get('donations'), function(donation){ %>
+								<% _.each(participant.get('events'), function(event){ %>
 								<tr>
 									<td class="personalTableLargeOne personalTableFirstRow">
-										<%= donation.date %>
+										<%= event.name %>
+									</td>
+									<td class="personalTableSmall personalTableFirstRow">
+										<%= event.date %>
 									</td>
 									<td class="personalTableEndOne personalTableFirstRow">
-										<%= donation.amount %>
+										<%= event.candles %>
 									</td>
 								</tr>
 								<% }) %>
@@ -322,17 +322,17 @@
 			</div>
 			<div class="personalBox">
 				<div class="personalTab">
-					Emails Sent
+					T-shirts
 				</div>
 				<div class="personalBody">
 					<div class="personalBodyTop">
 						<table class="personalTable">
 							<tr class="personalBodyHeader">
 								<th class="personalTableLarge">
-									Date
+									T-shirt
 								</th>
 								<th class="personalTableSmall">
-									Emails
+									Amount
 								</th>
 								<th class="personalTableEnd">
 									Candles
@@ -340,18 +340,18 @@
 							</tr>
 						</table>
 						<div class="forScroll">
-							<% if ( _.size(participant.get('emails')) > 0 ){ %>
+							<% if ( _.size(participant.get('tshirts')) > 0 ){ %>
 							<table class="personalTable">
-								<% _.each(participant.get('emails'), function(email){ %>
+								<% _.each(participant.get('tshirts'), function(tshirt){ %>
 								<tr>
 									<td class="personalTableLarge personalTableFirstRow">
-										<%= email.date %>
+										<%= tshirt.name %>
 									</td>
 									<td class="personalTableSmall personalTableFirstRow">
-										<%= email.emails %>
+										<%= tshirt.quantity %>
 									</td>
 									<td class="personalTableEnd personalTableFirstRow">
-										<%= email.candles %>
+										<%= tshirt.candles %>
 									</td>
 								</tr>
 								<% }) %>
@@ -365,10 +365,10 @@
 							Total
 						</div>
 						<div class="personalBodyBottomSmall">
-							<%= participant.get('totals').emails_sent %>
+							<%= participant.get('totals').tshirt_total %>
 						</div>
 						<div class="personalBodyBottomEnd">
-							<%= participant.get('totals').emails_candles %>
+							<%= N/A %>
 						</div>
 					</div>
 				</div>
