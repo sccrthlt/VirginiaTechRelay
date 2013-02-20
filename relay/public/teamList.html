@@ -239,13 +239,13 @@
 								<% _.each(participant.get('milestones'), function(milestone){ %>
 								<tr>
 									<td class="personalTableLarge personalTableFirstRow">
-										10-20-12
+										<%= milestone.date %>
 									</td>
 									<td class="personalTableSmall personalTableFirstRow">
-										350
+										<%= milestone.amount %>
 									</td>
 									<td class="personalTableEnd personalTableFirstRow">
-										1435
+										<%= milestone.candles %>
 									</td>
 								</tr>
 								<% }) %>
@@ -335,13 +335,13 @@
 								<% _.each(participant.get('emails'), function(email){ %>
 								<tr>
 									<td class="personalTableLarge personalTableFirstRow">
-										10-20-12
+										<%= email.date %>
 									</td>
 									<td class="personalTableSmall personalTableFirstRow">
-										350
+										<%= email.emails %>
 									</td>
 									<td class="personalTableEnd personalTableFirstRow">
-										1435
+										<%= email.candles %>
 									</td>
 								</tr>
 								<% }) %>
@@ -388,13 +388,13 @@
 								<% _.each(participant.get('events'), function(event){ %>
 								<tr>
 									<td class="personalTableLarge personalTableFirstRow">
-										10-20-12
+										<%= event.name %>
 									</td>
 									<td class="personalTableSmall personalTableFirstRow">
-										350
+										<%= event.date %>
 									</td>
 									<td class="personalTableEnd personalTableFirstRow">
-										1435
+										<%= event.candles %>
 									</td>
 								</tr>
 								<% }) %>
