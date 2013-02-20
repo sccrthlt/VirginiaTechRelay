@@ -217,8 +217,21 @@ class RelayFunctions:
 		return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
 
 	def participants_specific_emails_candles(self, participant):
-		candles = Participant_Email_Record.objects.filter(participant = participant).aggregate(candles_rewarded = Sum('email_milestone__candles_rewarded'))
-		return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
+		participant = Participant.objects.get(participant = participant)
+
+		total = 0
+		for rule in Email_Rule.objects.all():
+			if rule.emails <= participant.emails_sent:
+				total += participant.emails_sent * rule.candles_rewarded
+
+		return total
+		
+		
+		
+		
+		
+		#candles = Participant_Email_Record.objects.filter(participant = participant).aggregate(candles_rewarded = Sum('email_milestone__candles_rewarded'))
+		#return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
 
 	def participants_specific_event_candles(self, participant):
 		candles = Participant_Event_Record.objects.filter(participant = participant).aggregate(candles_rewarded = Sum('event__candles_rewarded'))
