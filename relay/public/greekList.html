@@ -235,6 +235,9 @@
 								<th class="personalTableLarge">
 									Date
 								</th>
+								<th class="personalTableSmall">
+									
+								</th>
 								<th class="personalTableEnd">
 									Amount
 								</th>
@@ -248,8 +251,11 @@
 									<td class="personalTableLarge personalTableFirstRow">
 										<%= donation.date %>
 									</td>
+									<td class="personalTableSmall personalTableFirstRow">
+										
+									</td>
 									<td class="personalTableEnd personalTableFirstRow">
-										<%= amount.candles %>
+										<%= donation.amount %>
 									</td>
 								</tr>
 								<% }) %>
@@ -263,10 +269,10 @@
 							Total
 						</div>
 						<div class="personalBodyBottomSmall">
-							<%= participant.get('totals').milestone_total %>
+							<%= participant.get('totals').donations_total %>
 						</div>
 						<div class="personalBodyBottomEnd">
-							####
+							<%= participant.get('totals').donations_total %>
 						</div>
 					</div>
 				</div>
@@ -315,7 +321,7 @@
 							Total
 						</div>
 						<div class="personalBodyBottomEndOne">
-							<%= participant.get('totals').donations_total %>
+							<%= participant.get('totals').event_candles %>
 						</div>
 					</div>
 				</div>
@@ -368,7 +374,7 @@
 							<%= participant.get('totals').tshirt_total %>
 						</div>
 						<div class="personalBodyBottomEnd">
-							<%= N/A %>
+							N/A
 						</div>
 					</div>
 				</div>
