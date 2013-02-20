@@ -217,7 +217,7 @@ class RelayFunctions:
 		return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
 
 	def participants_specific_emails_candles(self, participant):
-		participant = Participant.objects.get(participant = participant)
+		participant = Participant.objects.get(pk = participant)
 
 		total = 0
 		for rule in Email_Rule.objects.all():
