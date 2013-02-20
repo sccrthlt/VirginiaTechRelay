@@ -21,6 +21,7 @@ urlpatterns += patterns('relayapp.views',
     url(r'^candles/all/$', 'all_candles'),
     url(r'^participants/all/info/$', 'all_participants_info'),
     url(r'^participants/$', 'participant_info'),
+	url(r'^participants/unsigned/$', 'participant_unsigned'),
     url(r'^teams/all/info/$', 'all_teams_info'),
     url(r'^events/registration/$', 'event_registration'),
     url(r'^events/homepage_events/$', 'homepage_events'),
@@ -38,4 +39,5 @@ urlpatterns += patterns('relayapp.views',
     url(r'^team/specific/greek/(?P<team>\d{1,4})/$', 'team_specific_greek_candles'),
     url(r'^participants/specific/(?P<participant>\d{1,4})/$', 'participant_specific'),
     url(r'^participants/specific/greek/(?P<participant>\d{1,4})/$', 'participant_specific_greek'),
+	
 )

@@ -121,6 +121,7 @@ def team_specific_general_candles(request, team):
 
 	for participant in Participant.objects.filter(team = team):
 			all_team_specific_general_candles.append(helper.team_specific_general_candles(model_to_dict(participant)['id']))
+			cool = helper.team_specific_general_candles(model_to_dict(participant)['id'])
 
 	response = json.dumps(all_team_specific_general_candles)
 	return HttpResponse(response, mimetype="application/json")
@@ -132,6 +133,8 @@ def team_specific_general_participants(request, team):
 
 	for participant in Participant.objects.filter(team = team):
 			all_team_specific_general_participants.append(helper.team_specific_general_participants(model_to_dict(participant)['id']))
+			cool = helper.team_specific_general_participants(model_to_dict(participant)['id'])
+			currTotal = cool.participant_candles_total
 
 	response = json.dumps(all_team_specific_general_participants)
 	return HttpResponse(response, mimetype="application/json")
@@ -298,3 +301,9 @@ def team_registration(request):
 	response.content = serialized_obj = serializers.serialize('json', [ team, ])
 	response['Content-Type'] = 'application/json'
 	return response
+
+def participant_unsigned(request)
+	unsigned = Participant.objects.get.all()['fname', 'lname']
+	
+	response = json.dumps(unsigned)
+	return HttpResponse(response, mimetype="application/json")
