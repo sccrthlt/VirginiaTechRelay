@@ -53,7 +53,7 @@ def setupDonation(info):
         donation_return = Donation(participant = found_participant, amount = str(float(info['Donation Amount'])), date = date_donated)
         donation_return.save()
 
-        checkDonationsTotals(Participant.objects.get(email = found_participant.email))
+        checkDonationsTotals(Participant.objects.get(email = found_participant.email).pk)
 
     except Participant.DoesNotExist:
         print('Participant not found for >> ' + info['Participant Credited First Name'] + ' ' + info['Participant Credited Last Name'])
