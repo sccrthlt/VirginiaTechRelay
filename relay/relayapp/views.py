@@ -303,12 +303,7 @@ def team_registration(request):
 	return response
 
 def participant_unsigned(request):
-	
-	cool = {}
-	for participant in Participant.objects.all():
-		cool['fname'] = participant.fname
-		cool['lname'] = participant.lname
-		cool['id'] = participant.id
-	
-	response = json.dumps(cool)
+	participants = Participant.objects.all()
+	json_serializer = serializers.get_serializer("json")()
+	response = json_serializer.serialize(participants, ensure_ascii=False)
 	return HttpResponse(response, mimetype="application/json")
