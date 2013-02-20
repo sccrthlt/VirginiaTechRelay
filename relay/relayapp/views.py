@@ -302,7 +302,7 @@ def team_registration(request):
 	response['Content-Type'] = 'application/json'
 	return response
 
-def participant_unsigned(request)
+def participant_unsigned(request):
 	unsigned = Participant.objects.get.all()['fname', 'lname']
 	
 	response = json.dumps(unsigned)
