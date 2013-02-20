@@ -2158,6 +2158,9 @@ table
 {
 	display: none;
 }
+.personal {
+	margin-left:20px;
+}
 .personalBox
 {
 	float: left;
