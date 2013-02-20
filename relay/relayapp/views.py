@@ -303,7 +303,7 @@ def team_registration(request):
 	return response
 
 def participant_unsigned(request):
-	unsigned = Participant.objects.get.all()['fname', 'lname']
+	unsigned = Participant.objects.all()['fname', 'lname']
 	
 	response = json.dumps(unsigned)
 	return HttpResponse(response, mimetype="application/json")
