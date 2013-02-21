@@ -258,11 +258,8 @@
 						<div class="personalBodyBottomLarge">
 							Total
 						</div>
-						<div class="personalBodyBottomSmall">
-							<%= participant.get('totals').milestone_total %>
-						</div>
 						<div class="personalBodyBottomEnd">
-							####
+							<%= participant.get('totals').milestone_total %>
 						</div>
 					</div>
 				</div>
@@ -335,13 +332,13 @@
 								<% _.each(participant.get('emails'), function(email){ %>
 								<tr>
 									<td class="personalTableLarge personalTableFirstRow">
-										<%= email.date %>
+										10-20-12
 									</td>
 									<td class="personalTableSmall personalTableFirstRow">
-										<%= email.emails %>
+										350
 									</td>
 									<td class="personalTableEnd personalTableFirstRow">
-										<%= email.candles %>
+										1435
 									</td>
 								</tr>
 								<% }) %>
@@ -388,13 +385,13 @@
 								<% _.each(participant.get('events'), function(event){ %>
 								<tr>
 									<td class="personalTableLarge personalTableFirstRow">
-										<%= event.name %>
+										10-20-12
 									</td>
 									<td class="personalTableSmall personalTableFirstRow">
-										<%= event.date %>
+										350
 									</td>
 									<td class="personalTableEnd personalTableFirstRow">
-										<%= event.candles %>
+										1435
 									</td>
 								</tr>
 								<% }) %>
