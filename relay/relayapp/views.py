@@ -271,9 +271,13 @@ def event_registration(request):
 	numguests = request.POST.get('guests', '')
 	eventid = request.POST.get('event', '')
 
+	try:
+		participantkey = Participant.objects.get(pk = participant_id)
+	except Participant.DoesNotExist:
+		return HttpResponse(status=400)
 
 	eventkey = Event.objects.get(id=eventid)
-	per = Participant_Event_Record(guests = numguests, event = eventkey, participant = participantid)
+	per = Participant_Event_Record(guests = numguests, event = eventkey, participant = participantkey)
 	per.save()
 
 	response = HttpResponse()
