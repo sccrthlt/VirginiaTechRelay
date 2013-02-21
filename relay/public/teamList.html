@@ -258,11 +258,8 @@
 						<div class="personalBodyBottomLarge">
 							Total
 						</div>
-						<div class="personalBodyBottomSmall">
-							<%= participant.get('totals').milestone_total %>
-						</div>
 						<div class="personalBodyBottomEnd">
-							####
+							<%= participant.get('totals').milestone_total %>
 						</div>
 					</div>
 				</div>
@@ -292,7 +289,7 @@
 										<%= donation.date %>
 									</td>
 									<td class="personalTableEndOne personalTableFirstRow">
-										<%= donation.amount %>
+										$<%= donation.amount %>
 									</td>
 								</tr>
 								<% }) %>
@@ -305,11 +302,12 @@
 							Total
 						</div>
 						<div class="personalBodyBottomEndOne">
-							<%= participant.get('totals').donations_total %>
+							$<%= participant.get('totals').donations_total %>
 						</div>
 					</div>
 				</div>
 			</div>
+			<div class="emailsBox">
 			<div class="personalBox">
 				<div class="personalTab">
 					Emails Sent
@@ -319,7 +317,6 @@
 						<table class="personalTable">
 							<tr class="personalBodyHeader">
 								<th class="personalTableLarge">
-									Date
 								</th>
 								<th class="personalTableSmall">
 									Emails
@@ -335,13 +332,13 @@
 								<% _.each(participant.get('emails'), function(email){ %>
 								<tr>
 									<td class="personalTableLarge personalTableFirstRow">
-										<%= email.date %>
+										10-20-12
 									</td>
 									<td class="personalTableSmall personalTableFirstRow">
-										<%= email.emails %>
+										350
 									</td>
 									<td class="personalTableEnd personalTableFirstRow">
-										<%= email.candles %>
+										1435
 									</td>
 								</tr>
 								<% }) %>
@@ -363,6 +360,7 @@
 					</div>
 				</div>
 			</div>
+			</div><!-- end emailsBox -->
 			<div class="personalBox">
 				<div class="personalTab">
 					Events
@@ -388,13 +386,13 @@
 								<% _.each(participant.get('events'), function(event){ %>
 								<tr>
 									<td class="personalTableLarge personalTableFirstRow">
-										<%= event.name %>
+										10-20-12
 									</td>
 									<td class="personalTableSmall personalTableFirstRow">
-										<%= event.date %>
+										350
 									</td>
 									<td class="personalTableEnd personalTableFirstRow">
-										<%= event.candles %>
+										1435
 									</td>
 								</tr>
 								<% }) %>
