@@ -981,6 +981,7 @@ table
 	font-size: 12px;
 	text-align: center;
 	width: 48px;
+	margin-top:15px;
 }
 #greekPagesCheck #forScroll #table #team_table_body .greekRow .greekRowFirstName
 {
@@ -991,6 +992,7 @@ table
 	text-align: left;
 	padding-left:10px;
 	width: 332px;
+	margin-top:15px;
 }
 #greekPagesCheck #forScroll #table #team_table_body .greekRow .greekRowFirstName a
 {
@@ -1011,6 +1013,7 @@ table
 	float: left;
 	text-align: center;
 	width: 87px;
+	margin-top:15px;
 }
 #greekPagesCheck #forScroll #table #team_table_body .greekRow p
 {
@@ -1022,6 +1025,7 @@ table
 	float: left;
 	text-align: center;
 	width: 87px;
+	margin-top:15px;
 }
 #greekPagesCheck #forScroll #table #team_table_body .greekRow .greekRowEvents
 {
@@ -1029,6 +1033,7 @@ table
 	float: left;
 	text-align: center;
 	width: 87px;
+	margin-top:15px;
 }
 #greekPagesCheck #forScroll #table #team_table_body .greekRow .greekRowTshirt
 {
@@ -1036,6 +1041,7 @@ table
 	float: left;
 	text-align: center;
 	width: 87px;
+	margin-top:15px;
 }
 #greekPagesCheck #forScroll #table #team_table_body .greekRow .greekRowTotal
 {
@@ -1043,7 +1049,8 @@ table
 	margin-left:18px;
 	float: left;
 	text-align: center;
-	width: 57px;
+	width: 53px;
+	margin-top:15px;
 }
 #signUpBkg
 {
