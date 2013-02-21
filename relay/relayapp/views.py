@@ -267,17 +267,13 @@ def participant_specific_greek(request, participant):
 
 @csrf_exempt
 def event_registration(request):
-	participant_email = request.POST.get('email', '')
+	participant_id = request.POST.get('id', '')
 	numguests = request.POST.get('guests', '')
 	eventid = request.POST.get('event', '')
 
-	try:
-		participantkey = Participant.objects.get(email = participant_email)
-	except Participant.DoesNotExist:
-		return HttpResponse(status=400)
 
 	eventkey = Event.objects.get(id=eventid)
-	per = Participant_Event_Record(guests = numguests, event = eventkey, participant = participantkey)
+	per = Participant_Event_Record(guests = numguests, event = eventkey, participant = participantid)
 	per.save()
 
 	response = HttpResponse()
