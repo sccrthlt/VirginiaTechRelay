@@ -253,7 +253,6 @@ jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function(arg) {
 		//Amends the "signup" boolean for teams in the call
 		$("#signInSubmit").click(function(){
 		  	var arr = document.getElementById("highlight");
-			alert(arr.parentNode.id)
 			if($(arr).is(':visible')){
 				$.post("http://vtrelaycandles.org/events/registration/",
 					{

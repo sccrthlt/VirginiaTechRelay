@@ -386,13 +386,13 @@
 								<% _.each(participant.get('events'), function(event){ %>
 								<tr>
 									<td class="personalTableLarge personalTableFirstRow">
-										10-20-12
+										<%= event.name %>
 									</td>
 									<td class="personalTableSmall personalTableFirstRow">
-										350
+										<%= event.date %>
 									</td>
 									<td class="personalTableEnd personalTableFirstRow">
-										1435
+										<%= event.candles %>
 									</td>
 								</tr>
 								<% }) %>
