@@ -93,7 +93,7 @@ def all_team_candles_general(request):
 			if team.signup == True:
 				all_team_candles.append(helper.team_candles(model_to_dict(team)['id']))
 
-	newlist = sorted(all_team_candles, key=itemgetter('team_candles_total'))
+	newlist = sorted(all_team_candles, key=itemgetter('team_candles_total'), reverse = True)
 	
 	#currPos = 1
 	#for item in newlist
