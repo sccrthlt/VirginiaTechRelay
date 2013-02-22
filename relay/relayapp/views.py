@@ -174,7 +174,7 @@ def company_specific_greek_candles(request, company):
 	for team in Team.objects.filter(company = company):
 			all_company_specific_greek_candles.append(helper.company_specific_greek_candles(model_to_dict(team)['id']))
 	
-	newlist = sorted(all_team_specific_greek_candles, key=itemgetter('team_event_milestone_candles'), reverse = True)
+	newlist = sorted(all_company_specific_greek_candles, key=itemgetter('team_event_milestone_candles'), reverse = True)
 
 	response = json.dumps(newlist)
 	return HttpResponse(response, mimetype="application/json")
