@@ -130,8 +130,10 @@ def team_specific_general_candles(request, team):
 	for participant in Participant.objects.filter(team = team):
 			all_team_specific_general_candles.append(helper.team_specific_general_candles(model_to_dict(participant)['id']))
 			cool = helper.team_specific_general_candles(model_to_dict(participant)['id'])
+			
+	newlist = sorted(all_team_specific_general_candles, key=itemgetter('participant_candles_total'), reverse = True)
 
-	response = json.dumps(all_team_specific_general_candles)
+	response = json.dumps(newlist)
 	return HttpResponse(response, mimetype="application/json")
 
 def team_specific_general_participants(request, team):
@@ -143,6 +145,8 @@ def team_specific_general_participants(request, team):
 			all_team_specific_general_participants.append(helper.team_specific_general_participants(model_to_dict(participant)['id']))
 			cool = helper.team_specific_general_participants(model_to_dict(participant)['id'])
 			currTotal = cool.participant_candles_total
+	
+	##newlist = sorted(all_team_specific_general_participants, key=itemgetter('participant_candles_total'), reverse = True)
 
 	response = json.dumps(all_team_specific_general_participants)
 	return HttpResponse(response, mimetype="application/json")
@@ -156,8 +160,10 @@ def team_specific_greek_candles(request, team):
 	companyObject = Company.objects.get(pk = teamObject.company.id)
 	for participant in Participant.objects.filter(team = team):
 			all_team_specific_greek_candles.append(helper.team_specific_greek_candles(model_to_dict(participant)['id']))
+	
+	newlist = sorted(all_team_specific_greek_candles, key=itemgetter('participant_candles_total'), reverse = True)
 
-	response = json.dumps(all_team_specific_greek_candles)
+	response = json.dumps(newlist)
 	return HttpResponse(response, mimetype="application/json")
 
 def company_specific_greek_candles(request, company):
@@ -167,8 +173,10 @@ def company_specific_greek_candles(request, company):
 
 	for team in Team.objects.filter(company = company):
 			all_company_specific_greek_candles.append(helper.company_specific_greek_candles(model_to_dict(team)['id']))
+	
+	newlist = sorted(all_team_specific_greek_candles, key=itemgetter('team_event_milestone_candles'), reverse = True)
 
-	response = json.dumps(all_company_specific_greek_candles)
+	response = json.dumps(newlist)
 	return HttpResponse(response, mimetype="application/json")
 
 # @cache_page(60 * 60) # cache for 60 minutes
@@ -192,8 +200,10 @@ def all_company_greek_candles(request):
 
 	for company in Company.objects.filter(company_type = 'GT'):
 			all_company_greek_candles.append(helper.company_greek_candles(model_to_dict(company)['id']))
+			
+	newlist = sorted(all_company_greek_candles, key=itemgetter('company_candles_total'), reverse = True)
 
-	response = json.dumps(all_company_greek_candles)
+	response = json.dumps(newlist)
 	return HttpResponse(response, mimetype="application/json")
 
 
