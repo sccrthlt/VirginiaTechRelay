@@ -13,6 +13,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.template import RequestContext
 from relayapp.models import *
 from relayapp.RelayFunctions import *
+from operator import itemgetter
 # from django.views.decorators.cache import cache_page
 
 # @cache_page(60 * 60) # cache for 60 minutes
@@ -91,6 +92,13 @@ def all_team_candles_general(request):
 		for team in Team.objects.filter(company = company):
 			if team.signup == True:
 				all_team_candles.append(helper.team_candles(model_to_dict(team)['id']))
+
+	newlist = sorted(all_team_candles, key=itemgetter('team_candles_total'))
+	
+	currPos = 1
+	for item in newlist
+		candles['pos'] = currPos
+		currPos = currPos + 1
 
 	response = json.dumps(all_team_candles)
 	return HttpResponse(response, mimetype="application/json")
