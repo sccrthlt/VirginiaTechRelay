@@ -31,7 +31,7 @@
 			//Scrollbar
 			(function ($) {
 				$(window).load(function () {
-					$("#forScroll").mCustomScrollbar();
+					$("#forScroll, .forScroll").mCustomScrollbar();
 				});
 			})(jQuery);
 
@@ -236,7 +236,7 @@
 									Date
 								</th>
 								<th class="personalTableSmall">
-									
+
 								</th>
 								<th class="personalTableEnd">
 									Amount
@@ -252,7 +252,7 @@
 										<%= donation.date %>
 									</td>
 									<td class="personalTableSmall personalTableFirstRow">
-										
+
 									</td>
 									<td class="personalTableEnd personalTableFirstRow">
 										<%= donation.amount %>

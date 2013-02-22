@@ -317,6 +317,8 @@ ParticipantSingleView = Backbone.View.extend({
 
 				$(that.el).html(
 					_.template($('#participant-single-template').html(), vars));
+
+                                            jQuery(".forScroll").mCustomScrollbar("update");
 			}
 		});
 
