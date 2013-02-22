@@ -100,7 +100,7 @@ def all_team_candles_general(request):
 		#candles['pos'] = currPos
 		#currPos = currPos + 1
 
-	response = json.dumps(all_team_candles)
+	response = json.dumps(newlist)
 	return HttpResponse(response, mimetype="application/json")
 	
 # @cache_page(60 * 60) # cache for 60 minutes
