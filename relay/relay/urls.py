@@ -11,7 +11,7 @@ urlpatterns = patterns('relay',
     # url(r'^relay/', include('relay.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
@@ -39,5 +39,5 @@ urlpatterns += patterns('relayapp.views',
     url(r'^team/specific/greek/(?P<team>\d{1,4})/$', 'team_specific_greek_candles'),
     url(r'^participants/specific/(?P<participant>\d{1,4})/$', 'participant_specific'),
     url(r'^participants/specific/greek/(?P<participant>\d{1,4})/$', 'participant_specific_greek'),
-	
+
 )

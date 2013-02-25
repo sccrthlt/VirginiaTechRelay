@@ -1,5 +1,11 @@
 # Django settings for relay project.
 
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
+
+TEMPLATE_CONTEXT_PROCESSORS = TCP + (
+    'django.core.context_processors.request',
+)
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -45,18 +51,18 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = '/home/vtrelay/relay/public/site_media/'
+MEDIA_ROOT = '/home/vtrelayc/projects/VirginiaTechRelay/relay/media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = '/site_media/'
+MEDIA_URL = '/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = '/home/vtrelayc/projects/VirginiaTechRelay/relay/static/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -67,6 +73,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    '/home/vtrelayc/lib/python2.6/site-packages/django/contrib/admin/static/',
 )
 
 # List of finder classes that know how to find static files in
@@ -78,7 +85,7 @@ STATICFILES_FINDERS = (
 )
 
 # Public HTML Dir
-STATIC_DOC_ROOT = '/home/vtrelayc/public_html/'
+STATIC_DOC_ROOT = '/home/vtrelayc/projects/VirginiaTechRelay/relay/static/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'fx0b6b2q7x&amp;*070nwqiri@)cvpkqp*pk42bn00bi!27byrs^k&amp;'
@@ -119,6 +126,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
+
+    'suit',
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
@@ -155,3 +164,34 @@ LOGGING = {
         },
     }
 }
+
+# Django Suit configuration example
+# Uncomment and change any of following keys
+SUIT_CONFIG = {
+    # header
+    'ADMIN_NAME': 'VT Relay Candles',
+    # 'HEADER_DATE_FORMAT': 'l, j. F Y',
+    # 'HEADER_TIME_FORMAT': 'H:i',
+
+    # forms
+    'SHOW_REQUIRED_ASTERISK': True,  # Default True
+    'CONFIRM_UNSAVED_CHANGES': True, # Default True
+
+    # menu
+    'SEARCH_URL': 'admin:auth_user_changelist',
+    'MENU_ICONS': {
+        'sites': 'icon-leaf',
+        'auth': 'icon-lock',
+    },
+    # 'MENU_OPEN_FIRST_CHILD': True, # Default True
+    # 'MENU_EXCLUDE': ('auth.group',),
+    # 'MENU_ORDER': ( # Unlisted apps/models, will also be excluded
+    #     ('sites',),
+    #     ('auth', ('user','group')),
+    # ),
+
+    # misc
+    'LIST_PER_PAGE': 15
+}
+
+
