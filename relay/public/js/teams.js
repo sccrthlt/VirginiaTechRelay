@@ -302,6 +302,7 @@ ParticipantSingleView = Backbone.View.extend({
 		var that = this;
 		var P = new Participant({id: id});
 		$('#search-area, #sorterHeader, #forScroll, #pagesCheck').hide();
+		jQuery(".forScroll").mCustomScrollbar("destroy");
 		P.fetch({
 			success: function(participant){
 
@@ -312,13 +313,19 @@ ParticipantSingleView = Backbone.View.extend({
 					participant: participant
 				};
 
-				$('#pagesHeaderTxt').html(
-					_.template($('#participant-title-template').html(), vars));
+                                            _.defer(function(){
 
-				$(that.el).html(
-					_.template($('#participant-single-template').html(), vars));
+                                                $('#pagesHeaderTxt').html(
+                                                    _.template($('#participant-title-template').html(), vars));
 
-                                            jQuery(".forScroll").mCustomScrollbar("update");
+                                                $(that.el).html(
+                                                    _.template($('#participant-single-template').html(), vars));
+
+                                            });
+
+                                            _.defer(function(){
+                                                jQuery(".forScroll").mCustomScrollbar();
+                                            });
 			}
 		});
 
