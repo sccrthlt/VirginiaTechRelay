@@ -1,4 +1,11 @@
-TeamFundraiser
-ParticipantDetails
-ParticipantFundraising
-DonationDetails
+TeamFundraiser / team_fundraising
+python manage.py team_fundraising ~/projects/vt-relay-reports/csv/Date_Range_-_Team_Fundraising_Performance.latest.csv
+
+
+ParticipantDetails / participant_details
+python manage.py participant_details ~/projects/vt-relay-reports/csv/Participants_-_Registration_Details_Report.latest.csv
+
+ParticipantFundraising / participant_fundraising
+
+DonationDetails / donation_details
+python manage.py donation_details ~/projects/vt-relay-reports/csv/Money_-_Donations.latest.csv
