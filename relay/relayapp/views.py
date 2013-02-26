@@ -95,10 +95,11 @@ def all_team_candles_general(request):
 
 	newlist = sorted(all_team_candles, key=itemgetter('team_candles_total'), reverse = True)
 	
-	currPos = 1
+	#currPos = 1
 	for item in newlist:
-		candles['pos'] = currPos
-		currPos = currPos + 1
+		print item
+		#candles['pos'] = currPos
+		#currPos = currPos + 1
 
 	response = json.dumps(newlist)
 	return HttpResponse(response, mimetype="application/json")
