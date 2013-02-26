@@ -2,6 +2,7 @@
 var __proxy = window.location.host == 'localhost'  ? 'requests/proxy.php?__url=http://localhost:8000' : '';
 
 var info = "";
+var __type = "company";
 
 //Feedback slide up
 
@@ -102,8 +103,39 @@ $(function() {
 
 });
 
+__sortFields = {
+	company: {
+		sort_name: "company_name",
+		sort_donations: "company_donations_total",
+		sort_registration: "company_registration_candles",
+		sort_events: "company_event_candles",
+		sort_tshirts: "company_tshirt_candles",
+		sort_total: "company_candles_total",
+	},
+	team: {
+		sort_name: "team_name",
+		sort_donations: "team_donations_total",
+		sort_registration: "team_registration_milestone_candles",
+		sort_events: "team_tshirt_milestone_candles",
+		sort_tshirts: "company_tshirt_candles",
+		sort_total: "team_candles_total",
+	},
+	participant: {
+		sort_name: "participant_first_name",
+		sort_donations: "participant_donations_total",
+		sort_registration: "participant_registration_milestone_candles",
+		sort_events: "participant_event_milestone_candles",
+		sort_tshirts: "participant_tshirt_milestone_candles",
+		sort_total: "participant_candles_total",
+	}
+}
+
 function sortResults(prop, asc) {
     arr = info;
+
+    var __name = __sortFields[__type].sort_name;
+
+    prop = __sortFields[__type][prop];
 
     arr = arr.sort(function (a, b) {
         var thing1 = a.get(prop);
@@ -120,7 +152,7 @@ function sortResults(prop, asc) {
             if (thing1 < thing2) {
                 return -1;
             } else {
-                return (compareThings(a.get("company_name"), b.get("company_name")));
+                return (compareThings(a.get(__name), b.get(__name)));
             }
         } else {
             if (thing2 > thing1) {
@@ -129,7 +161,7 @@ function sortResults(prop, asc) {
             if (thing2 < thing1) {
                 return -1;
             } else {
-                return (compareThings(a.get("company_name"), b.get("company_name")));
+                return (compareThings(a.get(__name), b.get(__name)));
             }
         }
     });
@@ -151,9 +183,19 @@ function compareThings(thing1, thing2) {
 function showResults (arr) {
     var html = '';
 
-    $('#team_table_body').html(
-                _.template($('#companies-list-row-template').html(),
-                    {companies: arr}));
+    if ( __type == "company" ) {
+	    $('#team_table_body').html(
+	                _.template($('#companies-list-row-template').html(),
+	                    {companies: arr}));
+    } else if ( __type == "team" ) {
+	    $('#team_table_body').html(
+	                _.template($('#teams-list-row-template').html(),
+	                    {teams: arr}));
+    } else if ( __type == "participant" ) {
+	    $('#team_table_body').html(
+	                _.template($('#participants-list-row-template').html(),
+	                    {participants: arr}));
+    }
 }
 
 // #
@@ -169,6 +211,7 @@ CompaniesListView = Backbone.View.extend({
 		$('#company_name').text('Company Name');
 		$('#pagesHeaderTxt').text('Greeks');
 		$('#search-area, #sorterHeader, #forScroll, #greekPagesCheck').show();
+		__type = "company";
 
 		CompaniesCollection.fetch({
 			success: function(companies){
@@ -195,8 +238,9 @@ CompanyTeamsListView = Backbone.View.extend({
 		$(this.el).empty();
 		$('#content').empty();
 		$('#loadingImg').show();
-		$('#company_name').text('Team Name');
+		$('#sort_name').text('Team Name');
 		$('#search-area, #sorterHeader, #forScroll, #greekPagesCheck').show();
+		__type = "team";
 
 		var c = new Company({id: id});
 		c.fetch({
@@ -235,8 +279,10 @@ ParticipantsListView = Backbone.View.extend({
 		$(this.el).empty();
 		$('#content').empty();
 		$('#loadingImg').show();
-		$('#company_name').text('Participant Name');
+		$('#sort_name').text('Participant Name');
 		$('#search-area, #sorterHeader, #forScroll, #greekPagesCheck').show();
+
+		__type = "participant";
 
 		var t = new Team({id: id}).fetch({
 			success: function(team){
