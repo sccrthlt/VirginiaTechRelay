@@ -397,5 +397,5 @@ class RelayFunctions:
 		candles['team_donation_milestone_candles'] = self.participants_milestone_candles(team)
 		candles['team_email_milestone_candles'] = self.participants_emails_candles(team)
 		candles['team_event_milestone_candles'] = self.participants_event_candles(team)
-		candles['pos'] = 0
+		#candles['pos'] = 0
 		return candles
