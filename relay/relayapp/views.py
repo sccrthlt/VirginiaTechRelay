@@ -97,7 +97,7 @@ def all_team_candles_general(request):
 	
 	currPos = 1
 	for item in newlist:
-		candles.append(candles['pos'] = currPos)
+		candles.pos.append(currPos)
 		currPos = currPos + 1
 
 	response = json.dumps(newlist)
