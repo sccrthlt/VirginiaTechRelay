@@ -176,7 +176,7 @@ class RelayFunctions:
 		donations = []
 		for donation in donation_objects:
 			tempDonation = {}
-			tempDonation['datetime'] = donation.date.strftime("%d/%m/%y")
+			tempDonation['datetime'] = donation.datetime.strftime("%d/%m/%y")
 			tempDonation['amount'] = float(str(model_to_dict(donation)['amount']))
 			donations.append(tempDonation)
 
