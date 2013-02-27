@@ -7,7 +7,7 @@ class ParticipantAdmin(admin.ModelAdmin):
     search_fields = ['email']
 
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('name', 'date', 'candles', 'candles_rewarded', 'homepage')
+    list_display = ('name', 'date', 'candles_rewarded', 'homepage')
     list_filter = ['date']
     search_fields = ['name']
 
