@@ -74,7 +74,6 @@ class TShirt(models.Model):
 class Donation(models.Model):
     participant = models.ForeignKey(Participant)
     amount = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
-    date = models.DateField()
     datetime = models.DateTimeField()
 
 class Company_TShirt_Milestone(models.Model):

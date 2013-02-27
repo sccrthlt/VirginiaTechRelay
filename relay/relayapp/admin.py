@@ -12,8 +12,8 @@ class EventAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
 class DonationAdmin(admin.ModelAdmin):
-    list_display = ('participant', 'amount', 'date')
-    list_filter = ['date']
+    list_display = ('participant', 'amount', 'datetime')
+    list_filter = ['datetime']
     search_fields = ['participant']
 
 class ParticipantMilestoneRecordAdmin(admin.ModelAdmin):
