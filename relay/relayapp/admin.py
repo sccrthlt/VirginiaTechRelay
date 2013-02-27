@@ -33,6 +33,11 @@ class TeamAdmin(admin.ModelAdmin):
     list_filter = ['company']
     search_fields = ['name']
 
+class ParticipantEventRecordAdmin(admin.ModelAdmin):
+    list_display = ('participant', 'event', 'date')
+    list_filter = ['event']
+    search_fields = ['participant']
+
 admin.site.register(Company)
 admin.site.register(Team, TeamAdmin)
 admin.site.register(Participant, ParticipantAdmin)
@@ -44,7 +49,7 @@ admin.site.register(Donation_Milestone)
 admin.site.register(Company_Registration_Rule)
 admin.site.register(Email_Rule, EmailRuleAdmin)
 admin.site.register(Participant_Email_Record, ParticipantEmailRecordAdmin)
-admin.site.register(Participant_Event_Record)
+admin.site.register(Participant_Event_Record, ParticipantEventRecordAdmin)
 admin.site.register(Company_TShirt_Milestone_Record)
 admin.site.register(Team_Event_Record)
 admin.site.register(Participant_Milestone_Record, ParticipantMilestoneRecordAdmin)
