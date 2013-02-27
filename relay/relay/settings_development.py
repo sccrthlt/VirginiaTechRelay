@@ -121,7 +121,8 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 
     'relayapp',
-    'reports'
+    'reports',
+    'south',
 )
 
 # A sample logging configuration. The only tangible logging
