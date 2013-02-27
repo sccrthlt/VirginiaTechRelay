@@ -7,7 +7,7 @@ class ParticipantAdmin(admin.ModelAdmin):
     search_fields = ['email']
 
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('name', 'date')
+    list_display = ('name', 'date', 'candles', 'candles_rewarded', 'homepage')
     list_filter = ['date']
     search_fields = ['name']
 
@@ -30,7 +30,8 @@ class EmailRuleAdmin(admin.ModelAdmin):
     list_display = ('candles_rewarded', 'emails')
 
 class TeamAdmin(admin.ModelAdmin):
-    list_filter = ['company']
+    list_display = ('name', 'company', 'signup')
+    list_filter = ['signup']
     search_fields = ['name']
 
 class ParticipantEventRecordAdmin(admin.ModelAdmin):
@@ -38,7 +39,17 @@ class ParticipantEventRecordAdmin(admin.ModelAdmin):
     list_filter = ['event']
     search_fields = ['participant']
 
-admin.site.register(Company)
+class CompanyRegistrationRuleAdmin(admin.ModelAdmin):
+    list_display = ('percent_registered', 'date_cutoff', 'candles_rewarded')
+    list_filter = ['percent_registered']
+    search_fields = ['percent_registered']
+
+class CompanyAdmin(admin.ModelAdmin):
+    list_display = ('name', 'captain', 'total_people_in_chapter', 'company_type')
+    list_filter = ['name']
+    search_fields = ['name']
+
+admin.site.register(Company, CompanyAdmin)
 admin.site.register(Team, TeamAdmin)
 admin.site.register(Participant, ParticipantAdmin)
 admin.site.register(Event, EventAdmin)
@@ -46,7 +57,7 @@ admin.site.register(TShirt)
 admin.site.register(Donation, DonationAdmin)
 admin.site.register(Company_TShirt_Milestone)
 admin.site.register(Donation_Milestone)
-admin.site.register(Company_Registration_Rule)
+admin.site.register(Company_Registration_Rule, CompanyRegistrationRuleAdmin)
 admin.site.register(Email_Rule, EmailRuleAdmin)
 admin.site.register(Participant_Email_Record, ParticipantEmailRecordAdmin)
 admin.site.register(Participant_Event_Record, ParticipantEventRecordAdmin)
