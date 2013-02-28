@@ -1,57 +1,11 @@
+// var __proxy = 'requests/proxy.php?__url=http://www.vtrelaycandles.org';
+var __proxy = window.location.host == 'localhost'  ? 'requests/proxy.php?__url=http://localhost:8000' : '';
 
 var info = "";
-
-function setupPage() {
-    $.get(__proxy + "/teams/candles/all/", function (data, status) {
-        for (item in data) {
-            record = data[item];
-            if (record.team_signup == true && record.team_type == "RT") {
-                record.team_name = new String(record.team_name);
-                record.team_event_milestone_candles = parseInt(record.team_event_milestone_candles);
-                record.team_email_milestone_candles = parseInt(record.team_email_milestone_candles);
-                record.team_donation_milestone_candles = parseInt(record.team_donation_milestone_candles);
-                record.team_candles_total = parseInt(record.team_candles_total);
-            } else {
-                delete data[item];
-            }
-        }
-        sortResult(data);
-    });
-}
-
-function setupTable(data) {
-    document.getElementById("loadingImg").style.display = "none";
-    for (var item in data) {
-        record = data[item];
-        record['position'] = parseInt(item) + 1;
-        $("#team_table_body").append("<tr class='teamRow' id=" + item + "><td id='teamRowPosition'>" + record.position + "</td><td class='teamRowFirstName'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + record.team_name + "</td><td id='teamRowMilestone'>" + record.team_donation_milestone_candles + "</td><td id='teamRowEmails'>" + record.team_email_milestone_candles + "</td><td id='teamRowEvents'>" + record.team_event_milestone_candles + "</td><td id='teamRowTotal'>" + record.team_candles_total + "</td></tr>");
-    }
-    jQuery("#forScroll").mCustomScrollbar("update");
-}
-
-function sortResult(data) {
-    data = data.sort(function (a, b) {
-        var prop = "team_candles_total";
-        if (b[prop] instanceof String) {
-            a[prop] = a[prop].toLowerCase();
-            b[prop] = b[prop].toLowerCase();
-        }
-        if (b[prop] > a[prop]) {
-            return 1;
-        }
-        if (b[prop] < a[prop]) {
-            return -1;
-        } else {
-            return (compareThings(a["team_name"], b["team_name"]));
-        }
-
-        // return (compareThings(b["team_candles_total"], a["team_candles_total"]));
-    });
-    setupTable(data);
-    info = data;
-}
+var __type = "team";
 
 // Search bar
+
 $(document).ready(function ($) {
     jQuery.expr[":"].contains = jQuery.expr.createPseudo(function (arg) {
         return function (elem) {
@@ -84,7 +38,6 @@ $(document).ready(function ($) {
         listFilter($(".teamRow"));
     });
 }(jQuery));
-
 
 //Feedback slide up
 
@@ -166,8 +119,31 @@ $(function () {
 
 });
 
+
+__sortFields = {
+    team: {
+        sort_name: "team_name",
+        sort_donations: "team_donation_milestone_candles",
+        sort_events: "team_event_milestone_candles",
+        sort_emails: "team_email_milestone_candles",
+        sort_total: "team_candles_total",
+    },
+    participant: {
+        sort_name: "participant_first_name",
+        sort_donations: "participant_donation_milestone_candles",
+        sort_registration: "participant_registration_milestone_candles",
+        sort_events: "participant_event_milestone_candles",
+        sort_emails: "participant_email_milestone_candles",
+        sort_total: "participant_candles_total",
+    }
+}
+
 function sortResults(prop, asc) {
     arr = info;
+
+    var __name = __sortFields[__type].sort_name;
+
+    prop = __sortFields[__type][prop];
 
     arr = arr.sort(function (a, b) {
         var thing1 = a.get(prop);
@@ -184,7 +160,7 @@ function sortResults(prop, asc) {
             if (thing1 < thing2) {
                 return -1;
             } else {
-                return (compareThings(a.get("team_name"), b.get("team_name")));
+                return (compareThings(a.get(__name), b.get(__name)));
             }
         } else {
             if (thing2 > thing1) {
@@ -193,13 +169,14 @@ function sortResults(prop, asc) {
             if (thing2 < thing1) {
                 return -1;
             } else {
-                return (compareThings(a.get("team_name"), b.get("team_name")));
+                return (compareThings(a.get(__name), b.get(__name)));
             }
         }
     });
 
     showResults(arr);
 }
+
 
 function compareThings(thing1, thing2) {
     if (thing1 instanceof String) {
@@ -216,14 +193,16 @@ function compareThings(thing1, thing2) {
 function showResults(arr) {
     var html = '';
 
-    $('#team_table_body').html(
-                _.template($('#teams-list-row-template').html(),
-                    {teams: arr}));
-
+    if ( __type == "team" ) {
+	    $('#team_table_body').html(
+	                _.template($('#teams-list-row-template').html(),
+	                    {teams: arr}));
+    } else if ( __type == "participant" ) {
+	    $('#team_table_body').html(
+	                _.template($('#participants-list-row-template').html(),
+	                    {participants: arr}));
+    }
 }
-
-// var __proxy = 'requests/proxy.php?__url=http://www.vtrelaycandles.org';
-var __proxy = window.location.host == 'localhost'  ? 'requests/proxy.php?__url=http://localhost:8000' : '';
 
 // #
 // Default route
@@ -238,6 +217,7 @@ TeamsListView = Backbone.View.extend({
 		$('#team_name').text('Team Name');
 		$('#pagesHeaderTxt').text('General Teams');
 		$('#search-area, #sorterHeader, #forScroll, #pagesCheck').show();
+		__type = "team";
 
 		TeamsCollection.fetch({
 			success: function(teams){
@@ -267,6 +247,7 @@ ParticipantsListView = Backbone.View.extend({
 		$('#loadingImg').show();
 		$('#team_name').text('Participant Name');
 		$('#search-area, #sorterHeader, #forScroll, #pagesCheck').show();
+		__type = "participant";
 
 		var t = new Team({id: id}).fetch({
 			success: function(team){

@@ -4,28 +4,42 @@ var __proxy = window.location.host == 'localhost'  ? 'requests/proxy.php?__url=h
 var info = "";
 var __type = "company";
 
+// Search bar
+
+$(document).ready(function ($) {
+jQuery.expr[":"].contains = jQuery.expr.createPseudo(function(arg) {
+    return function( elem ) {
+        return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+    };
+  });
+
+  function listFilter(list) {
+    var input = $("#searchBox");
+
+        $(input)
+            .change(function () {
+            var filter = $(this).val();
+            if (filter) {
+                $('tr').find("td:not(:Contains(" + filter + "))").parent().hide();
+                $('tr').find("td:Contains(" + filter + ")").parent().show();
+                $("#forScroll").mCustomScrollbar("update");
+            } else {
+                $('tr').show();
+            }
+            $("#forScroll").mCustomScrollbar("update");
+            return false;
+        })
+            .keyup(function () {
+            $(this).change();
+        });
+  }
+
+  $(function () {
+    listFilter($(".greekRow"));
+  });
+}(jQuery));
+
 //Feedback slide up
-
-function sortResult(data) {
-    data = data.sort(function (a, b) {
-        var prop = "company_candles_total";
-        if(b[prop] instanceof String){
-            a[prop] = a[prop].toLowerCase();
-            b[prop] = b[prop].toLowerCase();
-        }
-        if(b[prop] > a[prop]){return 1;}
-        if(b[prop] < a[prop]){
-            return -1;}
-        else{
-            return (compareThings(a["company_name"], b["company_name"]));
-        }
-
-       // return (compareThings(b["team_candles_total"], a["team_candles_total"]));
-    });
-    setupTable(data);
-    info = data;
-}
-
 
 $(document).ready(function () {
     $("#feedbackTab").click(function (event) {
@@ -52,41 +66,8 @@ $(document).ready(function () {
     });
 });
 
+//Column sorting
 
-
-
-$(document).ready(function ($) {
-jQuery.expr[":"].contains = jQuery.expr.createPseudo(function(arg) {
-    return function( elem ) {
-        return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
-    };
-  });
-  function listFilter(list) {
-    var input = $("#searchBox");
-
-    $(input)
-      .change( function () {
-        var filter = $(this).val();
-        if(filter) {
-          $('tr').find("td:not(:Contains(" + filter + "))").parent().hide();
-          $('tr').find("td:Contains(" + filter + ")").parent().show();
-        } else {
-          $('tr').show();
-        }
-        return false;
-      })
-    .keyup( function () {
-        $(this).change();
-    });
-  }
-
-  $(function () {
-    listFilter($(".greekRow"));
-  });
-}(jQuery));
-
-
-			//Column sorting
 $(function() {
     $('#sorterHeader tr th').click(function() {
         var id = $(this).attr('id');
@@ -116,8 +97,8 @@ __sortFields = {
 		sort_name: "team_name",
 		sort_donations: "team_donations_total",
 		sort_registration: "team_registration_milestone_candles",
-		sort_events: "team_tshirt_milestone_candles",
-		sort_tshirts: "company_tshirt_candles",
+		sort_events: "team_event_milestone_candles",
+		sort_tshirts: "team_tshirt_milestone_candles",
 		sort_total: "team_candles_total",
 	},
 	participant: {
