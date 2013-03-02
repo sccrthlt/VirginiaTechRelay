@@ -41,6 +41,7 @@ class Participant(models.Model):
     emails_sent = models.PositiveIntegerField(default=0, blank=True)
     team = models.ForeignKey(Team)
     reg_date = models.DateField()
+    hokie_passport_id = models.BigIntegerField(blank=True, default=0)
 
     #tshirt purchase totals based on records
     #donation totals will be based on donation records with this participant key
