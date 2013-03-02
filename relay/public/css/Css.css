@@ -510,6 +510,81 @@ h4.five
 	overflow: auto;
 	width: 180px;
 }
+#actualSponsors 
+{
+	float:left;
+	margin-top:10px;
+	margin-left:0px;
+}
+#actualSponsors li
+{
+	list-style:none;
+	display:inline;
+}
+#actualSponsors li a
+{
+	margin-left:20px;
+}
+#actualSponsors li #campusCookies
+{
+	width:40px;
+	height:35px;
+}
+#actualSponsors li #sageEnvironmentalConsulting
+{
+	width:75px;
+	height:27.5px;
+}
+#actualSponsors li #liasHairstyling
+{
+	width:150px;
+	height:55px;
+}
+#actualSponsors li #dominosPizza
+{
+	width:64px;
+	height:64px;
+}
+#actualSponsors li #blockAndBridle
+{
+	width:64.5px;
+	height:66.5px;
+}
+#actualSponsors li #redBull
+{
+	width:50px;
+	height:32.55px;
+}
+#actualSponsors li #PRISM
+{
+	width:53.1px;
+	height:20.5px;
+}
+#actualSponsors li #moes
+{
+	width:52.5px;
+	height:52.5px;
+}
+#actualSponsors li #rhf
+{
+	width:53.3px;
+	height:22.6px;
+}
+#actualSponsors li #sga
+{
+	width:50px;
+	height:44.3px;
+}
+#actualSponsors li #universityBookstore
+{
+	width:39.5px;
+	height:55px;
+}
+#actualSponsors li #aJMiniStorage
+{
+	width:51.4px;
+	height:18.2px;
+}
 div.loggedIn
 {
 	float: right;
@@ -2316,7 +2391,6 @@ table
 {
 	height: 90px;
 	width: 100%;
-	overflow: hidden;
 }
 .personalTableFirstRow
 {
