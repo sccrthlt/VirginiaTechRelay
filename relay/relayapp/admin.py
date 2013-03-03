@@ -35,7 +35,7 @@ class TeamAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
 class ParticipantEventRecordAdmin(admin.ModelAdmin):
-    list_display = ('participant', 'event', 'guests')
+    list_display = ('participant', 'hokie_passport_id', 'event', 'guests',)
     list_filter = ['event']
     search_fields = ['participant']
 
