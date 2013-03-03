@@ -18,12 +18,12 @@ def setupParticipant(info):
 
 	for this_event in Event.objects.all():
 		try:
-			participant_event_return = Participant_Event_Record.objects.get(hokie_passport_id = info['Card Number'], event = this_event)
+			participant_event_return = Participant_Event_Record.objects.get(hokie_passport_id = info['Card number'], event = this_event)
 		except Participant_Event_Record.DoesNotExist:
 			try:
 				new_participant_event_record = Participant_Event_Record(
-					participant = Participant.objects.get(hokie_passport_id = info['Card Number']),
-					id = info['Card Number'],
+					participant = Participant.objects.get(hokie_passport_id = info['Card number']),
+					id = info['Card number'],
 					event = Event.objects.get(event = this_event),
 				)
 				new_participant_event_record.save()
@@ -38,7 +38,7 @@ def parseCSVHokiePassport(csv_file_location):
     print("starting...")
     for row in relayreader:
         try:
-            if not len(row['Card Number']) == 0:
+            if not len(row['Card number']) == 0:
                 setupDonation(row)
             else:
                 print('SKIPPED')
