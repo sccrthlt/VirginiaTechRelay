@@ -112,7 +112,7 @@ class Participant_Event_Record(models.Model):
     guests = models.PositiveIntegerField(default=0, blank=True)
     event = models.ForeignKey(Event)
     participant = models.ForeignKey(Participant)
-    hokie_passport_id = Participant.get(participant = participant).hokie_passport_id
+    hokie_passport_id = models.BigIntegerField(blank=True, default=0)
 
 class Company_TShirt_Milestone_Record(models.Model):
     company = models.ForeignKey(Company)
