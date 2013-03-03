@@ -16,7 +16,7 @@ class Command(BaseCommand):
 
 def setupParticipant(info):
 
-	for event in Event.objects.all()
+	for this_event in Event.objects.all()
 		try:
 			participant_event_return = Participant_Event_Record.objects.get(hokie_passport_id = info['Card Number'], event = event)
 		except Participant_Event_Record.DoesNotExist:
@@ -24,11 +24,11 @@ def setupParticipant(info):
 				new_participant_event_record = Participant_Event_Record(
 					participant = Participant.objects.get(hokie_passport_id = info['Card Number']),
 					id = info['Card Number'],
-					event = Event.objects.get(event = event),
+					event = Event.objects.get(event = this_event),
 				)
 				new_participant_event_record.save()
 			except len(info['id']) == 0:
-				return None
+				print('ID not found for >> ' + info)
 
 def parseCSVHokiePassport(csv_file_location):
 
@@ -38,8 +38,10 @@ def parseCSVHokiePassport(csv_file_location):
     print("starting...")
     for row in relayreader:
         try:
-            row['Team Name'] = unicode(row['Team Name'], 'latin-1')
-            setupParticipant(row)
+            if not len(row['Card Number']) == 0:
+                setupDonation(row)
+            else:
+                print('SKIPPED')
 
         except UnicodeDecodeError:
             print ("it was not a ascii-encoded unicode string")
