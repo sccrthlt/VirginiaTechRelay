@@ -27,7 +27,7 @@ def setupEventRecord(info):
 					event = Event.objects.get(event = this_event),
 				)
 				new_participant_event_record.save()
-			except len(info['id']) == 0:
+			except len(info['Card number']) == 0:
 				print('ID not found for >> ' + info)
 
 def parseCSVHokiePassport(csv_file_location):
