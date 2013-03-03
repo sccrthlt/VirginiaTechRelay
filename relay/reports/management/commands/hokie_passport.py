@@ -14,7 +14,7 @@ class Command(BaseCommand):
         csv_file_location = args[0]
         parseCSVHokiePassport(csv_file_location)
 
-def setupParticipant(info):
+def setupEventRecord(info):
 
 	for this_event in Event.objects.all():
 		try:
@@ -39,7 +39,7 @@ def parseCSVHokiePassport(csv_file_location):
     for row in relayreader:
         try:
             if not len(row['Card number']) == 0:
-                setupDonation(row)
+                setupEventRecord(row)
             else:
                 print('SKIPPED')
 
