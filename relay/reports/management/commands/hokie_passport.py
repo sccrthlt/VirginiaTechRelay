@@ -16,7 +16,7 @@ class Command(BaseCommand):
 
 def setupParticipant(info):
 
-	for this_event in Event.objects.all()
+	for this_event in Event.objects.all():
 		try:
 			participant_event_return = Participant_Event_Record.objects.get(hokie_passport_id = info['Card Number'], event = this_event)
 		except Participant_Event_Record.DoesNotExist:
