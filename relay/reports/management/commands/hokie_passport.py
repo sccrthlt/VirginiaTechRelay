@@ -16,22 +16,21 @@ class Command(BaseCommand):
 
 def setupParticipant(info):
 
-    try:
-		events = Participant_Event_Record.objects.all()
-		for event_record in events
-			participant_event_return = Participant_Event_Record.objects.filter(hokie_passport_id = info['Card Number'])
-    except Participant.DoesNotExist:
-        try:
-			participant_event_return = Participant_Event_Record(
-				participant = Participant.objects.get(pk = info['id']),
-				id = info['id'],
-				event = Event.objects.get(event = eventname),
-            )
-            participant_return.save()
+	for event in Event.objects.all()
+		try:
+			participant_event_return = Participant_Event_Record.objects.get(hokie_passport_id = info['Card Number'], event = event)
+		except Participant_Event_Record.DoesNotExist:
+			try:
+				new_participant_event_record = Participant_Event_Record(
+					participant = Participant.objects.get(hokie_passport_id = info['Card Number']),
+					id = info['Card Number'],
+					event = Event.objects.get(event = event),
+				)
+				new_participant_event_record.save()
+			except len(info['id']) == 0:
+				return None
 
-    return participant_event_return
-
-def parseCSVParticipantDetails(csv_file_location):
+def parseCSVHokiePassport(csv_file_location):
 
     data = open(csv_file_location).read()
     relayreader = csv.DictReader(cStringIO.StringIO(data), delimiter=',')
