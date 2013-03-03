@@ -25,7 +25,7 @@ def setupEventRecord(info):
 				new_participant_event_record = Participant_Event_Record(
 					participant = Participant.objects.get(hokie_passport_id = info['Card number']),
 					id = info['Card number'],
-					event = model_to_dict(Event.objects.get(pk = this_event))['name'],
+					event = model_to_dict(Event.objects.get(event = this_event))['name'],
 				)
 				new_participant_event_record.save()
 			except len(info['Card number']) == 0:
