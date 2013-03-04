@@ -70,6 +70,7 @@ class RelayFunctions:
 		total['event_total'] = eventTotal
 		candles_event = Participant_Event_Record.objects.filter(participant = participant).aggregate(candles_rewarded = Sum('event__candles_rewarded'))
 		total['event_candles'] = float(str(candles_event['candles_rewarded'] if candles_event['candles_rewarded'] is not None else 0))
+		#total['candles'] = totalCandles + candles_event['candles_rewarded'] + total_milestone['candles_rewarded']
 
 		return total
 

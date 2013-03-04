@@ -86,6 +86,12 @@ class Fundraising_Challenge_Record(models.Model):
 	challenge = models.ForeignKey(Fundraising_Challenge)
 	datetime = models.DateTimeField()
 
+class Fundraising_Challenge_Start_Record(models.Model):
+	participant = models.ForeignKey(Participant)
+	amount_raised = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
+	candles_raised = models.IntegerField(default=0)
+	datetime_start = models.DateTimeField()
+
 class TShirt(models.Model):
     name = models.CharField(max_length=200)
 

@@ -16,9 +16,14 @@ class FundraisingChallengeAdmin(admin.ModelAdmin):
     list_filter = ['datetime_start']
     search_fields = ['name']
 
-class FundraisingChallenegeRecordAdmin(admin.ModelAdmin):
+class FundraisingChallengeRecordAdmin(admin.ModelAdmin):
     list_display = ('participant', 'challenge', 'datetime')
     list_filter = ['datetime']
+    search_fields = ['participant']
+
+class FundraisingChallenegeStartRecordAdmin(admin.ModelAdmin):
+    list_display = ('participant', 'amount_raised', 'candles_raised', 'datetime_start')
+    list_filter = ['datetime_start']
     search_fields = ['participant']
 
 class DonationAdmin(admin.ModelAdmin):
@@ -68,7 +73,8 @@ admin.site.register(Donation, DonationAdmin)
 admin.site.register(Company_TShirt_Milestone)
 admin.site.register(Donation_Milestone)
 admin.site.register(Fundraising_Challenge, FundraisingChallengeAdmin)
-admin.site.register(Fundraising_Challenge_Record, FundraisingChallenegeRecordAdmin)
+admin.site.register(Fundraising_Challenge_Record, FundraisingChallengeRecordAdmin)
+admin.site.register(Fundraising_Challenge_Start_Record, FundraisingChallengeStartRecordAdmin)
 admin.site.register(Company_Registration_Rule, CompanyRegistrationRuleAdmin)
 admin.site.register(Email_Rule, EmailRuleAdmin)
 admin.site.register(Participant_Email_Record, ParticipantEmailRecordAdmin)
