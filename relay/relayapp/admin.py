@@ -13,7 +13,7 @@ class EventAdmin(admin.ModelAdmin):
 
 class FundraisingChallengeAdmin(admin.ModelAdmin):
     list_display = ('name', 'datetime_start', 'datetime_end', 'amount_raised', 'candles_raised', 'candles_rewarded', 'homepage')
-    list_filter = ['date_start']
+    list_filter = ['datetime_start']
     search_fields = ['name']
 
 class FundraisingChallenegeRecordAdmin(admin.ModelAdmin):
