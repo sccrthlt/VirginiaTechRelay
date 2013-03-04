@@ -21,7 +21,7 @@ class FundraisingChallengeRecordAdmin(admin.ModelAdmin):
     list_filter = ['datetime']
     search_fields = ['participant']
 
-class FundraisingChallenegeStartRecordAdmin(admin.ModelAdmin):
+class FundraisingChallengeStartRecordAdmin(admin.ModelAdmin):
     list_display = ('participant', 'amount_raised', 'candles_raised', 'datetime_start')
     list_filter = ['datetime_start']
     search_fields = ['participant']
