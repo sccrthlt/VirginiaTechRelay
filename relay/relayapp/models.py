@@ -69,6 +69,23 @@ class Event(models.Model):
 
 #change to partipant record for donations
 #pull from CSV
+
+class Fundraising_Challenge(models.Model):
+	name = models.CharField(max_length=100)
+	datetime_start = models.DateTimeField()
+	datetime_end = models.DateTimeField()
+	amount_raised = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
+	candles_raised = models.IntegerField(default=0)
+	candles_rewarded = models.IntegerField(default=0)
+	description = models.TextField(blank=True)
+	image = models.URLField(blank = True)
+	homepage = models.BooleanField()
+
+class Fundraising_Challenge_Record(models.Model):
+	participant = models.ForeignKey(Participant)
+	challenge = models.ForeignKey(Fundraising_Challenge)
+	datetime = models.DateTimeField()
+
 class TShirt(models.Model):
     name = models.CharField(max_length=200)
 
