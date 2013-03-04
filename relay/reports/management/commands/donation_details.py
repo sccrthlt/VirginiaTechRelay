@@ -33,7 +33,8 @@ def checkDonationsTotals(participant):
 		new_participant_milestone_record = Participant_Milestone_Record(participant = save_participant, donation_milestone = milestone, date = donated_date[0].most_recent_donation_date)
 		new_participant_milestone_record.save()
 
-def checkFundraisingChallenge(participant):
+		
+def createFundraisingChallengeRecord(participant):
 	helper = RelayFunctions()
 	totals = helper.participant_specific_totals(pk = participant)
 	totalCandles = totals['candles']
@@ -79,7 +80,7 @@ def setupDonation(info):
         donation_return.save()
 
         checkDonationsTotals(Participant.objects.get(email = found_participant.email).pk)
-		checkDonationsTotals(Participant.objects.get(email = found_participant.email).pk)
+		createFundraisingChallengeRecord(Participant.objects.get(email = found_participant.email).pk)
 
     except Participant.DoesNotExist:
         print('Participant not found for >> ' + info['Participant Credited First Name'] + ' ' + info['Participant Credited Last Name'])
