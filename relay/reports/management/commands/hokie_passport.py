@@ -17,19 +17,23 @@ class Command(BaseCommand):
 
 def setupEventRecord(info):
 
-	for this_event in Event.objects.all():
+		this_event = Event.objects.get(name = "Moe's Night 2013-03-06")
 		try:
-			participant_event_return = Participant_Event_Record.objects.get(hokie_passport_id = info['Card number'], event = this_event)
-		except Participant_Event_Record.DoesNotExist:
+			participant_return = Participant.objects.get(hokie_passport_id = info['Card number'])
 			try:
-				new_participant_event_record = Participant_Event_Record(
-					participant = Participant.objects.get(hokie_passport_id = info['Card number']),
-					id = info['Card number'],
-					event = this_event,
-				)
-				new_participant_event_record.save()
-			except len(info['Card number']) == 0:
-				print('ID not found for >> ' + info)
+				participant_event_return = Participant_Event_Record.objects.get(hokie_passport_id = info['Card number'], event = this_event)
+			except Participant_Event_Record.DoesNotExist:
+				try:
+					new_participant_event_record = Participant_Event_Record(
+						participant = Participant.objects.get(hokie_passport_id = info['Card number']),
+						hokie_passport_id = info['Card number'],
+						event = this_event,
+					)
+					new_participant_event_record.save()
+				except len(info['Card number']) == 0:
+					print('ID not found for >> ' + info)
+		except Participant.DoesNotExist:
+			print('not cool bro')
 
 def parseCSVHokiePassport(csv_file_location):
 
