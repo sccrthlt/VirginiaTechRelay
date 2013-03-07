@@ -32,29 +32,6 @@ def checkDonationsTotals(participant):
 		donated_date = Donation.objects.filter(participant = participant).annotate(most_recent_donation_date = Max('datetime'))
 		new_participant_milestone_record = Participant_Milestone_Record(participant = save_participant, donation_milestone = milestone, date = donated_date[0].most_recent_donation_date)
 		new_participant_milestone_record.save()
-
-		
-def createFundraisingChallengeRecord(participant):
-	helper = RelayFunctions()
-	totals = helper.participant_specific_totals(pk = participant)
-	totalCandles = totals['candles']
-	
-	for challenge in Fundraising_Challenge.objects.all():
-		if  challenge.datetime_start <= datetime.datetime.now() <= challenge.datetime_end:
-			if not challenge.amount_raised == 0 and challenge.candles_raised == 0:
-				if currentRaised > totalRaised:
-					try:
-						record = Fundraising_Challenge_Record.objects.get(participant = participant, challenge = challenge)
-					except Fundraising_Challenge_Record.DoesNotExist:
-						save_participant = Participant.objects.get(pk = participant)
-						donated_datetime = Donation.objects.filter(participant = participant).annotate(most_recent_donation_datetime = Max('datetime'))
-						new_fundraising_record = Fundraising_Challenge_Record(participant = save_participant, challenge = challenge, datetime = donated_datetime[0].most_recent_donation_datetime)
-						new_fundraising_record.save()
-			if not challenge.candles_raised == 0 and challenge.amount_raised == 0:
-				try:
-					record = Fundraising_Challenge_Record.objects.get(participant = participant, challenge = challenge)
-				except Fundraising_Challenge_Record.DoesNotExist:
-					save_participant = Participant.objects.get(pk = participant)
 					
 
 def setupDonation(info):
@@ -80,7 +57,6 @@ def setupDonation(info):
         donation_return.save()
 
         checkDonationsTotals(Participant.objects.get(email = found_participant.email).pk)
-		createFundraisingChallengeRecord(Participant.objects.get(email = found_participant.email).pk)
 
     except Participant.DoesNotExist:
         print('Participant not found for >> ' + info['Participant Credited First Name'] + ' ' + info['Participant Credited Last Name'])
