@@ -19,6 +19,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         print "Starting Command.."
         createFundraisingChallengeStartRecord()
+        createFundraisingChallengeRecord()
+        createFundraisingChallengeTrackerRecord()
 
 def createFundraisingChallengeStartRecord(request):
 	helper = RelayFunctions()
@@ -50,13 +52,58 @@ def createFundraisingChallengeRecord(request):
 				for participant in Participant.objects.all():
 					currentRaised = Donation.objects.filter(participant = participant).aggregate(total_donations = Sum('amount'))
 					startRaised = Fundraising_Challenge_Start_Record.objects.filter(participant = participant).amount_raised
+					diffRaised = currentRaised - startRaised
 					try:
 						record = Fundraising_Challenge_Record.objects.get(participant = participant, challenge = challenge)
 						Fundraising_Challenge_Record.objects.get(participant = participant, challenge = challenge).delete()
-						if currentRaised > startRaised:
+						if diffRaised > challenge.amount_raised:
 							save_participant = Participant.objects.get(pk = participant)
 							donated_datetime = Donation.objects.filter(participant = participant).annotate(most_recent_donation_datetime = Max('datetime'))
-							new_fundraising_record = Fundraising_Challenge_Record(participant = save_participant, challenge = challenge, datetime = donated_datetime[0].most_recent_donation_datetime)
+							new_fundraising_record = Fundraising_Challenge_Record(participant = save_participant, challenge = challenge, datetime = donated_datetime[0].most_recent_donation_datetime, candles_rewarded = challenge.candles_rewarded)
+							new_fundraising_record.save()
+					except Fundraising_Challenge_Record.DoesNotExist:
+						print('Fundraising_Challenge_Record does not exist')
+			if not challenge.candles_raised == 0 and challenge.amount_raised == 0:
+				for participant in Participant.objects.all():
+					totals = helper.participant_specific_totals(model_to_dict(participant)['id'])
+					currentRaised = totals.milestone_total + totals.emails_candles + totals.event_candles
+					startRaised = Fundraising_Challenge_Start_Record.objects.filter(participant = participant).candles_raised
+					diffRaised = currentRaised - startRaised
+					try:
+						record = Fundraising_Challenge_Record.objects.filter(participant = participant, challenge = challenge)
+						Fundraising_Challenge_Record.objects.get(participant = participant, challenge = challenge).delete()
+						if diffRaised > challenge.amount_raised:
+							save_participant = Participant.objects.get(pk = participant)
+							donated_datetime = Donation.objects.filter(participant = participant).annotate(most_recent_donation_datetime = Max('datetime'))
+							new_fundraising_record = Fundraising_Challenge_Record(participant = save_participant, challenge = challenge, datetime = donated_datetime[0].most_recent_donation_datetime, candles_rewarded = challenge.candles_rewarded)
+							new_fundraising_record.save()
+					except Fundraising_Challenge_Record.DoesNotExist:
+						print('Fundraising_Challenge_Record does not exist')
+			else:
+				print('No amount_raised or candles_raised specified')
+		else:
+			print('No challenge currently running')
+	except:
+		print('No challenges')
+
+def createFundraisingChallengeTrackerRecord(request):
+	helper = RelayFunctions()
+	
+	
+	for challenge in Fundraising_Challenge.objects.all():
+		if  challenge.datetime_start <= datetime.datetime.now() <= challenge.datetime_end:
+			if not challenge.amount_raised == 0 and challenge.candles_raised == 0:
+				for participant in Participant.objects.all():
+					currentRaised = Donation.objects.filter(participant = participant).aggregate(total_donations = Sum('amount'))
+					startRaised = Fundraising_Challenge_Start_Record.objects.filter(participant = participant).amount_raised
+					diffRaised = currentRaised - startRaised
+					try:
+						record = Fundraising_Challenge_Record.objects.get(participant = participant, challenge = challenge)
+						Fundraising_Challenge_Record.objects.get(participant = participant, challenge = challenge).delete()
+						if not diffRaised == 0:
+							save_participant = Participant.objects.get(pk = participant)
+							donated_datetime = Donation.objects.filter(participant = participant).annotate(most_recent_donation_datetime = Max('datetime'))
+							new_fundraising_record = Fundraising_Challenge_Record(participant = save_participant, challenge = challenge, datetime = donated_datetime[0].most_recent_donation_datetime, diffRaised = diffRaised)
 							new_fundraising_record.save()
 					except Fundraising_Challenge_Record.DoesNotExist:
 						print('Fundraising_Challenge_Record does not exist')
