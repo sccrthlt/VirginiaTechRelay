@@ -19,35 +19,32 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         print "Starting Command.."
         createFundraisingChallengeStartRecord()
-        createFundraisingChallengeRecord()
-        createFundraisingChallengeTrackerRecord()
 
-def createFundraisingChallengeStartRecord(request):
+def createFundraisingChallengeStartRecord():
 	helper = RelayFunctions()
 	
 	for participant in Participant.objects.all():
 		totals = helper.participant_specific_totals(model_to_dict(participant)['id'])
-		total_donations = totals.donations_total
-		total_candles = totals.milestone_total + totals.emails_candles + totals.event_candles
+		total_donations = totals['donations_total']
+		total_candles = totals['milestone_total'] + totals['emails_candles'] + totals['event_candles']
 		try:
 			for challenge in Fundraising_Challenge.objects.all():
 				try:
 					fundraising_challenge_start_record = Fundraising_Challenge_Start_Record(participant = participant, challenge = challenge)
 				except Fundraising_Challenge_Start_Record.DoesNotExist:
 					print('Record DNE.  Creating start record...')
-					try:
-						new_fundraising_challenge_start_record = Fundraising_Challenge_Start_Record(participant = participant, challenge = challenge, amount_raised = total_donations, candles_raised = total_candles, datetime_start = challenge.datetime_start)
-		except:
+					new_fundraising_challenge_start_record = Fundraising_Challenge_Start_Record(participant = participant, challenge = challenge, amount_raised = total_donations, candles_raised = total_candles, datetime_start = challenge.datetime_start)
+		except Exception:
 			print('No challenges')
 
 	createFundraisingChallengeRecord()
 			
-def createFundraisingChallengeRecord(request):
+def createFundraisingChallengeRecord():
 	helper = RelayFunctions()
 	
 	
 	for challenge in Fundraising_Challenge.objects.all():
-		if  challenge.datetime_start <= datetime.datetime.now() <= challenge.datetime_end:
+		if  challenge.datetime_start <= datetime.now(tzinfo=default) <= challenge.datetime_end:
 			if not challenge.amount_raised == 0 and challenge.candles_raised == 0:
 				for participant in Participant.objects.all():
 					currentRaised = Donation.objects.filter(participant = participant).aggregate(total_donations = Sum('amount'))
@@ -66,7 +63,7 @@ def createFundraisingChallengeRecord(request):
 			if not challenge.candles_raised == 0 and challenge.amount_raised == 0:
 				for participant in Participant.objects.all():
 					totals = helper.participant_specific_totals(model_to_dict(participant)['id'])
-					currentCandles = totals.milestone_total + totals.emails_candles + totals.event_candles
+					currentCandles = totals['milestone_total'] + totals['emails_candles'] + totals['event_candles']
 					startCandles = Fundraising_Challenge_Start_Record.objects.filter(participant = participant).candles_raised
 					diffCandles = currentCandles - startCandles
 					try:
@@ -83,15 +80,15 @@ def createFundraisingChallengeRecord(request):
 				print('No amount_raised or candles_raised specified')
 		else:
 			print('No challenge currently running')
-	except:
-		print('No challenges')
 
-def createFundraisingChallengeTrackerRecord(request):
+	createFundraisingChallengeTrackerRecord()
+
+def createFundraisingChallengeTrackerRecord():
 	helper = RelayFunctions()
 	
 	
 	for challenge in Fundraising_Challenge.objects.all():
-		if  challenge.datetime_start <= datetime.datetime.now() <= challenge.datetime_end:
+		if  challenge.datetime_start <= datetime.utcnow() <= challenge.datetime_end:
 			if not challenge.amount_raised == 0 and challenge.candles_raised == 0:
 				for participant in Participant.objects.all():
 					currentRaised = Donation.objects.filter(participant = participant).aggregate(total_donations = Sum('amount'))
@@ -110,7 +107,7 @@ def createFundraisingChallengeTrackerRecord(request):
 			if not challenge.candles_raised == 0 and challenge.amount_raised == 0:
 				for participant in Participant.objects.all():
 					totals = helper.participant_specific_totals(model_to_dict(participant)['id'])
-					currentCandles = totals.milestone_total + totals.emails_candles + totals.event_candles
+					currentCandles = totals['milestone_total'] + totals['emails_candles'] + totals['event_candles']
 					startCandles = Fundraising_Challenge_Start_Tracker_Record.objects.filter(participant = participant).candles_raised
 					diffCandles = currentCandles - startCandles
 					try:
@@ -127,5 +124,3 @@ def createFundraisingChallengeTrackerRecord(request):
 				print('No amount_raised or candles_raised specified')
 		else:
 			print('No challenge currently running')
-	except:
-		print('No challenges')

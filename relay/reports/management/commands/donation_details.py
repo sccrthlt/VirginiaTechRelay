@@ -23,6 +23,7 @@ class Command(BaseCommand):
 def checkDonationsTotals(participant):
 
     donated = Donation.objects.filter(participant = participant).aggregate(donations_total = Sum('amount'))
+	Participant_Milestone_Record.objects.filter(participant = participant).delete()
 
     for milestone in Donation_Milestone.objects.all():
 		if donated['donations_total'] > milestone.donation_amount:
