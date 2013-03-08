@@ -84,6 +84,7 @@ class Fundraising_Challenge(models.Model):
 class Fundraising_Challenge_Record(models.Model):
 	participant = models.ForeignKey(Participant)
 	challenge = models.ForeignKey(Fundraising_Challenge)
+	candles_rewarded = candles_raised = models.IntegerField(default=0)
 	datetime = models.DateTimeField()
 
 def getDefaultChallenge():
