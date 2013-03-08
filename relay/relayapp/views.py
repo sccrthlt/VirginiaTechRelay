@@ -276,8 +276,7 @@ def participant_specific_greek(request, participant):
 	donations = helper.participant_specific_donations_greek(participant)
 	events = helper.participant_specific_events_greek(participant)
 	tshirts = helper.participant_specific_tshirt_greek(participant)
-
-
+	
 	data = { 'info' : info , 'totals' : totals , 'donations' : donations , 'events' : events, 'tshirts' : tshirts }
 
 	response = json.dumps(data)

@@ -22,17 +22,28 @@ class Command(BaseCommand):
 
 def checkDonationsTotals(participant):
 
-    donated = Donation.objects.filter(participant = participant).aggregate(donations_total = Sum('amount'))
+	donated = Donation.objects.filter(participant = participant).aggregate(donations_total = Sum('amount'))
 	Participant_Milestone_Record.objects.filter(participant = participant).delete()
 
+	cool = []
+	donationTotal = 0
+	milestoneNumber = 0
+	for milestone in Donation_Milestone.objects.all():
+		for donation in Donation.objects.all():
+			donationTotal = donationTotal + donation.amount
+			if donationTotal >= milestone.donation_amount:
+				cool = append(donation.datetime)
+				milestoneNumber = milestoneNumber + 1
+
+    milestoneNumber = 
     for milestone in Donation_Milestone.objects.all():
-		if donated['donations_total'] > milestone.donation_amount:
+		if donated['donations_total'] >= milestone.donation_amount:
 			try:
 				record = Participant_Milestone_Record.objects.get(participant = participant, donation_milestone = milestone)
 			except Participant_Milestone_Record.DoesNotExist:
 				save_participant = Participant.objects.get(pk = participant)
-				donated_date = Donation.objects.filter(participant = participant).annotate(most_recent_donation_date = Max('datetime'))
-				new_participant_milestone_record = Participant_Milestone_Record(participant = save_participant, donation_milestone = milestone, date = donated_date[0].most_recent_donation_date)
+				#donated_date = Donation.objects.filter(participant = participant).annotate(most_recent_donation_date = Max('datetime'))
+				new_participant_milestone_record = Participant_Milestone_Record(participant = save_participant, donation_milestone = milestone, date = cool[milestoneNumber])
 				new_participant_milestone_record.save()
 					
 
