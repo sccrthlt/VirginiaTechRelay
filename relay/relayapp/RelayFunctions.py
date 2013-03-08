@@ -85,7 +85,8 @@ class RelayFunctions:
 			tempDonation['amount'] = float(str(model_to_dict(donation)['amount']))
 			donations.append(tempDonation)
 
-		return donations
+		newlist = sorted(donations, key=itemgetter('datetime'), reverse = True)
+		return newlist
 
 	def participant_specific_milestones(self, participant):
 		milestone_record_objects = Participant_Milestone_Record.objects.filter(participant = participant)
