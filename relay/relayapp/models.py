@@ -90,7 +90,8 @@ class Fundraising_Challenge_Record(models.Model):
 class Fundraising_Challenge_Tracker_Record(models.Model):
 	participant = models.ForeignKey(Participant)
 	challenge = models.ForeignKey(Fundraising_Challenge)
-	diffRaised = models.IntegerField(default=0)
+	difference_raised = models.IntegerField(default=0)
+	difference_candles = models.IntegerField(default=0)
 	datetime = models.DateTimeField()
 	
 def getDefaultChallenge():
