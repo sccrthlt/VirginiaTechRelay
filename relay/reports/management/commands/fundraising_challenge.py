@@ -3,6 +3,7 @@ import csv
 import os
 import time
 import cStringIO
+import pytz
 
 from django.forms.models import model_to_dict
 from django.db.models import Sum
@@ -41,10 +42,14 @@ def createFundraisingChallengeStartRecord():
 			
 def createFundraisingChallengeRecord():
 	helper = RelayFunctions()
+	utc=pytz.UTC
 	
+	challenge.datetime_start = utc.localize(challenge.datetime_start) 
+	challenge.datetime_end = utc.localize(challenge.datetime_end) 
+	# now both the datetime objects are aware, and you can compare them
 	
 	for challenge in Fundraising_Challenge.objects.all():
-		if  challenge.datetime_start <= datetime.now(tzinfo=default) <= challenge.datetime_end:
+		if challenge.datetime_start <= datetime.now() <= challenge.datetime_end:
 			if not challenge.amount_raised == 0 and challenge.candles_raised == 0:
 				for participant in Participant.objects.all():
 					currentRaised = Donation.objects.filter(participant = participant).aggregate(total_donations = Sum('amount'))

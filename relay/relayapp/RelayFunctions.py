@@ -99,7 +99,7 @@ class RelayFunctions:
 			tempMilestoneRecord['candles'] = milestone_record.donation_milestone.candles_rewarded
 			milestoneRecords.append(tempMilestoneRecord)
 
-		newlist = sorted(milestoneRecords, key=itemgetter('amount'), reverse = True)
+		newlist = sorted(milestoneRecords, key=itemgetter('amount'), reverse = False)
 		return newlist
 
 	def participant_specific_events(self, participant):
