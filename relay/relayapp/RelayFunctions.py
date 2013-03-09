@@ -108,7 +108,7 @@ class RelayFunctions:
 		eventRecords = []
 		for event_record in event_record_objects:
 			tempEventRecord = {}
-			tempEventRecord['date'] = event_record.event.date.strftime("%d/%m/%y")
+			tempEventRecord['date'] = event_record.event.date.strftime("%m/%d/%y")
 			tempEventRecord['candles'] = event_record.event.candles_rewarded
 			tempEventRecord['name'] = event_record.event.name
 			tempEventRecord['description'] = event_record.event.description
