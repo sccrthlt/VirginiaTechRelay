@@ -81,7 +81,7 @@ class RelayFunctions:
 		donations = []
 		for donation in donation_objects:
 			tempDonation = {}
-			tempDonation['datetime'] = donation.datetime.strftime("%d/%m/%y")
+			tempDonation['datetime'] = donation.datetime.strftime("%m/%d/%y")
 			tempDonation['amount'] = float(str(model_to_dict(donation)['amount']))
 			donations.append(tempDonation)
 
@@ -94,7 +94,7 @@ class RelayFunctions:
 		milestoneRecords = []
 		for milestone_record in milestone_record_objects:
 			tempMilestoneRecord = {}
-			tempMilestoneRecord['date'] = milestone_record.date.strftime("%d/%m/%y")
+			tempMilestoneRecord['date'] = milestone_record.date.strftime("%m/%d/%y")
 			tempMilestoneRecord['amount'] = float(str(milestone_record.donation_milestone.donation_amount))
 			tempMilestoneRecord['candles'] = milestone_record.donation_milestone.candles_rewarded
 			milestoneRecords.append(tempMilestoneRecord)
