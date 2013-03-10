@@ -18,6 +18,7 @@ MANAGERS = ADMINS
 
 AUTHENTICATION_BACKENDS = (
     'django_facebook.auth_backends.FacebookBackend',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 AUTH_PROFILE_MODULE = 'django_facebook.FacebookProfile'
@@ -203,6 +204,6 @@ SUIT_CONFIG = {
     'LIST_PER_PAGE': 15
 }
 
-FBAPI_APP_ID = os.environ.get('607638312582879')
-FBAPI_APP_SECRET = os.environ.get('cbd62f3f21aeaf37fb4827ad98377063')
+FACEBOOK_APP_ID              = os.environ.get('FACEBOOK_APP_ID')
+FACEBOOK_API_SECRET          = os.environ.get('FACEBOOK_SECRET')
 
