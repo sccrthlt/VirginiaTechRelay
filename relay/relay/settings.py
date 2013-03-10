@@ -4,6 +4,7 @@ from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',
+    'django_facebook.context_processors.facebook',
 )
 
 DEBUG = True
@@ -14,6 +15,12 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
+
+AUTHENTICATION_BACKENDS = (
+    'django_facebook.auth_backends.FacebookBackend',
+)
+
+AUTH_PROFILE_MODULE = 'django_facebook.FacebookProfile'
 
 DATABASES = {
     'default': {
@@ -135,6 +142,7 @@ INSTALLED_APPS = (
     'relayapp',
     'reports',
     'south',
+    'django_facebook',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -195,4 +203,6 @@ SUIT_CONFIG = {
     'LIST_PER_PAGE': 15
 }
 
+FBAPI_APP_ID = os.environ.get('607638312582879')
+FBAPI_APP_SECRET = os.environ.get('cbd62f3f21aeaf37fb4827ad98377063')
 
