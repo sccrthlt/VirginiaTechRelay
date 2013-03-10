@@ -5,10 +5,12 @@ import time
 import cStringIO
 import pytz
 
+
 from django.forms.models import model_to_dict
 from django.db.models import Sum
 from django.db.models import Max
 from datetime import datetime
+from django.utils import timezone
 
 from relayapp.models import *
 from relayapp.RelayFunctions import *
@@ -35,6 +37,7 @@ def createFundraisingChallengeStartRecord():
 				except Fundraising_Challenge_Start_Record.DoesNotExist:
 					print('Record DNE.  Creating start record...')
 					new_fundraising_challenge_start_record = Fundraising_Challenge_Start_Record(participant = participant, challenge = challenge, amount_raised = total_donations, candles_raised = total_candles, datetime_start = challenge.datetime_start)
+					new_fundraising_challenge_start_record.save()
 		except Exception:
 			print('No challenges')
 
@@ -42,18 +45,18 @@ def createFundraisingChallengeStartRecord():
 			
 def createFundraisingChallengeRecord():
 	helper = RelayFunctions()
+	timezone.now()
 	utc=pytz.UTC
 	
-	challenge.datetime_start = utc.localize(challenge.datetime_start) 
-	challenge.datetime_end = utc.localize(challenge.datetime_end) 
-	# now both the datetime objects are aware, and you can compare them
+	
 	
 	for challenge in Fundraising_Challenge.objects.all():
-		if challenge.datetime_start <= datetime.now() <= challenge.datetime_end:
+		if challenge.datetime_start <= datetime.now(utc) <= challenge.datetime_end:
 			if not challenge.amount_raised == 0 and challenge.candles_raised == 0:
 				for participant in Participant.objects.all():
 					currentRaised = Donation.objects.filter(participant = participant).aggregate(total_donations = Sum('amount'))
-					startRaised = Fundraising_Challenge_Start_Record.objects.filter(participant = participant).amount_raised
+					startRecord = Fundraising_Challenge_Start_Record.objects.get(participant = participant, challenge = challenge)
+					startRaised = startRecord.amount_raised
 					diffRaised = currentRaised - startRaised
 					try:
 						record = Fundraising_Challenge_Record.objects.get(participant = participant, challenge = challenge)
@@ -69,7 +72,8 @@ def createFundraisingChallengeRecord():
 				for participant in Participant.objects.all():
 					totals = helper.participant_specific_totals(model_to_dict(participant)['id'])
 					currentCandles = totals['milestone_total'] + totals['emails_candles'] + totals['event_candles']
-					startCandles = Fundraising_Challenge_Start_Record.objects.filter(participant = participant).candles_raised
+					startRecord = Fundraising_Challenge_Start_Record.objects.get(participant = participant, challenge = challenge)
+					startCandles = startRecord.candles_raised
 					diffCandles = currentCandles - startCandles
 					try:
 						record = Fundraising_Challenge_Record.objects.filter(participant = participant, challenge = challenge)
@@ -91,13 +95,17 @@ def createFundraisingChallengeRecord():
 def createFundraisingChallengeTrackerRecord():
 	helper = RelayFunctions()
 	
+	timezone.now()
+	utc=pytz.UTC
+	
 	
 	for challenge in Fundraising_Challenge.objects.all():
-		if  challenge.datetime_start <= datetime.utcnow() <= challenge.datetime_end:
+		if challenge.datetime_start <= datetime.now(utc) <= challenge.datetime_end:
 			if not challenge.amount_raised == 0 and challenge.candles_raised == 0:
 				for participant in Participant.objects.all():
 					currentRaised = Donation.objects.filter(participant = participant).aggregate(total_donations = Sum('amount'))
-					startRaised = Fundraising_Challenge_Start_Record.objects.filter(participant = participant).amount_raised
+					startRecord = Fundraising_Challenge_Start_Record.objects.get(participant = participant, challenge = challenge)
+					startRaised = startRecord.amount_raised
 					diffRaised = currentRaised - startRaised
 					try:
 						record = Fundraising_Challenge_Tracker_Record.objects.get(participant = participant, challenge = challenge)
@@ -113,7 +121,8 @@ def createFundraisingChallengeTrackerRecord():
 				for participant in Participant.objects.all():
 					totals = helper.participant_specific_totals(model_to_dict(participant)['id'])
 					currentCandles = totals['milestone_total'] + totals['emails_candles'] + totals['event_candles']
-					startCandles = Fundraising_Challenge_Start_Tracker_Record.objects.filter(participant = participant).candles_raised
+					startRecord = Fundraising_Challenge_Start_Record.objects.get(participant = participant, challenge = challenge)
+					startCandles = startRecord.candles_raised
 					diffCandles = currentCandles - startCandles
 					try:
 						record = Fundraising_Challenge_Tracker_Record.objects.filter(participant = participant, challenge = challenge)
