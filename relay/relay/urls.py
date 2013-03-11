@@ -41,5 +41,11 @@ urlpatterns += patterns('relayapp.views',
     url(r'^participants/specific/greek/(?P<participant>\d{1,4})/$', 'participant_specific_greek'),
     url(r'^facebook/', include('django_facebook.urls')),
     url(r'^accounts/', include('django_facebook.auth_urls')),
+)
 
+urlpatterns += patterns('relayapp.renderer',
+	url(r'^cool/home/$', 'renderHome'),
+	#url(r'^signup/?$', 'foo'),
+	url(r'^cool/teamList/$', 'renderTeamList'),
+	#url(r'^greekList/?$', 'foo'),
 )

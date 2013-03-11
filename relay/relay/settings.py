@@ -204,6 +204,6 @@ SUIT_CONFIG = {
     'LIST_PER_PAGE': 15
 }
 
-FACEBOOK_APP_ID              = os.environ.get('FACEBOOK_APP_ID')
-FACEBOOK_API_SECRET          = os.environ.get('FACEBOOK_SECRET')
+FACEBOOK_APP_ID              = '607638312582879'
+FACEBOOK_APP_SECRET          = 'cbd62f3f21aeaf37fb4827ad98377063'
 
