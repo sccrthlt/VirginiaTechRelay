@@ -39,8 +39,8 @@ urlpatterns += patterns('relayapp.views',
     url(r'^team/specific/greek/(?P<team>\d{1,4})/$', 'team_specific_greek_candles'),
     url(r'^participants/specific/(?P<participant>\d{1,4})/$', 'participant_specific'),
     url(r'^participants/specific/greek/(?P<participant>\d{1,4})/$', 'participant_specific_greek'),
-    url(r'^facebook/', include('django_facebook.urls')),
-    url(r'^accounts/', include('django_facebook.auth_urls')),
+    #url(r'^facebook/', include('django_facebook.urls')),
+    #url(r'^accounts/', include('django_facebook.auth_urls')),
 )
 
 urlpatterns += patterns('relayapp.renderer',
