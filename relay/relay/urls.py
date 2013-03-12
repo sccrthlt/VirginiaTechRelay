@@ -44,8 +44,8 @@ urlpatterns += patterns('relayapp.views',
 )
 
 urlpatterns += patterns('relayapp.renderer',
-	url(r'^cool/home/$', 'renderHome'),
+	url(r'^home/$', 'renderHome'),
 	#url(r'^signup/?$', 'foo'),
-	url(r'^cool/teamList/$', 'renderTeamList'),
+	url(r'^teamList/$', 'renderTeamList'),
 	#url(r'^greekList/?$', 'foo'),
 )
