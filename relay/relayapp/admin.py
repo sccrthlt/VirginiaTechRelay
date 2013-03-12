@@ -3,7 +3,7 @@ from django.contrib import admin
 from relayapp.models import *
 
 class ParticipantAdmin(admin.ModelAdmin):
-    list_display = ('lname', 'fname', 'email', 'team', 'emails_sent', 'hokie_passport_id')
+    list_display = ('lname', 'fname', 'email', 'team', 'emails_sent', 'hokie_passport_id', 'facebook_username')
     search_fields = ['email']
 
 class EventAdmin(admin.ModelAdmin):
