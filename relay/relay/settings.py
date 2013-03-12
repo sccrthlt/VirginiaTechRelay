@@ -17,11 +17,11 @@ ADMINS = (
 MANAGERS = ADMINS
 
 AUTHENTICATION_BACKENDS = (
-    'django_facebook.auth_backends.FacebookBackend',
+    #'django_facebook.auth_backends.FacebookBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
-AUTH_PROFILE_MODULE = 'django_facebook.FacebookProfile'
+#AUTH_PROFILE_MODULE = 'django_facebook.FacebookProfile'
 
 DATABASES = {
     'default': {
@@ -144,7 +144,7 @@ INSTALLED_APPS = (
     'relayapp',
     'reports',
     'south',
-    'django_facebook',
+    #'django_facebook',
 )
 
 # A sample logging configuration. The only tangible logging
