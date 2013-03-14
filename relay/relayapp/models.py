@@ -22,10 +22,11 @@ class Company(models.Model):
 
 #move type to company
 class Team(models.Model):
-
     name = models.CharField(verbose_name='Team Name', max_length=100)
     company = models.ForeignKey(Company)
     signup = models.BooleanField()
+    counter = models.BooleanField()
+    counter_datetime = models.DateTimeField()
 
     def __unicode__(self):
         return self.name

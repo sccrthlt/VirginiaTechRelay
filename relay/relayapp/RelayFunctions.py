@@ -8,6 +8,14 @@ from operator import itemgetter
 
 class RelayFunctions:
 
+	def participants_unsigned(self, participant):
+		candles = {}
+		candles['id'] = int(participant)
+		candles['fname'] = model_to_dict(Participant.objects.get(pk = participant))['fname']
+		candles['lname'] = model_to_dict(Participant.objects.get(pk = participant))['lname']
+		
+		return candles
+
 	def participants_milestone_candles(self, team):
 		candles = Participant_Milestone_Record.objects.filter(participant__team = team).aggregate(candles_rewarded = Sum('donation_milestone__candles_rewarded'))
 		return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
