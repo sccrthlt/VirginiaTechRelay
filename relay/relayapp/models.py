@@ -26,7 +26,7 @@ class Team(models.Model):
     company = models.ForeignKey(Company)
     signup = models.BooleanField()
     counter = models.BooleanField(default=False)
-    counter_datetime = models.DateTimeField(default=None, blank=True)
+    counter_datetime = models.DateTimeField(default=None, blank=True, null=True)
 
     def __unicode__(self):
         return self.name
