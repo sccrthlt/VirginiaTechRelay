@@ -3,22 +3,59 @@ from django import template
 from django.http import HttpResponse
 
 def renderHome(request):
-	#return render_template('teamList.html')
 	t = get_template('base_home.html')
-	c = template.Context({'pagesButtonGeneral': 'generalDown', 'pagesButtonGreek': 'greeksDown', 'pagesButtonCorps': 'corpsDown'})
+	context = {'pagesButtonGeneral': 'generalDown', 
+		'pagesButtonGreek': 'greeksDown', 
+		'pagesButtonCorps': 'corpsDown', 
+		'onLoad': 'setupPage()',
+		'scrollbarID': '#forScroll'
+		}
+	c = template.Context(context)
 	r = t.render(c)
 	return HttpResponse(r)
 
 def renderTeamList(request):
-	#return render_template('teamList.html')
 	t = get_template('base_teamList.html')
-	c = template.Context({'pagesButtonGeneral': 'generalUp', 'pagesButtonGreek': 'greeksDown', 'pagesButtonCorps': 'corpsDown'})
+	context = {'pagesButtonGeneral': 'generalUp', 
+		'pagesButtonGreek': 'greeksDown', 
+		'pagesButtonCorps': 'corpsDown', 
+		'onLoad': 'setupPage()',
+		'scrollbarID': '#forScroll'
+		}
+	c = template.Context(context)
 	r = t.render(c)
 	return HttpResponse(r)
 
 def renderParticipant(request):
-	#return render_template('teamList.html')
 	t = get_template('base_participant.html')
-	c = template.Context({'pagesButtonGeneral': 'generalUp', 'pagesButtonGreek': 'greeksDown', 'pagesButtonCorps': 'corpsDown'})
+	context = {'pagesButtonGeneral': 'generalUp', 
+		'pagesButtonGreek': 'greeksDown', 
+		'pagesButtonCorps': 'corpsDown'
+		}
+	c = template.Context(context)
+	r = t.render(c)
+	return HttpResponse(r)
+
+def renderSignup(request):
+	t = get_template('base_signup.html')
+	context = {'pagesButtonGeneral': 'generalDown', 
+		'pagesButtonGreek': 'greeksDown', 
+		'pagesButtonCorps': 'corpsDown', 
+		'onLoad': 'setupSignUpPage()',
+		'scrollbarID': '#forScroll'
+		}
+	c = template.Context(context)
+	r = t.render(c)
+	return HttpResponse(r)
+
+def renderSignupCounterReg(request):
+	t = get_template('base_counterReg.html')
+	context = {'pagesButtonGeneral': 'generalDown', 
+		'pagesButtonGreek': 'greeksDown', 
+		'pagesButtonCorps': 'corpsDown', 
+		'onLoad': 'cool()',
+		'scrollbarID': ''
+		}
+	c = template.Context(context)
 	r = t.render(c)
 	return HttpResponse(r)

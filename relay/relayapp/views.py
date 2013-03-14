@@ -14,6 +14,7 @@ from django.template import RequestContext
 from relayapp.models import *
 from relayapp.RelayFunctions import *
 from operator import itemgetter
+from datetime import datetime
 # from django.views.decorators.cache import cache_page
 
 # @cache_page(60 * 60) # cache for 60 minutes
@@ -318,9 +319,50 @@ def team_registration(request):
 	response.content = serialized_obj = serializers.serialize('json', [ team, ])
 	response['Content-Type'] = 'application/json'
 	return response
-
+	
 def participant_unsigned(request):
-	participants = Participant.objects.all()
-	json_serializer = serializers.get_serializer("json")()
-	response = json_serializer.serialize(participants, ensure_ascii=False)
+	helper = RelayFunctions()
+	
+	participants = []
+	for participant in Participant.objects.all():
+		participants.append(helper.participants_unsigned(model_to_dict(participant)['id']))
+		
+	response = json.dumps(participants)
 	return HttpResponse(response, mimetype="application/json")
+
+@csrf_exempt
+def myCandles_reg(request):
+	username = request.POST.get('username', '')
+	participant_id = request.POST.get('id', '')
+	
+	try:
+		participant = Participant.objects.get(facebook_username = username)
+		return HttpResponse(status=400)
+	except Participant.DoesNotExist:
+		participant = Participant.objects.get(id = participant_id)
+		participant.facebook_username = username
+		participant.save()
+	
+	response = HttpResponse()
+	response.content = serialized_obj = serializers.serialize('json', [ participant, ])
+	response['Content-Type'] = 'application/json'
+	return response
+
+@csrf_exempt
+def counter_reg(request):
+	team_id = request.POST.get('id', '')
+	signup = request.POST.get('signup', '')
+	
+	try:
+		team = Team.objects.get(id = team_id, signup = True)
+		return HttpResponse(status=400)
+	except Team.DoesNotExist:
+		team = Team.objects.get(id = team_id)
+		team.counter = signup.lower() in ("yes", "true", "t", "1")
+		team.counter_datetime = datetime.now(utc)
+		team.save()
+	
+	response = HttpResponse()
+	response.content = serialized_obj = serializers.serialize('json', [ team, ])
+	response['Content-Type'] = 'application/json'
+	return response
