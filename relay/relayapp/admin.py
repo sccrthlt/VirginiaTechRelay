@@ -69,6 +69,12 @@ class CompanyAdmin(admin.ModelAdmin):
     list_filter = ['name']
     search_fields = ['name']
 
+class OlympicsLapCounterSignupAdmin(admin.ModelAdmin):
+    list_display = ('team', 'company', 'captain', 'captain_email', 'olympics', 'counter', 'datetime')
+    list_filter = ['company']
+    search_fields = ['team']
+
+admin.site.register(Olympics_Lap_Counter_Signup, OlympicsLapCounterSignupAdmin)
 admin.site.register(Company, CompanyAdmin)
 admin.site.register(Team, TeamAdmin)
 admin.site.register(Participant, ParticipantAdmin)

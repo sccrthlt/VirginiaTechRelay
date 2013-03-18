@@ -25,8 +25,6 @@ class Team(models.Model):
     name = models.CharField(verbose_name='Team Name', max_length=100)
     company = models.ForeignKey(Company)
     signup = models.BooleanField()
-    counter = models.BooleanField(default=False)
-    counter_datetime = models.DateTimeField(default=None, blank=True, null=True)
 
     def __unicode__(self):
         return self.name
@@ -176,6 +174,15 @@ class Company_Registration_Record(models.Model):
     registration_milestone = models.ForeignKey(Company_Registration_Rule)
     date = models.DateField()
 
+class Olympics_Lap_Counter_Signup(models.Model):
+	team = models.ForeignKey(Team)
+	company = models.ForeignKey(Company)
+	captain = models.CharField(max_length=100)
+	captain_email = models.CharField(max_length=100)
+	olympics = models.BooleanField(default=False)
+	counter = models.BooleanField(default=False)
+	datetime = models.DateTimeField(default=None, blank=True, null=True)
+	
 #add tshirt milestone record for copmanies
 
 #participant percentage registration milestone company

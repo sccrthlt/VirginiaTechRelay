@@ -341,7 +341,8 @@ def myCandles_reg(request):
 def counter_reg(request):
 	username = request.POST.get('username', '')
 	team_id = request.POST.get('id', '')
-	signup = request.POST.get('signup', '')
+	signupCounter = request.POST.get('signupCounter', '')
+	signupOlympics = request.POST.get('signupOlympics', '')
 	
 	try:
 		team_object = Team.objects.get(pk = team_id)

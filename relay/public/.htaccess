@@ -2,8 +2,8 @@ AddHandler fcgid-script .fcgi
 
 RewriteEngine On
 Options +FollowSymLinks
+Options -Indexes
 RewriteBase /
-RewriteCond %{REQUEST_URI} !^$
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ dispatch.fcgi/$1

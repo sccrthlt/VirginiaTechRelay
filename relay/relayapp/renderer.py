@@ -41,6 +41,19 @@ def renderRedirectTeamList(request):
 	r = t.render(c)
 	return HttpResponse(r)
 
+def renderRedirectGreekList(request):
+	t = get_template('base_redirect.html')
+	context = {'pagesButtonGeneral': 'generalDown', 
+		'pagesButtonGreek': 'greeksDown', 
+		'pagesButtonCorps': 'corpsDown', 
+		'onLoad': 'cool()',
+		'scrollbarID': '#forScroll',
+		'redirectUrl': 'http://vtrelaycandles.org/greekList',
+		}
+	c = template.Context(context)
+	r = t.render(c)
+	return HttpResponse(r)
+
 def renderHome(request):
 	t = get_template('base_home.html')
 	context = {'pagesButtonGeneral': 'generalDown', 
@@ -57,6 +70,18 @@ def renderTeamList(request):
 	t = get_template('base_teamList.html')
 	context = {'pagesButtonGeneral': 'generalUp', 
 		'pagesButtonGreek': 'greeksDown', 
+		'pagesButtonCorps': 'corpsDown', 
+		'onLoad': 'setupPage()',
+		'scrollbarID': '#forScroll'
+		}
+	c = template.Context(context)
+	r = t.render(c)
+	return HttpResponse(r)
+	
+def renderGreekList(request):
+	t = get_template('base_greekList.html')
+	context = {'pagesButtonGeneral': 'generalDown', 
+		'pagesButtonGreek': 'greeksUp', 
 		'pagesButtonCorps': 'corpsDown', 
 		'onLoad': 'setupPage()',
 		'scrollbarID': '#forScroll'
