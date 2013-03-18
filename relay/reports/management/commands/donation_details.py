@@ -41,8 +41,8 @@ def checkDonationsTotals(participant):
 				record = Participant_Milestone_Record.objects.get(participant = participant, donation_milestone = milestone)
 			except Participant_Milestone_Record.DoesNotExist:
 				save_participant = Participant.objects.get(pk = participant)
-				#donated_date = Donation.objects.filter(participant = participant).annotate(most_recent_donation_date = Max('datetime'))
-				new_participant_milestone_record = Participant_Milestone_Record(participant = save_participant, donation_milestone = milestone)
+				donated_date = Donation.objects.filter(participant = participant).annotate(most_recent_donation_date = Max('datetime'))
+				new_participant_milestone_record = Participant_Milestone_Record(participant = save_participant, donation_milestone = milestone, date = donated_date)
 				new_participant_milestone_record.save()
 					
 
