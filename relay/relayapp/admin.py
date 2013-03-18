@@ -50,7 +50,7 @@ class EmailRuleAdmin(admin.ModelAdmin):
     list_display = ('candles_rewarded', 'emails')
 
 class TeamAdmin(admin.ModelAdmin):
-    list_display = ('name', 'company', 'signup', 'counter', 'counter_datetime')
+    list_display = ('name', 'company', 'signup')
     list_filter = ['signup']
     search_fields = ['name']
 
