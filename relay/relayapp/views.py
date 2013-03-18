@@ -231,23 +231,13 @@ def all_company_corps_candles(request):
 	return HttpResponse(response, mimetype="application/json")
 
 # @cache_page(60 * 60) # cache for 60 minutes
-def teams_unregistered(request):
+def teams_all(request):
+	helper = RelayFunctions()
+	
 	teams = []
-	for company in Company.objects.filter(company_type = 'RT'):
-		for team in Team.objects.filter(company = company):
-			if team.signup == False:
-				team = model_to_dict(team)
-				team['team_type'] = model_to_dict(Company.objects.get(team__pk = team['id']))['company_type']
-				teams.append(team)
-
-	#teams = []
-	#for team in unregistered:
-		#team = model_to_dict(team)
-		#team['team_type'] = model_to_dict(Company.objects.get(team__pk = team['id']))['company_type']
-		#teams.append(team)
-
-	#json_serializer = serializers.get_serializer("json")()
-	#response = json_serializer.serialize(unregistered, ensure_ascii=False)
+	for team in Team.objects.all():
+		teams.append(helper.teams_all(model_to_dict(team)['id']))
+		
 	response = json.dumps(teams)
 	return HttpResponse(response, mimetype="application/json")
 
@@ -336,12 +326,11 @@ def myCandles_reg(request):
 	participant_id = request.POST.get('id', '')
 	
 	try:
-		participant = Participant.objects.get(facebook_username = username)
-		return HttpResponse(status=400)
-	except Participant.DoesNotExist:
 		participant = Participant.objects.get(id = participant_id)
 		participant.facebook_username = username
 		participant.save()
+	except Participant.DoesNotExist:
+		return HttpResponse(status=400)
 	
 	response = HttpResponse()
 	response.content = serialized_obj = serializers.serialize('json', [ participant, ])
@@ -350,19 +339,38 @@ def myCandles_reg(request):
 
 @csrf_exempt
 def counter_reg(request):
+	username = request.POST.get('username', '')
 	team_id = request.POST.get('id', '')
 	signup = request.POST.get('signup', '')
 	
 	try:
-		team = Team.objects.get(id = team_id, signup = True)
-		return HttpResponse(status=400)
-	except Team.DoesNotExist:
+		team_object = Team.objects.get(pk = team_id)
+		participant = Participant.objects.get(facebook_username = username, team = team_object)
 		team = Team.objects.get(id = team_id)
 		team.counter = signup.lower() in ("yes", "true", "t", "1")
-		team.counter_datetime = datetime.now(utc)
+		team.counter_datetime = datetime.now()
 		team.save()
+	except Team.DoesNotExist:
+		return HttpResponse(status=400)
 	
 	response = HttpResponse()
 	response.content = serialized_obj = serializers.serialize('json', [ team, ])
+	response['Content-Type'] = 'application/json'
+	return response
+
+@csrf_exempt
+def hokie_passport_reg(request):
+	participant_id = request.POST.get('participantId', '')
+	hokie_id = request.POST.get('hokiePassportId', '')
+	
+	try:
+		participant = Participant.objects.get(pk = participant_id)
+		participant.hokie_passport_id = hokie_id
+		participant.save()
+	except Participant.DoesNotExist:
+		return HttpResponse(status=400)
+	
+	response = HttpResponse()
+	response.content = serialized_obj = serializers.serialize('json', [ participant, ])
 	response['Content-Type'] = 'application/json'
 	return response
