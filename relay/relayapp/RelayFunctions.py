@@ -15,6 +15,13 @@ class RelayFunctions:
 		candles['lname'] = model_to_dict(Participant.objects.get(pk = participant))['lname']
 		
 		return candles
+	
+	def teams_all(self, team):
+		candles = {}
+		candles['id'] = int(team)
+		candles['name'] = model_to_dict(Team.objects.get(pk = team))['name']
+		
+		return candles
 
 	def participants_milestone_candles(self, team):
 		candles = Participant_Milestone_Record.objects.filter(participant__team = team).aggregate(candles_rewarded = Sum('donation_milestone__candles_rewarded'))
@@ -328,7 +335,7 @@ class RelayFunctions:
 		candles['team_candles_total'] = str('N/A')
 		candles['team_event_milestone_candles'] = self.participants_event_candles(team)
 		candles['team_tshirt_milestone_candles'] = str('N/A')
-		candles['team_registration_milestone_candles'] = str('N/A')
+		candles['team_registration_milestone_candles'] = ('N/A')
 
 		donations_total = Donation.objects.filter(participant__team = team).aggregate(total_donations = Sum('amount'))
 		candles['team_donations_total'] = float(str(donations_total['total_donations'] if donations_total['total_donations'] is not None else 0))

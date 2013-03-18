@@ -2,6 +2,45 @@ from django.template.loader import get_template
 from django import template
 from django.http import HttpResponse
 
+def renderRedirectHome(request):
+	t = get_template('base_redirect.html')
+	context = {'pagesButtonGeneral': 'generalDown', 
+		'pagesButtonGreek': 'greeksDown', 
+		'pagesButtonCorps': 'corpsDown', 
+		'onLoad': 'cool()',
+		'scrollbarID': '#forScroll',
+		'redirectUrl': 'http://vtrelaycandles.org/home',
+		}
+	c = template.Context(context)
+	r = t.render(c)
+	return HttpResponse(r)
+
+def renderRedirectSignup(request):
+	t = get_template('base_redirect.html')
+	context = {'pagesButtonGeneral': 'generalDown', 
+		'pagesButtonGreek': 'greeksDown', 
+		'pagesButtonCorps': 'corpsDown', 
+		'onLoad': 'cool()',
+		'scrollbarID': '#forScroll',
+		'redirectUrl': 'http://vtrelaycandles.org/signup',
+		}
+	c = template.Context(context)
+	r = t.render(c)
+	return HttpResponse(r)
+	
+def renderRedirectTeamList(request):
+	t = get_template('base_redirect.html')
+	context = {'pagesButtonGeneral': 'generalDown', 
+		'pagesButtonGreek': 'greeksDown', 
+		'pagesButtonCorps': 'corpsDown', 
+		'onLoad': 'cool()',
+		'scrollbarID': '#forScroll',
+		'redirectUrl': 'http://vtrelaycandles.org/teamList',
+		}
+	c = template.Context(context)
+	r = t.render(c)
+	return HttpResponse(r)
+
 def renderHome(request):
 	t = get_template('base_home.html')
 	context = {'pagesButtonGeneral': 'generalDown', 
@@ -26,9 +65,41 @@ def renderTeamList(request):
 	r = t.render(c)
 	return HttpResponse(r)
 
-def renderParticipant(request):
-	t = get_template('base_participant.html')
-	context = {'pagesButtonGeneral': 'generalUp', 
+def renderHowItWorks(request):
+	t = get_template('base_howitworks.html')
+	context = {'pagesButtonGeneral': 'generalDown', 
+		'pagesButtonGreek': 'greeksDown', 
+		'pagesButtonCorps': 'corpsDown', 
+		'onLoad': 'cool()',
+		'scrollbarID': '#forScroll'
+		}
+	c = template.Context(context)
+	r = t.render(c)
+	return HttpResponse(r)
+
+def renderHowItWorksGeneral(request):
+	t = get_template('base_howitworksGeneral.html')
+	context = {'pagesButtonGeneral': 'generalDown', 
+		'pagesButtonGreek': 'greeksDown', 
+		'pagesButtonCorps': 'corpsDown'
+		}
+	c = template.Context(context)
+	r = t.render(c)
+	return HttpResponse(r)
+
+def renderHowItWorksGreek(request):
+	t = get_template('base_howitworksGreek.html')
+	context = {'pagesButtonGeneral': 'generalDown', 
+		'pagesButtonGreek': 'greeksDown', 
+		'pagesButtonCorps': 'corpsDown'
+		}
+	c = template.Context(context)
+	r = t.render(c)
+	return HttpResponse(r)
+
+def renderHowItWorksCorps(request):
+	t = get_template('base_howitworksCorps.html')
+	context = {'pagesButtonGeneral': 'generalDown', 
 		'pagesButtonGreek': 'greeksDown', 
 		'pagesButtonCorps': 'corpsDown'
 		}
