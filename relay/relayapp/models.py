@@ -24,7 +24,6 @@ class Company(models.Model):
 class Team(models.Model):
     name = models.CharField(verbose_name='Team Name', max_length=100)
     company = models.ForeignKey(Company)
-    captain = models.ForeignKey('Participant', blank=True, null=True)
     signup = models.BooleanField()
 
 
@@ -55,6 +54,13 @@ class Participant(models.Model):
     class Meta:
         ordering = ['lname', 'fname']
 
+class Team_Captain(models.Model):
+	fname = models.CharField(verbose_name='First Name', max_length=100)
+	lname = models.CharField(verbose_name='Last Name', max_length=100)
+	email = models.EmailField(blank=False)
+	team = models.ForeignKey(Team)
+	reg_date = reg_date = models.DateField()
+	
 class Event(models.Model):
     name = models.CharField(max_length=100)
     date = models.DateField()

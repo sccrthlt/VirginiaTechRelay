@@ -6,6 +6,10 @@ class ParticipantAdmin(admin.ModelAdmin):
     list_display = ('lname', 'fname', 'email', 'team', 'emails_sent', 'hokie_passport_id', 'facebook_username')
     search_fields = ['email']
 
+class TeamCaptainAdmin(admin.ModelAdmin):
+    list_display = ('lname', 'fname', 'email', 'team', 'reg_date')
+    search_fields = ['email']
+
 class EventAdmin(admin.ModelAdmin):
     list_display = ('name', 'date', 'candles_rewarded', 'homepage')
     list_filter = ['date']
@@ -74,6 +78,7 @@ class OlympicsLapCounterSignupAdmin(admin.ModelAdmin):
     list_filter = ['company']
     search_fields = ['team']
 
+admin.site.register(Team_Captain, TeamCaptainAdmin)
 admin.site.register(Olympics_Lap_Counter_Signup, OlympicsLapCounterSignupAdmin)
 admin.site.register(Company, CompanyAdmin)
 admin.site.register(Team, TeamAdmin)

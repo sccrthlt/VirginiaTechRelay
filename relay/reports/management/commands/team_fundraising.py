@@ -85,6 +85,24 @@ def setupCaptain(info):
 
     return cap_return
 
+def newCaptain(info):
+
+    try:
+        cap_return = Team_Captain.objects.get(email = info['Team Captain Email Address'])
+        print "Found Participant >> " + info['Team Captain Email Address']
+    except Team_Captain.DoesNotExist:
+        cap_return = Team_Captain(
+            fname = info['Team Captain First Name'],
+            lname = info['Team Captain Last Name'],
+            email = info['Team Captain Email Address'],
+            team = Team.objects.get(name = info['Team Name']),
+            reg_date = datetime.date.today()
+        )
+        cap_return.save()
+        # print "Created Participant"
+
+    return cap_return
+
 def parseCSVTeamFundraising(csv_file_location):
 
     data = open(csv_file_location).read()
@@ -101,9 +119,6 @@ def parseCSVTeamFundraising(csv_file_location):
 
             company.captain = captain
             company.save()
-			
-            team.captain = captain
-            team.save()
 
         except UnicodeDecodeError, e:
             print e
