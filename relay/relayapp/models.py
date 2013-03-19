@@ -189,6 +189,7 @@ class Olympics_Lap_Counter_Signup(models.Model):
 	captain_email = models.CharField(max_length=100)
 	olympics = models.BooleanField(default=False)
 	counter = models.BooleanField(default=False)
+	tier = models.CharField(max_length=100, default=None, blank=True, null=True)
 	datetime = models.DateTimeField(default=None, blank=True, null=True)
 	
 #add tshirt milestone record for copmanies

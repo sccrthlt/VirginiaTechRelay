@@ -116,6 +116,7 @@ def parseCSVTeamFundraising(csv_file_location):
             company = setupCompany(row)
             team = setupTeam(row)
             captain = setupCaptain(row)
+            NewCaptain = newCaptain(row)
 
             company.captain = captain
             company.save()
