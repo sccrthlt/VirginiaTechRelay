@@ -101,6 +101,9 @@ def parseCSVTeamFundraising(csv_file_location):
 
             company.captain = captain
             company.save()
+			
+            team.captain = captain
+            team.save()
 
         except UnicodeDecodeError, e:
             print e

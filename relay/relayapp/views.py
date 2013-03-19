@@ -338,7 +338,7 @@ def myCandles_reg(request):
 	return response
 
 @csrf_exempt
-def counter_reg(request):
+def counter_olympics_reg(request):
 	username = request.POST.get('username', '')
 	team_id = request.POST.get('id', '')
 	signupCounter = request.POST.get('signupCounter', '')
@@ -347,11 +347,17 @@ def counter_reg(request):
 	try:
 		team_object = Team.objects.get(pk = team_id)
 		participant = Participant.objects.get(facebook_username = username, team = team_object)
-		team = Team.objects.get(id = team_id)
-		team.counter = signup.lower() in ("yes", "true", "t", "1")
-		team.counter_datetime = datetime.now()
-		team.save()
-	except Team.DoesNotExist:
+		try:
+			record = Olympics_Lap_Counter_Signup.objects.get(team = team_object)
+		except Olympics_Lap_Counter_Signup.DoesNotExist:
+			print('No record made, making one...')
+			company_object = Team.objects.get(pk = team_id).company
+			captain_name = model_to_dict(Team.objects.get(pk = team_id))['captain']
+			captain_email = model_to_dict(Participant.objects.get(name = captain_name))['email']
+			
+			new_Olympics_Lap_Counter_Signup = Olympics_Lap_Counter_Signup(team = team_object, company = company_object, captain = captain_name, captain_email = captain_email, counter = signupCounter, olympics = signupOlympics, datetime = datetime.now())
+			new_Olympics_Lap_Counter_Signup.save()
+	except Participant.DoesNotExist:
 		return HttpResponse(status=400)
 	
 	response = HttpResponse()

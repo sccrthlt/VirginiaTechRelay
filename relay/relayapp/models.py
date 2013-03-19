@@ -24,7 +24,9 @@ class Company(models.Model):
 class Team(models.Model):
     name = models.CharField(verbose_name='Team Name', max_length=100)
     company = models.ForeignKey(Company)
+    captain = models.ForeignKey('Participant', blank=True, null=True)
     signup = models.BooleanField()
+
 
     def __unicode__(self):
         return self.name
