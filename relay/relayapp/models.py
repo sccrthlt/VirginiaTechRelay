@@ -1,6 +1,7 @@
 #relay/relayapp
 from django.db import models
 from decimal import Decimal
+from django.contrib.auth.models import User
 
 class Company(models.Model):
 
@@ -191,7 +192,14 @@ class Olympics_Lap_Counter_Signup(models.Model):
 	counter = models.BooleanField(default=False)
 	tier = models.CharField(max_length=100, default=None, blank=True, null=True)
 	datetime = models.DateTimeField(default=None, blank=True, null=True)
-	
+
+class Pledge(models.Model):
+	sponsor = models.ForeignKey(User)
+	pledge_amount = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
+	max_pledge_amount = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
+	datetime = models.DateTimeField(default=None, blank=True, null=True)
+
+
 #add tshirt milestone record for copmanies
 
 #participant percentage registration milestone company

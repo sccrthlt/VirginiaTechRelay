@@ -9,6 +9,8 @@ from django.forms.models import model_to_dict
 from django.core import serializers
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 
 from django.template import RequestContext
 from relayapp.models import *
@@ -98,7 +100,7 @@ def all_team_candles_general(request):
 
 	#currPos = 1
 	#for item in newlist:
-		#pos.append(currPos)
+		#['pos'] = currPos
 		#currPos = currPos + 1
 
 	response = json.dumps(newlist)
@@ -339,7 +341,6 @@ def myCandles_reg(request):
 
 @csrf_exempt
 def counter_olympics_reg(request):
-	username = request.POST.get('username', '')
 	team_id = request.POST.get('id', '')
 	Counter = request.POST.get('signupCounter', '')
 	signupCounter = Counter.lower() in ("yes", "true", "t", "1")
@@ -347,26 +348,36 @@ def counter_olympics_reg(request):
 	signupOlympics = Olympics.lower() in ("yes", "true", "t", "1")
 	tier = request.POST.get('tier', '')
 	
+
 	try:
-		team_object = Team.objects.get(id = team_id)
-		participant = Participant.objects.get(facebook_username = username, team = team_object)
-		try:
-			team_object = Team.objects.get(pk = team_id)
-			company_object = Company.objects.get(team = team_object)
-			captain_fname = model_to_dict(Team_Captain.objects.get(team = team_object))['fname']
-			captain_lname = model_to_dict(Team_Captain.objects.get(team = team_object))['lname']
-			captain_name = captain_fname + ' ' + captain_lname
-			captain_email = model_to_dict(Team_Captain.objects.get(team = team_object))['email']
+		team_object = Team.objects.get(pk = team_id)
+		company_object = Company.objects.get(team = team_object)
+		captain_fname = model_to_dict(Team_Captain.objects.get(team = team_object))['fname']
+		captain_lname = model_to_dict(Team_Captain.objects.get(team = team_object))['lname']
+		captain_name = captain_fname + ' ' + captain_lname
+		captain_email = model_to_dict(Team_Captain.objects.get(team = team_object))['email']
 			
-			new_Olympics_Lap_Counter_Signup = Olympics_Lap_Counter_Signup(team = team_object, company = company_object, captain = captain_name, captain_email = captain_email, counter = signupCounter, olympics = signupOlympics, tier = tier, datetime = datetime.now())
-			new_Olympics_Lap_Counter_Signup.save()
-		except Olympics_Lap_Counter_Signup.DoesNotExist:
-			print('uh oh')
-	except Participant.DoesNotExist:
-		return HttpResponse(status=400)
+		new_Olympics_Lap_Counter_Signup = Olympics_Lap_Counter_Signup(team = team_object, company = company_object, captain = captain_name, captain_email = captain_email, counter = signupCounter, olympics = signupOlympics, tier = tier, datetime = datetime.now())
+		new_Olympics_Lap_Counter_Signup.save()
+	except Olympics_Lap_Counter_Signup.DoesNotExist:
+		print('uh oh')
 	
 	response = HttpResponse()
 	response.content = serialized_obj = serializers.serialize('json', [ new_Olympics_Lap_Counter_Signup, ])
+	response['Content-Type'] = 'application/json'
+	return response
+	
+@csrf_exempt
+def checkBackend(request):
+	username = request.POST.get('username', '')
+	
+	try:
+		participant_object = Participant.objects.get(facebook_username = username)
+	except Participant.DoesNotExist:
+		return HttpResponse(status=400)
+
+	response = HttpResponse()
+	response.content = serialized_obj = serializers.serialize('json', [ participant_object, ])
 	response['Content-Type'] = 'application/json'
 	return response
 
@@ -386,3 +397,53 @@ def hokie_passport_reg(request):
 	response.content = serialized_obj = serializers.serialize('json', [ participant, ])
 	response['Content-Type'] = 'application/json'
 	return response
+
+@csrf_exempt
+def setupUser(request):
+	first_name = request.POST.get('first_name', '')
+	last_name = request.POST.get('last_name', '')
+	email = request.POST.get('email', '')
+	password = request.POST.get('password', '')
+	
+	try:
+		user = User.objects.get(first_name = first_name, last_name = last_name , email = email, password = password)
+	except User.DoesNotExist:
+		user = User.objects.create_user(first_name = first_name, last_name = last_name , email = email, password = password)
+	
+	response = HttpResponse()
+	response.content = serialized_obj = serializers.serialize('json', [ participant, ])
+	response['Content-Type'] = 'application/json'
+	return response
+
+@csrf_exempt
+def userSignIn(request):
+	username = request.POST.get('username', '')
+	password = request.POST.get('password', '')
+	user = authenticate(username=username, password=password)
+	if user is not None:
+		if user.is_active:
+			login(request, user)
+			# Redirect to a success page.
+		else:
+			return user
+	else:
+		return HttpResponse(status=400)
+		
+	response = HttpResponse()
+	response.content = serialized_obj = serializers.serialize('json', [ user, ])
+	response['Content-Type'] = 'application/json'
+	return response
+
+@csrf_exempt
+def userSignOut(request):
+	logout(request)
+	# Redirect to a success page.
+	
+
+#def handle(self, *args, **options):
+#helper = counter()
+	
+#print "Starting Command.."
+#csv_file_location = args[0]
+# print sys.getdefaultencoding()
+#counter.parseCSVCounter(csv_file_location)

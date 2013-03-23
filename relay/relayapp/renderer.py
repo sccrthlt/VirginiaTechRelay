@@ -1,6 +1,8 @@
 from django.template.loader import get_template
 from django import template
 from django.http import HttpResponse
+from django.contrib.auth import authenticate
+from django.shortcuts import render
 
 def renderRedirectHome(request):
 	t = get_template('base_redirect.html')
@@ -149,9 +151,35 @@ def renderSignupCounterReg(request):
 	context = {'pagesButtonGeneral': 'generalDown', 
 		'pagesButtonGreek': 'greeksDown', 
 		'pagesButtonCorps': 'corpsDown', 
-		'onLoad': 'cool()',
-		'scrollbarID': ''
+		'onLoad': 'setupCounterRegPage()'
 		}
 	c = template.Context(context)
 	r = t.render(c)
 	return HttpResponse(r)
+	
+def renderSignIn(request):
+	t = get_template('base_signin.html')
+	context = {'pagesButtonGeneral': 'generalDown', 
+		'pagesButtonGreek': 'greeksDown', 
+		'pagesButtonCorps': 'corpsDown', 
+		'onLoad': 'setupCounterRegPage()'
+		}
+	c = template.Context(context)
+	r = t.render(c)
+	return HttpResponse(r)
+
+def renderMyCandles(request):
+	if request.user.is_authenticated():
+		# Do something for authenticated users.
+		t = get_template('base_myCandles.html')
+		context = {'pagesButtonGeneral': 'generalDown', 
+			'pagesButtonGreek': 'greeksDown', 
+			'pagesButtonCorps': 'corpsDown', 
+			'onLoad': 'cool()'
+			}
+		c = template.Context(context)
+		r = t.render(c)
+		return HttpResponse(r)
+	else:
+		print('user is not authenticated')
+		return render(request, 'base_signin.html')
