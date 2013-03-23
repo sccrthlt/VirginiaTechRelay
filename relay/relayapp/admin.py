@@ -78,6 +78,12 @@ class OlympicsLapCounterSignupAdmin(admin.ModelAdmin):
     list_filter = ['company']
     search_fields = ['team']
 
+class PledgeAdmin(admin.ModelAdmin):
+    list_display = ('sponsor', 'pledge_amount', 'max_pledge_amount', 'datetime')
+    list_filter = ['sponsor']
+    search_fields = ['sponsor']
+
+admin.site.register(Pledge, PledgeAdmin)	
 admin.site.register(Team_Captain, TeamCaptainAdmin)
 admin.site.register(Olympics_Lap_Counter_Signup, OlympicsLapCounterSignupAdmin)
 admin.site.register(Company, CompanyAdmin)
