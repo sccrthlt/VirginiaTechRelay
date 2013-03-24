@@ -195,7 +195,7 @@ class Olympics_Lap_Counter_Signup(models.Model):
 
 class Pledge(models.Model):
 	sponsor = models.ForeignKey(User)
-	participant = models.ForeignKey(Participant)
+	participant = models.ForeignKey('Participant', default=None, blank=True, null=True)
 	pledge_amount = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
 	max_pledge_amount = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
 	datetime = models.DateTimeField(default=None, blank=True, null=True)
