@@ -1,0 +1,281 @@
+{% extends "base.html" %}
+
+{% block scrollBar %}
+
+	<script>
+
+	//Scrollbar
+	    (function ($) {
+	        $(window).load(function () {
+	                $("#forScroll").mCustomScrollbar();
+	        });
+	    })(jQuery);
+
+
+	</script>
+{% endblock scrollBar %}
+{% block scripts %}
+<script src="/js/greeks.js" type="text/javascript"></script>
+<script type="text/template" id="companies-list-row-template">
+			<% _.each(companies, function(company){ %>
+			<tr class="greekRow" id="company-<%= company.get('company_id') %>">
+				<td id="greekRowPosition"><%= company.get('position') %></td>
+				<td class="greekRowFirstName">
+					<a href="#/company/<%= company.get('company_id') %>">
+						<%= company.get('company_name') %>
+					</a>
+				</td>
+				<td class="greekRowDonation">$<%= company.get('company_donations_total') %></td>
+				<td class="greekRowEvents"><%= company.get('company_event_candles') %></td>
+				<td class="greekRowTshirt"><%= company.get('company_tshirt_candles') %></td>
+				<td class="greekRowTotal"><%= company.get('company_candles_total') %></td>
+			</tr>
+			<% }); %>
+		</script>
+
+		<script type="text/template" id="company-title-template">
+			<a href="/greekList#">Companies</a> &raquo; <%= company.get('company_name') %>
+		</script>
+
+		<script type="text/template" id="teams-list-row-template">
+			<% _.each(teams, function(team){ %>
+			<tr class="greekRow" id="teams-<%= team.get('teams_id') %>">
+				<td id="greekRowPosition"><%= team.get('position') %></td>
+				<td class="greekRowFirstName">
+					<a href="#/team/<%= team.get('team_id') %>">
+						<%= team.get('team_name') %>
+					</a>
+				</td>
+				<td class="greekRowDonation">$<%= team.get('team_donations_total') %></td>
+				<td class="greekRowEvents"><%= team.get('team_event_milestone_candles') %></td>
+				<td class="greekRowTshirt"><%= team.get('team_tshirt_milestone_candles') %></td>
+				<td class="greekRowTotal"><%= team.get('team_candles_total') %></td>
+			</tr>
+			<% }); %>
+		</script>
+
+		<script type="text/template" id="participants-title-template">
+			<a href="/greekList#">Teams</a> &raquo; <%= team.get('team_name') %>
+		</script>
+
+		<script type="text/template" id="participants-list-row-template">
+			<% _.each(participants, function(p){ %>
+			<tr class="greekRow" id="participant-<%= p.get('participant_id') %>">
+				<td id="greekRowPosition"><%= p.get('position') %></td>
+				<td class="greekRowFirstName">
+					<a href="#/participant/<%= p.get('participant_id') %>">
+						<%= p.get('participant_first_name') %>
+						<%= p.get('participant_last_name') %>
+					</a>
+				</td>
+				<td class="greekRowDonation">$<%= p.get('participant_donations_total') %></td>
+				<td class="greekRowEvents"><%= p.get('participant_event_milestone_candles') %></td>
+				<td class="greekRowTshirt"><%= p.get('participant_tshirt_milestone_candles') %></td>
+				<td class="greekRowTotal"><%= p.get('participant_candles_total') %></td>
+			</tr>
+			<% }); %>
+		</script>
+
+		<script type="text/template" id="participant-title-template">
+			<a href="#/team/<%= participant.get('info').team_id %>"><%= participant.get('info').team_name %></a> &raquo; <span><%= participant.get('info').fname %>
+			<%= participant.get('info').lname %></span>
+		</script>
+		<script type="text/template" id="participant-single-template">
+		<div class="personal">
+			<div class="personalBox">
+				<div class="personalTab">
+					Donations
+				</div>
+				<div class="personalBody">
+					<div class="personalBodyTop">
+						<table class="personalTable">
+							<tr class="personalBodyHeader">
+								<th class="personalTableLarge">
+									Date
+								</th>
+								<th class="personalTableSmall">
+
+								</th>
+								<th class="personalTableEnd">
+									Amount
+								</th>
+							</tr>
+						</table>
+						<div class="forScroll">
+							<% if ( _.size(participant.get('donations')) > 0 ){ %>
+							<table class="personalTable">
+								<% _.each(participant.get('donations'), function(donation){ %>
+								<tr>
+									<td class="personalTableLarge personalTableFirstRow">
+										<%= donation.date %>
+									</td>
+									<td class="personalTableSmall personalTableFirstRow">
+
+									</td>
+									<td class="personalTableEnd personalTableFirstRow">
+										<%= donation.amount %>
+									</td>
+								</tr>
+								<% }) %>
+							</table>
+							<% } %>
+						</div>
+						<div class="personalBodySpace"></div>
+					</div>
+					<div class="personalBodyBottom">
+						<div class="personalBodyBottomLarge">
+							Total
+						</div>
+						<div class="personalBodyBottomSmall">
+							<%= participant.get('totals').donations_total %>
+						</div>
+						<div class="personalBodyBottomEnd">
+							<%= participant.get('totals').donations_total %>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="personalBox">
+				<div class="personalTab">
+					Events
+				</div>
+				<div class="personalBody">
+					<div class="personalBodyTop">
+						<table class="personalTable">
+							<tr class="personalBodyHeader">
+								<th class="personalTableLargeOne">
+									Date
+								</th>
+								<th class="personalTableSmall">
+									Attend?
+								</th>
+								<th class="personalTableEndOne">
+									Candles
+								</th>
+							</tr>
+						</table>
+						<div class="forScroll">
+							<% if ( _.size(participant.get('events')) > 0 ){ %>
+							<table class="personalTable">
+								<% _.each(participant.get('events'), function(event){ %>
+								<tr>
+									<td class="personalTableLargeOne personalTableFirstRow">
+										<%= event.name %>
+									</td>
+									<td class="personalTableSmall personalTableFirstRow">
+										<%= event.date %>
+									</td>
+									<td class="personalTableEndOne personalTableFirstRow">
+										<%= event.candles %>
+									</td>
+								</tr>
+								<% }) %>
+							</table>
+							<% } %>
+						</div>
+					</div>
+					<div class="personalBodyBottom">
+						<div class="personalBodyBottomLarge">
+							Total
+						</div>
+						<div class="personalBodyBottomEndOne">
+							<%= participant.get('totals').event_candles %>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="personalBox">
+				<div class="personalTab">
+					T-shirts
+				</div>
+				<div class="personalBody">
+					<div class="personalBodyTop">
+						<table class="personalTable">
+							<tr class="personalBodyHeader">
+								<th class="personalTableLarge">
+									T-shirt
+								</th>
+								<th class="personalTableSmall">
+									Amount
+								</th>
+								<th class="personalTableEnd">
+									Candles
+								</th>
+							</tr>
+						</table>
+						<div class="forScroll">
+							<% if ( _.size(participant.get('tshirts')) > 0 ){ %>
+							<table class="personalTable">
+								<% _.each(participant.get('tshirts'), function(tshirt){ %>
+								<tr>
+									<td class="personalTableLarge personalTableFirstRow">
+										<%= tshirt.name %>
+									</td>
+									<td class="personalTableSmall personalTableFirstRow">
+										<%= tshirt.quantity %>
+									</td>
+									<td class="personalTableEnd personalTableFirstRow">
+										<%= tshirt.candles %>
+									</td>
+								</tr>
+								<% }) %>
+							</table>
+							<% } %>
+						</div>
+						<div class="personalBodySpace"></div>
+					</div>
+					<div class="personalBodyBottom">
+						<div class="personalBodyBottomLarge">
+							Total
+						</div>
+						<div class="personalBodyBottomSmall">
+							<%= participant.get('totals').tshirt_total %>
+						</div>
+						<div class="personalBodyBottomEnd">
+							N/A
+						</div>
+					</div>
+				</div>
+			</div>
+		
+			</div><!-- end personal -->
+		</script>
+{% endblock scripts %}
+	{% block content %}
+    		<div id="pagesBkg">
+					<div id="pagesHeaderBkg">
+						<h2 id="pagesHeaderTxt">
+
+						</h2>
+						<ul id="pagesBack">
+							<li class="pagesBackLink">
+								<a href="/greekList">Greek Teams</a>&nbsp;-
+							</li>
+							<li class="pagesBackLink">
+								<a href="/home">Home</a>
+							</li>
+						</ul>
+					</div>
+					<div id="search-area"><label class="search">Search:&nbsp;&nbsp;<input id="searchBox" type="text" name="teamName"></label></div>
+
+					<div id="content"></div>
+					<div id="greekPagesCheck">
+					<table id="sorterHeader">
+						<tr>
+							<th id="position" class="greekSorterPosition">Pos.</th>
+							<th id="company_name" class="greekSorterTeamName">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Company Name</th>
+							<th id="company_donations_total" class="greekSorterOther">Donations</th>
+							<th id="company_event_milestone_candles" class="greekSorterOther">Events</th>
+							<th id="company_tshirt_milestone_candles" class="greekSorterOther">T-shirts</th>
+							<th id="company_candles_total" class="greekSorterOther">Total</th>
+						</tr>
+					</table>
+					<img id="loadingImg" src="/img/loading_bar.gif">
+						<div id="forScroll">
+							<table id="table">
+								<tbody id="greekList_body"></tbody>
+							</table><!-- end table -->
+						</div><!-- end forScroll -->
+					</div><!-- end pagesCheck -->
+				</div><!-- end pagesBkg -->
+    {% endblock content %}

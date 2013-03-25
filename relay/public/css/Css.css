@@ -590,7 +590,16 @@ div.loggedIn
 	float: right;
 	font-size: 10px;
 	margin-right: 10px;
-	margin-top: -5px;
+	margin-top: 5px;
+}
+.loggedIn a
+{
+	display:inline;
+	color:white;
+	font-family:Arial, Helvetica, sans-serif;
+	text-decoration:underline;
+	margin-right:5px;
+	cursor:pointer;
 }
 #teamBoxes
 {
@@ -760,7 +769,7 @@ div.loggedIn
 	margin-top: 0px;
 	width: 100%;
 }
-#pagesCheck #forScroll #table #team_table_body
+#pagesCheck #forScroll #table #teamList_body
 {
 	border: none;
 	border-color: none;
@@ -769,12 +778,12 @@ div.loggedIn
 	height: 100%;
 	width: 100%;
 }
-#pagesCheck #forScroll #table #team_table_body a
+#pagesCheck #forScroll #table #teamList_body a
 {
 	color: #FFF;
 	text-decoration: underline;
 }
-#pagesCheck #forScroll #table #team_table_body a:hover
+#pagesCheck #forScroll #table #teamList_body a:hover
 {
 	text-decoration: none;
 }
@@ -829,7 +838,7 @@ div.loggedIn
 		font-family: Arial;
 		font-weight:bold;
 }
-#pagesCheck #forScroll #table #team_table_body .teamRow
+#pagesCheck #forScroll #table #teamList_body .teamRow
 {
 	border-spacing: 0px;
 	box-shadow: none;
@@ -844,7 +853,7 @@ table
 {
 	border-spacing: 0px;
 }
-#pagesCheck #forScroll #table #team_table_body .teamRow .teamRowPosition {
+#pagesCheck #forScroll #table #teamList_body .teamRow .teamRowPosition {
 			text-align:center;
 			margin-top:20px;
 			width:48px;
@@ -853,7 +862,7 @@ table
 			font-size:12px;
 			font-family:arial;
 }
-#pagesCheck #forScroll #table #team_table_body .teamRow .teamRowFirstName {
+#pagesCheck #forScroll #table #teamList_body .teamRow .teamRowFirstName {
 			float:left;
 			margin-top:20px;
 			padding-left:12px;
@@ -868,28 +877,28 @@ table
 	border-spacing: 0px;
 }
 
-		#pagesCheck #forScroll #table #team_table_body .teamRow .team_donation_milestone_candles {
+		#pagesCheck #forScroll #table #teamList_body .teamRow .team_donation_milestone_candles {
 			margin-top:20px;
 		float:left;
 		border:none;
 		width:112px;
 		text-align:center;
 		}
-		#pagesCheck #forScroll #table #team_table_body .teamRow .team_email_milestone_candles {
+		#pagesCheck #forScroll #table #teamList_body .teamRow .team_email_milestone_candles {
 			margin-top:20px;
 		float:left;
 		border:none;
 		width:112px;
 		text-align:center;
 		}
-		#pagesCheck #forScroll #table #team_table_body .teamRow .team_event_milestone_candles {
+		#pagesCheck #forScroll #table #teamList_body .teamRow .team_event_milestone_candles {
 			margin-top:20px;
 		float:left;
 		border:none;
 		width:112px;
 		text-align:center;
 		}
-		#pagesCheck #forScroll #table #team_table_body .teamRow .team_candles {
+		#pagesCheck #forScroll #table #teamList_body .teamRow .team_candles {
 			margin-top:20px;
 		float:left;
 		margin-left:26px;
@@ -978,7 +987,7 @@ table
 	margin-top: 0px;
 	width: 100%;
 }
-#greekPagesCheck #forScroll #table #team_table_body
+#greekPagesCheck #forScroll #table #greekList_body
 {
 	border: none;
 	border-color: none;
@@ -1036,7 +1045,7 @@ table
 	text-align: center;
 	width: 85px;
 }
-#greekPagesCheck #forScroll #table #team_table_body .greekRow
+#greekPagesCheck #forScroll #table #greekList_body .greekRow
 {
 	border-spacing: 0px;
 	box-shadow: none;
@@ -1048,7 +1057,7 @@ table
 	margin-top: 10px;
 	width: 100%;
 }
-#greekPagesCheck #forScroll #table #team_table_body .greekRow #greekRowPosition
+#greekPagesCheck #forScroll #table #greekList_body .greekRow #greekRowPosition
 {
 	border: none;
 	float: left;
@@ -1058,7 +1067,7 @@ table
 	width: 48px;
 	margin-top:15px;
 }
-#greekPagesCheck #forScroll #table #team_table_body .greekRow .greekRowFirstName
+#greekPagesCheck #forScroll #table #greekList_body .greekRow .greekRowFirstName
 {
 	border: none;
 	float: left;
@@ -1069,12 +1078,12 @@ table
 	width: 332px;
 	margin-top:15px;
 }
-#greekPagesCheck #forScroll #table #team_table_body .greekRow .greekRowFirstName a
+#greekPagesCheck #forScroll #table #greekList_body .greekRow .greekRowFirstName a
 {
 	color:white;
 	text-decoration: underline;
 }
-#greekPagesCheck #forScroll #table #team_table_body .greekRow .greekRowFirstName a:hover
+#greekPagesCheck #forScroll #table #greekList_body .greekRow .greekRowFirstName a:hover
 {
 	text-decoration: none;
 }
@@ -1082,7 +1091,7 @@ table
 {
 	border-spacing: 0px;
 }
-#greekPagesCheck #forScroll #table #team_table_body .greekRow .greekRowDonation
+#greekPagesCheck #forScroll #table #greekList_body .greekRow .greekRowDonation
 {
 	border: none;
 	float: left;
@@ -1090,11 +1099,11 @@ table
 	width: 87px;
 	margin-top:15px;
 }
-#greekPagesCheck #forScroll #table #team_table_body .greekRow p
+#greekPagesCheck #forScroll #table #greekList_body .greekRow p
 {
 	display: inline;
 }
-#greekPagesCheck #forScroll #table #team_table_body .greekRow .greekRowRegistration
+#greekPagesCheck #forScroll #table #greekList_body .greekRow .greekRowRegistration
 {
 	border: none;
 	float: left;
@@ -1102,7 +1111,7 @@ table
 	width: 87px;
 	margin-top:15px;
 }
-#greekPagesCheck #forScroll #table #team_table_body .greekRow .greekRowEvents
+#greekPagesCheck #forScroll #table #greekList_body .greekRow .greekRowEvents
 {
 	border: none;
 	float: left;
@@ -1110,7 +1119,7 @@ table
 	width: 87px;
 	margin-top:15px;
 }
-#greekPagesCheck #forScroll #table #team_table_body .greekRow .greekRowTshirt
+#greekPagesCheck #forScroll #table #greekList_body .greekRow .greekRowTshirt
 {
 	border: none;
 	float: left;
@@ -1118,7 +1127,7 @@ table
 	width: 87px;
 	margin-top:15px;
 }
-#greekPagesCheck #forScroll #table #team_table_body .greekRow .greekRowTotal
+#greekPagesCheck #forScroll #table #greekList_body .greekRow .greekRowTotal
 {
 	border: none;
 	margin-left:18px;
@@ -1274,7 +1283,7 @@ table
 	margin-top: 0px;
 	width: 100%;
 }
-#signUpCheck #forScroll #table #team_table_body
+#signUpCheck #forScroll #table #signUp_body
 {
 	border: none;
 	border-color: none;
@@ -1301,7 +1310,7 @@ table
 	padding: 12px 0 0 20px;
 	text-align: left;
 }
-#signUpCheck #forScroll #table #team_table_body .signUpTeamRow
+#signUpCheck #forScroll #table #signUp_body .signUpTeamRow
 {
 	box-shadow: none;
 	color: white;
@@ -1311,7 +1320,7 @@ table
 	list-style-type: none;
 	width: 100%;
 }
-#signUpCheck #forScroll #table #team_table_body .signUpTeamRow:hover
+#signUpCheck #forScroll #table #signUp_body .signUpTeamRow:hover
 {
 	background-color: #003;
 	box-shadow: none;
@@ -1322,7 +1331,7 @@ table
 	list-style-type: none;
 	width: 100%;
 }
-#signUpCheck #forScroll #table #team_table_body .signUpTeamRowFirstName
+#signUpCheck #forScroll #table #signUp_body .signUpTeamRowFirstName
 {
 	border: none;
 	cursor: hand;
@@ -1498,7 +1507,7 @@ input.signin
 	margin-top: 0px;
 	width: 100%;
 }
-#howItWorksCheck #forScroll #table #team_table_body
+#howItWorksCheck #forScroll #table #how_body
 {
 	border: none;
 	border-color: none;
@@ -1556,7 +1565,7 @@ input.signin
 	text-align: center;
 	width: 110px;
 }
-#howItWorksCheck #forScroll #table #team_table_body .teamRow
+#howItWorksCheck #forScroll #table #how_body .teamRow
 {
 	border-spacing: 0px;
 	box-shadow: none;
@@ -1568,7 +1577,7 @@ input.signin
 	margin-top: 20px;
 	width: 100%;
 }
-#howItWorksCheck #forScroll #table #team_table_body .teamRow #teamRowPosition
+#howItWorksCheck #forScroll #table #how_body .teamRow #teamRowPosition
 {
 	border: none;
 	float: left;
@@ -1577,7 +1586,7 @@ input.signin
 	text-align: center;
 	width: 48px;
 }
-#howItWorksCheck #forScroll #table #team_table_body .teamRow .teamRowFirstName
+#howItWorksCheck #forScroll #table #how_body .teamRow .teamRowFirstName
 {
 	border: none;
 	float: left;
@@ -1590,28 +1599,28 @@ table
 {
 	border-spacing: 0px;
 }
-#howItWorksCheck #forScroll #table #team_table_body .teamRow #teamRowMilestone
+#howItWorksCheck #forScroll #table #how_body .teamRow #teamRowMilestone
 {
 	border: none;
 	float: left;
 	text-align: center;
 	width: 112px;
 }
-#howItWorksCheck #forScroll #table #team_table_body .teamRow #teamRowEmails
+#howItWorksCheck #forScroll #table #how_body .teamRow #teamRowEmails
 {
 	border: none;
 	float: left;
 	text-align: center;
 	width: 112px;
 }
-#howItWorksCheck #forScroll #table #team_table_body .teamRow #teamRowEvents
+#howItWorksCheck #forScroll #table #how_body .teamRow #teamRowEvents
 {
 	border: none;
 	float: left;
 	text-align: center;
 	width: 112px;
 }
-#howItWorksCheck #forScroll #table #team_table_body .teamRow #teamRowTotal
+#howItWorksCheck #forScroll #table #how_body .teamRow #teamRowTotal
 {
 	border: none;
 	float: left;
@@ -2408,4 +2417,994 @@ table
 #pagesHeaderTxt a:hover
 {
 	text-decoration: none;
+}
+
+
+
+
+#counterRegBkg #bigBkg {
+	background-color:#CCC;
+	height:1080px;
+	width:1920px;
+	background-position:center center;
+	position:fixed;
+	left:0px;
+	top:0px;
+	opacity:.3;
+	z-index:1;
+}
+
+#counterRegBkg #signIn
+{
+	background-image:url(../img/counterRegBigBkg_09.png);
+	position:fixed;
+	top:150px;
+	margin-left:0px;
+	height:458px;
+	width:960px;
+	z-index:2;
+}
+#counterRegBkg #signIn #loadingSignImgCandles
+{
+	height:100%;
+	width:100%;
+	float:left;
+	margin-top:-100px;
+}
+#counterRegBkg #signIn #registerLapCounter
+{
+	float:left;
+	display:inline;
+	width:380px;
+	height:382px;
+	padding-left:40px;
+	padding-top:30px;
+}
+#counterRegBkg #signIn #registerLapCounter #title
+{
+	margin:0 0 20px 0;
+}
+#counterRegBkg #signIn #registerLapCounter #title h2
+{
+	display:inline;
+	margin-left:0px;
+	margin-top:0px;
+	margin-bottom:20px;
+	color:white;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:900;
+}
+#counterRegBkg #signIn #registerLapCounter #title .goToMyCandlesDescription
+{
+	display:inline;
+	margin:0;
+	color:#CCC;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:900;
+	cursor:pointer;
+}
+#counterRegBkg #signIn #registerLapCounter #facebookReg, #counterRegBkg #signIn #registerLapCounter #facebookSignIn
+{
+	width:auto;
+	float:left;
+	margin:0px 0 0 20px;
+}
+#counterRegBkg #signIn #registerLapCounter #facebookReg #checkMark1
+{
+	display:inline;
+	height:20px;
+	width:20px;
+	margin:0px 0 0 5px;
+}
+#counterRegBkg #signIn #registerLapCounter #checkMark2
+{
+	display:inline;
+	height:20px;
+	width:20px;
+	margin:0 0 0 5px;
+}
+#counterRegBkg #signIn #registerLapCounter h3 
+{
+	float:left;
+	display:inline;
+	font-family:Arial, Helvetica, sans-serif;
+	color:white;
+	margin:0 5px 0 0;
+}
+#counterRegBkg #signIn #registerLapCounter #facebookReg p, #counterRegBkg #signIn #registerLapCounter #facebookSignIn p
+{
+	display:inline;
+	float:left;
+	width:auto;
+	color:#CCC;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:24px;
+	cursor:pointer;
+	margin:0px 0 0 0;
+}
+#counterRegBkg #signIn #registerLapCounter #searchName
+{
+	float:left;
+	margin-top:10px;
+	margin-left:20px;
+}
+#counterRegBkg #signIn #registerLapCounter #searchName .signUpTxt
+{
+	display:inline;
+	color:white;
+	font-size:16px;
+	margin-top:0px;
+	width:auto;
+	float:right;
+	font-family:Arial, Helvetica, sans-serif;
+}
+#counterRegBkg #signIn #registerLapCounter #searchName .signUpEntryCounter
+{
+	display:inline;
+	width:162px;
+	float:right;
+	margin-left:0px;
+	margin-right:0px;
+	margin-top:0px;
+}
+#counterRegBkg #signIn #registerLapCounter #selectName
+{
+	float:left;
+	margin-top:20px;
+	margin-left:20px;
+	margin-right:30px;
+}
+#counterRegBkg #signIn #registerLapCounter #olympics
+{
+	float:left;
+	margin:20px 0 0 20px;
+	font-family:Arial, Helvetica, sans-serif;
+	color:white;
+}
+#counterRegBkg #signIn #registerLapCounter #submit
+{
+	float: left;
+	width:100%;
+	height:30px;
+	margin:0;
+}
+#counterRegBkg #signIn #registerLapCounter #submit #signUpSubmit
+{
+	background: #303;
+	border: 1px solid #3A3078;
+	border-radius: 5px;
+	color: white;
+	height: 30px;
+	width: 120px;
+	margin:0;
+	position:relative;
+	top:30px;
+	left:20px;
+}
+#counterRegBkg #signIn #registerLapCounter #submit #signUpSubmit:hover
+{
+	background: #2C3B7C;
+}
+
+
+
+#counterRegBkg #signIn #registerLapCounter #signUpCheck
+{
+	float:left;
+	box-shadow: 0px 2px 2px #222222;
+	height: 80px;
+	margin:0;
+	width: 162px;
+}
+#counterRegBkg #signIn #registerLapCounter #signUpCheck #forScroll
+{
+	float: left;
+	height: 40px;
+	width: auto;
+	overflow:hidden;
+}
+#counterRegBkg #signIn #registerLapCounter #signUpCheck #forScroll .mCSB_container
+{
+	margin: 0;
+}
+#counterRegBkg #signIn #registerLapCounter #signUpCheck #forScroll #table
+{
+	border-collapse: separate;
+	border-spacing: 0;
+	float: left;
+	height: 100%;
+	margin-left: 0px;
+	margin-top: 0px;
+	width: 100%;
+}
+#counterRegBkg #signIn #registerLapCounter #signUpCheck #forScroll #table #counterReg_body
+{
+	border: none;
+	border-color: none;
+	border-spacing: none;
+	box-shadow: none;
+	height: 100%;
+	width: 100%;
+}
+#counterRegBkg #signIn #registerLapCounter #signUpCheck #sorterHeader
+{
+	background-image: url('../img/everyone_sorter_background_11.png');
+	height: 39px;
+	margin-left: 0px;
+	width: 100%;
+}
+#counterRegBkg #signIn #registerLapCounter #signUpCheck #sorterHeader .sorterTeamName
+{
+	color: white;
+	float: left;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 0 0 20px;
+	text-align: left;
+}
+#counterRegBkg #signIn #registerLapCounter #signUpCheck #forScroll #table #myCandlesReg_body .signUpTeamRow
+{
+	box-shadow: none;
+	color: white;
+	float: left;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	list-style-type: none;
+	width: 100%;
+}
+#counterRegBkg #signIn #registerLapCounter #signUpCheck #forScroll #table #myCandlesReg_body .signUpTeamRow:hover
+{
+	background-color: #003;
+	box-shadow: none;
+	color: white;
+	float: left;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	list-style-type: none;
+	width: 100%;
+}
+#counterRegBkg #signIn #registerLapCounter #signUpCheck #forScroll #table #myCandlesReg_body .signUpTeamRowFirstName
+{
+	border: none;
+	cursor: hand;
+	cursor: pointer;
+	float: left;
+	font-family: arial;
+	font-size: 12px;
+	padding-left: 0px;
+	padding-top: 10px;
+	width: 100%;
+	color:white;
+}
+#counterRegBkg #signIn #registerLapCounter #highlight
+{
+	background-color: #330033;
+}
+#counterRegBkg #signIn #registerLapCounter .highlight
+{
+	background-color: #330033;
+}
+#counterRegBkg #signIn #registerLapCounter #loadingSignImg
+{
+	margin-top:20px;
+	margin-left:0px;
+	margin-right:0px;
+	width: 225px;
+}
+
+
+
+
+
+#counterRegBkg #selectTeamName #registerLapCounter #signUpCheck, #counterRegBkg #selectTeamName #registerOlympics #signUpCheck
+{
+	float:left;
+	box-shadow: 0px 2px 2px #222222;
+	height: 80px;
+	margin:0;
+	width: 162px;
+}
+#counterRegBkg #selectTeamName #registerLapCounter #signUpCheck #forScroll, #counterRegBkg #selectTeamName #registerOlympics #signUpCheck #forScroll
+{
+	float: left;
+	height: 40px;
+	width: auto;
+	overflow:hidden;
+}
+#counterRegBkg #selectTeamName #registerLapCounter #signUpCheck #forScroll .mCSB_container, #counterRegBkg #selectTeamName #registerOlympics #signUpCheck #forScroll .mCSB_container
+{
+	margin: 0;
+}
+#counterRegBkg #selectTeamName #registerLapCounter #signUpCheck #forScroll #table, #counterRegBkg #selectTeamName #registerOlympics #signUpCheck #forScroll #table
+{
+	border-collapse: separate;
+	border-spacing: 0;
+	float: left;
+	height: 100%;
+	margin-left: 0px;
+	margin-top: 0px;
+	width: 100%;
+}
+#counterRegBkg #selectTeamName #registerLapCounter #signUpCheck #forScroll #table #counterReg_body, #counterRegBkg #selectTeamName #registerOlympics #signUpCheck #forScroll #table #counterReg_body
+{
+	border: none;
+	border-color: none;
+	border-spacing: none;
+	box-shadow: none;
+	height: 100%;
+	width: 100%;
+}
+#counterRegBkg #selectTeamName #registerLapCounter #signUpCheck #sorterHeader, #counterRegBkg #selectTeamName #registerOlympics #signUpCheck #sorterHeader
+{
+	background-image: url('../img/everyone_sorter_background_11.png');
+	height: 39px;
+	margin-left: 0px;
+	width: 100%;
+}
+#counterRegBkg #selectTeamName #registerLapCounter #signUpCheck #sorterHeader .sorterTeamName, #counterRegBkg #selectTeamName #registerOlympics #signUpCheck #sorterHeader .sorterTeamName
+{
+	color: white;
+	float: left;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 0 0 20px;
+	text-align: left;
+}
+#counterRegBkg #selectTeamName #registerLapCounter #signUpCheck #forScroll #table #counterReg_body .signUpTeamRow, #counterRegBkg #selectTeamName #registerOlympics #signUpCheck #forScroll #table #olympicsReg_body .signUpTeamRow
+{
+	box-shadow: none;
+	color: white;
+	float: left;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	list-style-type: none;
+	width: 100%;
+}
+#counterRegBkg #selectTeamName #registerLapCounter #signUpCheck #forScroll #table #counterReg_body .signUpTeamRow:hover, #counterRegBkg #selectTeamName #registerOlympics #signUpCheck #forScroll #table #olympicsReg_body .signUpTeamRow:hover
+{
+	background-color: #003;
+	box-shadow: none;
+	color: white;
+	float: left;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	list-style-type: none;
+	width: 100%;
+}
+#counterRegBkg #selectTeamName #registerLapCounter #signUpCheck #forScroll #table #counterReg_body .signUpTeamRowFirstName, #counterRegBkg #selectTeamName #registerOlympics #signUpCheck #forScroll #table #olympicsReg_body .signUpTeamRowFirstName
+{
+	border: none;
+	cursor: hand;
+	cursor: pointer;
+	float: left;
+	font-family: arial;
+	font-size: 12px;
+	padding-left: 0px;
+	padding-top: 10px;
+	width: 100%;
+	color:white;
+}
+#counterRegBkg #selectTeamName #registerLapCounter #highlight, #counterRegBkg #selectTeamName #registerOlympics #highlight
+{
+	background-color: #330033;
+}
+#counterRegBkg #selectTeamName #registerLapCounter .highlight, #counterRegBkg #selectTeamName #registerOlympics .highlight
+{
+	background-color: #330033;
+}
+#counterRegBkg #selectTeamName #registerLapCounter #loadingSignImg, #counterRegBkg #selectTeamName #registerOlympics #loadingSignImg
+{
+	margin-top:20px;
+	margin-left:0px;
+	margin-right:0px;
+	width: 225px;
+}
+#counterRegBkg #selectTeamName #registerLapCounter .tier {
+	float:left;
+	display:inline;
+	margin:5px 0 0 10px;
+}
+#counterRegBkg #selectTeamName
+{
+	background-image:url(../img/counterRegBigBkg_09.png);
+	position:fixed;
+	top:150px;
+	margin-left:0px;
+	height:458px;
+	width:960px;
+	z-index:2;
+}
+#counterRegBkg #selectTeamName #registerLapCounter, #counterRegBkg #selectTeamName #registerOlympics
+{
+	float:left;
+	display:inline;
+	width:430px;
+	height:382px;
+	padding-left:40px;
+	padding-top:30px;
+}
+#counterRegBkg #selectTeamName #loadingSignImgCounter, #counterRegBkg #selectTeamName #loadingSignImgOlympics
+{
+	height:100%;
+	width:100%;
+	float:left;
+	margin-top:-100px;
+}
+#counterRegBkg #selectTeamName #registerLapCounter #title, #counterRegBkg #selectTeamName #registerOlympics #title
+{
+}
+#counterRegBkg #selectTeamName #registerLapCounter #title h2, #counterRegBkg #selectTeamName #registerOlympics #title h2
+{
+	display:inline;
+	margin-left:0px;
+	margin-top:0px;
+	color:white;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:900;
+}
+#counterRegBkg #selectTeamName #registerLapCounter #title p, #counterRegBkg #selectTeamName #registerOlympics #title p
+{
+	display:inline;
+	margin:0;
+	color:#CCC;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:900;
+	cursor:pointer;
+}
+#counterRegBkg #selectTeamName #registerLapCounter #description, #counterRegBkg #selectTeamName #registerOlympics #description
+{
+	width:auto;
+	float:left;
+	margin:0px 0 0 20px;
+}
+#counterRegBkg #selectTeamName #registerLapCounter #description p, #counterRegBkg #selectTeamName #registerOlympics #description p
+{
+	width:auto;
+	color:#CCC;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:24px;
+}
+#counterRegBkg #selectTeamName #registerLapCounter #searchName, #counterRegBkg #selectTeamName #registerOlympics #searchName
+{
+	float:left;
+	margin-top:10px;
+	margin-left:0px;
+}
+#counterRegBkg #selectTeamName #registerLapCounter #searchName .signUpTxt, #counterRegBkg #selectTeamName #registerOlympics #searchName .signUpTxt
+{
+	display:inline;
+	color:white;
+	font-size:16px;
+	margin-top:0px;
+	width:auto;
+	float:right;
+	font-family:Arial, Helvetica, sans-serif;
+}
+#counterRegBkg #selectTeamName #registerLapCounter #searchName .signUpEntryCounter, #counterRegBkg #selectTeamName #registerOlympics #searchName .signUpEntryCounter
+{
+	display:inline;
+	width:162px;
+	float:right;
+	margin-left:0px;
+	margin-right:0px;
+	margin-top:0px;
+}
+#counterRegBkg #selectTeamName #registerLapCounter #selectName, #counterRegBkg #selectTeamName #registerOlympics #selectName
+{
+	float:left;
+	width:100%;
+	margin-top:20px;
+	margin-left:20px;
+	margin-right:0px;
+}
+#counterRegBkg #selectTeamName #registerLapCounter #olympics, #counterRegBkg #selectTeamName #registerOlympics #olympics
+{
+	float:left;
+	margin:20px 0 0 20px;
+	font-family:Arial, Helvetica, sans-serif;
+	color:white;
+}
+#counterRegBkg #selectTeamName #registerLapCounter #submit, #counterRegBkg #selectTeamName #registerOlympics #submit
+{
+	float: left;
+	width:100%;
+	height:30px;
+	margin:0;
+}
+#counterRegBkg #selectTeamName #registerLapCounter #submit #signUpSubmit, #counterRegBkg #selectTeamName #registerOlympics #submit #signUpSubmit
+{
+	background: #303;
+	border: 1px solid #3A3078;
+	border-radius: 5px;
+	color: white;
+	height: 30px;
+	width: 120px;
+	margin:0;
+	position:relative;
+	top:30px;
+	left:20px;
+}
+#counterRegBkg #selectTeamName #registerLapCounter #submit #signUpSubmit:hover, #counterRegBkg #selectTeamName #registerOlympics #submit #signUpSubmit:hover
+{
+	background: #2C3B7C;
+}
+#counterRegBkg #selectTeamName #divider
+{
+	background-color: #333;
+	box-shadow: 0 -2px 5px #222;
+	height: 350px;
+	margin-top:0px;
+	margin-left:-200px;
+	width: 1px;
+	z-index:3;
+}
+#counterRegBkg #selectTeamName #registerOlympics
+{
+	float:left;
+	margin:30px 40px 0 0;
+	width:422px;
+	padding:0;
+}
+
+#counterRegBkg #descriptionTotal, #counterRegBkg #myCandlesDescription
+{
+	background-image:url(../img/counterRegBigBkg_09.png);
+	position:fixed;
+	top:150px;
+	margin-left:0px;
+	height:458px;
+	width:960px;
+	z-index:2;
+}
+#counterRegBkg #descriptionTotal #descriptionCounter, #counterRegBkg #myCandlesDescription #descriptionCounter
+{
+	display:inline;
+	float:left;
+	margin:30px 0 0 40px;
+	height:100%;
+	width:400px;
+}
+#counterRegBkg #descriptionTotal #descriptionOlympics
+{
+	display:inline;
+	float:left;
+	margin:30px 0 0 40px;
+	height:100%;
+	width:430px;
+}
+#counterRegBkg #descriptionTotal #descriptionCounter .title, #counterRegBkg #descriptionTotal #descriptionOlympics .title, #counterRegBkg #myCandlesDescription #descriptionCounter .title
+{
+	float:left;
+	margin:0;
+}
+
+
+#counterRegBkg #descriptionTotal #descriptionCounter .back, #counterRegBkg #descriptionTotal #descriptionOlympics .back, #counterRegBkg #myCandlesDescription #descriptionCounter .back
+{
+	display:inline;
+	margin:5px 0 0 0;
+	float:left;
+	color:#CCC;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:900;
+	cursor:pointer;
+}
+
+#counterRegBkg #descriptionTotal #descriptionCounter .forScroll, #counterRegBkg #descriptionTotal #descriptionOlympics .forScroll, #counterRegBkg #myCandlesDescription #descriptionCounter .forScroll
+{
+	float:left;
+	margin:0;
+	width:100%;
+	height:300px;
+	overflow:hidden;
+}
+#counterRegBkg #descriptionTotal #descriptionCounter .forScroll .description, #counterRegBkg #descriptionTotal #descriptionOlympics .forScroll .description, #counterRegBkg #myCandlesDescription #descriptionCounter .forScroll .description
+{
+	float:left;
+	margin:20px 0 0 10px;
+	width:360px;
+	font-family:Tahoma, Geneva, sans-serif;
+}
+#counterRegBkg #descriptionTotal #descriptionCounter .subTitle, #counterRegBkg #descriptionTotal #descriptionOlympics .subTitle, #counterRegBkg #myCandlesDescription #descriptionCounter .subTitle
+{
+	float:left;
+	margin:20px 0 0 10px;
+	width:100%;
+}
+/*#counterRegBkg #descriptionTotal #descriptionCounter .description #forScroll
+{
+	float: left;
+	height: 40px;
+	width: auto;
+	overflow:hidden;
+}*/
+#counterRegBkg #descriptionTotal #descriptionCounter .forScroll .mCSB_container, #counterRegBkg #myCandlesDescription #descriptionCounter .forScroll .mCSB_container
+{
+	margin: 0;
+}
+
+#counter
+{
+	height:auto;
+	width:auto;
+	margin:80px 0 0 170px;
+}
+
+#counterRegBkg #selectTeamName #registerLapCounter #searchName .inputCounter, #counterRegBkg #selectTeamName #registerOlympics #searchName .inputCounter, #counterRegBkg #signIn #registerLapCounter #searchName .inputCounter
+{
+  margin: 5px 0;
+  background: white;
+  float: left;
+  clear: both;
+  margin-left:20px;
+	margin-right:200px;
+	margin-top:0px;
+}
+#counterRegBkg #signIn #registerLapCounter #searchName .inputCounter {
+	display:inline;
+	float:left;
+	margin: -20px 0 0 20px;
+  background: white;
+  clear: both;
+}
+.inputCounter span {
+  position: absolute;
+  padding: 5px;
+  margin-left: 3px;
+  color: #999;
+}
+.inputCounter input, .inputCounter textarea, .inputCounter select {
+  position: relative;
+  margin: 0;
+  border-width: 1px;
+  padding: 6px;
+  background: transparent;
+  font: inherit;
+}
+/* Hack to remove Safari's extra padding. Remove if you don't care about pixel-perfection. */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .inputCounter input, .inputCounter textarea, .inputCounter select { padding: 4px; }
+}
+
+
+#counterRegBkg .signUpEntryCounterdfsdf
+{
+	display:inline;
+	width:162px;
+	float:right;
+	margin-left:0px;
+	margin-right:0px;
+	margin-top:0px;
+}
+
+#myCandlesCounterCheck
+{
+	box-shadow: 0px 4px 5px #222222;
+	height: 350px;
+	margin-left: 27px;
+	margin-top: 30px;
+	width: 400px;
+}
+#myCandlesCounterCheck #forScroll
+{
+	float: left;
+	height: 350px;
+	overflow: hidden;
+	width: 100%;
+	margin:0;
+}
+#myCandlesCounterCheck #forScroll #table
+{
+	border: none;
+	border-collapse: separate;
+	border-spacing: 0px;
+	float: left;
+	margin-left: 0px;
+	margin-top: 0px;
+	width: 100%;
+}
+#myCandlesCounterCheck #forScroll #table #teamList_body
+{
+	border: none;
+	border-color: none;
+	border-spacing: 0px;
+	box-shadow: none;
+	height: 100%;
+	width: 100%;
+	margin:0;
+}
+#myCandlesCounterCheck #forScroll #table #teamList_body a
+{
+	color: #FFF;
+	text-decoration: underline;
+}
+#myCandlesCounterCheck #forScroll #table #teamList_body a:hover
+{
+	text-decoration: none;
+}
+#myCandlesCounterCheck #sorterHeader
+{
+	background-image: url('../img/everyone_sorter_background_11.png');
+	float: left;
+	margin:0;
+	width: 100%;
+}
+#myCandlesCounterCheck #sorterHeader .sorterDonorName
+{
+	float:left;
+			width:100px;
+			text-align:left;
+			padding-left:10px;
+			height:27px;
+			padding-top:11px;
+			color:white;
+			font-size:12px;
+			font-weight:bold;
+			font-family:Arial, Helvetica, sans-serif;
+			border-left: 2px solid #222222;
+}
+
+#myCandlesCounterCheck #sorterHeader th
+{
+	cursor: pointer;
+}
+#myCandlesCounterCheck #sorterHeader .sorterOther
+{
+		width:80px;
+		height:27px;
+		text-align: center;
+		vertical-align:middle;
+		font-weight: bold;
+		color: white;
+		font-size:12px;
+		border-left: 2px solid #222222;
+		font-family: Arial;
+		font-weight:bold;
+}
+#myCandlesCounterCheck #forScroll #table #teamList_body .teamRow
+{
+	border-spacing: 0px;
+	box-shadow: none;
+	color: white;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	list-style-type: none;
+	width: 100%;
+	margin-bottom:0px;
+}
+table
+{
+	border-spacing: 0px;
+}
+#myCandlesCounterCheck #forScroll #table #teamList_body .teamRow .teamRowPosition {
+			text-align:center;
+			margin-top:20px;
+			width:48px;
+			height:15px;
+			border:none;
+			font-size:12px;
+			font-family:arial;
+}
+#myCandlesCounterCheck #forScroll #table #teamList_body .teamRow .teamRowFirstName {
+			float:left;
+			margin-top:20px;
+			padding-left:12px;
+			text-align:left;
+			width:330px;
+			border:none;
+			font-size:12px;
+			font-family:arial;
+		}
+table
+{
+	border-spacing: 0px;
+}
+
+		#myCandlesCounterCheck #forScroll #table #teamList_body .teamRow .team_donation_milestone_candles {
+			margin-top:20px;
+		float:left;
+		border:none;
+		width:112px;
+		text-align:center;
+		}
+		#myCandlesCounterCheck #forScroll #table #teamList_body .teamRow .team_email_milestone_candles {
+			margin-top:20px;
+		float:left;
+		border:none;
+		width:112px;
+		text-align:center;
+		}
+		#myCandlesCounterCheck #forScroll #table #teamList_body .teamRow .team_event_milestone_candles {
+			margin-top:20px;
+		float:left;
+		border:none;
+		width:112px;
+		text-align:center;
+		}
+		#myCandlesCounterCheck #forScroll #table #teamList_body .teamRow .team_candles {
+			margin-top:20px;
+		float:left;
+		margin-left:26px;
+		border:none;
+		width:60px;
+		text-align:center;
+		}
+
+
+
+
+#myCandlesSettingsCheck
+{
+	box-shadow: 0px 4px 5px #222222;
+	height: 350px;
+	margin-left: 27px;
+	margin-top: 30px;
+	width: 400px;
+}
+#myCandlesSettingsCheck #forScroll
+{
+	float: left;
+	height: 350px;
+	overflow: hidden;
+	width: 100%;
+	margin:0;
+}
+#myCandlesSettingsCheck #forScroll #table
+{
+	border: none;
+	border-collapse: separate;
+	border-spacing: 0px;
+	float: left;
+	margin-left: 0px;
+	margin-top: 0px;
+	width: 100%;
+}
+#myCandlesSettingsCheck #forScroll #table #teamList_body
+{
+	border: none;
+	border-color: none;
+	border-spacing: 0px;
+	box-shadow: none;
+	height: 100%;
+	width: 100%;
+	margin:0;
+}
+#myCandlesSettingsCheck #forScroll #table #teamList_body a
+{
+	color: #FFF;
+	text-decoration: underline;
+}
+#myCandlesSettingsCheck #forScroll #table #teamList_body a:hover
+{
+	text-decoration: none;
+}
+#myCandlesSettingsCheck #sorterHeader
+{
+	background-image: url('../img/everyone_sorter_background_11.png');
+	float: left;
+	margin:0;
+	width: 100%;
+}
+#myCandlesSettingsCheck #sorterHeader .sorterDonorName
+{
+	float:left;
+			width:100px;
+			text-align:left;
+			padding-left:10px;
+			height:27px;
+			padding-top:11px;
+			color:white;
+			font-size:12px;
+			font-weight:bold;
+			font-family:Arial, Helvetica, sans-serif;
+			border-left: 2px solid #222222;
+}
+
+#myCandlesSettingsCheck #sorterHeader th
+{
+	cursor: pointer;
+}
+#myCandlesSettingsCheck #sorterHeader .sorterOther
+{
+		width:80px;
+		height:27px;
+		text-align: center;
+		vertical-align:middle;
+		font-weight: bold;
+		color: white;
+		font-size:12px;
+		border-left: 2px solid #222222;
+		font-family: Arial;
+		font-weight:bold;
+}
+#myCandlesSettingsCheck #forScroll #table #teamList_body .teamRow
+{
+	border-spacing: 0px;
+	box-shadow: none;
+	color: white;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	list-style-type: none;
+	width: 100%;
+	margin-bottom:0px;
+}
+table
+{
+	border-spacing: 0px;
+}
+#myCandlesSettingsCheck #forScroll #table #teamList_body .teamRow .teamRowPosition {
+			text-align:center;
+			margin-top:20px;
+			width:48px;
+			height:15px;
+			border:none;
+			font-size:12px;
+			font-family:arial;
+}
+#myCandlesSettingsCheck #forScroll #table #teamList_body .teamRow .teamRowFirstName {
+			float:left;
+			margin-top:20px;
+			padding-left:12px;
+			text-align:left;
+			width:330px;
+			border:none;
+			font-size:12px;
+			font-family:arial;
+		}
+table
+{
+	border-spacing: 0px;
+}
+
+		#myCandlesSettingsCheck #forScroll #table #teamList_body .teamRow .team_donation_milestone_candles {
+			margin-top:20px;
+		float:left;
+		border:none;
+		width:112px;
+		text-align:center;
+		}
+		#myCandlesSettingsCheck #forScroll #table #teamList_body .teamRow .team_email_milestone_candles {
+			margin-top:20px;
+		float:left;
+		border:none;
+		width:112px;
+		text-align:center;
+		}
+		#myCandlesSettingsCheck #forScroll #table #teamList_body .teamRow .team_event_milestone_candles {
+			margin-top:20px;
+		float:left;
+		border:none;
+		width:112px;
+		text-align:center;
+		}
+		#myCandlesSettingsCheck #forScroll #table #teamList_body .teamRow .team_candles {
+			margin-top:20px;
+		float:left;
+		margin-left:26px;
+		border:none;
+		width:60px;
+		text-align:center;
+		}
+#pagesBkg .navigation
+{
+	margin:10px 0 0 30px;
+}
+
+#pagesBkg .navigation .link
+{
+	display:inline;
+	margin:0;
+	cursor:pointer;
+	color:white;
+	height:200px;
+	width:300px;
+	font-size:12px;
+	background-image:url(../../img/link_highlight_07.png);
+	font-family:Arial, Helvetica, sans-serif;
+}
+#pagesBkg .navigation #link2
+{
+	margin:0 0 0 10px;
 }

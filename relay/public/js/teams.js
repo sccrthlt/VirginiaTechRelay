@@ -1,3 +1,5 @@
+
+
 // var __proxy = 'requests/proxy.php?__url=http://www.vtrelaycandles.org';
 var __proxy = window.location.host == 'localhost'  ? 'requests/proxy.php?__url=http://localhost:8000' : '';
 
@@ -22,11 +24,11 @@ $(document).ready(function ($) {
             if (filter) {
                 $('tr').find("td:not(:Contains(" + filter + "))").parent().hide();
                 $('tr').find("td:Contains(" + filter + ")").parent().show();
-                $("#forScroll").mCustomScrollbar("update");
+                //$("#forScroll").mCustomScrollbar("update");
             } else {
                 $('tr').show();
             }
-            $("#forScroll").mCustomScrollbar("update");
+            //$("#forScroll").mCustomScrollbar("update");
             return false;
         })
             .keyup(function () {
@@ -120,7 +122,7 @@ $(function () {
 });
 
 
-__sortFields = {
+var __sortFields = {
     team: {
         sort_name: "team_name",
         sort_donations: "team_donation_milestone_candles",
@@ -194,11 +196,11 @@ function showResults(arr) {
     var html = '';
 
     if ( __type == "team" ) {
-	    $('#team_table_body').html(
+	    $('#teamList_body').html(
 	                _.template($('#teams-list-row-template').html(),
 	                    {teams: arr}));
     } else if ( __type == "participant" ) {
-	    $('#team_table_body').html(
+	    $('#teamList_body').html(
 	                _.template($('#participants-list-row-template').html(),
 	                    {participants: arr}));
     }
@@ -207,7 +209,7 @@ function showResults(arr) {
 // #
 // Default route
 TeamsListView = Backbone.View.extend({
-	el: $('#team_table_body'),
+	el: $('#teamList_body'),
 	render: function(){
 		var that = this;
 
@@ -228,7 +230,7 @@ TeamsListView = Backbone.View.extend({
 						{teams: teams.models}));
 
 				info = _.toArray(teams.models);
-
+				// console.log(info);
 				jQuery("#forScroll").mCustomScrollbar("update");
 			}
 		});
@@ -238,7 +240,7 @@ TeamsListView = Backbone.View.extend({
 // #/team/:id
 //View for listing participants in a team
 ParticipantsListView = Backbone.View.extend({
-	el: $('#team_table_body'),
+	el: $('#teamList_body'),
 	render: function(id){
 		var that = this;
 
@@ -267,7 +269,7 @@ ParticipantsListView = Backbone.View.extend({
 								participants: participants.models
 							}));
 						info = _.toArray(participants.models);
-						    jQuery("#forScroll").mCustomScrollbar("update");
+						jQuery("#forScroll").mCustomScrollbar("update");
 					}
 				});
 			}
@@ -283,7 +285,7 @@ ParticipantSingleView = Backbone.View.extend({
 		var that = this;
 		var P = new Participant({id: id});
 		$('#search-area, #sorterHeader, #forScroll, #pagesCheck').hide();
-		jQuery(".forScroll").mCustomScrollbar("destroy");
+		//jQuery(".forScroll").mCustomScrollbar("destroy");
 		P.fetch({
 			success: function(participant){
 
@@ -305,7 +307,7 @@ ParticipantSingleView = Backbone.View.extend({
                                             });
 
                                             _.defer(function(){
-                                                jQuery(".forScroll").mCustomScrollbar();
+                                                //jQuery(".forScroll").mCustomScrollbar();
                                             });
 			}
 		});

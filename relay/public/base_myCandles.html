@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block scripts %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"> </script>
+<script>
+$("#link1").on("click", function() {
+	$("#link1").attr("style", "background-image: url('/img/link_highlight_07.png');");
+});
+</script>
+{% endblock scripts %}
+	{% block content %}
+			<div id="pagesBkg">
+            		<div id="pagesHeaderBkg">
+						<h2 id="pagesHeaderTxt">
+							My name goes here
+						</h2>
+						<ul id="pagesBack">
+							<!-- <li class="pagesBackLink"><a href="#">Individual</a>&nbsp;-</li> -->
+							<li class="pagesBackLink">
+								<a href="teamList.html#">My name goes here</a>&nbsp;-
+							</li>
+							<li class="pagesBackLink">
+								<a href="home.html">Home</a>
+							</li>
+						</ul>
+					</div>
+                    <div class="navigation">
+                    	<h3 id="link1" class="link">Account Settings</h3>
+                        <h3 id="link2" class="link">Lap Counter</h3>
+                    </div>
+
+					<div id="content"></div>
+					<div id="myCandlesCounterCheck">
+						<table id="sorterHeader">
+							<tr>
+								<th id="donerName" class="sorterDonorName">
+									&nbsp;&nbsp;&nbsp;&nbsp;{{ username }}
+								</th>
+								<th id="pledge" class="sorterOther">
+									Pledge
+								</th>
+								<th id="lapsCompleted" class="sorterOther">
+									Laps Completed
+								</th>
+								<th id="total" class="sorterOther">
+									Total
+								</th>
+							</tr>
+						</table>
+                        <!--<img id="loadingImg" src="/img/loading_bar.gif">-->
+						<div id="forScroll">
+							<table id="table">
+								<tbody id="teamList_body"></tbody>
+							</table><!-- end table -->
+						</div><!-- end forScroll -->
+					</div><!-- end myCandlesCounterCheck -->
+                    
+                    
+                    
+                    <div id="myCandlesSettingsCheck">
+                        <!--<img id="loadingImg" src="/img/loading_bar.gif">-->
+						<div id="forScroll">
+							<table id="table">
+								<tbody id="teamList_body"></tbody>
+							</table><!-- end table -->
+						</div><!-- end forScroll -->
+					</div><!-- end myCandlesSettingsCheck -->
+			</div><!-- end pagesBkg -->
+            
+            
+	{% endblock content %}
