@@ -855,7 +855,7 @@ table
 }
 #pagesCheck #forScroll #table #teamList_body .teamRow .teamRowPosition {
 			text-align:center;
-			margin-top:20px;
+			margin-top:30px;
 			width:48px;
 			height:15px;
 			border:none;
@@ -863,7 +863,6 @@ table
 			font-family:arial;
 }
 #pagesCheck #forScroll #table #teamList_body .teamRow .teamRowFirstName {
-			float:left;
 			margin-top:20px;
 			padding-left:12px;
 			text-align:left;

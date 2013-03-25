@@ -6,7 +6,7 @@
 			<% _.each(teams, function(team){ %>
 			<tr class="teamRow" id="team-<%= team.get('team_id') %>">
 				<td class="teamRowPosition">
-					<%= team.get('position') %>
+					<%= team.get('pos') %>
 				</td>
 				<td class="teamRowFirstName">
 					<a href="#team/<%= team.get('team_id') %>">
@@ -27,7 +27,7 @@
 			<% _.each(participants, function(p){ %>
 			<tr class="teamRow" id="participant-<%= p.get('participant_id') %>">
 				<td class="teamRowPosition">
-					<%= p.get('position') %>
+					<%= p.get('pos') %>
 				</td>
 				<td class="teamRowFirstName">
 					<a href="#participant/<%= p.get('participant_id') %>">
