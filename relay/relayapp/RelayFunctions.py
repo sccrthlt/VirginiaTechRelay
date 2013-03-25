@@ -32,9 +32,10 @@ class RelayFunctions:
 
 		total = 0
 		for participant in participants:
-			for rule in Email_Rule.objects.all():
-				if rule.emails <= participant.emails_sent:
-					total += participant.emails_sent * rule.candles_rewarded
+			if not participant.fname == 'William' and not participant.lname == 'Castelvecchi' and not participant.fname == 'Christopher' and not participant.lname == 'Millehan':
+				for rule in Email_Rule.objects.all():
+					if rule.emails <= participant.emails_sent:
+						total += participant.emails_sent * rule.candles_rewarded
 
 		return total
 
@@ -405,6 +406,7 @@ class RelayFunctions:
 	def company_registration_candles(self, company):
 		candles = Company_Registration_Record.objects.filter(company = company).aggregate(candles_rewarded = Sum('registration_milestone__candles_rewarded'))
 		return candles['candles_rewarded'] if candles['candles_rewarded'] is not None else 0
+	
 
 	def team_candles(self, team):
 		candles = {}
