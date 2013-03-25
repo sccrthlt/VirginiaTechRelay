@@ -1,0 +1,579 @@
+{% extends "base.html" %}
+{% block header %}
+<title>VT Relay Candles - Lap Counter and Relay Olympics Signup</title>
+{% endblock header %}
+
+{% block scripts %}
+
+ <script src="/js/jquery.mCustomScrollbar.js"></script>
+ <script>
+//Scrollbar
+	    //(function ($) {
+	        //$(window).load(function () {
+	                //$("#forScroll").mCustomScrollbar();
+	        //});
+	    //})(jQuery);
+</script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"> </script>
+<script src="/js/jquery.mCustomScrollbar.js"></script>
+<script type="text/javascript">
+
+		//Get data
+	    var info = "";
+		function setupMyCandlesRegPage()
+		{
+			
+			$.get("/participants/unsigned/", function (data,status) {
+				for (var item in data) {
+	                record = data[item];
+	                //if (record.team_type != "RT") {
+	                    //delete data[item];
+	                //}
+				}
+			    setupTableMyCandles(data);
+			    info = data;
+			});
+		}
+
+		
+		function setupTableMyCandles(data)
+		{
+			var string = "";
+			for(x in data){
+			    string = string + "<tr id='" + data[x].id + "' class='signUpTeamRow'><td onClick='highlightClick(event)'  class='signUpTeamRowFirstName'>" + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp" + data[x].fname + " "+data[x].lname+"</td></tr>";
+			}//end for loop
+		$("#loadingSignImgCandles").attr("style", "visibility:hidden;");
+		document.getElementById("myCandlesReg_body").innerHTML = string;
+		jQuery("#forScroll").mCustomScrollbar("update");
+		}//end setupTable
+
+
+
+//Get data
+		function setupCounterRegPage()
+		{
+			$.get("/teams/all/", function (data,status) {
+				for (var item in data) {
+	                record = data[item];
+	                //if (record.team_type != "RT") {
+	                    //delete data[item];
+	                //}
+				}
+			    setupTableCounter(data);
+			    info = data;
+			});
+		}
+
+		function setupTableCounter(data)
+		{
+		var string = "";
+			for(x in data){
+				console.log('cool');
+			    string = string + "<tr id='" + data[x].id + "' class='signUpTeamRow'><td onClick='highlightClick(event)'  class='signUpTeamRowFirstName'>" + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp" + data[x].name + "</td></tr>";
+			}//end for loop
+		$("#loadingSignImgCounter").attr("style", "visibility:hidden;");
+		$("#loadingSignImgOlympics").attr("style", "visibility:hidden;");
+		document.getElementById("counterReg_body").innerHTML = string;
+		document.getElementById("olympicsReg_body").innerHTML = string;
+		jQuery("#signIn #forScroll").mCustomScrollbar("update");
+		}//end setupTable
+
+
+//Search filter
+	
+	//Creates a new event handler for uppercase letters entered by the user
+	$(document).ready(function ($) {
+jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function(arg) {
+    return function( elem ) {
+        return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+    }; //end return function
+  });//end jQuery.expr
+	
+	//Takes an input
+	function listFilterSignIn(list) {
+    var input = $("#signIn #inputRegSearch");
+	
+	//filters the input
+    $(input)
+      .change( function () {
+        var filter = $(this).val();
+        if(filter) {
+          $('#signIn tr').find("td:not(:Contains(" + filter + "))").parent().hide();
+          $('#signIn tr').find("td:Contains(" + filter + ")").parent().show();
+		  $("#signIn #forScroll").mCustomScrollbar("update");
+        } else {
+          $('#signIn tr').show();
+		  jQuery("#signIn #forScroll").mCustomScrollbar("update");
+        }
+        return false;
+      })
+    .keyup( function () {
+        $(this).change();
+    });//end input .change
+  }//end listFilter
+
+	//Specifies what to filter.  In this instance a class that is assigned to a table row
+	$(function () {
+    	listFilterSignIn($("#signIn .signUpTeamRow"));
+  	});//end function
+}(jQuery));//end document ready
+	
+	
+//Search filter
+	
+	//Creates a new event handler for uppercase letters entered by the user
+	$(document).ready(function ($) {
+jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function(arg) {
+    return function( elem ) {
+        return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+    }; //end return function
+  });//end jQuery.expr
+	
+	//Takes an input
+	function listFilterCounter(list) {
+    var input = $("#selectTeamName #inputCounterSearch");
+	
+	//filters the input
+    $(input)
+      .change( function () {
+        var filter = $(this).val();
+        if(filter) {
+          $('#selectTeamName #registerLapCounter tr').find("td:not(:Contains(" + filter + "))").parent().hide();
+          $('#selectTeamName #registerLapCounter tr').find("td:Contains(" + filter + ")").parent().show();
+		  $("#selectTeamName #registerLapCounter #forScroll").mCustomScrollbar("update");
+		  var arr = document.getElementById("highlight");
+		  if($(arr).is(':hidden')){
+		  } else {
+		  }
+        } else {
+          $('#selectTeamName #registerLapCounter tr').show();
+		  jQuery("#selectTeamName #registerLapCounter #forScroll").mCustomScrollbar("update");
+        }
+        return false;
+      })
+    .keyup( function () {
+        $(this).change();
+    });//end input .change
+  }//end listFilter
+
+	//Specifies what to filter.  In this instance a class that is assigned to a table row
+	$(function () {
+    	listFilterCounter($("#selectTeamName #registerLapCounter .signUpTeamRow"));
+  	});//end function
+}(jQuery));//end document ready
+
+
+//Search filter
+	
+	//Creates a new event handler for uppercase letters entered by the user
+	$(document).ready(function ($) {
+jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function(arg) {
+    return function( elem ) {
+        return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+    }; //end return function
+  });//end jQuery.expr
+	
+	//Takes an input
+	function listFilterCounter(list) {
+    var input = $("#selectTeamName #inputOlympicsSearch");
+	
+	//filters the input
+    $(input)
+      .change( function () {
+        var filter = $(this).val();
+        if(filter) {
+          $('#selectTeamName #registerOlympics tr').find("td:not(:Contains(" + filter + "))").parent().hide();
+          $('#selectTeamName #registerOlympics tr').find("td:Contains(" + filter + ")").parent().show();
+		  $("#selectTeamName #registerOlympics #forScroll").mCustomScrollbar("update");
+		  var arr = document.getElementById("highlight");
+		  if($(arr).is(':hidden')){
+		  } else {
+		  }
+        } else {
+          $('#selectTeamName #registerOlympics tr').show();
+		  jQuery("#selectTeamName #registerOlympics #forScroll").mCustomScrollbar("update");
+        }
+        return false;
+      })
+    .keyup( function () {
+        $(this).change();
+    });//end input .change
+  }//end listFilter
+
+	//Specifies what to filter.  In this instance a class that is assigned to a table row
+	$(function () {
+    	listFilterCounter($("#selectTeamName #registerOlympics .signUpTeamRow"));
+  	});//end function
+}(jQuery));//end document ready
+
+	function highlightClick(event) {
+	    if (document.getElementById("highlight") != null) {
+	        document.getElementById("highlight").id = "";
+	    }
+	    event.target.id = 'highlight';
+		$("#checkMark2").attr("style", "visibility: visible;")
+		//var name2 = document.getElementById("highlight").childNodes[0].name;
+		//document.getElementById("name1").innerHTML = name2;
+	} 
+		
+		
+		
+		//Highlight team
+		$(document).ready(function(){
+		    $("#signIn .signUpTeamRow").on("click", function () {
+				$("#signIn .highlight").removeClass("highlight");
+    			$(this).addClass("highlight");
+				var name = document.getElementById("highlight");
+		}); //end document ready
+		
+		//var username = "";
+		//Amends the "signup" boolean for teams in the call
+		//$("#signIn #signUpSubmit").click(function sendData(){
+			//FB.getLoginStatus(function(response) {
+				//if (response.status === 'connected') {
+					//var getUser = storeInfo(function(wait, logged){
+						//username = wait;
+						//var arr = document.getElementById("highlight");
+						//if($(arr).is(':visible') && logged != 0){
+							//$.post("http://vtrelaycandles.org/signup/myCandles/",
+								//{
+									//'username':username,
+									//'id':arr.parentNode.id,
+								//},
+								//function(data,status) {
+										//alert("Thank you for signing up for myCandles!");
+										//setupCounterRegPage();
+										//$("#signIn").attr("style", "visibility: hidden;");
+										///$("#selectTeamName").attr("style", "visibility: visible;");
+										//$("#descriptionTotal").attr("style", "visibility: hidden;");
+										//$("#checkMark1").attr("style", "visibility: hidden;");
+										//$("#checkMark2").attr("style", "visibility: hidden;");
+									//}).fail(function(err, status){
+									//});//end fail
+						//} //end if
+						//else {
+							//alert('Please complete the above steps  :)');
+						//}// end else
+					//});//end storeInfo
+  				//} else if (response.status === 'not_authorized') {
+	    				//alert('Please sign in with facebook too :)')
+  				//} else {
+	     			//alert('Please sign in with facebook too :)')
+  				//}
+ 			//});// end getLoginStatus							   
+																		   
+			
+		//});//end #signUpSubmit
+		
+		//Amends the "signup" boolean for teams in the call
+		$("#selectTeamName #registerLapCounter #signUpSubmit").click(function sendData(){
+				var walk = document.getElementById("walkCounter").checked;
+				var run = document.getElementById("runCounter").checked;
+				var tier;
+				if (walk == true) {
+					tier = 'walk';
+				} else if (walk == false) {
+					tier = 'run';
+				}
+				var arr = document.getElementById("highlight");
+				console.log(arr.parentNode.id);
+				if($(arr).is(':visible')){
+					$.post("http://vtrelaycandles.org/signup/counterOlympics/",
+						{
+							'id':arr.parentNode.id,
+							'signupCounter':"True",
+							'signupOlympics':"False",
+							'tier':tier
+						},
+						function(data,status) {
+								alert("Thank you for signing up for the Lap Counter!")
+								window.location = '/home'
+							}).fail(function(err, status){
+								alert("There has been an error in our system.  We're sorry for the inconvenience.  Please check back again later")
+							});//end fail
+				} //end if
+				else {
+					alert('Please complete the above steps  :)');
+				}// end else
+		});//end #signUpSubmit
+		
+		//Amends the "signup" boolean for teams in the call
+		$("#selectTeamName #registerOlympics #signUpSubmit").click(function sendData(){
+				var walk = document.getElementById("walkOlympics").checked;
+				var run = document.getElementById("runOlympics").checked;
+				var tier;
+				if (walk == true) {
+					tier = 'walk';
+				} else if (walk == false) {
+					tier = 'run';
+				}
+				var arr = document.getElementById("highlight");
+				console.log(arr.parentNode.id);
+				if($(arr).is(':visible')){
+					$.post("http://vtrelaycandles.org/signup/counterOlympics/",
+						{
+							'id':arr.parentNode.id,
+							'signupCounter':"True",
+							'signupOlympics':"True",
+							'tier':tier
+						},
+						function(data,status) {
+								alert("Thank you for signing up for Relay Olympics!")
+								window.location = '/home'
+							}).fail(function(err, status){
+								alert("There has been an error in our system.  We're sorry for the inconvenience.  Please check back again later.")
+							});//end fail
+				} //end if
+				else {
+					alert('Please complete the above steps  :)');
+				}// end else
+		});//end #signUpSubmit
+	});//end document ready
+	
+	
+		$(function () {
+		    $('#signIn #sorterHeader tr th').click(function () {
+		        var id = $(this).attr('id');
+		        var asc = (!$(this).attr('asc')); // switch the order, true if not set
+		        // set asc="asc" when sorted in ascending order
+		        $('#sorterHeader tr th').each(function () {
+		            $(this).removeAttr('asc');
+		        });
+		        if (asc) $(this).attr('asc', 'asc');
+
+		        sortResults(id, asc);
+		    });
+		});
+
+		function sortResults(prop, asc) {
+		    arr = info;
+		    alert(arr);
+		    arr = arr.sort(function (a, b) {
+		        if (asc) return (compareThings(a[prop], b[prop]));
+		        else return (compareThings(b[prop], a[prop]));
+		    });
+		    showResults(arr);
+		}
+
+		function compareThings(thing1, thing2) {
+		    if (thing1 > thing2) {
+		        return 1;
+		    }
+		    if (thing1 < thing2) {
+		        return -1;
+		    }
+		    if (thing1 == thing2) {
+		        return 0;
+		    }
+		}
+
+		function showResults(arr) {
+		    var html = '';
+		    for (var e in arr) {
+		        stuff = info[e];
+		        html += "<tr id='" + e + "' class='signUpTeamRow'><td onClick='highlightClick(event)'  class='signUpTeamRowFirstName'>" + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + stuff.fields.name + "</td></tr>";
+		    }
+		    $('#signUp_body').html(html);
+		    alert(html);
+		}
+
+//Input gray label
+(function($) {
+    function toggleLabel() {
+        var input = $(this);
+        setTimeout(function() {
+            var def = input.attr('title');
+            if (!input.val() || (input.val() == def)) {
+                input.prev('span').css('visibility', '');
+                if (def) {
+                    var dummy = $('<label></label>').text(def).css('visibility','hidden').appendTo('body');
+                    input.prev('span').css('margin-left', dummy.width() + 3 + 'px');
+                    dummy.remove();
+                }
+            } else {
+                input.prev('span').css('visibility', 'hidden');
+            }
+        }, 0);
+    };
+
+    function resetField() {
+        var def = $(this).attr('title');
+        if (!$(this).val() || ($(this).val() == def)) {
+            $(this).val(def);
+            $(this).prev('span').css('visibility', '');
+        }
+    };
+
+    $('input, textarea').live('keydown', toggleLabel);
+    $('input, textarea').live('paste', toggleLabel);
+    $('select').live('change', toggleLabel);
+
+    $('input, textarea').live('focusin', function() {
+        $(this).prev('span').css('color', '#ccc');
+    });
+    $('input, textarea').live('focusout', function() {
+        $(this).prev('span').css('color', '#999');
+    });
+
+    $(function() {
+        $('input, textarea').each(function() { toggleLabel.call(this); });
+    });
+
+})(jQuery);
+
+$(".goToDescription").on("click", function () {
+	$("#descriptionTotal").attr("style", "visibility: visible;");
+	$("#selectTeamName").attr("style", "visibility: hidden;");
+});
+$("#descriptionTotal .back").on("click", function () {
+	$("#descriptionTotal").attr("style", "visibility: hidden;");
+	$("#selectTeamName").attr("style", "visibility: visible;");
+	//$("#signIn").attr("style", "visibility: visible;");
+});
+//$(".goToMyCandlesDescription").on("click", function () {
+	//$("#myCandlesDescription").attr("style", "visibility: visible;");
+	//$("#signIn").attr("style", "visibility: hidden;");
+	//$("#selectTeamName").attr("style", "visibility: hidden;");
+//});
+//$("#myCandlesDescription .back").on("click", function () {
+	//$("#myCandlesDescription").attr("style", "visibility: hidden;");
+	//$("#signIn").attr("style", "visibility: visible;");
+//});
+//if ($("#signIn").is(':visible')) {
+//$(":not(#signIn)").on("click", function () {
+	//$("#descriptionTotal").attr("style", "visibility: hidden;");
+	//$("#selectTeamName").attr("style", "visibility: hidden;");
+	//$("#signIn").attr("style", "visibility: hidden;");
+	//$("#bigBkg").attr("style", "visibility: hidden;");
+//});
+//}
+		</script>
+{% endblock scripts %}
+
+	{% block content %}
+    		<div id="counterRegBkg">
+                    
+
+                   
+                   
+                   
+                    
+                    <div id="selectTeamName" style="visibility:hidden">
+                    	<div id="registerLapCounter">
+                        	<div id="title">
+                        		<h2>Lap Counter Sign Up</h2>
+                                <p class="goToDescription">&nbsp;[Description]</p>
+                            </div>
+                            <div id="description">
+                            	<p>($1)</p>
+                            </div><!-- end description -->
+                            <div id="searchName">
+                                <label class="inputCounter">
+   									<span>Search Team Name</span>
+    								<input id="inputCounterSearch" type="text" />
+								</label>
+                            </div><!-- end searchName -->
+                            <div id="selectName">
+                                <div id="signUpCheck">
+                                  <table id="sorterHeader">
+                                      <tr>
+                                          <th id="name" class="sorterTeamName">Team Name</th>
+                                      </tr>
+                                  </table>
+                                  <img id="loadingSignImgCounter" src="/img/loading_bar.gif"/>
+                                  <div id="forScroll">
+                                      <table id="table">
+                                          <tbody id="counterReg_body">
+                                          </tbody>
+                                      </table><!-- end table -->
+                                  </div><!-- end forScroll -->
+                                </div><!-- end signUpCheck -->
+                            </div><!-- end selectName -->
+                            <div id="olympics">
+                            	<input type="radio" id="walkCounter" class="tier" value="Walk" name="tier">&nbsp;&nbsp;Walk<br>
+                                <input type="radio" id="runCounter" class="tier" value="Run" name="tier">&nbsp;&nbsp;Run<br>
+                            </div>
+                            <div id="submit">
+                            	<input id="signUpSubmit" type="submit" value="Submit">
+                            </div><!-- end submit -->
+                        </div><!-- end registerLapCounter -->
+                        <!-- <div id="divider"></div> -->
+                        <div id="registerOlympics">
+                        	<div id="title">
+                    			<h2 align="right">Relay Olympics Sign Up</h2>
+                                <p class="goToDescription">&nbsp;[Description]</p>
+                            </div>
+                            <div id="description">
+                            	<p>($5 + FREE Lap Counter)</p>
+                            </div><!-- end description -->
+                            <div id="searchName">
+                                <label class="inputCounter">
+   									<span>Search Team Name</span>
+    								<input id="inputOlympicsSearch" type="text" />
+								</label>
+                            </div><!-- end searchName -->
+                            <div id="selectName">
+                                <div id="signUpCheck">
+                                  <table id="sorterHeader">
+                                      <tr>
+                                          <th id="name" class="sorterTeamName">Team Name</th>
+                                      </tr>
+                                  </table>
+                                  <img id="loadingSignImgOlympics" src="/img/loading_bar.gif"/>
+                                  <div id="forScroll">
+                                      <table id="table">
+                                          <tbody id="olympicsReg_body">
+                                          </tbody>
+                                      </table><!-- end table -->
+                                  </div><!-- end forScroll -->
+                                </div><!-- end signUpCheck -->
+                            </div><!-- end selectName -->
+                            <div id="olympics">
+                            	<input type="radio" id="walkOlympics" class="tier" value="Walk" name="tier">&nbsp;&nbsp;Walk<br>
+                                <input type="radio" id="runOlympics" class="tier" value="Run" name="tier">&nbsp;&nbsp;Run<br>
+                            </div>
+                            <div id="submit">
+                            	<input id="signUpSubmit" type="submit" value="Submit">
+                            </div><!-- end submit -->
+                        </div><!-- end registerOlympics -->
+                     </div><!-- end slectTeamName -->
+                     
+                     
+                     <div id="descriptionTotal" style="visibility:visible;">
+                          <div id="descriptionCounter">
+                              <h2 class="title">Lap Counter Description</h2>
+                              <p class="back">&nbsp;[Sign Up!]</p>
+                              <div class="forScroll">
+                                  <p class="description">The Lap Counter is a pay-per-lap fundraising system.  Laps are tracked by a chip carried by one team member only.  Sponsors (Friends, family, etc.) pay per lap the team completes.  Sponsorship pledges are <b>non-binding</b>.<br /><br />  
+
+The Lap Counter is a team competition.  The team's total amount raised from pledges will be used for competition on the night of the event.  Lap and amount raised totals will be updated realtime on this website on the night of the event.<br /><br />
+    
+The chip is a NON-BENDABLE sticker that you can place on any item that your team wishes to carry.  Decorated items are encouraged.<br /><br />
+    
+    The competition will be split up into two groups: walking and running.  There will be one chip per team.<br /><br />
+    
+    <p class="back">&nbsp;[Sign Up!]</p></p>
+    
+    <h3 class="subTitle">More On Pledging</h3>
+    <p class="description">A sponsor specifies the amount per lap they would like to donate.  This is called a pledge. Sponsorship pledges are <b>non-binding</b>.<br /><br />
+
+Sponsorship pledges are made to individuals within a team.  All pledges made to team members will be added up to get the team pledge total.  The team pledge total will be used for competition on the night of the event.<br /><br />
+
+This website will be used as a method to track pledges.  Just log into your myCandles account to view all of your received pledges and who they came from.<br /><br />
+<p class="back">&nbsp;[Sign Up!]</p>
+                                  </p><!-- end description -->
+                              </div><!-- end forScroll -->
+                          </div><!-- end descriptionCounter -->
+                          <div id="descriptionOlympics">
+                              <h2 class="title">Relay Olympics Description</h2>
+                              <p class="back">&nbsp;[Sign Up!]</p>
+                              <div class="forScroll">
+                                  <p class="description">Relay Olympics consists of field games, Queen of the Night, Minute-to-Win-it games, themed laps and a hot wing eating competition! You and your team compete in these events together to accumulate candles. The team with the most candles at the end of the night is the Relay Olympics Champion! <p class="back">&nbsp;[Sign Up!]</p>
+                                  </p>
+                                  
+                              </div><!-- end forScroll -->
+                          </div><!-- end descriptionOlympics -->
+                     </div><!-- end descriptionTotal -->
+            </div><!-- end counterBkg -->
+    {% endblock content %}

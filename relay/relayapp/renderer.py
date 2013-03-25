@@ -183,3 +183,31 @@ def renderMyCandles(request):
 	else:
 		print('user is not authenticated')
 		return render(request, 'base_signin.html')
+
+def renderMyCandlesPage(request, User):
+	if request.user.is_authenticated():
+		# Do something for authenticated users.
+		t = get_template('base_myCandles.html')
+		context = {'pagesButtonGeneral': 'generalDown', 
+			'pagesButtonGreek': 'greeksDown', 
+			'pagesButtonCorps': 'corpsDown', 
+			'onLoad': 'cool()',
+			'username': User
+			}
+		c = template.Context(context)
+		r = t.render(c)
+		return HttpResponse(r)
+	else:
+		print('user is not authenticated')
+		return render(request, 'base_signin.html')
+		
+def renderLogin(request):
+	t = get_template('base_login.html')
+	context = {'pagesButtonGeneral': 'generalDown', 
+		'pagesButtonGreek': 'greeksDown', 
+		'pagesButtonCorps': 'corpsDown', 
+		'onLoad': 'setupCounterRegPage()'
+		}
+	c = template.Context(context)
+	r = t.render(c)
+	return HttpResponse(r)

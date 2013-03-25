@@ -1,45 +1,32 @@
 // var __proxy = 'requests/proxy.php?__url=http://www.vtrelaycandles.org';
 var __proxy = window.location.host == 'localhost'  ? 'requests/proxy.php?__url=http://localhost:8000' : '';
 
+
+
 var info = "";
-var __type = "company";
-
-// Search bar
-
-$(document).ready(function ($) {
-jQuery.expr[":"].contains = jQuery.expr.createPseudo(function(arg) {
-    return function( elem ) {
-        return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
-    };
-  });
-
-  function listFilter(list) {
-    var input = $("#searchBox");
-
-        $(input)
-            .change(function () {
-            var filter = $(this).val();
-            if (filter) {
-                $('tr').find("td:not(:Contains(" + filter + "))").parent().hide();
-                $('tr').find("td:Contains(" + filter + ")").parent().show();
-                $("#forScroll").mCustomScrollbar("update");
-            } else {
-                $('tr').show();
-            }
-            $("#forScroll").mCustomScrollbar("update");
-            return false;
-        })
-            .keyup(function () {
-            $(this).change();
-        });
-  }
-
-  $(function () {
-    listFilter($(".greekRow"));
-  });
-}(jQuery));
 
 //Feedback slide up
+
+function sortResult(data) {
+    data = data.sort(function (a, b) {
+        var prop = "company_candles_total";
+        if(b[prop] instanceof String){
+            a[prop] = a[prop].toLowerCase();
+            b[prop] = b[prop].toLowerCase();
+        }
+        if(b[prop] > a[prop]){return 1;}
+        if(b[prop] < a[prop]){
+            return -1;}
+        else{
+            return (compareThings(a["company_name"], b["company_name"]));
+        }
+
+       // return (compareThings(b["team_candles_total"], a["team_candles_total"]));
+    });
+    setupTable(data);
+    info = data;
+}
+
 
 $(document).ready(function () {
     $("#feedbackTab").click(function (event) {
@@ -66,8 +53,41 @@ $(document).ready(function () {
     });
 });
 
-//Column sorting
 
+
+
+$(document).ready(function ($) {
+jQuery.expr[":"].contains = jQuery.expr.createPseudo(function(arg) {
+    return function( elem ) {
+        return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+    };
+  });
+  function listFilter(list) {
+    var input = $("#searchBox");
+
+    $(input)
+      .change( function () {
+        var filter = $(this).val();
+        if(filter) {
+          $('tr').find("td:not(:Contains(" + filter + "))").parent().hide();
+          $('tr').find("td:Contains(" + filter + ")").parent().show();
+        } else {
+          $('tr').show();
+        }
+        return false;
+      })
+    .keyup( function () {
+        $(this).change();
+    });
+  }
+
+  $(function () {
+    listFilter($(".greekRow"));
+  });
+}(jQuery));
+
+
+			//Column sorting
 $(function() {
     $('#sorterHeader tr th').click(function() {
         var id = $(this).attr('id');
@@ -84,39 +104,8 @@ $(function() {
 
 });
 
-__sortFields = {
-	company: {
-		sort_name: "company_name",
-		sort_donations: "company_donations_total",
-		sort_registration: "company_registration_candles",
-		sort_events: "company_event_candles",
-		sort_tshirts: "company_tshirt_candles",
-		sort_total: "company_candles_total",
-	},
-	team: {
-		sort_name: "team_name",
-		sort_donations: "team_donations_total",
-		sort_registration: "team_registration_milestone_candles",
-		sort_events: "team_event_milestone_candles",
-		sort_tshirts: "team_tshirt_milestone_candles",
-		sort_total: "team_candles_total",
-	},
-	participant: {
-		sort_name: "participant_first_name",
-		sort_donations: "participant_donations_total",
-		sort_registration: "participant_registration_milestone_candles",
-		sort_events: "participant_event_milestone_candles",
-		sort_tshirts: "participant_tshirt_milestone_candles",
-		sort_total: "participant_candles_total",
-	}
-}
-
 function sortResults(prop, asc) {
     arr = info;
-
-    var __name = __sortFields[__type].sort_name;
-
-    prop = __sortFields[__type][prop];
 
     arr = arr.sort(function (a, b) {
         var thing1 = a.get(prop);
@@ -133,7 +122,7 @@ function sortResults(prop, asc) {
             if (thing1 < thing2) {
                 return -1;
             } else {
-                return (compareThings(a.get(__name), b.get(__name)));
+                return (compareThings(a.get("company_name"), b.get("company_name")));
             }
         } else {
             if (thing2 > thing1) {
@@ -142,7 +131,7 @@ function sortResults(prop, asc) {
             if (thing2 < thing1) {
                 return -1;
             } else {
-                return (compareThings(a.get(__name), b.get(__name)));
+                return (compareThings(a.get("company_name"), b.get("company_name")));
             }
         }
     });
@@ -164,25 +153,15 @@ function compareThings(thing1, thing2) {
 function showResults (arr) {
     var html = '';
 
-    if ( __type == "company" ) {
-	    $('#team_table_body').html(
-	                _.template($('#companies-list-row-template').html(),
-	                    {companies: arr}));
-    } else if ( __type == "team" ) {
-	    $('#team_table_body').html(
-	                _.template($('#teams-list-row-template').html(),
-	                    {teams: arr}));
-    } else if ( __type == "participant" ) {
-	    $('#team_table_body').html(
-	                _.template($('#participants-list-row-template').html(),
-	                    {participants: arr}));
-    }
+    $('#greekList_body').html(
+                _.template($('#companies-list-row-template').html(),
+                    {companies: arr}));
 }
 
 // #
 // Default route
 CompaniesListView = Backbone.View.extend({
-	el: $('#team_table_body'),
+	el: $('#greekList_body'),
 	render: function(){
 		var that = this;
 
@@ -192,7 +171,6 @@ CompaniesListView = Backbone.View.extend({
 		$('#company_name').text('Company Name');
 		$('#pagesHeaderTxt').text('Greeks');
 		$('#search-area, #sorterHeader, #forScroll, #greekPagesCheck').show();
-		__type = "company";
 
 		CompaniesCollection.fetch({
 			success: function(companies){
@@ -212,16 +190,15 @@ CompaniesListView = Backbone.View.extend({
 // #/company/:id
 // View for the teams in a company
 CompanyTeamsListView = Backbone.View.extend({
-	el: $('#team_table_body'),
+	el: $('#greekList_body'),
 	render: function(id){
 		var that = this;
 
 		$(this.el).empty();
 		$('#content').empty();
 		$('#loadingImg').show();
-		$('#sort_name').text('Team Name');
+		$('#company_name').text('Team Name');
 		$('#search-area, #sorterHeader, #forScroll, #greekPagesCheck').show();
-		__type = "team";
 
 		var c = new Company({id: id});
 		c.fetch({
@@ -253,17 +230,15 @@ CompanyTeamsListView = Backbone.View.extend({
 // #/team/:id
 // View for listing participants in a team
 ParticipantsListView = Backbone.View.extend({
-	el: $('#team_table_body'),
+	el: $('#greekList_body'),
 	render: function(id){
 		var that = this;
 
 		$(this.el).empty();
 		$('#content').empty();
 		$('#loadingImg').show();
-		$('#sort_name').text('Participant Name');
+		$('#company_name').text('Participant Name');
 		$('#search-area, #sorterHeader, #forScroll, #greekPagesCheck').show();
-
-		__type = "participant";
 
 		var t = new Team({id: id}).fetch({
 			success: function(team){
@@ -300,7 +275,6 @@ ParticipantSingleView = Backbone.View.extend({
 		var that = this;
 		var P = new Participant({id: id});
 		$('#search-area, #sorterHeader, #forScroll, #greekPagesCheck').hide();
-		jQuery(".forScroll").mCustomScrollbar("destroy");
 		P.fetch({
 			success: function(participant){
 
@@ -311,19 +285,13 @@ ParticipantSingleView = Backbone.View.extend({
 					participant: participant
 				};
 
-                                            _.defer(function(){
+				$('#pagesHeaderTxt').html(
+					_.template($('#participant-title-template').html(), vars));
 
-                                                $('#pagesHeaderTxt').html(
-                                                    _.template($('#participant-title-template').html(), vars));
+				$(that.el).html(
+					_.template($('#participant-single-template').html(), vars));
 
-                                                $(that.el).html(
-                                                    _.template($('#participant-single-template').html(), vars));
-
-                                            });
-
-                                            _.defer(function(){
-                                                jQuery(".forScroll").mCustomScrollbar();
-                                            });
+                                            jQuery(".forScroll").mCustomScrollbar("update");
 			}
 		});
 

@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+{% block scrollBar %}
+
+<link href="/css/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css" />
+	<script>
+
+	//Scrollbar
+	    (function ($) {
+	        $(window).load(function () {
+	                $("#forScroll").mCustomScrollbar();
+	        });
+	    })(jQuery);
+
+
+	</script>
+{% endblock scrollBar %}
+
+{% block scripts %}
+
+<script type="text/javascript">
+		//Get data
+	    var info = "";
+		function setupSignUpPage()
+		{
+			$.get("http://vtrelaycandles.org/teams/all/", function (data,status) {
+				for (var item in data) {
+	                record = data[item];
+				}
+			    setupTable(data);
+			    info = data;
+			});
+		}
+		
+		var string = "";
+		function setupTable(data) 
+		{
+			for(x in data){
+			    string = string + "<tr id='" + data[x].id + "' class='signUpTeamRow'><td onClick='highlightClick(event)'  class='signUpTeamRowFirstName'>" + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + data[x].name + "</td></tr>";
+			}//end for loop
+		document.getElementById("loadingSignImg").style.display = "none";
+		document.getElementById("signUp_body").innerHTML = string;
+		jQuery("#forScroll").mCustomScrollbar("update");
+		}//end setupTable
+
+		
+			
+	//Search filter
+	
+	//Creates a new event handler for uppercase letters entered by the user
+	$(document).ready(function ($) {
+jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function(arg) {
+    return function( elem ) {
+        return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+    }; //end return function
+  });//end jQuery.expr
+	
+	//Takes an input
+	function listFilter(list) {
+    var input = $(".signUpEntry");
+	
+	//filters the input
+    $(input)
+      .change( function () {
+        var filter = $(this).val();
+        if(filter) {
+          $('tr').find("td:not(:Contains(" + filter + "))").parent().hide();
+          $('tr').find("td:Contains(" + filter + ")").parent().show();
+		  $("#forScroll").mCustomScrollbar("update");
+        } else {
+          $('tr').show();
+		  jQuery("#forScroll").mCustomScrollbar("update");
+        }
+        return false;
+      })
+    .keyup( function () {
+        $(this).change();
+    });//end input .change
+  }//end listFilter
+
+	//Specifies what to filter.  In this instance a class that is assigned to a table row
+	$(function () {
+    	listFilter($(".signUpTeamRow"));
+  	});//end function
+}(jQuery));//end document ready
+		
+		
+	function highlightClick(event) {
+	    if (document.getElementById("highlight") != null) {
+	        document.getElementById("highlight").id = "";
+	    }
+	    event.target.id = 'highlight';
+	} 
+		
+		
+		
+		//Highlight team
+		$(document).ready(function(){
+		    $(".signUpTeamRow").on("click", function () {
+		        alert("ASDF");
+				$(".highlight").removeClass("highlight");
+    			$(this).addClass("highlight");
+		}); //end document ready
+
+		//Amends the "signup" boolean for teams in the call
+		$("#signUpSubmit").click(function(){
+		  	var arr = document.getElementById("highlight");
+			if($(arr).is(':visible')){
+				$.post("http://vtrelaycandles.org/teams/registration/",
+					{
+						'team':arr.parentNode.id,
+						'signup':"true",
+					},
+					function(data,status) {
+				  		//alert("Data: " + data + "\nStatus: " + status);
+				  		if(status == "success") {
+				  			alert("Thank you for registering for this event!")
+							window.location = 'http://vtrelaycandles.org/teamList'
+				  		} else {
+				  			alert("We could not find that email in our system :(")
+				  		}
+				}); //end post
+			} //end if
+			else {
+				alert('Please select a team.  :)');
+			}// end else
+		});//end #signUpSubmit
+	});//end document ready
+	
+	
+		$(function () {
+		    $('#sorterHeader tr th').click(function () {
+		        var id = $(this).attr('id');
+		        var asc = (!$(this).attr('asc')); // switch the order, true if not set
+		        // set asc="asc" when sorted in ascending order
+		        $('#sorterHeader tr th').each(function () {
+		            $(this).removeAttr('asc');
+		        });
+		        if (asc) $(this).attr('asc', 'asc');
+
+		        sortResults(id, asc);
+		    });
+		});
+
+		function sortResults(prop, asc) {
+		    arr = info;
+		    alert(arr);
+		    arr = arr.sort(function (a, b) {
+		        if (asc) return (compareThings(a[prop], b[prop]));
+		        else return (compareThings(b[prop], a[prop]));
+		    });
+		    showResults(arr);
+		}
+
+		function compareThings(thing1, thing2) {
+		    if (thing1 > thing2) {
+		        return 1;
+		    }
+		    if (thing1 < thing2) {
+		        return -1;
+		    }
+		    if (thing1 == thing2) {
+		        return 0;
+		    }
+		}
+
+		function showResults(arr) {
+		    var html = '';
+		    for (var e in arr) {
+		        stuff = info[e];
+		        html += "<tr id='" + e + "' class='signUpTeamRow'><td onClick='highlightClick(event)'  class='signUpTeamRowFirstName'>" + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + stuff.fields.name + "</td></tr>";
+		    }
+		    $('#signUp_body').html(html);
+		    alert(html);
+		}
+
+</script>
+
+{% endblock scripts %}
+	{% block content %}
+    	<div id="signUpBkg">
+    		<div id="signUpCandles">
+					<div id="signUpHeaderBkg">
+						<h2 id="signUpCandlesTxt">Sign Up For Candles</h2>
+                        <h2 id="signUpRelayTxt">Sign Up For Relay</h2>
+					</div><!-- end signUpHeaderBkg -->
+					<label class="signUpTxt">Search team name:&nbsp;<input class="signUpEntry" type="text" name="email"></label><br>
+                	<input id="signUpSubmit" type="submit" value="Sign Up">
+					<div id="signUpCheck">
+						<table id="sorterHeader">
+							<tr>
+							    <th id="name" class="sorterTeamName">Team Name</th>
+							</tr>
+						</table>
+						<img id="loadingSignImg" src="img/loading_bar.gif"/>
+						<div id="forScroll">
+							<table id="table">
+								<tbody id="signUp_body">		
+								</tbody>
+							</table><!-- end table -->
+						</div><!-- end forScroll -->
+					</div><!-- end signUpCheck -->
+                </div><!-- end signUpCandles -->
+                <div id="signUpRelay">
+                    <div id="boxes">
+                    	<div class="box"><a href="http://bit.ly/Y4xezV" id="new" target="_blank">Start A New Team</a></div>
+                        <div class="box"><a href="http://bit.ly/ZZHREv" id="exist" target="_blank">Join An Existing Team</a></div>
+                        <div class="box"><a href="http://bit.ly/SvZfyc" id="survivor" target="_blank">Walk The Survivor Lap</a></div>
+                    </div>
+                </div><!-- end signUpRelay -->
+            </div><!-- end signUpBkg -->
+    {% endblock content %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+	{% block content %}
+    <div id="pagesBkg">
+				<div id="pagesHeaderBkg">
+					<h2 id="pagesHeaderTxt">How It Works</h2>
+                    <ul id="pagesBack">
+                    	<!-- <li class="pagesBackLink"><a href="#">Individual</a>&nbsp;-</li> -->
+                   		<li class="pagesBackLink"><a href="/teamList">How It Works</a>&nbsp;-</li> 
+                    	<li class="pagesBackLink"><a href="/home">Home</a></li>
+                    </ul>
+				</div>
+                <div id="teamBoxes">
+					<div class="teamBox">
+						<a href="/howitworksCorps" id="cadets">Cadets For Cure</a>
+					</div>
+					<div class="teamBox">
+						<a href="/howitworksGreek" id="greeks">Greeks For Life</a>
+					</div>
+					<div class="teamBox">
+						<a href="/howitworksGeneral" id="general">General Teams</a>
+					</div><!-- end teamBox -->
+				</div><!-- end teamBoxes -->
+				<div id="art">
+                </div>	
+				<div id="howItWorksCheck">
+					<table id="sorterHeader">
+						<tr>
+							<th id="points" class="sorterPosition">Pos.</th>
+							<th id="fname" class="sorterTeamName">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Team Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="searchHow">Search:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="searchBox" type="text" name="teamName"></label></th>
+							<th id="signup" class="sorterOther">Milestone</th>
+							<th id="donations" class="sorterOther">Emails</th>
+							<th class="sorterOther">Events</th>
+							<th class="sorterOther">Total</th>
+						</tr>
+					</table>
+					<div id="forScroll" style="visibility:hidden;">
+						<table id="table">
+							<tbody id="team_table_body">		
+							</tbody>
+						</table><!-- end table -->
+					</div><!-- end forScroll -->
+				</div><!-- end howItWorksCheck -->
+			</div><!-- end pagesBkg -->
+    {% endblock content %}
