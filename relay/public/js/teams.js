@@ -122,7 +122,7 @@ $(function () {
 });
 
 
-__sortFields = {
+var __sortFields = {
     team: {
         sort_name: "team_name",
         sort_donations: "team_donation_milestone_candles",
@@ -230,8 +230,8 @@ TeamsListView = Backbone.View.extend({
 						{teams: teams.models}));
 
 				info = _.toArray(teams.models);
-				console.log('not cool');
-				//jQuery("#forScroll").mCustomScrollbar("update");
+				// console.log(info);
+				jQuery("#forScroll").mCustomScrollbar("update");
 			}
 		});
 	}
@@ -269,7 +269,7 @@ ParticipantsListView = Backbone.View.extend({
 								participants: participants.models
 							}));
 						info = _.toArray(participants.models);
-						    //jQuery("#forScroll").mCustomScrollbar("update");
+						jQuery("#forScroll").mCustomScrollbar("update");
 					}
 				});
 			}
