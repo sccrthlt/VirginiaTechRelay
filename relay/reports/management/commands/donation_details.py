@@ -54,6 +54,7 @@ def setupDonation(info):
         donation_date = datetime.strptime(info['Donation Date'], '%m/%d/%y %H:%M')
         donation_date_parsed = donation_date.strftime('%y-%m-%d')
 
+		
         participants = Participant.objects.filter(
             fname = info['Participant Credited First Name'],
             lname = info['Participant Credited Last Name']

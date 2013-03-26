@@ -186,7 +186,7 @@ def renderMyCandles(request):
 
 def renderMyCandlesPage(request, User):
 	if request.user.is_authenticated():
-		if request.user.username = User:
+		if request.user.username == User:
 			# Do something for authenticated users.
 			t = get_template('base_myCandles.html')
 			context = {'pagesButtonGeneral': 'generalDown', 
