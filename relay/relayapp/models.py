@@ -65,7 +65,10 @@ class Team_Captain(models.Model):
 class Event(models.Model):
     name = models.CharField(max_length=100)
     date = models.DateField()
+    start_time = models.TimeField(default=None, blank=True, null=True)
+    end_time = models.TimeField(default=None, blank=True, null=True)
     candles_rewarded = models.IntegerField()
+    prize = models.CharField(max_length=100, default=None, blank=True, null=True)
     description = models.TextField(blank=True)
     image = models.URLField(blank = True)
     homepage = models.BooleanField()
