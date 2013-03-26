@@ -3,6 +3,10 @@ from django import template
 from django.http import HttpResponse
 from django.contrib.auth import authenticate
 from django.shortcuts import render
+from relayapp.models import *
+from django.db.models import Sum
+from django.db.models import Count
+from django.forms.models import model_to_dict
 
 def renderRedirectHome(request):
 	t = get_template('base_redirect.html')
@@ -63,6 +67,20 @@ def renderHome(request):
 		'pagesButtonCorps': 'corpsDown', 
 		'onLoad': 'setupPage()',
 		'scrollbarID': '#forScroll'
+		}
+	c = template.Context(context)
+	r = t.render(c)
+	return HttpResponse(r)
+
+def renderHomeNew(request):
+	events = Event.objects.all()
+	t = get_template('base_home_new.html')
+	context = {'pagesButtonGeneral': 'generalDown', 
+		'pagesButtonGreek': 'greeksDown', 
+		'pagesButtonCorps': 'corpsDown', 
+		'onLoad': 'setupPage()',
+		'scrollbarID': '#forScroll',
+		'events': events
 		}
 	c = template.Context(context)
 	r = t.render(c)

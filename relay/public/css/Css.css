@@ -3407,3 +3407,162 @@ table
 {
 	margin:0 0 0 10px;
 }
+
+
+#homePagesCheck
+{
+	box-shadow: 0px 4px 5px #222222;
+	height: 400px;
+	margin-left: 27px;
+	margin-top: 100px;
+	width: 900px;
+}
+#homePagesCheck #forScroll
+{
+	float: left;
+	height: 350px;
+	overflow: hidden;
+	width: 100%;
+}
+#homePagesCheck #forScroll #table
+{
+	border: none;
+	border-collapse: separate;
+	border-spacing: 0px;
+	float: left;
+	margin-left: 0px;
+	margin-top: 0px;
+	width: 100%;
+}
+#homePagesCheck #forScroll #table #teamList_body
+{
+	border: none;
+	border-color: none;
+	border-spacing: 0px;
+	box-shadow: none;
+	height: 100%;
+	width: 100%;
+}
+#homePagesCheck #forScroll #table #teamList_body a
+{
+	color: #FFF;
+	text-decoration: underline;
+}
+#homePagesCheck #forScroll #table #teamList_body a:hover
+{
+	text-decoration: none;
+}
+#homePagesCheck #sorterHeader
+{
+	background-image: url('../img/everyone_sorter_background_11.png');
+	float: left;
+	margin-left: 0px;
+	height: 39px;
+	width: 100%;
+}
+#homePagesCheck #sorterHeader .sorterPosition
+{
+	color: white;
+	float: left;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	margin-top: 10px;
+	text-align: center;
+	width: 48px;
+}
+#homePagesCheck #sorterHeader #day
+{
+	width: 202px;
+}
+#homePagesCheck #sorterHeader #eventName
+{
+	width: 152px;
+}
+#homePagesCheck #sorterHeader #time
+{
+	width: 72px;
+}
+#homePagesCheck #sorterHeader #description
+{
+	width: 252px;
+}
+#homePagesCheck #sorterHeader #candles
+{
+	width: 72px;
+}
+#homePagesCheck #sorterHeader #prize
+{
+	width: 48px;
+}
+#homePagesCheck #sorterHeader th
+{
+	cursor: pointer;
+}
+#homePagesCheck #sorterHeader .sorterField
+{
+		text-align: center;
+		font-weight: bold;
+		vertical-align:middle;
+		color: white;
+		font-size:12px;
+		border-left: 2px solid #222222;
+		font-family: Arial;
+		font-weight:bold;
+		height: 39px;
+		padding:15px 0 0 0;
+		float:left;
+}
+#homePagesCheck #forScroll #table #teamList_body .teamRow
+{
+	border-spacing: 0px;
+	box-shadow: none;
+	color: white;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	list-style-type: none;
+	width: 100%;
+	margin-bottom:0px;
+}
+table
+{
+	border-spacing: 0px;
+}
+#homePagesCheck #forScroll #table #teamList_body .teamRow #day
+{
+	width:200px;
+}
+#homePagesCheck #forScroll #table #teamList_body .teamRow #eventName
+{
+	width:150px;
+	font-weight:900;
+}
+#homePagesCheck #forScroll #table #teamList_body .teamRow #time
+{
+	width:70px;
+}
+#homePagesCheck #forScroll #table #teamList_body .teamRow #description
+{
+	width:250px;
+	text-align:left;
+}
+#homePagesCheck #forScroll #table #teamList_body .teamRow #candles
+{
+	width:70px;
+}
+#homePagesCheck #forScroll #table #teamList_body .teamRow #prize
+{
+	width:100px;
+}
+#homePagesCheck #forScroll #table #teamList_body .teamRow .rowCell 
+{
+	padding:0;
+	float:left;
+	height:48px;
+	border-left: 2px solid #222222;
+	text-align:center;
+}
+#homePagesCheck #forScroll #table #teamList_body .teamRow .rowCell h2, #homePagesCheck #forScroll #table #teamList_body .teamRow .rowCell p
+{
+	margin:0;
+}

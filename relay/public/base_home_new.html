@@ -3,75 +3,66 @@
 {% block scripts %}
 {% endblock scripts %}
 	{% block content %}
-			<div id="pagesBkg">
-            	<div id="pagesHeaderBkg">
-						<h2 id="pagesHeaderTxt">
-							General Teams
-						</h2>
-						<ul id="pagesBack">
-							<!-- <li class="pagesBackLink"><a href="#">Individual</a>&nbsp;-</li> -->
-							<li class="pagesBackLink">
-								<a href="teamList.html#">General Teams</a>&nbsp;-
-							</li>
-							<li class="pagesBackLink">
-								<a href="home.html">Home</a>
-							</li>
-						</ul>
-					</div>
-				<div id="search-area"><label class="search">Search:&nbsp;&nbsp;<input id="searchBox" type="text" name="teamName"></label></div>
-
-					<div id="content"></div>
-					<div id="pagesCheck">
+					<div id="homePagesCheck">
 						<table id="sorterHeader">
 							<tr>
-								<th id="position" class="sorterPosition">
-									Pos.
+								<th id="day" class="sorterField">
+									Date
 								</th>
-								<th id="sort_name" class="sorterTeamName">
-									&nbsp;&nbsp;&nbsp;&nbsp;Team Name
+								<th id="eventName" class="sorterField">
+									Event Name
 								</th>
-								<th id="sort_donations" class="sorterOther">
-									Milestone
+								<th id="time" class="sorterField">
+									Time
 								</th>
-								<th id="sort_emails" class="sorterOther">
-									Emails
+								<th id="description" class="sorterField">
+									Description
 								</th>
-								<th id="sort_events" class="sorterOther">
-									Events
+								<th id="candles" class="sorterField">
+									Candles
 								</th>
-								<th id="sort_total" class="sorterOther">
-									Total
+								<th id="prize" class="sorterField">
+									Prize
 								</th>
 							</tr>
-						</table><img id="loadingImg" src="/img/loading_bar.gif">
+						</table>
 						<div id="forScroll">
 							<table id="table">
 								<tbody id="teamList_body">
-                                    <tr class='teamRow' id=" + item + ">
-                                        <td id='teamRowPosition'>
-                                            record.position
-                                        </td>
-                                        <td class='teamRowFirstName'>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;record.team_name
-                                        </td>
-                                        <td id='teamRowMilestone'>
-                                            " + record.team_donation_milestone_candles + "
-                                        </td>
-                                        <td id='teamRowEmails'>
-                                            " + record.team_email_milestone_candles + "
-                                        </td>
-                                        <td id='teamRowEvents'>
-                                            " + record.team_event_milestone_candles + "
-                                        </td>
-                                        <td id='teamRowTotal'>
-                                            " + record.team_candles_total + "
-                                        </td>
-                                    </tr>
+                                	{% if event.homepage %}
+                                            <tr class='teamRow' id=" + item + ">
+                                            	{% if event[0] %}
+                                                    <td id='day' class="rowCell">
+                                                        <h2>{{ event.date|date:"D" }}</h2>
+                                                        <p>{{ event.date|date:"n/d" }}</p>
+                                                    </td>
+                                                {% endif %}
+                                                {% for event in events %}
+                                                <tr>
+                                                    <td id="eventName" class='rowCell'>
+                                                        {{ event.name }} {{event.homepage }}
+                                                    </td>
+                                                    <td id='time' class="rowCell">
+                                                        {{ event.start_time }}&nbsp;to&nbsp;{{ event.end_time }}
+                                                    </td>
+                                                    <td id='description' class="rowCell">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ event.description }}
+                                                    </td>
+                                                    <td id='candles' class="rowCell">
+                                                        {{ event.candles_rewarded }}
+                                                    </td>
+                                                    <td id='prize' class="rowCell">
+                                                        {{ event.prize }}
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tr>
+                                    {% endif %}
+                                
                                 </tbody>
 							</table><!-- end table -->
 						</div><!-- end forScroll -->
 					</div><!-- end pagesCheck -->
-			</div><!-- end pagesBkg -->
 
 
 
