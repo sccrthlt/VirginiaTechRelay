@@ -197,13 +197,21 @@ class Olympics_Lap_Counter_Signup(models.Model):
 	datetime = models.DateTimeField(default=None, blank=True, null=True)
 
 class Pledge(models.Model):
-	sponsor = models.ForeignKey(User)
+	sponsor = models.CharField(max_length=100, default=None, blank=True, null=True)
 	participant = models.ForeignKey('Participant', default=None, blank=True, null=True)
 	pledge_amount = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
 	max_pledge_amount = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
 	datetime = models.DateTimeField(default=None, blank=True, null=True)
 
-
+class Counter(models.Model):
+	team = models.ForeignKey(User)
+	strip_id = models.PositiveIntegerField(default=0, blank=True)
+	pledge_amount = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
+	max_pledge_amount = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
+	laps_completed = models.PositiveIntegerField(default=0, blank=True)
+	
+	
+	
 #add tshirt milestone record for copmanies
 
 #participant percentage registration milestone company

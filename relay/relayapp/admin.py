@@ -83,6 +83,12 @@ class PledgeAdmin(admin.ModelAdmin):
     list_filter = ['sponsor']
     search_fields = ['sponsor']
 
+class CounterAdmin(admin.ModelAdmin):
+    list_display = ('team', 'strip_id', 'pledge_amount', 'max_pledge_amount', 'laps_completed')
+    list_filter = ['team']
+    search_fields = ['team']
+
+admin.site.register(Counter, CounterAdmin)
 admin.site.register(Pledge, PledgeAdmin)	
 admin.site.register(Team_Captain, TeamCaptainAdmin)
 admin.site.register(Olympics_Lap_Counter_Signup, OlympicsLapCounterSignupAdmin)

@@ -3,17 +3,10 @@
 <title>VT Relay Candles - Lap Counter and Relay Olympics Signup</title>
 {% endblock header %}
 
+
+
 {% block scripts %}
 
- <script src="/js/jquery.mCustomScrollbar.js"></script>
- <script>
-//Scrollbar
-	    //(function ($) {
-	        //$(window).load(function () {
-	                //$("#forScroll").mCustomScrollbar();
-	        //});
-	    //})(jQuery);
-</script>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"> </script>
 <script src="/js/jquery.mCustomScrollbar.js"></script>
@@ -45,7 +38,7 @@
 			}//end for loop
 		$("#loadingSignImgCandles").attr("style", "visibility:hidden;");
 		document.getElementById("myCandlesReg_body").innerHTML = string;
-		jQuery("#forScroll").mCustomScrollbar("update");
+		jQuery(".forScroll").mCustomScrollbar("update");
 		}//end setupTable
 
 
@@ -76,7 +69,7 @@
 		$("#loadingSignImgOlympics").attr("style", "visibility:hidden;");
 		document.getElementById("counterReg_body").innerHTML = string;
 		document.getElementById("olympicsReg_body").innerHTML = string;
-		jQuery("#signIn #forScroll").mCustomScrollbar("update");
+		jQuery("#signIn .forScroll").mCustomScrollbar("update");
 		}//end setupTable
 
 
@@ -101,10 +94,10 @@ jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function(arg) {
         if(filter) {
           $('#signIn tr').find("td:not(:Contains(" + filter + "))").parent().hide();
           $('#signIn tr').find("td:Contains(" + filter + ")").parent().show();
-		  $("#signIn #forScroll").mCustomScrollbar("update");
+		  $("#signIn .forScroll").mCustomScrollbar("update");
         } else {
           $('#signIn tr').show();
-		  jQuery("#signIn #forScroll").mCustomScrollbar("update");
+		  jQuery("#signIn .forScroll").mCustomScrollbar("update");
         }
         return false;
       })
@@ -141,14 +134,14 @@ jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function(arg) {
         if(filter) {
           $('#selectTeamName #registerLapCounter tr').find("td:not(:Contains(" + filter + "))").parent().hide();
           $('#selectTeamName #registerLapCounter tr').find("td:Contains(" + filter + ")").parent().show();
-		  $("#selectTeamName #registerLapCounter #forScroll").mCustomScrollbar("update");
+		  $("#selectTeamName #registerLapCounter .forScroll").mCustomScrollbar("update");
 		  var arr = document.getElementById("highlight");
 		  if($(arr).is(':hidden')){
 		  } else {
 		  }
         } else {
           $('#selectTeamName #registerLapCounter tr').show();
-		  jQuery("#selectTeamName #registerLapCounter #forScroll").mCustomScrollbar("update");
+		  jQuery("#selectTeamName #registerLapCounter .forScroll").mCustomScrollbar("update");
         }
         return false;
       })
@@ -185,14 +178,14 @@ jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function(arg) {
         if(filter) {
           $('#selectTeamName #registerOlympics tr').find("td:not(:Contains(" + filter + "))").parent().hide();
           $('#selectTeamName #registerOlympics tr').find("td:Contains(" + filter + ")").parent().show();
-		  $("#selectTeamName #registerOlympics #forScroll").mCustomScrollbar("update");
+		  $("#selectTeamName #registerOlympics .forScroll").mCustomScrollbar("update");
 		  var arr = document.getElementById("highlight");
 		  if($(arr).is(':hidden')){
 		  } else {
 		  }
         } else {
           $('#selectTeamName #registerOlympics tr').show();
-		  jQuery("#selectTeamName #registerOlympics #forScroll").mCustomScrollbar("update");
+		  jQuery("#selectTeamName #registerOlympics .forScroll").mCustomScrollbar("update");
         }
         return false;
       })
@@ -482,7 +475,7 @@ $("#descriptionTotal .back").on("click", function () {
                                       </tr>
                                   </table>
                                   <img id="loadingSignImgCounter" src="/img/loading_bar.gif"/>
-                                  <div id="forScroll">
+                                  <div class="forScroll">
                                       <table id="table">
                                           <tbody id="counterReg_body">
                                           </tbody>
@@ -521,7 +514,7 @@ $("#descriptionTotal .back").on("click", function () {
                                       </tr>
                                   </table>
                                   <img id="loadingSignImgOlympics" src="/img/loading_bar.gif"/>
-                                  <div id="forScroll">
+                                  <div class="forScroll">
                                       <table id="table">
                                           <tbody id="olympicsReg_body">
                                           </tbody>
@@ -544,7 +537,7 @@ $("#descriptionTotal .back").on("click", function () {
                           <div id="descriptionCounter">
                               <h2 class="title">Lap Counter Description</h2>
                               <p class="back">&nbsp;[Sign Up!]</p>
-                              <div class="forScroll">
+                              <div id="forScroll">
                                   <p class="description">The Lap Counter is a pay-per-lap fundraising system.  Laps are tracked by a chip carried by one team member only.  Sponsors (Friends, family, etc.) pay per lap the team completes.  Sponsorship pledges are <b>non-binding</b>.<br /><br />  
 
 The Lap Counter is a team competition.  The team's total amount raised from pledges will be used for competition on the night of the event.  Lap and amount raised totals will be updated realtime on this website on the night of the event.<br /><br />
@@ -568,7 +561,7 @@ This website will be used as a method to track pledges.  Just log into your myCa
                           <div id="descriptionOlympics">
                               <h2 class="title">Relay Olympics Description</h2>
                               <p class="back">&nbsp;[Sign Up!]</p>
-                              <div class="forScroll">
+                              <div id="forScroll">
                                   <p class="description">Relay Olympics consists of field games, Queen of the Night, Minute-to-Win-it games, themed laps and a hot wing eating competition! You and your team compete in these events together to accumulate candles. The team with the most candles at the end of the night is the Relay Olympics Champion! <p class="back">&nbsp;[Sign Up!]</p>
                                   </p>
                                   

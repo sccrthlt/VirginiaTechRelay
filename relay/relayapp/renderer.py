@@ -7,6 +7,7 @@ from relayapp.models import *
 from django.db.models import Sum
 from django.db.models import Count
 from django.forms.models import model_to_dict
+import urllib
 
 def renderRedirectHome(request):
 	t = get_template('base_redirect.html')
@@ -186,23 +187,11 @@ def renderSignIn(request):
 	r = t.render(c)
 	return HttpResponse(r)
 
-def renderMyCandles(request):
-	if request.user.is_authenticated():
-		# Do something for authenticated users.
-		t = get_template('base_myCandles.html')
-		context = {'pagesButtonGeneral': 'generalDown', 
-			'pagesButtonGreek': 'greeksDown', 
-			'pagesButtonCorps': 'corpsDown', 
-			'onLoad': 'cool()'
-			}
-		c = template.Context(context)
-		r = t.render(c)
-		return HttpResponse(r)
-	else:
-		print('user is not authenticated')
-		return render(request, 'base_signin.html')
-
 def renderMyCandlesPage(request, User):
+	user_username = request.user.username
+	participant = Participant.objects.get(pk = user_username)
+	pledges = Pledge.objects.filter(participant = participant)
+	
 	if request.user.is_authenticated():
 		if request.user.username == User:
 			# Do something for authenticated users.
@@ -211,17 +200,32 @@ def renderMyCandlesPage(request, User):
 				'pagesButtonGreek': 'greeksDown', 
 				'pagesButtonCorps': 'corpsDown', 
 				'onLoad': 'cool()',
-				'username': User
+				'pledges': pledges,
+				'participant': participant
 				}
 			c = template.Context(context)
 			r = t.render(c)
 			return HttpResponse(r)
+		else:
+			print('user is authenticated but not under this username')
+			return render(request, 'base_login.html')
 	else:
 		print('user is not authenticated')
-		return render(request, 'base_signin.html')
+		return render(request, 'base_login.html')
 		
 def renderLogin(request):
 	t = get_template('base_login.html')
+	context = {'pagesButtonGeneral': 'generalDown', 
+		'pagesButtonGreek': 'greeksDown', 
+		'pagesButtonCorps': 'corpsDown', 
+		'onLoad': 'setupCounterRegPage()'
+		}
+	c = template.Context(context)
+	r = t.render(c)
+	return HttpResponse(r)
+	
+def renderCounter(request):
+	t = get_template('base_counter.html')
 	context = {'pagesButtonGeneral': 'generalDown', 
 		'pagesButtonGreek': 'greeksDown', 
 		'pagesButtonCorps': 'corpsDown', 

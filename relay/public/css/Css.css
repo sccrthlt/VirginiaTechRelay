@@ -1401,15 +1401,6 @@ input.signin
 	font-family: Arial;
 	text-decoration: underline;
 }
-#login
-{
-	border-radius: 20px;
-	border-style: solid;
-	float: left;
-	height: 400px;
-	margin: 80px 0 0 40px;
-	width: 40%;
-}
 #signin label
 {
 	color: white;
@@ -2704,18 +2695,18 @@ table
 	margin:0;
 	width: 162px;
 }
-#counterRegBkg #selectTeamName #registerLapCounter #signUpCheck #forScroll, #counterRegBkg #selectTeamName #registerOlympics #signUpCheck #forScroll
+#counterRegBkg #selectTeamName #registerLapCounter #signUpCheck .forScroll, #counterRegBkg #selectTeamName #registerOlympics #signUpCheck .forScroll
 {
 	float: left;
 	height: 40px;
 	width: auto;
 	overflow:hidden;
 }
-#counterRegBkg #selectTeamName #registerLapCounter #signUpCheck #forScroll .mCSB_container, #counterRegBkg #selectTeamName #registerOlympics #signUpCheck #forScroll .mCSB_container
+#counterRegBkg #selectTeamName #registerLapCounter #signUpCheck .forScroll .mCSB_container, #counterRegBkg #selectTeamName #registerOlympics #signUpCheck .forScroll .mCSB_container
 {
 	margin: 0;
 }
-#counterRegBkg #selectTeamName #registerLapCounter #signUpCheck #forScroll #table, #counterRegBkg #selectTeamName #registerOlympics #signUpCheck #forScroll #table
+#counterRegBkg #selectTeamName #registerLapCounter #signUpCheck .forScroll #table, #counterRegBkg #selectTeamName #registerOlympics #signUpCheck .forScroll #table
 {
 	border-collapse: separate;
 	border-spacing: 0;
@@ -2725,7 +2716,7 @@ table
 	margin-top: 0px;
 	width: 100%;
 }
-#counterRegBkg #selectTeamName #registerLapCounter #signUpCheck #forScroll #table #counterReg_body, #counterRegBkg #selectTeamName #registerOlympics #signUpCheck #forScroll #table #counterReg_body
+#counterRegBkg #selectTeamName #registerLapCounter #signUpCheck .forScroll #table #counterReg_body, #counterRegBkg #selectTeamName #registerOlympics #signUpCheck .forScroll #table #counterReg_body
 {
 	border: none;
 	border-color: none;
@@ -2751,7 +2742,7 @@ table
 	padding: 12px 0 0 20px;
 	text-align: left;
 }
-#counterRegBkg #selectTeamName #registerLapCounter #signUpCheck #forScroll #table #counterReg_body .signUpTeamRow, #counterRegBkg #selectTeamName #registerOlympics #signUpCheck #forScroll #table #olympicsReg_body .signUpTeamRow
+#counterRegBkg #selectTeamName #registerLapCounter #signUpCheck .forScroll #table #counterReg_body .signUpTeamRow, #counterRegBkg #selectTeamName #registerOlympics #signUpCheck .forScroll #table #olympicsReg_body .signUpTeamRow
 {
 	box-shadow: none;
 	color: white;
@@ -2761,7 +2752,7 @@ table
 	list-style-type: none;
 	width: 100%;
 }
-#counterRegBkg #selectTeamName #registerLapCounter #signUpCheck #forScroll #table #counterReg_body .signUpTeamRow:hover, #counterRegBkg #selectTeamName #registerOlympics #signUpCheck #forScroll #table #olympicsReg_body .signUpTeamRow:hover
+#counterRegBkg #selectTeamName #registerLapCounter #signUpCheck .forScroll #table #counterReg_body .signUpTeamRow:hover, #counterRegBkg #selectTeamName #registerOlympics #signUpCheck .forScroll #table #olympicsReg_body .signUpTeamRow:hover
 {
 	background-color: #003;
 	box-shadow: none;
@@ -2772,7 +2763,7 @@ table
 	list-style-type: none;
 	width: 100%;
 }
-#counterRegBkg #selectTeamName #registerLapCounter #signUpCheck #forScroll #table #counterReg_body .signUpTeamRowFirstName, #counterRegBkg #selectTeamName #registerOlympics #signUpCheck #forScroll #table #olympicsReg_body .signUpTeamRowFirstName
+#counterRegBkg #selectTeamName #registerLapCounter #signUpCheck .forScroll #table #counterReg_body .signUpTeamRowFirstName, #counterRegBkg #selectTeamName #registerOlympics #signUpCheck .forScroll #table #olympicsReg_body .signUpTeamRowFirstName
 {
 	border: none;
 	cursor: hand;
@@ -2991,7 +2982,7 @@ table
 	cursor:pointer;
 }
 
-#counterRegBkg #descriptionTotal #descriptionCounter .forScroll, #counterRegBkg #descriptionTotal #descriptionOlympics .forScroll, #counterRegBkg #myCandlesDescription #descriptionCounter .forScroll
+#counterRegBkg #descriptionTotal #descriptionCounter #forScroll, #counterRegBkg #descriptionTotal #descriptionOlympics #forScroll, #counterRegBkg #myCandlesDescription #descriptionCounter #forScroll
 {
 	float:left;
 	margin:0;
@@ -2999,11 +2990,13 @@ table
 	height:300px;
 	overflow:hidden;
 }
-#counterRegBkg #descriptionTotal #descriptionCounter .forScroll .description, #counterRegBkg #descriptionTotal #descriptionOlympics .forScroll .description, #counterRegBkg #myCandlesDescription #descriptionCounter .forScroll .description
+#counterRegBkg #descriptionTotal #descriptionCounter #forScroll .description, #counterRegBkg #descriptionTotal #descriptionOlympics #forScroll .description, #counterRegBkg #myCandlesDescription #descriptionCounter #forScroll #description
 {
 	float:left;
 	margin:20px 0 0 10px;
 	width:360px;
+	height:300px;
+	overflow:hidden;
 	font-family:Tahoma, Geneva, sans-serif;
 }
 #counterRegBkg #descriptionTotal #descriptionCounter .subTitle, #counterRegBkg #descriptionTotal #descriptionOlympics .subTitle, #counterRegBkg #myCandlesDescription #descriptionCounter .subTitle
@@ -3084,7 +3077,7 @@ table
 	height: 350px;
 	margin-left: 27px;
 	margin-top: 30px;
-	width: 400px;
+	width: 450px;
 }
 #myCandlesCounterCheck #forScroll
 {
@@ -3133,16 +3126,14 @@ table
 #myCandlesCounterCheck #sorterHeader .sorterDonorName
 {
 	float:left;
-			width:100px;
-			text-align:left;
-			padding-left:10px;
-			height:27px;
-			padding-top:11px;
-			color:white;
-			font-size:12px;
-			font-weight:bold;
-			font-family:Arial, Helvetica, sans-serif;
-			border-left: 2px solid #222222;
+	width:140px;
+	text-align:left;
+	height:27px;
+	padding-top:11px;
+	color:white;
+	font-size:12px;
+	font-weight:bold;
+	font-family:Arial, Helvetica, sans-serif;
 }
 
 #myCandlesCounterCheck #sorterHeader th
@@ -3151,16 +3142,16 @@ table
 }
 #myCandlesCounterCheck #sorterHeader .sorterOther
 {
-		width:80px;
-		height:27px;
-		text-align: center;
-		vertical-align:middle;
-		font-weight: bold;
-		color: white;
-		font-size:12px;
-		border-left: 2px solid #222222;
-		font-family: Arial;
-		font-weight:bold;
+	width:80px;
+	height:27px;
+	text-align: center;
+	vertical-align:middle;
+	font-weight: bold;
+	color: white;
+	font-size:12px;
+	border-left: 2px solid #222222;
+	font-family: Arial;
+	font-weight:bold;
 }
 #myCandlesCounterCheck #forScroll #table #teamList_body .teamRow
 {
@@ -3170,66 +3161,38 @@ table
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	list-style-type: none;
-	width: 100%;
 	margin-bottom:0px;
 }
-table
-{
-	border-spacing: 0px;
-}
-#myCandlesCounterCheck #forScroll #table #teamList_body .teamRow .teamRowPosition {
-			text-align:center;
-			margin-top:20px;
-			width:48px;
-			height:15px;
-			border:none;
-			font-size:12px;
-			font-family:arial;
-}
-#myCandlesCounterCheck #forScroll #table #teamList_body .teamRow .teamRowFirstName {
-			float:left;
-			margin-top:20px;
-			padding-left:12px;
-			text-align:left;
-			width:330px;
-			border:none;
-			font-size:12px;
-			font-family:arial;
-		}
-table
-{
-	border-spacing: 0px;
-}
 
-		#myCandlesCounterCheck #forScroll #table #teamList_body .teamRow .team_donation_milestone_candles {
-			margin-top:20px;
-		float:left;
-		border:none;
-		width:112px;
-		text-align:center;
-		}
-		#myCandlesCounterCheck #forScroll #table #teamList_body .teamRow .team_email_milestone_candles {
-			margin-top:20px;
-		float:left;
-		border:none;
-		width:112px;
-		text-align:center;
-		}
-		#myCandlesCounterCheck #forScroll #table #teamList_body .teamRow .team_event_milestone_candles {
-			margin-top:20px;
-		float:left;
-		border:none;
-		width:112px;
-		text-align:center;
-		}
-		#myCandlesCounterCheck #forScroll #table #teamList_body .teamRow .team_candles {
-			margin-top:20px;
-		float:left;
-		margin-left:26px;
-		border:none;
-		width:60px;
-		text-align:center;
-		}
+#myCandlesCounterCheck #forScroll #table #teamList_body .teamRow #donorName 
+{
+width:92px;
+text-align:left;
+border-left:none;
+}
+#myCandlesCounterCheck #forScroll #table #teamList_body .teamRow #pledge
+{
+width:47px;
+}
+#myCandlesCounterCheck #forScroll #table #teamList_body .teamRow #pledgeMax
+{
+width:49px;
+}
+#myCandlesCounterCheck #forScroll #table #teamList_body .teamRow #lapsCompleted
+{
+width:50px;
+}
+#myCandlesCounterCheck #forScroll #table #teamList_body .teamRow #total
+{
+width:45px;
+}
+#myCandlesCounterCheck #forScroll #table #teamList_body .teamRow .rowCell
+{
+padding:0;
+height:30px;
+border-left: 2px solid #222222;
+text-align:center;
+}
 
 
 
@@ -3333,59 +3296,24 @@ table
 {
 	border-spacing: 0px;
 }
-#myCandlesSettingsCheck #forScroll #table #teamList_body .teamRow .teamRowPosition {
-			text-align:center;
-			margin-top:20px;
-			width:48px;
-			height:15px;
-			border:none;
-			font-size:12px;
-			font-family:arial;
-}
-#myCandlesSettingsCheck #forScroll #table #teamList_body .teamRow .teamRowFirstName {
-			float:left;
-			margin-top:20px;
-			padding-left:12px;
-			text-align:left;
-			width:330px;
-			border:none;
-			font-size:12px;
-			font-family:arial;
-		}
-table
+#myCandlesSettingsCheck #forScroll #table #teamList_body .teamRow #donorName 
 {
-	border-spacing: 0px;
+text-align:center;
+margin-top:20px;
+width:48px;
+height:15px;
+border:none;
+font-size:12px;
+font-family:arial;
 }
-
-		#myCandlesSettingsCheck #forScroll #table #teamList_body .teamRow .team_donation_milestone_candles {
-			margin-top:20px;
-		float:left;
-		border:none;
-		width:112px;
-		text-align:center;
-		}
-		#myCandlesSettingsCheck #forScroll #table #teamList_body .teamRow .team_email_milestone_candles {
-			margin-top:20px;
-		float:left;
-		border:none;
-		width:112px;
-		text-align:center;
-		}
-		#myCandlesSettingsCheck #forScroll #table #teamList_body .teamRow .team_event_milestone_candles {
-			margin-top:20px;
-		float:left;
-		border:none;
-		width:112px;
-		text-align:center;
-		}
-		#myCandlesSettingsCheck #forScroll #table #teamList_body .teamRow .team_candles {
-			margin-top:20px;
-		float:left;
-		margin-left:26px;
-		border:none;
-		width:60px;
-		text-align:center;
-		}
+#myCandlesSettingsCheck #forScroll #table #teamList_body .teamRow .rowCell
+{
+	padding:0;
+	float:left;
+	height:48px;
+	border-left: 2px solid #222222;
+	text-align:center;
+}
 #pagesBkg .navigation
 {
 	margin:10px 0 0 30px;
@@ -3565,4 +3493,277 @@ table
 #homePagesCheck #forScroll #table #teamList_body .teamRow .rowCell h2, #homePagesCheck #forScroll #table #teamList_body .teamRow .rowCell p
 {
 	margin:0;
+}
+
+
+#login 
+{
+	background-image:url('../img/myCandles_bkg_15.png');
+	position:fixed;
+	top:150px;
+	margin-left:290px;
+	height:265px;
+	width:327px;
+	z-index:2;
+}
+#login #logo
+{
+	width:183px;
+	height: 55px;
+	margin:10px 0 0 75px;
+}
+#login #credentials
+{
+	margin:-15px 0 0 85px;
+}
+#login p
+{
+	float:left;
+	margin:10px 0 0 70px;
+	color:#CCC;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	font-weight:900;
+	cursor:pointer;
+}
+#login #submit
+{
+	margin:12px 0 0 125px;
+	height:27px;
+	width:78px;
+	cursor:pointer;
+}
+#credentials .inputEmail, #credentials .inputPassword
+{
+	margin: 20px 0 0 0px;
+  	background: white;
+  	float: left;
+  	clear: both;
+	display:inline;
+	float:left;
+  background: white;
+  clear: both;
+}
+
+.inputEmail span, .inputPassword span
+{
+  position: absolute;
+  padding: 5px;
+  margin-left: 3px;
+  color: #999;
+}
+.inputEmail input, .inputPassword input, .inputEmail textarea, .inputPassword textarea, .inputEmail select, .inputPassword select {
+  position: relative;
+  margin: 0;
+  border-width: 1px;
+  padding: 6px;
+  background: transparent;
+  font: inherit;
+}
+/* Hack to remove Safari's extra padding. Remove if you don't care about pixel-perfection. */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .inputEmail input, .inputPassword input, .inputEmail textarea, .inputPassword textarea, .inputEmail select, .inputPassword select { padding: 4px; }
+}
+
+
+
+#counterBkg
+{
+	border-radius: 30px;
+	box-shadow: 0px 4px 5px #222222;
+	height: 800px;
+	margin-left: 25px;
+	margin-top: 35px;
+	width: 910px;
+}
+#counterBkg #teamBoxes
+{
+	display: inline;
+	float: left;
+	font-family: Arial, Helvetica, sans-serif;
+	margin-bottom: 50px;
+	margin-left: 50px;
+	margin-right: 0px;
+	margin-top: 50px;
+	padding: 0;
+	width: 800px;
+}
+#counterBkg #pagesHeaderBkg
+{
+	background-image: url('../img/pages_header_05.png');
+	height: 42px;
+	width: 910px;
+}
+#counterBkg #pagesHeaderBkg #pagesHeaderTxt
+{
+	font-size: 130%;
+	line-height: 34pt;
+	text-indent: 25px;
+}
+#counterBkg #pagesHeaderBkg #pagesBack
+{
+	float: right;
+	list-style-type: none;
+	margin-right: 20px;
+	margin-top: -50px;
+}
+#counterBkg #pagesHeaderBkg #pagesBack .pagesBackLink
+{
+	color: white;
+	display: inline;
+}
+#counterBkg #pagesHeaderBkg #pagesBack .pagesBackLink a
+{
+	color: white;
+	font-family: Arial;
+	font-size: 12px;
+	text-decoration: none;
+}
+#counterBkg .search
+{
+	color: white;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	left: 240px;
+	position: relative;
+	top: 33px;
+}
+#counterBkg .searchHow
+{
+	color: white;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	left: 240px;
+	top: 33px;
+}
+#counterBkg #searchBox
+{
+	border-radius: 2px;
+	color: none;
+	width: 120px;
+}
+
+#counterCheckGeneral, #counterCheckGreek
+{
+	float:left;
+	box-shadow: 0px 4px 5px #222222;
+	height: 350px;
+	margin-left: 27px;
+	margin-top: 30px;
+	width: 420px;
+}
+#counterCheckGeneral #forScroll, #counterCheckGreek #forScroll
+{
+	float: left;
+	height: 350px;
+	overflow: hidden;
+	width: 100%;
+	margin:0;
+}
+#counterCheckGeneral #forScroll #table, #counterCheckGreek #forScroll #table
+{
+	border: none;
+	border-collapse: separate;
+	border-spacing: 0px;
+	float: left;
+	margin-left: 0px;
+	margin-top: 0px;
+	width: 100%;
+}
+#counterCheckGeneral #forScroll #table #teamList_body, #counterCheckGreek #forScroll #table #teamList_body
+{
+	border: none;
+	border-color: none;
+	border-spacing: 0px;
+	box-shadow: none;
+	height: 100%;
+	width: 100%;
+	margin:0;
+}
+#counterCheckGeneral #forScroll #table #teamList_body a, #counterCheckGreek #forScroll #table #teamList_body a
+{
+	color: #FFF;
+	text-decoration: underline;
+}
+#counterCheckGeneral #forScroll #table #teamList_body a:hover, #counterCheckGreek #forScroll #table #teamList_body a:hover
+{
+	text-decoration: none;
+}
+#counterCheckGeneral #sorterHeader, #counterCheckGreek #sorterHeader
+{
+	background-image: url('../img/everyone_sorter_background_11.png');
+	float: left;
+	margin:0;
+	width: 100%;
+}
+#counterCheckGeneral #sorterHeader .sorterDonorName, #counterCheckGreek #sorterHeader .sorterDonorName
+{
+	float:left;
+	width:130px;
+	text-align:left;
+	height:27px;
+	padding-top:11px;
+	color:white;
+	font-size:12px;
+	font-weight:bold;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+#counterCheckGeneral #sorterHeader th, #counterCheckGreek #sorterHeader th
+{
+	cursor: pointer;
+}
+#counterCheckGeneral #sorterHeader .sorterOther, #counterCheckGreek #sorterHeader .sorterOther
+{
+	width:80px;
+	height:27px;
+	text-align: center;
+	vertical-align:middle;
+	font-weight: bold;
+	color: white;
+	font-size:12px;
+	border-left: 2px solid #222222;
+	font-family: Arial;
+	font-weight:bold;
+}
+#counterCheckGeneral #forScroll #table #teamList_body .teamRow, #counterCheckGreek #forScroll #table #teamList_body .teamRow
+{
+	border-spacing: 0px;
+	box-shadow: none;
+	color: white;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	list-style-type: none;
+	margin-bottom:0px;
+}
+
+#counterCheckGeneral #forScroll #table #teamList_body .teamRow #donorName, #counterCheckGreek #forScroll #table #teamList_body .teamRow #donorName 
+{
+width:134px;
+text-align:left;
+border-left:none;
+}
+#counterCheckGeneral #forScroll #table #teamList_body .teamRow #pledge, #counterCheckGreek #forScroll #table #teamList_body .teamRow #pledge
+{
+width:64px;
+}
+#counterCheckGeneral #forScroll #table #teamList_body .teamRow #pledgeMax, #counterCheckGreek #forScroll #table #teamList_body .teamRow #pledgeMax
+{
+width:72px;
+}
+#counterCheckGeneral #forScroll #table #teamList_body .teamRow #lapsCompleted, #counterCheckGreek #forScroll #table #teamList_body .teamRow #lapsCompleted
+{
+width:74px;
+}
+#counterCheckGeneral #forScroll #table #teamList_body .teamRow #total, #counterCheckGreek #forScroll #table #teamList_body .teamRow #total
+{
+width:40px;
+}
+#counterCheckGeneral #forScroll #table #teamList_body .teamRow .rowCell, #counterCheckGreek #forScroll #table #teamList_body .teamRow .rowCell
+{
+	float:left;
+padding:10px 0 0 0;
+height:30px;
+border-left: 2px solid #222222;
+text-align:center;
 }

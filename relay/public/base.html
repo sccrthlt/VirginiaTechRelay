@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -41,11 +42,28 @@
                     <a href="/greekList" id="{{ pagesButtonGreek }}" class="pagesLink"></a>
                     <a href="/corpsList" id="{{ pagesButtonCorps }}" class="pagesLink"></a>
                 </div><!-- end pagesLinks -->
-                <!--<div class="loggedIn">
-                	<a id="signInCorner">Sign In</a>
-                    <a id="signOutCorner">Sign Out</a>
-				</div>--><!-- end loggedIn -->
+                <div class="loggedIn">
+                	<a id="signInCorner">Login</a>
+                    <a id="signOutCorner">Logout</a>
+				</div><!-- end loggedIn -->
 			</div><!-- end header -->
+        {% block login %}
+                    <div id="login" style="visibility:hidden;">
+                    	<img id="logo" src="/img/myCandles_logo_18.png" />
+                        <div id="credentials">
+                            <label class="inputEmail">
+                                <span>Email</span>
+                                <input id="email" type="text" />
+                            </label>
+                            <label class="inputPassword">
+                                <span>Password</span>
+                                <input id="password" type="password" />
+                            </label>
+                        </div><!-- end credentials -->
+                        <p>What is my email/credentials?</p>
+                        <img id="submit" src="/img/login_button_22.png" />
+                    </div><!-- end login -->
+		{% endblock login %}
         {% block content %}
         {% endblock content %}
 		</div><!-- end idk -->
@@ -65,6 +83,18 @@
                 </div><!-- end problems -->
           </div><!-- end feedbackBody -->
       </div><!-- end feedback -->
+      
+      <div id="login" style="visibility:hidden;">
+      	<label class="inputEmail">
+            <span>Email</span>
+            <input id="inputOlympicsSearch" type="text" />
+        </label>
+        <label class="inputPassword">
+            <span>Password</span>
+            <input id="inputOlympicsSearch" type="text" />
+        </label>
+        
+      </div><!-- end login -->
 	</div><!-- end main -->
 	</div><!-- end background -->
 
@@ -205,6 +235,99 @@ $(date).append(m_names[curr_month] + " " + curr_date + "<SUP>" + sup + "</SUP>")
 		});
 
 	</script>
+    
+    
+    
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"> </script>
+<script type="text/javascript">
+$("#signInCorner").on("click", function() {
+	$("#login").attr("style", "visiblity:visible;");
+});
+$("#signOutCorner").on("click", function() {
+	$.post("http://vtrelaycandles.org/logout/",
+			{
+			},
+			function(data,status){
+			   console.log('you have been logged out');
+			   window.location = 'http://vtrelaycandles.org/';
+			}).fail(function(err, status){
+                console.log('Oops.  Something went wrong :(');
+			});//end fail
+});
+$("#submit").on("click", function checkBackend(){
+		email = '';
+		password = '';
+		email = $("#email").val();
+		password = $("#password").val();
+		$.post("http://vtrelaycandles.org/loginCredentials/",
+			{
+				'email':email,
+                'password':password
+			},
+			function(data,status) {
+            	console.log('it worked!!');
+				var username = data[0].fields.username;
+				var base_location = 'http://vtrelaycandles.org/myCandles/user='
+				window.location = base_location + username;
+			}).fail(function(err, status){
+				alert("Oops. We couldn't find that email/password credentials in our system.  Please contact the Candles admin at vtrelay.productions@gmail.com");
+                console.log(email);
+			});//end fail
+});// end checkBackend
+
+//Input gray label
+(function($) {
+    function toggleLabel() {
+        var input = $(this);
+        setTimeout(function() {
+            var def = input.attr('title');
+            if (!input.val() || (input.val() == def)) {
+                input.prev('span').css('visibility', '');
+                if (def) {
+                    var dummy = $('<label></label>').text(def).css('visibility','hidden').appendTo('body');
+                    input.prev('span').css('margin-left', dummy.width() + 3 + 'px');
+                    dummy.remove();
+                }
+            } else {
+                input.prev('span').css('visibility', 'hidden');
+            }
+        }, 0);
+    };
+
+    function resetField() {
+        var def = $(this).attr('title');
+        if (!$(this).val() || ($(this).val() == def)) {
+            $(this).val(def);
+            $(this).prev('span').css('visibility', '');
+        }
+    };
+
+    $('input, textarea').live('keydown', toggleLabel);
+    $('input, textarea').live('paste', toggleLabel);
+    $('select').live('change', toggleLabel);
+
+    $('input, textarea').live('focusin', function() {
+        $(this).prev('span').css('color', '#ccc');
+    });
+    $('input, textarea').live('focusout', function() {
+        $(this).prev('span').css('color', '#999');
+    });
+
+    $(function() {
+        $('input, textarea').each(function() { toggleLabel.call(this); });
+    });
+
+})(jQuery);
+</script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
 	<script type="text/javascript">
 
 	function sendemail(){
@@ -245,69 +368,6 @@ $(date).append(m_names[curr_month] + " " + curr_date + "<SUP>" + sup + "</SUP>")
 	  })();
 
 	</script>
-
-{% block facebookAuth %}
-<script>
-  // Additional JS functions here
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '607638312582879', // App ID
-      channelUrl : 'http://www.vtrelaycandles.com/channel.html', // Channel File
-      status     : true, // check login status
-      cookie     : true, // enable cookies to allow the server to access the session
-      xfbml      : true  // parse XFBML
-    });
-
-    // Additional init code here
-	FB.getLoginStatus(function(response) {
-  if (response.status === 'connected') {
-	  $("#signInCorner").hide()
-	  testAPI()
-    // connected
-  } else if (response.status === 'not_authorized') {
-	  $("#signOutCorner").hide()
-    // not_authorized
-  } else {
-	  $("#signOutCorner").hide()
-    // not_logged_in
-  }
- 	});// end getLoginStatus
-  };//end fbAsyncInit
-
-$(document).ready(function(){
-  $("#signInCorner").on("click", function login() {
-    FB.login(function(response) {
-        if (response.authResponse) {
-            // connected
-        } else {
-            // cancelled
-        }
-    	});// end login
-	});// end signInCorner
-	$("#signOutCorner").on("click", function logout() {
-    	FB.logout(function(response) {
-        	console.log('User is now logged out');
-    	});// end logout
-	});// end signOut
-});// end document ready
-
-function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-        console.log('Good to see you, ' + response.name + '.');
-    });
-}
-  // Load the SDK Asynchronously
-  (function(d){
-     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement('script'); js.id = id; js.async = true;
-     js.src = "//connect.facebook.net/en_US/all.js";
-     ref.parentNode.insertBefore(js, ref);
-   }(document));
-
-</script>
-{% endblock facebookAuth %}
 </body>
 
 </html>

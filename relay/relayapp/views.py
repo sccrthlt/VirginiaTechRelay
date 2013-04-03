@@ -15,8 +15,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.template import RequestContext
 from relayapp.models import *
 from relayapp.RelayFunctions import *
+from relayapp.laper import *
 from operator import itemgetter
 from datetime import datetime
+from django.http import HttpResponseRedirect
+from django.shortcuts import render_to_response
 # from django.views.decorators.cache import cache_page
 
 # @cache_page(60 * 60) # cache for 60 minutes
@@ -416,8 +419,8 @@ def setupUser(request):
 	return response
 
 @csrf_exempt
-def userSignIn(request):
-	username = request.POST.get('username', '')
+def userLogin(request):
+	username = request.POST.get('email', '')
 	password = request.POST.get('password', '')
 	user = authenticate(username=username, password=password)
 	if user is not None:
@@ -435,15 +438,9 @@ def userSignIn(request):
 	return response
 
 @csrf_exempt
-def userSignOut(request):
+def userLogout(request):
 	logout(request)
 	# Redirect to a success page.
-	
 
-#def handle(self, *args, **options):
-#helper = counter()
-	
-#print "Starting Command.."
-#csv_file_location = args[0]
-# print sys.getdefaultencoding()
-#counter.parseCSVCounter(csv_file_location)
+	response = HttpResponse()
+	return response

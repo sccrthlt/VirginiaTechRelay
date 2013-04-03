@@ -19,6 +19,7 @@ MANAGERS = ADMINS
 AUTHENTICATION_BACKENDS = (
     #'django_facebook.auth_backends.FacebookBackend',
     'django.contrib.auth.backends.ModelBackend',
+    'django.contrib.auth.backend.EmailAuthBackend'
 )
 
 #AUTH_PROFILE_MODULE = 'django_facebook.FacebookProfile'

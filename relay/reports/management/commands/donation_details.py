@@ -52,7 +52,6 @@ def setupDonation(info):
     try:
         date_donated = datetime.strptime(info['Donation Date'], '%m/%d/%y %H:%M')
         donation_date = datetime.strptime(info['Donation Date'], '%m/%d/%y %H:%M')
-        donation_date_parsed = donation_date.strftime('%y-%m-%d')
 
 		
         participants = Participant.objects.filter(
@@ -72,12 +71,12 @@ def setupDonation(info):
         donor_fname = info['Donor First Name']
         donor_lname = info['Donor Last Name']
         event = Event.objects.get(name = 'Self Donation')
-        event_date = str(model_to_dict(Event.objects.get(name = 'Self Donation'))['date'])
+        event_date = model_to_dict(Event.objects.get(name = 'Self Donation'))['date']
         if found_participant.fname == donor_fname and found_participant.lname == donor_lname:
-			if event_date == donation_date_parsed:
+			if event_date == donation_date:
 				new_event_record = Participant_Event_Record(guests = 0, event = event, participant = found_participant, hokie_passport_id = 0)
 				new_event_record.save()
-        # print('Participant2: ' + str(found_participant))
+        print('Participant2: ' + str(found_participant))
         donation_return = Donation(participant = found_participant, amount = str(float(info['Donation Amount'])), datetime = date_donated)
         donation_return.save()
 

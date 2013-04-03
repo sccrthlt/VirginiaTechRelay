@@ -9,32 +9,28 @@ $("#link1").on("click", function() {
 </script>
 {% endblock scripts %}
 	{% block content %}
-			<div id="pagesBkg">
+			<div id="counterBkg">
             		<div id="pagesHeaderBkg">
 						<h2 id="pagesHeaderTxt">
-							{{ participant.fname }}&nbsp;{{ participant.lname }}
+							My name goes here
 						</h2>
 						<ul id="pagesBack">
 							<!-- <li class="pagesBackLink"><a href="#">Individual</a>&nbsp;-</li> -->
 							<li class="pagesBackLink">
-								<a href="teamList.html#">{{ participant.fname }}&nbsp;{{ participant.lname }}</a>&nbsp;-
+								<a href="teamList.html#">My name goes here</a>&nbsp;-
 							</li>
 							<li class="pagesBackLink">
 								<a href="home.html">Home</a>
 							</li>
 						</ul>
 					</div>
-                    <div class="navigation">
-                    	<h3 id="link1" class="link">Account Settings</h3>
-                        <h3 id="link2" class="link">Lap Counter</h3>
-                    </div>
 
 					<div id="content"></div>
-					<div id="myCandlesCounterCheck">
+					<div id="counterCheckGeneral">
 						<table id="sorterHeader">
 							<tr>
 								<th id="donerName" class="sorterDonorName">
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Donor Name
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Team Name
 								</th>
 								<th id="pledge" class="sorterOther">
 									Pledge
@@ -54,10 +50,9 @@ $("#link1").on("click", function() {
 						<div id="forScroll">
 							<table id="table">
 								<tbody id="teamList_body">
-                                {% for pledge in pledges %}
                                 	<tr class="teamRow" id=" + item + ">
                                         <td id="donorName" class="rowCell">
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ pledge.sponsor }}
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ pledge.name }}
                                         </td>
                                         <td id="pledge" class='rowCell'>
                                             ${{ pledge.amount }}
@@ -72,11 +67,57 @@ $("#link1").on("click", function() {
                                             ${{ pledge }}
                                         </td>
                                     </tr>
-                                {% endfor %}
                                 </tbody>
 							</table><!-- end table -->
 						</div><!-- end forScroll -->
-					</div><!-- end myCandlesCounterCheck -->
+					</div><!-- end counterCheckGeneral -->
+                    
+                    
+                    <div id="counterCheckGreek">
+						<table id="sorterHeader">
+							<tr>
+								<th id="donerName" class="sorterDonorName">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Company Name
+								</th>
+								<th id="pledge" class="sorterOther">
+									Pledge
+								</th>
+                                <th id="pledgeMax" class="sorterOther">
+									Maximum Donation
+								</th>
+								<th id="lapsCompleted" class="sorterOther">
+									Laps Completed
+								</th>
+								<th id="total" class="sorterOther">
+									Total
+								</th>
+							</tr>
+						</table>
+                        <!--<img id="loadingImg" src="/img/loading_bar.gif">-->
+						<div id="forScroll">
+							<table id="table">
+								<tbody id="teamList_body">
+                                	<tr class="teamRow" id=" + item + ">
+                                        <td id="donorName" class="rowCell">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ pledge.name }}
+                                        </td>
+                                        <td id="pledge" class='rowCell'>
+                                            ${{ pledge.amount }}
+                                        </td>
+                                        <td id="pledgeMax" class='rowCell'>
+                                            ${{ pledge.amount }}
+                                        </td>
+                                        <td id="lapsCompleted" class="rowCell">
+                                            0
+                                        </td>
+                                        <td id="total" class="rowCell">
+                                            ${{ pledge }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+							</table><!-- end table -->
+						</div><!-- end forScroll -->
+					</div><!-- end counterCheckGreek -->
                     
                     
                     
