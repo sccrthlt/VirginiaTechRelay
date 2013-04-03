@@ -210,7 +210,7 @@ class Counter(models.Model):
 	laps_completed = models.PositiveIntegerField(default=0, blank=True)
 	
 	
-	
+
 #add tshirt milestone record for copmanies
 
 #participant percentage registration milestone company
