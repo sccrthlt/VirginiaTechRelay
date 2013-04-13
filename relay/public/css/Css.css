@@ -855,7 +855,8 @@ table
 }
 #pagesCheck #forScroll #table #teamList_body .teamRow .teamRowPosition {
 			text-align:center;
-			margin-top:30px;
+			float:left;
+			margin-top:20px;
 			width:48px;
 			height:15px;
 			border:none;
@@ -863,7 +864,8 @@ table
 			font-family:arial;
 }
 #pagesCheck #forScroll #table #teamList_body .teamRow .teamRowFirstName {
-			margin-top:20px;
+			margin:20px 0 0 10px;
+			float:left;
 			padding-left:12px;
 			text-align:left;
 			width:330px;
@@ -880,7 +882,7 @@ table
 			margin-top:20px;
 		float:left;
 		border:none;
-		width:112px;
+		width:102px;
 		text-align:center;
 		}
 		#pagesCheck #forScroll #table #teamList_body .teamRow .team_email_milestone_candles {
@@ -3047,7 +3049,7 @@ table
   margin-left: 3px;
   color: #999;
 }
-.inputCounter input, .inputCounter textarea, .inputCounter select {
+#counterRegBkg .inputCounter input, .inputCounter textarea, #counterRegBkg .inputCounter select {
   position: relative;
   margin: 0;
   border-width: 1px;
@@ -3501,7 +3503,7 @@ table
 	background-image:url('../img/myCandles_bkg_15.png');
 	position:fixed;
 	top:150px;
-	margin-left:290px;
+	margin-left:323px;
 	height:265px;
 	width:327px;
 	z-index:2;
@@ -3519,7 +3521,7 @@ table
 #login p
 {
 	float:left;
-	margin:10px 0 0 70px;
+	margin:10px 0 0 83px;
 	color:#CCC;
 	font-family:Arial, Helvetica, sans-serif;
 	font-size:12px;
@@ -3528,7 +3530,7 @@ table
 }
 #login #submit
 {
-	margin:12px 0 0 125px;
+	margin:12px 0 0 127px;
 	height:27px;
 	width:78px;
 	cursor:pointer;
@@ -3542,6 +3544,7 @@ table
 	display:inline;
 	float:left;
   background: white;
+    border-radius:5px;
   clear: both;
 }
 
@@ -3558,6 +3561,7 @@ table
   border-width: 1px;
   padding: 6px;
   background: transparent;
+  border-radius:5px;
   font: inherit;
 }
 /* Hack to remove Safari's extra padding. Remove if you don't care about pixel-perfection. */
@@ -3766,4 +3770,499 @@ padding:10px 0 0 0;
 height:30px;
 border-left: 2px solid #222222;
 text-align:center;
+}
+
+#pledge #numbers
+{
+	background-image:url(../img/numbers.png);
+	margin:0 0 0 160px;
+	height:68px;
+	width:593px;
+}
+#pledge #arrows1
+{
+	background-image:url(../img/arrows_1.png);
+	margin:0 0 0 90px;
+	height:19px;
+	width:720px;
+}
+#pledge #arrows2
+{
+	background-image:url(../img/arrows_2.png);
+	margin:0 0 0 90px;
+	height:19px;
+	width:720px;
+}
+#pledge #arrows3
+{
+	background-image:url(../img/arrows_3.png);
+	margin:0 0 0 90px;
+	height:19px;
+	width:720px;
+}
+#pledge #arrows4
+{
+	background-image:url(../img/arrows_4.png);
+	margin:0 0 0 90px;
+	height:19px;
+	width:720px;
+}
+#pledge #info
+{
+	float:left;
+	margin:0 0 0 355px;
+	height:200px;
+	width:200px;
+}
+#pledge #selectParticipant
+{
+	float:left;
+	display:inline;
+	width:300px;
+	height:382px;
+	margin:-180px 0 0 345px;
+}
+#pledge #pledgeAmount
+{
+	float:left;
+	display:inline;
+	width:700px;
+	height:382px;
+	margin:-375px 0 0 150px;
+}
+#pledge #info #back
+{
+	float:left;
+	display:inline;
+	background-image:url(../img/back_03.png);
+	height:27px;
+	width:83px;
+	margin:30px 0 0 15px;
+	cursor:pointer;
+}
+#pledge #info #next
+{
+	float:left;
+	display:inline;
+	background-image:url(../img/next.png);
+	height:27px;
+	width:84px;
+	margin:30px 0 0 65px;
+	cursor:pointer;
+}
+#pledge #selectParticipant #back
+{
+	float:left;
+	display:inline;
+	background-image:url(../img/back_03.png);
+	height:27px;
+	width:83px;
+	margin:30px 0 0 40px;
+	cursor:pointer;
+}
+#pledge #selectParticipant #next
+{
+	float:left;
+	background-image:url(../img/next.png);
+	height:27px;
+	width:84px;
+	margin:30px 0 0 10px;
+	cursor:pointer;
+}
+#pledge #info .inputEmail span, #pledge #info .inputPassword span
+{
+  position: absolute;
+  padding: 12px 0 0 8px;
+  margin-left: 3px;
+  font-size:24px;
+  font-family:arial;
+  color: #999;
+}
+#pledge #info .inputEmail, #pledge #info .inputPassword
+{
+	margin: 20px 0 0 0px;
+  	background: white;
+  	float: left;
+  	clear: both;
+	display:inline;
+	border-radius:5px;
+}
+#pledge #info .inputEmail input, #pledge #info .inputPassword input
+{
+	position: relative;
+  	margin: 0;
+  	border-width: 1px;
+  	padding: 6px;
+  	background: transparent;
+  	font-family: arial;
+	font-size:24px;
+	height:40px;
+	width:200px;
+}
+#pledge #selectParticipant .inputEmail
+{
+	margin: 0px 0 0 0px;
+  	background: white;
+  	float: left;
+  	clear: both;
+	display:inline;
+	border-radius:5px;
+}
+#pledge #selectParticipant .inputEmail span
+{
+  position: absolute;
+  padding: 14px 0 0 4px;
+  margin-left: 3px;
+  font-size:21px;
+  font-family:arial;
+  color: #999;
+}
+#pledge #selectParticipant .inputEmail input
+{
+	position: relative;
+  	margin: 0;
+  	border-width: 1px;
+  	padding: 6px;
+  	background: transparent;
+  	font-family: arial;
+	font-size:24px;
+	height:40px;
+	width:170px;
+}
+#pledge #selectParticipant #search
+{
+	background-image:url(../img/search.png);
+	height:26px;
+	width:65px;
+	margin:12px 0 0 5px;
+	float:left;
+	cursor:pointer;
+}
+#pledge #pledgeAmount #title
+{
+	font-size:24px;
+	margin:10px 0 0 0;
+	display:inline;
+	float:left;
+	width:240px;
+}
+#pledge #pledgeAmount #title p
+{
+	float:right;
+	width:100%;
+	text-align:right;
+}
+#pledge #pledgeAmount #description
+{
+	display:inline;
+	float:left;
+	margin:-10px 0 0 0px;
+	font-size:16px;
+	height:200px;
+	width:300px;
+}
+#pledge #pledgeAmount #description p
+{
+	margin:40px 0 0 20px;
+	font-size:16px;
+}
+#pledge #pledgeAmount #inputs
+{
+	margin:0;
+	float:left;
+}
+#pledge #pledgeAmount #inputs .inputEmail, #pledge #pledgeAmount #inputs .inputPassword
+{
+	margin: 20px 0 0 10px;
+  	background: white;
+  	clear: both;
+	float:left;
+	border-radius:5px;
+	display:inline;
+}
+#pledge #pledgeAmount #inputs .inputEmail span, #pledge #pledgeAmount #inputs .inputPassword span
+{
+  position: absolute;
+  padding: 14px 0 0 4px;
+  margin-left: 3px;
+  font-size:21px;
+  font-family:arial;
+  color: #999;
+}
+#pledge #pledgeAmount #inputs .inputEmail input, #pledge #pledgeAmount #inputs .inputPassword input
+{
+	position: relative;
+  	margin: 0;
+  	border-width: 1px;
+  	padding: 6px;
+  	background: transparent;
+  	font-family: arial;
+	font-size:24px;
+	height:40px;
+	width:100px;
+}
+#pledge #pledgeAmount #back
+{
+	float:left;
+	display:inline;
+	background-image:url(../img/back_03.png);
+	height:27px;
+	width:83px;
+	margin:30px 0 0 220px;
+	cursor:pointer;
+}
+#pledge #pledgeAmount #next
+{
+	float:left;
+	background-image:url(../img/next.png);
+	height:27px;
+	width:84px;
+	margin:30px 0 0 10px;
+	cursor:pointer;
+}
+#pledge #verify
+{
+	float:left;
+	margin:-400px 0 0 60px;
+	width:800px;
+}
+#pledge #verify #info, #pledge #verify #participant, #pledge #verify #pledge
+{
+	float:left;
+	text-align:center;
+	width:200px;
+	margin:0 0 0 50px;
+}
+.field
+{
+	margin:0;
+	display:inline;
+}
+#selectParticipant  #signUpCheck
+{
+	float:left;
+	box-shadow: 0px 2px 2px #222222;
+	height: 200px;
+	margin:10px 0 0 0;
+	width: 255px;
+}
+#selectParticipant  #signUpCheck .forScroll
+{
+	float: left;
+	height: 160px;
+	width: 100%;
+	overflow:hidden;
+	margin:0px 0 0 0;
+}
+#selectParticipant  #signUpCheck .forScroll .mCSB_container
+{
+	margin: 0;
+}
+#selectParticipant  #signUpCheck .forScroll #table
+{
+	border-collapse: separate;
+	border-spacing: 0;
+	float: left;
+	height: 100%;
+	margin-left: 0px;
+	margin-top: 0px;
+	width: 100%;
+}
+#selectParticipant  #signUpCheck .forScroll #table #counterReg_body
+{
+	border: none;
+	border-color: none;
+	border-spacing: none;
+	box-shadow: none;
+	height: 100%;
+	width: 100%;
+}
+#selectParticipant  #signUpCheck #sorterHeader .sorterTeamName
+{
+	color: white;
+	float: left;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 0 0 20px;
+	text-align: left;
+}
+#selectParticipant  #signUpCheck .forScroll #table #counterReg_body .signUpTeamRow
+{
+	box-shadow: none;
+	color: white;
+	float: left;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	list-style-type: none;
+	width: 100%;
+}
+#selectParticipant  #signUpCheck .forScroll #table #counterReg_body .signUpTeamRow:hover
+{
+	background-color: #003;
+	box-shadow: none;
+	color: white;
+	float: left;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	list-style-type: none;
+	width: 100%;
+}
+#selectParticipant  #signUpCheck .forScroll #table #counterReg_body .signUpTeamRowFirstName
+{
+	border: none;
+	cursor: hand;
+	cursor: pointer;
+	float: left;
+	font-family: arial;
+	font-size: 12px;
+	padding-left: 20px;
+	padding-top: 10px;
+	width: 100%;
+	color:white;
+}
+#selectParticipant  #highlight
+{
+	background-color: #330033;
+}
+#selectParticipant  .highlight
+{
+	background-color: #330033;
+}
+#selectParticipant  #loadingSignImg
+{
+	margin-top:20px;
+	margin-left:0px;
+	margin-right:0px;
+	width: 225px;
+}
+#selectParticipant  .tier {
+	float:left;
+	display:inline;
+	margin:5px 0 0 10px;
+}
+
+
+#selectParticipant #loadingSignImgCounter
+{
+	height:auto;
+	width:auto;
+	float:left;
+	margin:20px 0 0 -22px;
+}
+#selectParticipant  #title
+{
+}
+#selectParticipant  #title h2
+{
+	display:inline;
+	margin-left:0px;
+	margin-top:0px;
+	color:white;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:900;
+}
+#selectParticipant  #title p
+{
+	display:inline;
+	margin:0;
+	color:#CCC;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:900;
+	cursor:pointer;
+}
+#selectParticipant  #description
+{
+	width:auto;
+	float:left;
+	margin:0px 0 0 20px;
+}
+#selectParticipant  #description p
+{
+	width:auto;
+	color:#CCC;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:24px;
+}
+#selectParticipant  #searchName
+{
+	float:left;
+	margin-top:10px;
+	margin-left:0px;
+}
+#selectParticipant  #searchName .signUpTxt
+{
+	display:inline;
+	color:white;
+	font-size:16px;
+	margin-top:0px;
+	width:auto;
+	float:right;
+	font-family:Arial, Helvetica, sans-serif;
+}
+#selectParticipant  #searchName .signUpEntryCounter
+{
+	display:inline;
+	width:162px;
+	float:right;
+	margin-left:0px;
+	margin-right:0px;
+	margin-top:0px;
+}
+#selectParticipant  #selectName
+{
+	float:left;
+	width:100%;
+	margin-top:20px;
+	margin-left:20px;
+	margin-right:0px;
+}
+#selectParticipant  #olympics
+{
+	float:left;
+	margin:20px 0 0 20px;
+	font-family:Arial, Helvetica, sans-serif;
+	color:white;
+}
+#selectParticipant  #submit
+{
+	float: left;
+	width:100%;
+	height:30px;
+
+	margin:0;
+}
+#selectParticipant  #submit #signUpSubmit
+{
+	background: #303;
+	border: 1px solid #3A3078;
+	border-radius: 5px;
+	color: white;
+	height: 30px;
+	width: 120px;
+	margin:0;
+	position:relative;
+	top:30px;
+	left:20px;
+}
+#selectParticipant  #submit #signUpSubmit:hover
+{
+	background: #2C3B7C;
+}
+#selectParticipant #divider
+{
+	background-color: #333;
+	box-shadow: 0 -2px 5px #222;
+	height: 350px;
+	margin-top:0px;
+	margin-left:-200px;
+	width: 1px;
+	z-index:3;
+}
+#selectParticipant #registerOlympics
+{
+	float:left;
+	margin:30px 40px 0 0;
+	width:422px;
+	padding:0;
 }

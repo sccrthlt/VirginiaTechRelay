@@ -223,6 +223,17 @@ def renderLogin(request):
 	c = template.Context(context)
 	r = t.render(c)
 	return HttpResponse(r)
+
+def renderPledge(request):
+	t = get_template('base_pledge.html')
+	context = {'pagesButtonGeneral': 'generalDown', 
+		'pagesButtonGreek': 'greeksDown', 
+		'pagesButtonCorps': 'corpsDown', 
+		'onLoad': 'setupMyCandlesRegPage()'
+		}
+	c = template.Context(context)
+	r = t.render(c)
+	return HttpResponse(r)
 	
 def renderCounter(request):
 	t = get_template('base_counter.html')

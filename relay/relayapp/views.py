@@ -444,3 +444,25 @@ def userLogout(request):
 
 	response = HttpResponse()
 	return response
+	
+@csrf_exempt
+def pledgeReceive(request):
+	fname = request.POST.get('fname', '')
+	lname = request.POST.get('lname', '')
+	participantName = request.POST.get('participantName', '')
+	participantID = request.POST.get('participantID', '')
+	ppl = request.POST.get('ppl', '')
+	maxi = request.POST.get('maxi', '')
+	
+	sponsor = fname + ' ' + lname
+	participant_obj = Participant.objects.get(pk = participantID)
+
+	try:
+		pledge = Pledge.objects.get(sponsor = sponsor, participant = participant_obj, pledge_amount = ppl, max_pledge_amount = maxi, datetime = datetime.now())
+	except Pledge.DoesNotExist:
+		pledge = Pledge.objects.create_user(sponsor = sponsor, participant = participant_obj, pledge_amount = ppl, max_pledge_amount = maxi, datetime = datetime.now())
+		
+	response = HttpResponse()
+	response.content = serialized_obj = serializers.serialize('json', [ pledge, ])
+	response['Content-Type'] = 'application/json'
+	return response

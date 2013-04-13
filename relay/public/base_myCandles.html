@@ -25,7 +25,6 @@ $("#link1").on("click", function() {
 						</ul>
 					</div>
                     <div class="navigation">
-                    	<h3 id="link1" class="link">Account Settings</h3>
                         <h3 id="link2" class="link">Lap Counter</h3>
                     </div>
 
@@ -60,16 +59,16 @@ $("#link1").on("click", function() {
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ pledge.sponsor }}
                                         </td>
                                         <td id="pledge" class='rowCell'>
-                                            ${{ pledge.amount }}
+                                            ${{ pledge.pledge_amount }}
                                         </td>
                                         <td id="pledgeMax" class='rowCell'>
-                                            ${{ pledge.amount }}
+                                            ${{ pledge.max_pledge_amount }}
                                         </td>
                                         <td id="lapsCompleted" class="rowCell">
                                             0
                                         </td>
                                         <td id="total" class="rowCell">
-                                            ${{ pledge }}
+                                            $0.00
                                         </td>
                                     </tr>
                                 {% endfor %}

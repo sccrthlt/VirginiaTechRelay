@@ -1,0 +1,284 @@
+{% extends "base.html" %}
+	{% block scripts %}
+    <script>
+
+
+	function highlightClick(event) {
+	    if (document.getElementById("highlight") != null) {
+	        document.getElementById("highlight").id = "";
+	    }
+	    event.target.id = 'highlight';
+		$("#checkMark2").attr("style", "visibility: visible;")
+		//var name2 = document.getElementById("highlight").childNodes[0].name;
+		//document.getElementById("name1").innerHTML = name2;
+	}
+
+	$("#arrows2").hide()
+	$("#arrows3").hide()
+	$("#arrows4").hide()
+	$("#info #next").on("click", function(){
+		var fname = $("#info #username").val();
+		var lname = $("#info #password").val();
+		console.log(fname);
+		if (fname.length < 2 && lname.length < 2) {
+			alert('Please enter your first and last name.');
+		} else if (fname.length < 2) {
+			alert('Please enter your first name');
+		} else if (lname.length < 2){
+			alert('Please enter your last name');
+		} else {
+			$("#info").attr("style", "visibility:hidden;");
+			$("#selectParticipant").attr("style", "visibility:visible;");
+			$("#arrows1").hide()
+			$("#arrows2").show()
+		}
+	});
+	
+	$("#selectParticipant #next").on("click", function(){
+		var arr = document.getElementById("highlight")
+		console.log(arr);
+		if (arr == null) {
+			alert('Please select a participant.');
+		}
+		else {
+			$("#selectParticipant").attr("style", "visibility:hidden;");
+			$("#pledgeAmount").attr("style", "visibility:visible;");
+			$("#arrows2").hide()
+			$("#arrows3").show()
+		}
+	});
+	$("#selectParticipant #back").on("click", function(){
+		$("#selectParticipant").attr("style", "visibility:hidden;");
+		$("#info").attr("style", "visibility:visible;");
+	});
+	var fname = '';
+	var lname = '';
+	var participantName = '';
+	var ppl = "";
+	var maxi = "";
+	var arr;
+	var participantID;
+	$("#pledgeAmount #next").on("click", function(){
+		var fname = $("#info #username").val();
+		var lname = $("#info #password").val();
+		var participantName = document.getElementById("highlight").innerHTML;
+		var ppl = $("#pledgeAmount #username").val().replace('$','');
+		var maxi = $("#pledgeAmount #password").val().replace('$','');
+		var arr = document.getElementById("highlight");
+		var participantID = arr.parentNode.id;
+		document.getElementById("fname").innerHTML = "<b>First Name:</b>&nbsp;<p id='lnamefield' class='field'>" + fname + "</p>";
+		document.getElementById("lname").innerHTML = "<b>Last Name:</b>&nbsp;<p id='lnamefield' class='field'>" + lname + "</p>";
+		document.getElementById("pname").innerHTML = "<b>Participant:</b>&nbsp;<p id='namefield' class='field'>" + participantName + "</p>";
+		document.getElementById("ppl").innerHTML = "<b>Pledge Per Lap:</b>&nbsp;<p id='pplfield' class='field'>$" + ppl + "</p>";
+		document.getElementById("max").innerHTML = "<b>Maximum Donation:</b>&nbsp;<p id='pplfield' class='field'>$" + maxi + "</p>";
+		$("#pledgeAmount").attr("style", "visibility:hidden;");
+		$("#verify").attr("style", "visibility:visible;");
+		$("#arrows3").hide()
+		$("#arrows4").show()
+	});
+	$("#pledgeAmount #back").on("click", function(){
+		$("#pledgeAmount").attr("style", "visibility:hidden;");
+		$("#selectParticipant").attr("style", "visibility:visible;");
+	});
+
+	$("#submit").on("click", function () {
+		$.post("http://vtrelaycandles.org/pledgeReceive/",
+			{
+				'fname':fname,
+				'lname':lname,
+				'participantName':participantName,
+				'participantID':participantID,
+				'ppl':ppl,
+				'max':maxi
+			},
+			function(data,status) {
+					alert('Thank you for making a pledge to ' + participantName + '!')
+					window.location = '/home'
+				}).fail(function(err, status){
+					alert("There has been an error in our system.  We're sorry for the inconvenience.  Please check back again later")
+		});//end fail
+	});
+
+	//Get data
+	    var info = "";
+		function setupMyCandlesRegPage()
+		{
+
+			$.get("/participants/unsigned/", function (data,status) {
+				for (var item in data) {
+	                record = data[item];
+	                //if (record.team_type != "RT") {
+	                    //delete data[item];
+	                //}
+				}
+			    setupTableMyCandles(data);
+			    info = data;
+			});
+		}
+
+
+		function setupTableMyCandles(data)
+		{
+			var string = "";
+			for(x in data){
+			    string = string + "<tr id='" + data[x].id + "' class='signUpTeamRow'><td onClick='highlightClick(event)'  class='signUpTeamRowFirstName' name='name'>" + data[x].fname + " "+data[x].lname+"</td></tr>";
+			}//end for loop
+		$("#loadingSignImgCounter").hide();
+		document.getElementById("counterReg_body").innerHTML = string;
+		}//end setupTable
+
+
+	//Search filter
+
+	//Creates a new event handler for uppercase letters entered by the user
+	$(document).ready(function ($) {
+jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function(arg) {
+    return function( elem ) {
+        return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+    }; //end return function
+  });//end jQuery.expr
+
+	//Takes an input
+	function listFilterSignIn(list) {
+    var input = $("#selectParticipant #username");
+
+	//filters the input
+    $(input)
+      .change( function () {
+		$(".forScroll").hide();
+		$("#loadingSignImgCounter").show('fast', function(){
+		console.log('vis');
+        var filter = $(input).val();
+        if(filter) {
+          $('#selectParticipant tr').find("td:not(:Contains(" + filter + "))").parent().hide();
+          $('#selectParticipant tr').find("td:Contains(" + filter + ")").parent().show();
+		  $("img").hide();
+        } else {
+          $('#selectParticipant tr').show();
+        }
+		var exists;
+		console.log($("#counterReg_body").children().css("display"));
+		if ($("#counterReg_body").children().css("display") == "block")
+		{
+			exists = 1;
+			alert('We could not find a participant in our system with that name.  Try just typing in his/her last name.  If this problem persists please contact vtrelay.productions@gmail.com');
+		}
+		
+		$(".forScroll").show();
+        return false;
+		});// end loadingSignImgCounter
+      })
+
+   $("#search").on("click", function() {
+        $(this).change();
+	});//end search
+  }//end listFilter
+
+	//Specifies what to filter.  In this instance a class that is assigned to a table row
+	$(function () {
+    	listFilterSignIn($("#selectParticipant .signUpTeamRow"));
+  	});//end function
+}(jQuery));//end document ready
+	</script>
+    {% endblock scripts %}
+	{% block content %}
+    	<div id="pagesBkg">
+            		<div id="pagesHeaderBkg">
+						<h2 id="pagesHeaderTxt">
+							Pledge
+						</h2>
+						<ul id="pagesBack">
+							<!-- <li class="pagesBackLink"><a href="#">Individual</a>&nbsp;-</li> -->
+							<li class="pagesBackLink">
+								<a href="/pledge">Pledge</a>&nbsp;-
+							</li>
+							<li class="pagesBackLink">
+								<a href="/home">Home</a>
+							</li>
+						</ul>
+					</div><!-- end pagesHeaderBkg -->
+				<div id="pledge">
+                    <div id="numbers"></div>
+                    <div id="arrows1"></div>
+                    <div id="arrows2"></div>
+                    <div id="arrows3"></div>
+                    <div id="arrows4"></div>
+                    <div id="info">
+                        <label class="inputEmail">
+                            <span>First Name</span>
+                            <input id="username" type="text" />
+                        </label>
+                        <label class="inputPassword">
+                            <span>Last Name</span>
+                            <input id="password" type="text" />
+                        </label>
+                        <div id="next"></div>
+                    </div><!-- end info -->
+
+                    <div id="selectParticipant" style="visibility:hidden;">
+                    	<label class="inputEmail">
+                            <span>Participant Name</span>
+                            <input id="username" type="text" />
+                        </label>
+                        <div id="search"></div>
+                    	<div id="signUpCheck">
+                            <table id="sorterHeader">
+                                <tr>
+                                    <th id="name" class="sorterTeamName">Name</th>
+                                </tr>
+                            </table>
+                            <img id="loadingSignImgCounter" src="/img/loading_bar.gif" />
+                            <div class="forScroll">
+                                <table id="table">
+                                    <tbody id="counterReg_body">
+                                    </tbody>
+                                </table><!-- end table -->
+                            </div><!-- end forScroll -->
+                        </div><!-- end signUpCheck -->
+                        <div id="back"></div>
+                        <div id="next"></div>
+                    </div><!-- end selectParticipant -->
+
+                    <div id="pledgeAmount" style="visibility:hidden;">
+                    	<div id="title">
+                        	<p>Pledge Per Lap&nbsp;&nbsp;&nbsp;&nbsp;$</p>
+                            <p>Max Donation&nbsp;&nbsp;&nbsp;&nbsp;$</p>
+                        </div><!-- end perLap -->
+                        <div id="inputs">
+                            <label class="inputEmail">
+                                <span>0.00</span>
+                                <input id="username" type="text" />
+                            </label>
+                            <label class="inputPassword">
+                                <span>0.00</span>
+                                <input id="password" type="text" />
+                            </label>
+                        </div><!-- end inputs -->
+                        <div id="description">
+                        	<p>= Amount you donate to the participant per lap walked by his/her team</p>
+                            <p>= Limit you will donate</p>
+                        </div><!-- end max -->
+                        <div id="back"></div>
+                        <div id="next"></div>
+                    </div><!-- end pledgeAmount -->
+
+                    <div id="verify" style="visibility:hidden;">
+                    	<div id="info">
+                        	<h2>Your Info</h2>
+                            <p id="fname"></p>
+                            <p id="lname"></p>
+                        </div>
+                        <div id="participant">
+                        	<h2>Participant Info</h2>
+                            <p id="pname"></p>
+                        </div>
+                        <div id="pledge">
+                        	<h2>Pledge</h2>
+                            <p id="ppl"></p>
+                            <p id="max"></p>
+                        </div>
+                        <div id="submit"></div>
+                    </div><!-- end verify -->
+				</div><!-- end pledge -->
+        </div><!-- end pagesBkg -->
+    {% endblock content %}
