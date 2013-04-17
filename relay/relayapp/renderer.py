@@ -236,7 +236,8 @@ def renderPledge(request):
 	return HttpResponse(r)
 	
 def renderCounter(request):
-	teams = Olympics_Lap_Counter_Signup.objects.all()
+	walkers = Counter.objects.all(tier = 'walk')
+	runners = Counter.objects.all(tier = 'run')
 	
 	t = get_template('base_counter.html')
 	context = {'pagesButtonGeneral': 'generalDown', 

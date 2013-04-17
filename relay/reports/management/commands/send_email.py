@@ -52,7 +52,7 @@ def counter():
 			pledge_amount = counter_pledge_numbers['pledge_amount']
 			max_pledge_amount = counter_pledge_numbers['max_pledge_amount']
 		
-			new_counter = Counter(team = team_object, strip_id = number, pledge_amount = pledge_amount, max_pledge_amount = max_pledge_amount, laps_completed = 0)
+			new_counter = Counter(team = team_object, strip_id = number, pledge_amount = pledge_amount, max_pledge_amount = max_pledge_amount, laps_completed = int(0))
 			new_counter.save()
 			
 #def setupUser():

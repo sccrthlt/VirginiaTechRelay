@@ -425,27 +425,27 @@ class RelayFunctions:
 		for participant in Participant.objects.filter(team = team):
 			participant_id = participant.pk
 			try:
-				for pledge in Pledge.objects.get(participant = participant_id):
+				for pledge in Pledge.objects.filter(participant = participant_id):
 					pledge_amount = pledge.pledge_amount
 					pledge_total = pledge_total + pledge_amount
 			except Pledge.DoesNotExist:
 				print('Pledge does not exist')
 				
-		return float(str(pledge_total))
+		return str(pledge_total if pledge_total is not None else 0)
 	
 	def max_pledge_amount(self, team):
 		max_pledge = 0
 		for participant in Participant.objects.filter(team = team):
 			participant_id = participant.pk
 			try:
-				for pledge in Pledge.objects.get(participant = participant_id):
+				for pledge in Pledge.objects.filter(participant = participant_id):
 					curr_max_pledge = pledge.max_pledge_amount
 					if curr_max_pledge >= max_pledge:
 						max_pledge = curr_max_pledge
 			except Pledge.DoesNotExist:
 				print('Pledge does not exist')
 					
-		return float(str(max_pledge))
+		return str(max_pledge if max_pledge is not None else 0)
 			
 	def counter(self, team):
 		di = {}

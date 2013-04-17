@@ -204,8 +204,15 @@ class Pledge(models.Model):
 	datetime = models.DateTimeField(default=None, blank=True, null=True)
 
 class Counter(models.Model):
+
+	WALK = 'WALK'
+	RUN = 'RUN'
+
+	TIER_TYPES = ((WALK, 'WALK'),(RUN, 'RUN'),)
+
 	team = models.ForeignKey(Team)
 	strip_id = models.PositiveIntegerField(default=0, blank=True, null=True)
+	tier = models.CharField(max_length=100, choices=TIER_TYPES, default=WALK, blank=True, null=True)
 	pledge_amount = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
 	max_pledge_amount = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
 	laps_completed = models.PositiveIntegerField(default=0, blank=True)

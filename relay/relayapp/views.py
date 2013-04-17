@@ -345,9 +345,10 @@ def myCandles_reg(request):
 
 @csrf_exempt
 def counter_olympics_reg(request):
+	helper = RelayFunctions()
 	team_id = request.POST.get('id', '')
-	Counter = request.POST.get('signupCounter', '')
-	signupCounter = Counter.lower() in ("yes", "true", "t", "1")
+	counter = request.POST.get('signupCounter', '')
+	signupCounter = counter.lower() in ("yes", "true", "t", "1")
 	Olympics = request.POST.get('signupOlympics', '')
 	signupOlympics = Olympics.lower() in ("yes", "true", "t", "1")
 	tier = request.POST.get('tier', '')
@@ -361,24 +362,29 @@ def counter_olympics_reg(request):
 	captain_email = model_to_dict(Team_Captain.objects.get(team = team_object))['email']
 
 	try:
-		new_Olympics_Lap_Counter_Signup = Olympics_Lap_Counter_Signup.get(team = team_object)
+		new_Olympics_Lap_Counter_Signup = Olympics_Lap_Counter_Signup.objects.get(team = team_object)
 	except Olympics_Lap_Counter_Signup.DoesNotExist:
-		new_Olympics_Lap_Counter_Signup = Olympics_Lap_Counter_Signup.get(team = team_object, company = company_object, captain = captain_name, captain_email = captain_email, counter = signupCounter, olympics = signupOlympics, tier = tier, datetime = datetime.now())
+		new_Olympics_Lap_Counter_Signup = Olympics_Lap_Counter_Signup(team = team_object, company = company_object, captain = captain_name, captain_email = captain_email, counter = signupCounter, olympics = signupOlympics, tier = tier, datetime = datetime.now())
 		new_Olympics_Lap_Counter_Signup.save()
-	try:
-		new_counter = Counter.objects.get(team = team_object)
-	except Counter.DoesNotExist:
-		number = 0
-		for counter in Counter.objects.all():
+
+	for o in Olympics_Lap_Counter_Signup.objects.all():
+		team_id = o.team.pk
+		team_object = Team.objects.get(pk = team_id)
+		try:
+			new_counter = Counter.objects.get(team = team_object)
+		except Counter.DoesNotExist:
+			print('Creating new')
+			number = 0
+			for counter in Counter.objects.all():
+				number = number + 1
 			number = number + 1
-		number = number + 1
 		
-		counter_pledge_numbers = helper.counter(team_id)
-		pledge_amount = counter_pledge_numbers.pledge_amount
-		max_pledge_amount = counter_pledge_numbers.max_pledge_amount
+			counter_pledge_numbers = helper.counter(team_id)
+			pledge_amount = counter_pledge_numbers['pledge_amount']
+			max_pledge_amount = counter_pledge_numbers['max_pledge_amount']
 		
-		new_counter = Counter(team = team_object, strip_id = number, pledge_amount = pledge_amount, max_pledge_amount = max_pledge_amount, laps_completed = 0)
-		new_counter.save()
+			new_counter = Counter(team = team_object, strip_id = number, tier = tier, pledge_amount = pledge_amount, max_pledge_amount = max_pledge_amount, laps_completed = int(0))
+			new_counter.save()
 		
 	
 	response = HttpResponse()
