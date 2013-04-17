@@ -216,6 +216,7 @@ class Counter(models.Model):
 	pledge_amount = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
 	max_pledge_amount = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
 	laps_completed = models.PositiveIntegerField(default=0, blank=True)
+	total = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
 	
 	
 

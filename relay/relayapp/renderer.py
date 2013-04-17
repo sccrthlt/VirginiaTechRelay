@@ -236,15 +236,16 @@ def renderPledge(request):
 	return HttpResponse(r)
 	
 def renderCounter(request):
-	walkers = Counter.objects.all(tier = 'walk')
-	runners = Counter.objects.all(tier = 'run')
+	walkers = Counter.objects.all(tier = 'WALK')
+	runners = Counter.objects.all(tier = 'RUN')
 	
 	t = get_template('base_counter.html')
 	context = {'pagesButtonGeneral': 'generalDown', 
 		'pagesButtonGreek': 'greeksDown', 
 		'pagesButtonCorps': 'corpsDown', 
 		'onLoad': 'setupCounterRegPage()',
-		'teams': teams
+		'walkers': walkers,
+		'runners': runners
 		}
 	c = template.Context(context)
 	r = t.render(c)

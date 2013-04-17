@@ -353,6 +353,12 @@ def counter_olympics_reg(request):
 	signupOlympics = Olympics.lower() in ("yes", "true", "t", "1")
 	tier = request.POST.get('tier', '')
 	
+	if tier == 'run':
+		tier = 'RUN'
+	else:
+		tier = 'WALK'
+		
+	
 	team_object = Team.objects.get(pk = team_id)
 	team_id = team_object.pk
 	company_object = Company.objects.get(team = team_object)

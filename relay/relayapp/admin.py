@@ -84,7 +84,7 @@ class PledgeAdmin(admin.ModelAdmin):
     search_fields = ['sponsor']
 
 class CounterAdmin(admin.ModelAdmin):
-    list_display = ('team', 'strip_id', 'pledge_amount', 'max_pledge_amount', 'laps_completed')
+    list_display = ('team', 'strip_id', 'tier', 'pledge_amount', 'max_pledge_amount', 'laps_completed', 'total')
     list_filter = ['team']
     search_fields = ['team']
 
