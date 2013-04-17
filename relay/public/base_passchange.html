@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block scripts %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"> </script>
+<script>
+$("#submit1").on("click", function checkBackend(){
+		var username = document.URL.replace('http://vtrelaycandles.org/myCandles/change/user%3D','').replace('/','');
+		console.log(username);
+		var password = $("#email1").val();
+		var passwordagain = $("#password1").val();
+		console.log(password);
+		if (password == passwordagain){
+			$.post("http://vtrelaycandles.org/myCandles/change/",
+				{
+					'username':username,
+					'password':password
+				},
+				function(data,status) {
+					alert('Thank you for changing your password');
+					var base_location = 'http://vtrelaycandles.org/home/'
+					window.location = base_location;
+				}).fail(function(err, status){
+					alert("Oops. We couldn't find that email/password credentials in our system.  Please contact the Candles admin at vtrelay.productions@gmail.com");
+					console.log(email);
+				});//end fail
+		} else {
+			alert('Your passwords did not match');
+		}
+});// end checkBackend
+</script>
+{% endblock scripts %}
+{% block content %}
+<div id="pagesBkg">
+	<div id="pagesHeaderBkg">
+        <h2 id="pagesHeaderTxt">
+            {{ participant.fname }}&nbsp;{{ participant.lname }}
+        </h2>
+        <ul id="pagesBack">
+            <!-- <li class="pagesBackLink"><a href="#">Individual</a>&nbsp;-</li> -->
+            <li class="pagesBackLink">
+                <a href="teamList.html#">{{ participant.fname }}&nbsp;{{ participant.lname }}</a>&nbsp;-
+            </li>
+            <li class="pagesBackLink">
+                <a href="home.html">Home</a>
+            </li>
+        </ul>
+    </div>
+
+
+    <div id="passChange">
+        <img id="logo" src="/img/myCandles_logo_18.png" />
+        <div id="credentials">
+        	<p id="description">{{ participant.fname }}&nbsp;{{ participant.lname }} create your password for myCandles.</p>
+            <label class="inputEmail">
+                <span>Password</span>
+                <input id="email1" type="password" />
+            </label>
+            <label class="inputPassword">
+                <span>Verify Password</span>
+                <input id="password1" type="password" />
+            </label>
+        </div><!-- end credentials -->
+        <img id="submit1" src="/img/submit.png" />
+    </div><!-- end login -->
+</div><!-- end pagesBkg -->
+{% endblock content %}

@@ -1,6 +1,13 @@
 {% extends "base.html" %}
+{% block header %}
+<title>VT Relay Candles - Pledge</title>
+{% endblock header %}
+
 	{% block scripts %}
-    <script>
+
+
+<script type="text/javascript">
+
 
 
 	function highlightClick(event) {
@@ -16,6 +23,16 @@
 	$("#arrows2").hide()
 	$("#arrows3").hide()
 	$("#arrows4").hide()
+	$("#selectTeamName").hide();
+	$("#bubble").on("click", function() {
+		$("#selectTeamName").show();
+	});
+	$(".back").on("click", function() {
+		$("#selectTeamName").hide();
+	});
+	$(".signup").on("click", function() {
+		window.location = '/signup/counterReg'
+	});
 	$("#info #next").on("click", function(){
 		var fname = $("#info #username").val();
 		var lname = $("#info #password").val();
@@ -50,12 +67,14 @@
 	$("#selectParticipant #back").on("click", function(){
 		$("#selectParticipant").attr("style", "visibility:hidden;");
 		$("#info").attr("style", "visibility:visible;");
+		$("#arrows2").hide()
+		$("#arrows1").show()
 	});
 	var fname = '';
 	var lname = '';
 	var participantName = '';
-	var ppl = "";
-	var maxi = "";
+	var ppl;
+	var maxi;
 	var arr;
 	var participantID;
 	$("#pledgeAmount #next").on("click", function(){
@@ -79,9 +98,20 @@
 	$("#pledgeAmount #back").on("click", function(){
 		$("#pledgeAmount").attr("style", "visibility:hidden;");
 		$("#selectParticipant").attr("style", "visibility:visible;");
+		$("#arrows3").hide()
+		$("#arrows2").show()
 	});
 
-	$("#submit").on("click", function () {
+	$("#verify #submit").on("click", function () {
+		fname = $("#info #username").val();
+		lname = $("#info #password").val();
+		participantName = document.getElementById("highlight").innerHTML;
+		var pp = $("#pledgeAmount #username").val();
+		ppl = Number(pp.replace(/[^0-9\.]+/g,""));
+		var maxs = $("#pledgeAmount #password").val().replace('$','');
+		maxi = Number(maxs.replace(/[^0-9\.]+/g,""));
+		arr = document.getElementById("highlight");
+		participantID = arr.parentNode.id;
 		$.post("http://vtrelaycandles.org/pledgeReceive/",
 			{
 				'fname':fname,
@@ -89,7 +119,7 @@
 				'participantName':participantName,
 				'participantID':participantID,
 				'ppl':ppl,
-				'max':maxi
+				'maxi':maxi
 			},
 			function(data,status) {
 					alert('Thank you for making a pledge to ' + participantName + '!')
@@ -97,6 +127,12 @@
 				}).fail(function(err, status){
 					alert("There has been an error in our system.  We're sorry for the inconvenience.  Please check back again later")
 		});//end fail
+	});
+	$("#verify #back").on("click", function(){
+		$("#pledgeAmount").attr("style", "visibility:visible;");
+		$("#verify").attr("style", "visibility:hidden;");
+		$("#arrows4").hide()
+		$("#arrows3").show()
 	});
 
 	//Get data
@@ -125,6 +161,7 @@
 			}//end for loop
 		$("#loadingSignImgCounter").hide();
 		document.getElementById("counterReg_body").innerHTML = string;
+		jQuery(".forScroll").mCustomScrollbar("update");
 		}//end setupTable
 
 
@@ -185,7 +222,7 @@ jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function(arg) {
     	<div id="pagesBkg">
             		<div id="pagesHeaderBkg">
 						<h2 id="pagesHeaderTxt">
-							Pledge
+							Lap Counter Pledge
 						</h2>
 						<ul id="pagesBack">
 							<!-- <li class="pagesBackLink"><a href="#">Individual</a>&nbsp;-</li> -->
@@ -204,20 +241,23 @@ jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function(arg) {
                     <div id="arrows3"></div>
                     <div id="arrows4"></div>
                     <div id="info">
-                        <label class="inputEmail">
-                            <span>First Name</span>
-                            <input id="username" type="text" />
-                        </label>
-                        <label class="inputPassword">
-                            <span>Last Name</span>
-                            <input id="password" type="text" />
-                        </label>
+                    	<div id="inputs">
+                            <label class="inputEmail">
+                                <span>Your First Name</span>
+                                <input id="username" type="text" />
+                            </label>
+                            <label class="inputPassword">
+                                <span>Your Last Name</span>
+                                <input id="password" type="text" />
+                            </label>
+                        </div><!-- end inputs -->
+                        <div id="bubble"></div>
                         <div id="next"></div>
                     </div><!-- end info -->
 
                     <div id="selectParticipant" style="visibility:hidden;">
                     	<label class="inputEmail">
-                            <span>Participant Name</span>
+                            <span>Participant Full Name</span>
                             <input id="username" type="text" />
                         </label>
                         <div id="search"></div>
@@ -277,8 +317,31 @@ jQuery.expr[":"].Contains = jQuery.expr.createPseudo(function(arg) {
                             <p id="ppl"></p>
                             <p id="max"></p>
                         </div>
+                        <div id="back"></div>
                         <div id="submit"></div>
                     </div><!-- end verify -->
 				</div><!-- end pledge -->
+                <div id="something">
+                <div id="selectTeamName">
+                    <div id="descriptionTotal">
+                              <div id="descriptionCounter">
+                                  <h2 class="title">Lap Counter Description</h2>
+                                  <div class="back"></div>
+                                  <div id="forScroll">
+                                      <p class="description">The Lap Counter is a pay-per-lap fundraising system.  Laps are tracked by a chip carried by one team member only.  Sponsors (Friends, family, etc.) pay per lap the team completes.  Sponsorship pledges are <b>non-binding</b>.<br /><br />  
+    
+    The Lap Counter is a team competition.  The team's total amount raised from pledges will be used for competition on the night of the event.  Lap and amount raised totals will be updated realtime on this website on the night of the event.<br /><br />
+        
+    The chip is a NON-BENDABLE sticker that you can place on any item that your team wishes to carry.  Decorated items are encouraged.<br /><br />
+        
+        The competition will be split up into two groups: walking and running.  There will be one chip per team.<br /><br />
+        
+        <div class="signup"></div><div class="back"></div>
+                                      </p><!-- end description -->
+                                  </div><!-- end forScroll -->
+                              </div><!-- end descriptionCounter -->
+                         </div><!-- end descriptionTotal -->
+                 </div><!-- end selectTeamName -->
+                 </div><!-- end something -->
         </div><!-- end pagesBkg -->
     {% endblock content %}

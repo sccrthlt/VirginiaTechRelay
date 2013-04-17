@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate
 from django.shortcuts import render
 from relayapp.models import *
+from relayapp.RelayFunctions import *
 from django.db.models import Sum
 from django.db.models import Count
 from django.forms.models import model_to_dict
@@ -188,8 +189,7 @@ def renderSignIn(request):
 	return HttpResponse(r)
 
 def renderMyCandlesPage(request, User):
-	user_username = request.user.username
-	participant = Participant.objects.get(pk = user_username)
+	participant = Participant.objects.get(pk = User)
 	pledges = Pledge.objects.filter(participant = participant)
 	
 	if request.user.is_authenticated():
@@ -236,11 +236,40 @@ def renderPledge(request):
 	return HttpResponse(r)
 	
 def renderCounter(request):
+	teams = Olympics_Lap_Counter_Signup.objects.all()
+	
 	t = get_template('base_counter.html')
 	context = {'pagesButtonGeneral': 'generalDown', 
 		'pagesButtonGreek': 'greeksDown', 
 		'pagesButtonCorps': 'corpsDown', 
-		'onLoad': 'setupCounterRegPage()'
+		'onLoad': 'setupCounterRegPage()',
+		'teams': teams
+		}
+	c = template.Context(context)
+	r = t.render(c)
+	return HttpResponse(r)
+
+def renderPassChange(request, User):
+	participant = Participant.objects.get(pk = User)
+	
+	t = get_template('base_passchange.html')
+	context = {'pagesButtonGeneral': 'generalDown', 
+		'pagesButtonGreek': 'greeksDown', 
+		'pagesButtonCorps': 'corpsDown', 
+		'onLoad': 'cool()',
+		'participant': participant
+		}
+	c = template.Context(context)
+	r = t.render(c)
+	return HttpResponse(r)
+	
+def renderSendEmail(request):
+	
+	t = get_template('base_sendemail.html')
+	context = {'pagesButtonGeneral': 'generalDown', 
+		'pagesButtonGreek': 'greeksDown', 
+		'pagesButtonCorps': 'corpsDown', 
+		'onLoad': 'cool()'
 		}
 	c = template.Context(context)
 	r = t.render(c)

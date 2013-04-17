@@ -419,3 +419,37 @@ class RelayFunctions:
 		candles['team_email_milestone_candles'] = self.participants_emails_candles(team)
 		candles['team_event_milestone_candles'] = self.participants_event_candles(team)
 		return candles
+
+	def pledge_amount(self, team):
+		pledge_total = 0
+		for participant in Participant.objects.filter(team = team):
+			participant_id = participant.pk
+			try:
+				for pledge in Pledge.objects.get(participant = participant_id):
+					pledge_amount = pledge.pledge_amount
+					pledge_total = pledge_total + pledge_amount
+			except Pledge.DoesNotExist:
+				print('Pledge does not exist')
+				
+		return float(str(pledge_total))
+	
+	def max_pledge_amount(self, team):
+		max_pledge = 0
+		for participant in Participant.objects.filter(team = team):
+			participant_id = participant.pk
+			try:
+				for pledge in Pledge.objects.get(participant = participant_id):
+					curr_max_pledge = pledge.max_pledge_amount
+					if curr_max_pledge >= max_pledge:
+						max_pledge = curr_max_pledge
+			except Pledge.DoesNotExist:
+				print('Pledge does not exist')
+					
+		return float(str(max_pledge))
+			
+	def counter(self, team):
+		di = {}
+		di['pledge_amount'] = self.pledge_amount(team)
+		di['max_pledge_amount'] = self.max_pledge_amount(team)
+		
+		return di

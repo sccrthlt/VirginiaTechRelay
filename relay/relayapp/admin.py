@@ -79,7 +79,7 @@ class OlympicsLapCounterSignupAdmin(admin.ModelAdmin):
     search_fields = ['team']
 
 class PledgeAdmin(admin.ModelAdmin):
-    list_display = ('sponsor', 'pledge_amount', 'max_pledge_amount', 'datetime')
+    list_display = ('sponsor', 'participant', 'pledge_amount', 'max_pledge_amount', 'datetime')
     list_filter = ['sponsor']
     search_fields = ['sponsor']
 

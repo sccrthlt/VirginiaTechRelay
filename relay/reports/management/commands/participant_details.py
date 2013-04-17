@@ -4,6 +4,8 @@ import os
 import cStringIO
 from datetime import datetime, date, time
 from relayapp.models import *
+from django.forms.models import model_to_dict
+from django.contrib.auth.models import User, Group
 
 class Command(BaseCommand):
     args = 'CSV file with <Participant> detail data'
@@ -18,6 +20,8 @@ def setupParticipant(info):
 
     try:
         participant_return = Participant.objects.get(email = info['Primary Email Address'])
+        #s = model_to_dict(Participant.objects.get(email = info['Primary Email Address']))['id']
+        #setupUser(s)
     except Participant.DoesNotExist:
         try:
             participant_return = Participant(
@@ -28,6 +32,8 @@ def setupParticipant(info):
                 reg_date = datetime.strptime(info['Registration Date'], '%m/%d/%y %H:%M')
             )
             participant_return.save()
+            #s = model_to_dict(Participant.objects.get(email = info['Primary Email Address']))['id']
+            #setupUser(s)
         except Team.DoesNotExist:
             participant_return = Participant(
                 fname = info['First Name'],
@@ -37,10 +43,26 @@ def setupParticipant(info):
                 reg_date = datetime.strptime(info['Registration Date'], '%m/%d/%y %H:%M')
             )
             participant_return.save()
+            #s = model_to_dict(Participant.objects.get(email = info['Primary Email Address']))['id']
+            #setupUser(s)
             print("Team does not exist for >> "+info['Team Name'])
             print("Put into General Team")
 
     return participant_return
+
+#def setupUser(info):
+	#participant = Participant.objects.get(pk = info)
+	#username = participant.pk
+	#email = participant.email
+	#groups = Group.objects.get(name = 'myCandles')
+
+	#try:
+		user = User.objects.get(username = info)
+	#except User.DoesNotExist:
+		#participant = Participant.objects.get(pk = info)
+		#new_user = User.objects.create_user(username = username, email = email, password = 'password')
+		#new_user.groups = groups
+		#new_user.save()
 
 def parseCSVParticipantDetails(csv_file_location):
 

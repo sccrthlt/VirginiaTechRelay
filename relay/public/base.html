@@ -60,7 +60,7 @@
                                 <input id="password" type="password" />
                             </label>
                         </div><!-- end credentials -->
-                        <p>What is my email/credentials?</p>
+                        <p>New user?  Click me!</p>
                         <img id="submit" src="/img/login_button_22.png" />
                     </div><!-- end login -->
 		{% endblock login %}
@@ -83,7 +83,7 @@
                 </div><!-- end problems -->
           </div><!-- end feedbackBody -->
       </div><!-- end feedback -->
-      
+
       <div id="login" style="visibility:hidden;">
       	<label class="inputEmail">
             <span>Email</span>
@@ -93,7 +93,7 @@
             <span>Password</span>
             <input id="inputOlympicsSearch" type="text" />
         </label>
-        
+
       </div><!-- end login -->
 	</div><!-- end main -->
 	</div><!-- end background -->
@@ -235,10 +235,7 @@ $(date).append(m_names[curr_month] + " " + curr_date + "<SUP>" + sup + "</SUP>")
 		});
 
 	</script>
-    
-    
-    
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"> </script>
+
 <script type="text/javascript">
 $("#signInCorner").on("click", function() {
 	$("#login").attr("style", "visiblity:visible;");
@@ -254,7 +251,10 @@ $("#signOutCorner").on("click", function() {
                 console.log('Oops.  Something went wrong :(');
 			});//end fail
 });
+var times = 0;
 $("#submit").on("click", function checkBackend(){
+		times = times + 1;
+		if (times <= 2) {
 		email = '';
 		password = '';
 		email = $("#email").val();
@@ -273,8 +273,14 @@ $("#submit").on("click", function checkBackend(){
 				alert("Oops. We couldn't find that email/password credentials in our system.  Please contact the Candles admin at vtrelay.productions@gmail.com");
                 console.log(email);
 			});//end fail
+		} else {
+			window.location = 'http://vtrelaycandles.org/myCandles/sendemail/'
+		}
 });// end checkBackend
 
+$("#login p").on("click", function() {
+	window.location = 'http://vtrelaycandles.org/myCandles/sendemail/'
+});
 //Input gray label
 (function($) {
     function toggleLabel() {
@@ -302,14 +308,16 @@ $("#submit").on("click", function checkBackend(){
         }
     };
 
-    $('input, textarea').live('keydown', toggleLabel);
-    $('input, textarea').live('paste', toggleLabel);
-    $('select').live('change', toggleLabel);
 
-    $('input, textarea').live('focusin', function() {
+    $('input, textarea').on('keydown', toggleLabel);
+    $('input, textarea').on('paste', toggleLabel);
+    $('select').on('change', toggleLabel);
+
+
+    $('input, textarea').on('focusin', function() {
         $(this).prev('span').css('color', '#ccc');
     });
-    $('input, textarea').live('focusout', function() {
+    $('input, textarea').on('focusout', function() {
         $(this).prev('span').css('color', '#999');
     });
 
@@ -319,15 +327,15 @@ $("#submit").on("click", function checkBackend(){
 
 })(jQuery);
 </script>
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
 	<script type="text/javascript">
 
 	function sendemail(){

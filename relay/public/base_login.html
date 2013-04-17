@@ -1,8 +1,40 @@
 {% extends "base.html" %}
 {% block scripts %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"> </script>
+<script>
+$("#login p").on("click", function() {
+	window.location = 'http://vtrelaycandles.org/myCandles/sendemail/'
+});
+var times = 0;
+$("#submit").on("click", function checkBackend(){
+		times = times + 1;
+		if (times <= 2) {
+		email = '';
+		password = '';
+		email = $("#email").val();
+		password = $("#password").val();
+		$.post("http://vtrelaycandles.org/loginCredentials/",
+			{
+				'email':email,
+                'password':password
+			},
+			function(data,status) {
+            	console.log('it worked!!');
+				var username = data[0].fields.username;
+				var base_location = 'http://vtrelaycandles.org/myCandles/user='
+				window.location = base_location + username;
+			}).fail(function(err, status){
+				alert("Oops. We couldn't find that email/password credentials in our system.  Please contact the Candles admin at vtrelay.productions@gmail.com");
+                console.log(email);
+			});//end fail
+		} else {
+			window.location = 'http://vtrelaycandles.org/myCandles/sendemail/'
+		}
+});// end checkBackend
+</script>
 {% endblock scripts %}
         {% block login %}
-                    <div id="login" style="visibility:hidden;">
+                    <div id="login">
                     	<img id="logo" src="/img/myCandles_logo_18.png" />
                         <div id="credentials">
                             <label class="inputEmail">
@@ -14,7 +46,7 @@
                                 <input id="password" type="password" />
                             </label>
                         </div><!-- end credentials -->
-                        <p>What is my username/credentials?</p>
+                        <p>New user?  Click me!</p>
                         <img id="submit" src="/img/login_button_22.png" />
                     </div><!-- end login -->
 		{% endblock login %}

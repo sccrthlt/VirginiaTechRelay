@@ -11,6 +11,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.core.mail import send_mail
 
 from django.template import RequestContext
 from relayapp.models import *
@@ -351,19 +352,34 @@ def counter_olympics_reg(request):
 	signupOlympics = Olympics.lower() in ("yes", "true", "t", "1")
 	tier = request.POST.get('tier', '')
 	
+	team_object = Team.objects.get(pk = team_id)
+	team_id = team_object.pk
+	company_object = Company.objects.get(team = team_object)
+	captain_fname = model_to_dict(Team_Captain.objects.get(team = team_object))['fname']
+	captain_lname = model_to_dict(Team_Captain.objects.get(team = team_object))['lname']
+	captain_name = captain_fname + ' ' + captain_lname
+	captain_email = model_to_dict(Team_Captain.objects.get(team = team_object))['email']
 
 	try:
-		team_object = Team.objects.get(pk = team_id)
-		company_object = Company.objects.get(team = team_object)
-		captain_fname = model_to_dict(Team_Captain.objects.get(team = team_object))['fname']
-		captain_lname = model_to_dict(Team_Captain.objects.get(team = team_object))['lname']
-		captain_name = captain_fname + ' ' + captain_lname
-		captain_email = model_to_dict(Team_Captain.objects.get(team = team_object))['email']
-			
-		new_Olympics_Lap_Counter_Signup = Olympics_Lap_Counter_Signup(team = team_object, company = company_object, captain = captain_name, captain_email = captain_email, counter = signupCounter, olympics = signupOlympics, tier = tier, datetime = datetime.now())
-		new_Olympics_Lap_Counter_Signup.save()
+		new_Olympics_Lap_Counter_Signup = Olympics_Lap_Counter_Signup.get(team = team_object)
 	except Olympics_Lap_Counter_Signup.DoesNotExist:
-		print('uh oh')
+		new_Olympics_Lap_Counter_Signup = Olympics_Lap_Counter_Signup.get(team = team_object, company = company_object, captain = captain_name, captain_email = captain_email, counter = signupCounter, olympics = signupOlympics, tier = tier, datetime = datetime.now())
+		new_Olympics_Lap_Counter_Signup.save()
+	try:
+		new_counter = Counter.objects.get(team = team_object)
+	except Counter.DoesNotExist:
+		number = 0
+		for counter in Counter.objects.all():
+			number = number + 1
+		number = number + 1
+		
+		counter_pledge_numbers = helper.counter(team_id)
+		pledge_amount = counter_pledge_numbers.pledge_amount
+		max_pledge_amount = counter_pledge_numbers.max_pledge_amount
+		
+		new_counter = Counter(team = team_object, strip_id = number, pledge_amount = pledge_amount, max_pledge_amount = max_pledge_amount, laps_completed = 0)
+		new_counter.save()
+		
 	
 	response = HttpResponse()
 	response.content = serialized_obj = serializers.serialize('json', [ new_Olympics_Lap_Counter_Signup, ])
@@ -455,14 +471,43 @@ def pledgeReceive(request):
 	maxi = request.POST.get('maxi', '')
 	
 	sponsor = fname + ' ' + lname
-	participant_obj = Participant.objects.get(pk = participantID)
+	participant_obj = Participant.objects.get(id = participantID)
 
 	try:
-		pledge = Pledge.objects.get(sponsor = sponsor, participant = participant_obj, pledge_amount = ppl, max_pledge_amount = maxi, datetime = datetime.now())
+		pledge = Pledge.objects.get(sponsor = sponsor, participant = participant_obj, pledge_amount = ppl, max_pledge_amount = maxi)
 	except Pledge.DoesNotExist:
-		pledge = Pledge.objects.create_user(sponsor = sponsor, participant = participant_obj, pledge_amount = ppl, max_pledge_amount = maxi, datetime = datetime.now())
+		pledge = Pledge(sponsor = sponsor, participant = participant_obj, pledge_amount = ppl, max_pledge_amount = maxi, datetime = datetime.now())
+		pledge.save()
 		
 	response = HttpResponse()
 	response.content = serialized_obj = serializers.serialize('json', [ pledge, ])
+	response['Content-Type'] = 'application/json'
+	return response
+
+@csrf_exempt
+def myCandlesChange(request):
+	password = request.POST.get('password', '')
+	username = request.POST.get('username', '')
+
+	u = User.objects.get(username=username)
+	u.set_password(password)
+	u.save()
+		
+	response = HttpResponse()
+	response.content = serialized_obj = serializers.serialize('json', [ u, ])
+	response['Content-Type'] = 'application/json'
+	return response
+
+@csrf_exempt
+def retrieveUsername(request):
+	email = request.POST.get('email', '')
+	
+	try:
+		user = User.objects.get(email = email)
+	except User.DoesNotExist:
+		return HttpResponse(status=400)
+
+	response = HttpResponse()
+	response.content = serialized_obj = serializers.serialize('json', [ user, ])
 	response['Content-Type'] = 'application/json'
 	return response
