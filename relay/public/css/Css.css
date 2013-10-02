@@ -3023,13 +3023,25 @@ table
 {
 	height:72px;
 	width:auto;
-	margin:80px 0 0 105px;
+	margin:0px 0 0 350px;
+}
+#actual
+{
+	height:159px;
+	width:auto;
+	margin:0px 0 0 225px;
+}
+#stream
+{
+	height:auto;
+	width:488px;
+	margin:80px 0 0 235px;
 }
 #pledge1
 {
 	height:72px;
 	width:auto;
-	margin:80px 0 0 10px;
+	margin:0px 0 0 350px;
 }
 
 #counterRegBkg #selectTeamName #registerLapCounter #searchName .inputCounter, #counterRegBkg #selectTeamName #registerOlympics #searchName .inputCounter, #counterRegBkg #signIn #registerLapCounter #searchName .inputCounter
@@ -3712,10 +3724,18 @@ table
 {
 	border-radius: 30px;
 	box-shadow: 0px 4px 5px #222222;
-	height: 800px;
+	height: 900px;
 	margin-left: 25px;
 	margin-top: 35px;
 	width: 910px;
+}
+#counterBkg .sectionType
+{
+	float:left;
+	font-size:24px;
+	margin:30px 0 0 30px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:900;
 }
 #counterBkg #teamBoxes
 {
@@ -3734,19 +3754,21 @@ table
 	background-image: url('../img/pages_header_05.png');
 	height: 42px;
 	width: 910px;
+	
 }
 #counterBkg #pagesHeaderBkg #pagesHeaderTxt
 {
 	font-size: 130%;
 	line-height: 34pt;
 	text-indent: 25px;
+	margin-bottom:0px;
 }
 #counterBkg #pagesHeaderBkg #pagesBack
 {
 	float: right;
 	list-style-type: none;
 	margin-right: 20px;
-	margin-top: -50px;
+	margin-top: -35px;
 }
 #counterBkg #pagesHeaderBkg #pagesBack .pagesBackLink
 {
@@ -3786,22 +3808,22 @@ table
 
 #counterCheckGeneral, #counterCheckGreek
 {
-	float:left;
 	box-shadow: 0px 4px 5px #222222;
+	float:left;
 	height: 350px;
 	margin-left: 27px;
-	margin-top: 30px;
-	width: 420px;
+	margin-top: 10px;
+	width: 850px;
 }
-#counterCheckGeneral #forScroll, #counterCheckGreek #forScroll
+#counterCheckGeneral .forScroll, #counterCheckGreek .forScroll
 {
 	float: left;
-	height: 350px;
+	height: 310px;
 	overflow: hidden;
 	width: 100%;
 	margin:0;
 }
-#counterCheckGeneral #forScroll #table, #counterCheckGreek #forScroll #table
+#counterCheckGeneral .forScroll #table, #counterCheckGreek .forScroll #table
 {
 	border: none;
 	border-collapse: separate;
@@ -3811,7 +3833,7 @@ table
 	margin-top: 0px;
 	width: 100%;
 }
-#counterCheckGeneral #forScroll #table #teamList_body, #counterCheckGreek #forScroll #table #teamList_body
+#counterCheckGeneral .forScroll #table #teamList_body, #counterCheckGreek .forScroll #table #teamList_body
 {
 	border: none;
 	border-color: none;
@@ -3821,12 +3843,12 @@ table
 	width: 100%;
 	margin:0;
 }
-#counterCheckGeneral #forScroll #table #teamList_body a, #counterCheckGreek #forScroll #table #teamList_body a
+#counterCheckGeneral .forScroll #table #teamList_body a, #counterCheckGreek .forScroll #table #teamList_body a
 {
 	color: #FFF;
 	text-decoration: underline;
 }
-#counterCheckGeneral #forScroll #table #teamList_body a:hover, #counterCheckGreek #forScroll #table #teamList_body a:hover
+#counterCheckGeneral .forScroll #table #teamList_body a:hover, #counterCheckGreek .forScroll #table #teamList_body a:hover
 {
 	text-decoration: none;
 }
@@ -3856,7 +3878,7 @@ table
 }
 #counterCheckGeneral #sorterHeader .sorterOther, #counterCheckGreek #sorterHeader .sorterOther
 {
-	width:80px;
+	width:16%;
 	height:27px;
 	text-align: center;
 	vertical-align:middle;
@@ -3867,7 +3889,7 @@ table
 	font-family: Arial;
 	font-weight:bold;
 }
-#counterCheckGeneral #forScroll #table #teamList_body .teamRow, #counterCheckGreek #forScroll #table #teamList_body .teamRow
+#counterCheckGeneral .forScroll #table #teamList_body .teamRow, #counterCheckGreek .forScroll #table #teamList_body .teamRow
 {
 	border-spacing: 0px;
 	box-shadow: none;
@@ -3878,33 +3900,17 @@ table
 	margin-bottom:0px;
 }
 
-#counterCheckGeneral #forScroll #table #teamList_body .teamRow #donorName, #counterCheckGreek #forScroll #table #teamList_body .teamRow #donorName 
+#counterCheckGeneral .forScroll #table #teamList_body .teamRow #donorName, #counterCheckGreek .forScroll #table #teamList_body .teamRow #donorName 
 {
-width:132px;
+width:auto;
 text-align:left;
 border-left:none;
 }
-#counterCheckGeneral #forScroll #table #teamList_body .teamRow #pledge, #counterCheckGreek #forScroll #table #teamList_body .teamRow #pledge
+#counterCheckGeneral .forScroll #table #teamList_body .teamRow .rowCell, #counterCheckGreek .forScroll #table #teamList_body .teamRow .rowCell
 {
-width:66px;
-}
-#counterCheckGeneral #forScroll #table #teamList_body .teamRow #pledgeMax, #counterCheckGreek #forScroll #table #teamList_body .teamRow #pledgeMax
-{
-width:74px;
-}
-#counterCheckGeneral #forScroll #table #teamList_body .teamRow #lapsCompleted, #counterCheckGreek #forScroll #table #teamList_body .teamRow #lapsCompleted
-{
-width:76px;
-}
-#counterCheckGeneral #forScroll #table #teamList_body .teamRow #total, #counterCheckGreek #forScroll #table #teamList_body .teamRow #total
-{
-width:50px;
-}
-#counterCheckGeneral #forScroll #table #teamList_body .teamRow .rowCell, #counterCheckGreek #forScroll #table #teamList_body .teamRow .rowCell
-{
-	float:left;
 padding:10px 0 0 0;
 height:30px;
+width:16%;
 border-left: 2px solid #222222;
 text-align:center;
 }

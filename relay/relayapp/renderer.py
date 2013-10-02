@@ -236,8 +236,8 @@ def renderPledge(request):
 	return HttpResponse(r)
 	
 def renderCounter(request):
-	walkers = Counter.objects.all(tier = 'WALK')
-	runners = Counter.objects.all(tier = 'RUN')
+	walkers = Counter.objects.filter(tier = 'WALK')
+	runners = Counter.objects.filter(tier = 'RUN')
 	
 	t = get_template('base_counter.html')
 	context = {'pagesButtonGeneral': 'generalDown', 
@@ -246,6 +246,30 @@ def renderCounter(request):
 		'onLoad': 'setupCounterRegPage()',
 		'walkers': walkers,
 		'runners': runners
+		}
+	c = template.Context(context)
+	r = t.render(c)
+	return HttpResponse(r)
+
+def renderCounterTeam(request, team):
+	helper = RelayFunctions()
+	
+	team_object = Team.objects.get(pk = team)
+	team_name = team_object.name
+	#laps_completed = Counter.objects.get(team = team_name)
+	
+	team = []
+	for participant in Participant.objects.filter(team = Team):
+		participant_id = participant.pk
+		team.append(helper.counterParticipant(participant_id))
+	
+	t = get_template('base_counterTeam.html')
+	context = {'pagesButtonGeneral': 'generalDown', 
+		'pagesButtonGreek': 'greeksDown', 
+		'pagesButtonCorps': 'corpsDown', 
+		'onLoad': 'setupCounterRegPage()',
+		'team': team,
+		'laps_completed': laps_completed
 		}
 	c = template.Context(context)
 	r = t.render(c)

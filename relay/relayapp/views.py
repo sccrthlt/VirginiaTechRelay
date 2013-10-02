@@ -380,12 +380,14 @@ def counter_olympics_reg(request):
 			new_counter = Counter.objects.get(team = team_object)
 		except Counter.DoesNotExist:
 			print('Creating new')
-			number = 0
+			b = 0
 			for counter in Counter.objects.all():
-				number = number + 1
-			number = number + 1
+				i = counter.strip_id
+				if i > b:
+					b = i
+					number = b + 1
 		
-			counter_pledge_numbers = helper.counter(team_id)
+			counter_pledge_numbers = helper.counterTeam(team_id)
 			pledge_amount = counter_pledge_numbers['pledge_amount']
 			max_pledge_amount = counter_pledge_numbers['max_pledge_amount']
 		

@@ -54,25 +54,25 @@ $(document).ready(function(){
 							</tr>
 						</table>
                         <!--<img id="loadingImg" src="/img/loading_bar.gif">-->
-						<div class="forScroll">
+						<div id="forScroll">
 							<table id="table">
 								<tbody id="teamList_body">
-                                {% for walker in walkers %}
+                                {% for participant in team %}
                                 	<tr class="teamRow" id=" + item + ">
                                         <td id="donorName" class="rowCell">
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ walker.team }}
+                                            <a href="/team={{ walker.team.pk  }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ participant['name'] }}</a>
                                         </td>
                                         <td id="pledge" class='rowCell'>
-                                            ${{ walker.pledge_amount }}
+                                            ${{ participant['pledge_amount'] }}
                                         </td>
                                         <td id="pledgeMax" class='rowCell'>
-                                            ${{ walker.max_pledge_amount }}
+                                            ${{ participant['max_pledge_amount'] }}
                                         </td>
                                         <td id="lapsCompleted" class="rowCell">
-                                            {{ walker.laps_completed }}
+                                            {{ laps_completed }}
                                         </td>
                                         <td id="total" class="rowCell">
-                                            ${{ walker.total }}
+                                            ${{ participant['pledge_amount']*laps_completed }}
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -103,7 +103,7 @@ $(document).ready(function(){
 							</tr>
 						</table>
                         <!--<img id="loadingImg" src="/img/loading_bar.gif">-->
-						<div class="forScroll">
+						<div id="forScroll">
 							<table id="table">
 								<tbody id="teamList_body">
                                 {% for runner in runners %}

@@ -420,7 +420,7 @@ class RelayFunctions:
 		candles['team_event_milestone_candles'] = self.participants_event_candles(team)
 		return candles
 
-	def pledge_amount(self, team):
+	def pledge_amount_team(self, team):
 		pledge_total = 0
 		for participant in Participant.objects.filter(team = team):
 			participant_id = participant.pk
@@ -433,7 +433,7 @@ class RelayFunctions:
 				
 		return str(pledge_total if pledge_total is not None else 0)
 	
-	def max_pledge_amount(self, team):
+	def max_pledge_amount_team(self, team):
 		max_pledge = 0
 		for participant in Participant.objects.filter(team = team):
 			participant_id = participant.pk
@@ -447,9 +447,42 @@ class RelayFunctions:
 					
 		return str(max_pledge if max_pledge is not None else 0)
 			
-	def counter(self, team):
+	def counterTeam(self, team):
 		di = {}
-		di['pledge_amount'] = self.pledge_amount(team)
-		di['max_pledge_amount'] = self.max_pledge_amount(team)
+		di['pledge_amount'] = self.pledge_amount_team(team)
+		di['max_pledge_amount'] = self.max_pledge_amount_team(team)
+		
+		return di
+		
+	def pledge_amount_participant(self, id):
+		pledge_total = 0
+		try:
+			for pledge in Pledge.objects.filter(participant = id):
+				pledge_amount = pledge.pledge_amount
+				pledge_total = pledge_total + pledge_amount
+		except Pledge.DoesNotExist:
+			print('Pledge does not exist')
+				
+		return str(pledge_total if pledge_total is not None else 0)
+	
+	def max_pledge_amount_participant(self, id):
+		max_pledge = 0
+		try:
+			for pledge in Pledge.objects.filter(participant = id):
+				curr_max_pledge = pledge.max_pledge_amount
+				if curr_max_pledge >= max_pledge:
+					max_pledge = curr_max_pledge
+		except Pledge.DoesNotExist:
+			print('Pledge does not exist')
+					
+		return str(max_pledge if max_pledge is not None else 0)
+
+	def counterParticipant(self, id):
+		di = {}
+		fname = Participant.objects.get(pk = id).fname
+		lname = Participant.objects.get(pk = id).lname
+		di['name'] = fname + ' ' + lname
+		di['pledge_amount'] = self.pledge_amount_participant(id)
+		di['max_pledge_amount'] = self.max_pledge_amount_participant(id)
 		
 		return di

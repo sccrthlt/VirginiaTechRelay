@@ -44,6 +44,7 @@ class Command(BaseCommand):
         files = glob.glob('/home/vtrelayc/projects/VirginiaTechRelay/relay/public/counter/*')
         print 'oldest:', get_oldest_file(files)
         parseCSVCounter(get_youngest_file(files))
+        #change()
 
 		
 
@@ -73,25 +74,30 @@ def get_oldest_file(files, _invert=False):
 def get_youngest_file(files):
     return get_oldest_file(files, _invert=True)
 
-def counter(info):
+def counter(info, noCol):
 	helper = RelayFunctions()
 	
 	try:
 		counter = Counter.objects.get(strip_id = info[0])
 		team_id = counter.team.pk
-		counter_pledge_numbers = helper.counter(team_id)
+		counter_pledge_numbers = helper.counterTeam(team_id)
 		pledge_amount = counter_pledge_numbers['pledge_amount']
 		max_pledge_amount = counter_pledge_numbers['max_pledge_amount']
-		laps_completed = int(1)
+		laps_completed = int(noCol)
 		
 		counter.pledge_amount = pledge_amount
 		counter.max_pledge_amount = max_pledge_amount
 		counter.laps_completed = laps_completed
+		total = laps_completed*pledge_amount
+		counter.total = total
 		counter.save()
 	except Counter.DoesNotExist:
 		print('Uh oh')
 
-    
+def change():
+	for counter in Counter.objects.all():
+		counter.laps_completed = int(0)
+		counter.save()
 
 def parseCSVCounter(csv_file):
 
@@ -107,7 +113,12 @@ def parseCSVCounter(csv_file):
 
             try:
                 #row[0] = unicode(row[0], 'latin-1')
-                counter(row)
+                noCol = 0
+                for col in row:
+                    noCol = noCol + 1
+                noCol = noCol - 2
+                print(noCol)
+                counter(row, noCol)
                 print('starting row..')
 
             except UnicodeDecodeError, e:
