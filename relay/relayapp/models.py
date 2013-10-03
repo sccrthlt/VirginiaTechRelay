@@ -82,6 +82,12 @@ class Event(models.Model):
 #change to partipant record for donations
 #pull from CSV
 
+class Candles_Record(models.Model):
+	CANDLE_TYPE = (('DO', 'From donation'),('EM', 'From email'),('EV', 'From event'))
+	candle_type = models.CharField(max_length=2, choices=CANDLE_TYPE, default='DO')
+	candles_value = models.IntegerField(default=0)
+	datetime = models.DateTimeField()
+
 class Fundraising_Challenge(models.Model):
 	name = models.CharField(max_length=100)
 	datetime_start = models.DateTimeField()

@@ -17,9 +17,11 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         print "Starting Command.."
         #s = model_to_dict(Participant.objects.get(email = 'scott2@vt.edu'))['id']
-        #setupUser()
-        #counter()
-        something()
+		#sendemail()  ## Sends email out to all participants with a message.  Uses their username (because username should be their email)
+        #setupUser()  ## Creates new user in django database if new participant is found in vtrelay.org database.
+        #counter()  ## Creates a counter in django database.  Counter number (aka strip, bib, number) is in numerical order (adds one for each new submission. Ex: First bib = 1.  Second bib, adds one = 2)
+        #something() ## Reset password for user 1
+        deleteUsers() ## Delete all users in django database except for main admins
 		
 
 ##def delete():
@@ -35,6 +37,19 @@ class Command(BaseCommand):
 			#message = 'One of your VT Relay team members has signed your team up for the lap counter.  Did you know the lap counter is potentially a HUGE fundraiser for your team?  Laps = Money. Ask your friends and family to donate a small amount per lap (called a "Pledge"). Pledge here: http://vtrelaycandles.org/pledge/'
 			#send_mail('Lap Counter Pledge', message, 'vtrelay.productions@gmail.com',[user_email], fail_silently=False, auth_user = 'no-reply@vtrelaycandles.org', auth_password = 'vtrelayexec')
 
+#def setupUser():
+	#for participant in Participant.objects.all():
+		#username = participant.pk
+		#email = participant.email
+		#groups = Group.objects.get(name = 'myCandles')
+
+		#try:
+			#user = User.objects.get(username = username)
+		#except User.DoesNotExist:
+			#new_user = User.objects.create_user(username = username, email = email, password = 'password')
+			#new_user.group = groups
+			#new_user.save()
+			
 ##def counter():
 	#helper = RelayFunctions()
 
@@ -58,25 +73,21 @@ class Command(BaseCommand):
 			#new_counter = Counter(team = team_object, strip_id = number, tier = 'WALK', pledge_amount = pledge_amount, max_pledge_amount = max_pledge_amount, laps_completed = int(0))
 			#new_counter.save()
 			
-#def setupUser():
-	#for participant in Participant.objects.all():
-		#username = participant.pk
-		#email = participant.email
-		#groups = Group.objects.get(name = 'myCandles')
 
-		#try:
-			#user = User.objects.get(username = username)
-		#except User.DoesNotExist:
-			#new_user = User.objects.create_user(username = username, email = email, password = 'password')
-			#new_user.group = groups
-			#new_user.save()
 
-def something():
-	s = 1
+#def something():
+	#s = 1
+	#for user in User.objects.all():
+		#while s == 1:
+			#use = user.username
+			##user.set_password('password')
+			#user.save()
+			#print use
+			#s = 2
+
+def deleteUsers():
 	for user in User.objects.all():
-		while s == 1:
-			use = user.username
-			user.set_password('password')
-			user.save()
-			print use
-			s = 2
+		if not user.username == 'vtrelay':
+			print('cool')
+			user.delete()
+			print('Deleting user:' + user.username)
