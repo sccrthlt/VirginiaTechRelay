@@ -54,13 +54,6 @@ class Participant(models.Model):
 
     class Meta:
         ordering = ['lname', 'fname']
-
-class Team_Captain(models.Model):
-	fname = models.CharField(verbose_name='First Name', max_length=100)
-	lname = models.CharField(verbose_name='Last Name', max_length=100)
-	email = models.EmailField(blank=False)
-	team = models.ForeignKey(Team)
-	reg_date = reg_date = models.DateField()
 	
 class Event(models.Model):
     name = models.CharField(max_length=100)
@@ -79,15 +72,108 @@ class Event(models.Model):
     class Meta:
         ordering = ['date']
 
-#change to partipant record for donations
-#pull from CSV
+class Donation(models.Model):
+    participant = models.ForeignKey(Participant)
+    amount = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
+    datetime = models.DateTimeField()
 
+class Team_Captain(models.Model):
+	fname = models.CharField(verbose_name='First Name', max_length=100)
+	lname = models.CharField(verbose_name='Last Name', max_length=100)
+	email = models.EmailField(blank=False)
+	team = models.ForeignKey(Team)
+	reg_date = reg_date = models.DateField()
+
+
+
+
+
+## General Teams System
+
+
+class Donation_Milestone(models.Model):
+    donation_amount = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
+    candles_rewarded = models.PositiveIntegerField()
+
+    def __unicode__(self):
+        return 'Milestone: ' + str(self.donation_amount) + ' Candles: ' + str(self.candles_rewarded)
+
+    class Meta:
+        ordering = ['candles_rewarded']
+
+class Email_Rule(models.Model):
+    candles_rewarded = models.PositiveIntegerField()
+    emails = models.PositiveIntegerField()
+
+    def __unicode__(self):
+        return 'Emails: ' + str(self.emails) + ' Candles: ' + str(self.candles_rewarded)
+
+class Participant_Milestone_Record(models.Model):
+    participant = models.ForeignKey(Participant)
+    donation_milestone = models.ForeignKey(Donation_Milestone)
+    datetime = models.DateTimeField(default = '05/07/1993 12:12')
+
+class Participant_Email_Record(models.Model):
+    participant = models.ForeignKey(Participant)
+    email_milestone = models.ForeignKey(Email_Rule)
+    datetime = models.DateField(default = '05/07/1993 12:12')
+
+class Participant_Event_Record(models.Model):
+    guests = models.PositiveIntegerField(default=0, blank=True)
+    event = models.ForeignKey(Event)
+    participant = models.ForeignKey(Participant)
+    hokie_passport_id = models.BigIntegerField(blank=True, default=0)
+
+class Team_Event_Record(models.Model):
+    event = models.ForeignKey(Event)
+    team = models.ForeignKey(Team)
+
+
+
+## Greeks
+
+class TShirt(models.Model):
+    name = models.CharField(max_length=200)
+
+class Company_TShirt_Milestone(models.Model):
+    percentage_purchased = models.PositiveIntegerField(default=0, blank=True)
+    candles_rewarded = models.PositiveIntegerField()
+
+class Company_Registration_Rule(models.Model):
+    percent_registered = models.PositiveIntegerField(default=0, blank=True)
+    candles_rewarded = models.PositiveIntegerField()
+    date_cutoff = models.DateField()
+
+class Company_TShirt_Milestone_Record(models.Model):
+    company = models.ForeignKey(Company)
+    tshirt_milestone = models.ForeignKey(Company_TShirt_Milestone)
+    date = models.DateField()
+
+class Participant_TShirt_Purchase_Record(models.Model):
+    participant = models.ForeignKey(Participant)
+    tshirt = models.ForeignKey(TShirt)
+    quantity = models.PositiveIntegerField(default=0, blank=True)
+    date = models.DateField()
+
+class Company_Registration_Record(models.Model):
+    company = models.ForeignKey(Company)
+    registration_milestone = models.ForeignKey(Company_Registration_Rule)
+    date = models.DateField()	
+	
+
+##  Candles Record
+	
 class Candles_Record(models.Model):
 	CANDLE_TYPE = (('DO', 'From donation'),('EM', 'From email'),('EV', 'From event'))
+	participant = models.ForeignKey(Participant)
 	candle_type = models.CharField(max_length=2, choices=CANDLE_TYPE, default='DO')
 	candles_value = models.IntegerField(default=0)
 	datetime = models.DateTimeField()
 
+	
+
+##  Fundraising Challenge	
+	
 class Fundraising_Challenge(models.Model):
 	name = models.CharField(max_length=100)
 	datetime_start = models.DateTimeField()
@@ -120,77 +206,10 @@ class Fundraising_Challenge_Start_Record(models.Model):
 	challenge = models.ForeignKey('Fundraising_Challenge', default = getDefaultChallenge)
 	amount_raised = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
 	candles_raised = models.IntegerField(default=0)
-	datetime_start = models.DateTimeField()
+	datetime_start = models.DateTimeField()	
+	
 
-class TShirt(models.Model):
-    name = models.CharField(max_length=200)
-
-class Donation(models.Model):
-    participant = models.ForeignKey(Participant)
-    amount = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
-    datetime = models.DateTimeField()
-
-class Company_TShirt_Milestone(models.Model):
-    percentage_purchased = models.PositiveIntegerField(default=0, blank=True)
-    candles_rewarded = models.PositiveIntegerField()
-
-class Donation_Milestone(models.Model):
-    donation_amount = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
-    candles_rewarded = models.PositiveIntegerField()
-
-    def __unicode__(self):
-        return 'Milestone: ' + str(self.donation_amount) + ' Candles: ' + str(self.candles_rewarded)
-
-    class Meta:
-        ordering = ['candles_rewarded']
-
-class Company_Registration_Rule(models.Model):
-    percent_registered = models.PositiveIntegerField(default=0, blank=True)
-    candles_rewarded = models.PositiveIntegerField()
-    date_cutoff = models.DateField()
-
-class Email_Rule(models.Model):
-    candles_rewarded = models.PositiveIntegerField()
-    emails = models.PositiveIntegerField()
-
-    def __unicode__(self):
-        return 'Emails: ' + str(self.emails) + ' Candles: ' + str(self.candles_rewarded)
-
-class Participant_Email_Record(models.Model):
-    participant = models.ForeignKey(Participant)
-    email_milestone = models.ForeignKey(Email_Rule)
-    date = models.DateField()
-
-class Participant_Event_Record(models.Model):
-    guests = models.PositiveIntegerField(default=0, blank=True)
-    event = models.ForeignKey(Event)
-    participant = models.ForeignKey(Participant)
-    hokie_passport_id = models.BigIntegerField(blank=True, default=0)
-
-class Company_TShirt_Milestone_Record(models.Model):
-    company = models.ForeignKey(Company)
-    tshirt_milestone = models.ForeignKey(Company_TShirt_Milestone)
-    date = models.DateField()
-
-class Team_Event_Record(models.Model):
-    event = models.ForeignKey(Event)
-    team = models.ForeignKey(Team)
-
-class Participant_Milestone_Record(models.Model):
-    participant = models.ForeignKey(Participant)
-    donation_milestone = models.ForeignKey(Donation_Milestone)
-    date = models.DateField()
-
-class Participant_TShirt_Purchase_Record(models.Model):
-    participant = models.ForeignKey(Participant)
-    tshirt = models.ForeignKey(TShirt)
-    quantity = models.PositiveIntegerField(default=0, blank=True)
-    date = models.DateField()
-
-class Company_Registration_Record(models.Model):
-    company = models.ForeignKey(Company)
-    registration_milestone = models.ForeignKey(Company_Registration_Rule)
-    date = models.DateField()
+## Lap Counter	
 
 class Olympics_Lap_Counter_Signup(models.Model):
 	team = models.ForeignKey(Team)
@@ -223,9 +242,3 @@ class Counter(models.Model):
 	max_pledge_amount = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
 	laps_completed = models.PositiveIntegerField(default=0, blank=True)
 	total = models.DecimalField(default=Decimal('0.00'), max_digits=10, decimal_places=2, blank=True)
-	
-	
-
-#add tshirt milestone record for copmanies
-
-#participant percentage registration milestone company

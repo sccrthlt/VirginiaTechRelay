@@ -24,6 +24,7 @@ class Command(BaseCommand):
 def checkDonationsTotals(participant):
 
     donated = Donation.objects.filter(participant = participant).aggregate(donations_total = Sum('amount'))
+    donations = Donation.objects.filter(participant = participant)
     Participant_Milestone_Record.objects.filter(participant = participant).delete()
 
 	#cool = []
@@ -42,9 +43,21 @@ def checkDonationsTotals(participant):
 				record = Participant_Milestone_Record.objects.get(participant = participant, donation_milestone = milestone)
 			except Participant_Milestone_Record.DoesNotExist:
 				save_participant = Participant.objects.get(pk = participant)
-				donated_date = Donation.objects.filter(participant = participant).annotate(most_recent_donation_date = Max('datetime'))
-				new_participant_milestone_record = Participant_Milestone_Record(participant = save_participant, donation_milestone = milestone, date = donated_date[0].most_recent_donation_date)
+				tot = 0
+				stop = 0
+				for donation in donations:
+					if stop == 0:
+						if tot < milestone.donation_amount:
+							amoun = donation.amount
+							tot = tot + amoun
+						else:
+							donated_datetime = donation.datetime
+							stop = 1
+				#donated_date = Donation.objects.filter(participant = participant).annotate(most_recent_donation_date = Max('datetime'))
+				new_participant_milestone_record = Participant_Milestone_Record(participant = save_participant, donation_milestone = milestone, datetime = donated_datetime) # FIX TO DATETIME IN MODELS
 				new_participant_milestone_record.save()
+				new_candles_record = Candles_Record(participant = participant, candle_type = 'DO', candles_value = milestone.candles_rewarded, datetime = donated_datetime)
+				new_candles_record.save()
 					
 
 def setupDonation(info):

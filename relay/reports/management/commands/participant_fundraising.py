@@ -30,11 +30,13 @@ def checkEmailTotals(participant):
 	if int(emails_count) > int(milestone.emails):
 	    print('Email Count: ' + str(emails_count) + ' Milestone Emails: ' + str(milestone.emails))
 	    try:
-		record = Participant_Email_Record.objects.get(participant = participant, email_milestone = milestone)
+			record = Participant_Email_Record.objects.get(participant = participant, email_milestone = milestone)
 	    except Participant_Email_Record.DoesNotExist:
-		date = now = datetime.datetime.now()
-		new_participant_email_record = Participant_Email_Record(participant = participant, email_milestone = milestone, date = date)
-		new_participant_email_record.save()
+			date_now = datetime.datetime.now()
+			new_participant_email_record = Participant_Email_Record(participant = participant, email_milestone = milestone, datetime = date_now)
+			new_participant_email_record.save()
+			new_candles_record = Candles_Record(participant = participant, candle_type = 'DO', candles_value = milestone.candles_rewarded, datetime = date_now)
+			new_candles_record.save()
 
 def setupEmailsSent(info):
 
