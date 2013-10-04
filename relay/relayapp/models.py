@@ -111,12 +111,12 @@ class Email_Rule(models.Model):
 class Participant_Milestone_Record(models.Model):
     participant = models.ForeignKey(Participant)
     donation_milestone = models.ForeignKey(Donation_Milestone)
-    datetime = models.DateTimeField(default = '05/07/1993 12:12')
+    datetime = models.DateTimeField(default = '1993-05-07 12:12')
 
 class Participant_Email_Record(models.Model):
     participant = models.ForeignKey(Participant)
     email_milestone = models.ForeignKey(Email_Rule)
-    datetime = models.DateField(default = '05/07/1993 12:12')
+    datetime = models.DateField(default = '1993-05-07 12:12')
 
 class Participant_Event_Record(models.Model):
     guests = models.PositiveIntegerField(default=0, blank=True)
