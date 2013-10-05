@@ -41,13 +41,13 @@ class DonationAdmin(admin.ModelAdmin):
     search_fields = ['participant']
 
 class ParticipantMilestoneRecordAdmin(admin.ModelAdmin):
-    list_display = ('participant', 'donation_milestone', 'date')
-    list_filter = ['date']
+    list_display = ('participant', 'donation_milestone', 'datetime')
+    list_filter = ['datetime']
     search_fields = ['participant']
 
 class ParticipantEmailRecordAdmin(admin.ModelAdmin):
-    list_display = ('participant', 'email_milestone', 'date')
-    list_filter = ['date']
+    list_display = ('participant', 'email_milestone', 'datetime')
+    list_filter = ['datetime']
     search_fields = ['participant']
 
 class EmailRuleAdmin(admin.ModelAdmin):
