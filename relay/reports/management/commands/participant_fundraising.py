@@ -35,7 +35,7 @@ def checkEmailTotals(participant):
 			date_now = datetime.datetime.now()
 			new_participant_email_record = Participant_Email_Record(participant = participant, email_milestone = milestone, datetime = date_now)
 			new_participant_email_record.save()
-			new_candles_record = Candles_Record(participant = participant, candle_type = 'DO', candles_value = milestone.candles_rewarded, datetime = date_now)
+			new_candles_record = Candles_Record(participant = participant, candle_type = 'EM', candles_value = milestone.candles_rewarded, datetime = date_now)
 			new_candles_record.save()
 
 def setupEmailsSent(info):
